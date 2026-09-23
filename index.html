@@ -3,21 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SPARC Interactive | Game Dev & Interactive Simulation Studio</title>
-  <meta name="description" content="Estudio formal de desarrollo de videojuegos, simuladores 3D interactivos y experiencias inmersivas.">
+  <title>SPARC Interactive | Game Dev & Simulation Studio</title>
+  <meta name="description" content="Estudio de desarrollo de videojuegos, simuladores interactivos 3D y experiencias en tiempo real en Unity y Roblox.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #07090e;
-      --card-bg: rgba(16, 22, 34, 0.7);
-      --card-border: rgba(255, 255, 255, 0.08);
-      --card-hover-border: rgba(0, 240, 255, 0.4);
+      --bg: #06080e;
+      --card-bg: rgba(13, 17, 27, 0.75);
+      --card-border: rgba(0, 240, 255, 0.15);
       --accent: #00f0ff;
-      --accent-glow: rgba(0, 240, 255, 0.25);
-      --purple-accent: #7928ca;
-      --text: #f1f5f9;
+      --accent-glow: rgba(0, 240, 255, 0.35);
+      --purple: #8a2be2;
+      --purple-glow: rgba(138, 43, 226, 0.3);
+      --text: #f8fafc;
       --text-muted: #94a3b8;
       --code-font: 'JetBrains Mono', monospace;
     }
@@ -33,27 +33,49 @@
       position: relative;
     }
 
-    /* Fondo dinámico canvas */
+    /* Fondo dinámico canvas + resplandores neón */
     #bg-canvas {
       position: fixed;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
+      z-index: -2;
+      pointer-events: none;
+    }
+    .glow-orb-1 {
+      position: fixed;
+      top: -10vw;
+      right: -10vw;
+      width: 45vw;
+      height: 45vw;
+      background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
       z-index: -1;
+      filter: blur(80px);
+      pointer-events: none;
+    }
+    .glow-orb-2 {
+      position: fixed;
+      bottom: 10vh;
+      left: -15vw;
+      width: 50vw;
+      height: 50vw;
+      background: radial-gradient(circle, var(--purple-glow) 0%, transparent 70%);
+      z-index: -1;
+      filter: blur(100px);
       pointer-events: none;
     }
 
-    h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; letter-spacing: -0.5px; }
+    h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; }
     a { text-decoration: none; color: inherit; }
 
-    /* Header */
+    /* Barra de Navegación */
     header {
       position: sticky;
       top: 0;
-      backdrop-filter: blur(16px);
-      background: rgba(7, 9, 14, 0.8);
-      border-bottom: 1px solid var(--card-border);
+      backdrop-filter: blur(20px);
+      background: rgba(6, 8, 14, 0.85);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
       z-index: 100;
     }
     .nav-container {
@@ -67,17 +89,22 @@
     .logo {
       font-size: 1.35rem;
       font-weight: 700;
-      letter-spacing: 1.5px;
+      letter-spacing: 2px;
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.6rem;
     }
-    .logo-dot {
+    .logo-pulse {
       width: 10px;
       height: 10px;
       background: var(--accent);
       border-radius: 50%;
-      box-shadow: 0 0 10px var(--accent);
+      box-shadow: 0 0 12px var(--accent);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.3); opacity: 0.6; }
     }
     .logo span { color: var(--accent); }
     .nav-links {
@@ -88,65 +115,57 @@
     .nav-links a {
       font-size: 0.95rem;
       color: var(--text-muted);
-      transition: color 0.2s ease;
+      transition: color 0.2s;
       font-weight: 500;
     }
     .nav-links a:hover { color: var(--accent); }
-    .nav-btn {
+    .github-link-btn {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
       padding: 0.5rem 1.1rem;
       border-radius: 8px;
       border: 1px solid var(--card-border);
-      background: rgba(255, 255, 255, 0.03);
+      background: rgba(0, 240, 255, 0.05);
       font-size: 0.85rem;
       font-family: var(--code-font);
-      transition: all 0.2s ease;
+      transition: all 0.2s;
     }
-    .nav-btn:hover {
-      border-color: var(--accent);
-      background: rgba(0, 240, 255, 0.08);
-      color: #fff;
+    .github-link-btn:hover {
+      background: var(--accent);
+      color: #000;
+      box-shadow: 0 0 15px var(--accent-glow);
     }
 
     /* Hero */
     .hero {
-      max-width: 1100px;
+      max-width: 1050px;
       margin: 0 auto;
-      padding: 8rem 2rem 5rem;
+      padding: 7rem 2rem 4rem;
       text-align: center;
-      position: relative;
     }
-    .hero-tag {
+    .hero-badge {
       display: inline-flex;
       align-items: center;
-      gap: 0.6rem;
-      padding: 0.4rem 1rem;
-      background: rgba(0, 240, 255, 0.06);
-      border: 1px solid rgba(0, 240, 255, 0.25);
+      gap: 0.5rem;
+      padding: 0.4rem 1.2rem;
+      background: rgba(0, 240, 255, 0.08);
+      border: 1px solid var(--accent);
       border-radius: 100px;
       font-size: 0.85rem;
       color: var(--accent);
       font-family: var(--code-font);
       margin-bottom: 2rem;
-    }
-    .hero-tag::before {
-      content: '';
-      width: 6px;
-      height: 6px;
-      background: var(--accent);
-      border-radius: 50%;
-      box-shadow: 0 0 8px var(--accent);
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.15);
     }
     .hero h1 {
-      font-size: clamp(2.5rem, 5vw, 4.2rem);
-      line-height: 1.1;
+      font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+      line-height: 1.15;
       font-weight: 700;
-      margin-bottom: 1.8rem;
+      margin-bottom: 1.5rem;
     }
-    .hero h1 .gradient-text {
-      background: linear-gradient(135deg, #ffffff 40%, var(--accent) 100%);
+    .gradient-text {
+      background: linear-gradient(135deg, #ffffff 30%, var(--accent) 80%, var(--purple) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -154,8 +173,7 @@
       font-size: clamp(1.05rem, 2vw, 1.25rem);
       color: var(--text-muted);
       max-width: 780px;
-      margin: 0 auto 3rem;
-      font-weight: 400;
+      margin: 0 auto 2.8rem;
     }
     .hero-actions {
       display: flex;
@@ -163,71 +181,109 @@
       gap: 1.2rem;
       flex-wrap: wrap;
     }
-    .btn-main {
+    .btn-glow {
       background: var(--accent);
       color: #05070a;
       font-weight: 700;
-      padding: 0.95rem 2rem;
+      padding: 0.95rem 2.2rem;
       border-radius: 8px;
       font-size: 0.95rem;
-      transition: all 0.2s ease;
       box-shadow: 0 0 25px var(--accent-glow);
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
     }
-    .btn-main:hover {
+    .btn-glow:hover {
       transform: translateY(-2px);
-      box-shadow: 0 0 35px rgba(0, 240, 255, 0.45);
+      box-shadow: 0 0 35px var(--accent);
     }
     .btn-secondary {
       background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--card-border);
+      border: 1px solid rgba(255, 255, 255, 0.15);
       color: var(--text);
       font-weight: 600;
-      padding: 0.95rem 2rem;
+      padding: 0.95rem 2.2rem;
       border-radius: 8px;
       font-size: 0.95rem;
       transition: all 0.2s ease;
     }
     .btn-secondary:hover {
-      border-color: rgba(255, 255, 255, 0.25);
-      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--accent);
+      background: rgba(0, 240, 255, 0.05);
     }
 
-    /* Metrics Strip */
-    .metrics-bar {
-      max-width: 1000px;
-      margin: 2rem auto 5rem;
-      padding: 1.5rem 2rem;
+    /* Motores & Tech Stack Strip */
+    .tech-stack-section {
+      max-width: 1100px;
+      margin: 1rem auto 4rem;
+      padding: 0 2rem;
+    }
+    .tech-stack-box {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
-      border-radius: 12px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 2rem;
+      border-radius: 16px;
+      padding: 2rem;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+    .tech-stack-title {
       text-align: center;
-    }
-    .metric-item h4 {
-      font-size: 1.8rem;
-      color: var(--accent);
       font-family: var(--code-font);
-    }
-    .metric-item p {
       font-size: 0.85rem;
-      color: var(--text-muted);
+      color: var(--accent);
+      letter-spacing: 2px;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      margin-bottom: 1.5rem;
+    }
+    .engines-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .engine-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: border-color 0.2s;
+    }
+    .engine-card:hover { border-color: var(--accent); }
+    .engine-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.8rem;
+    }
+    .engine-name {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .engine-tag {
+      font-family: var(--code-font);
+      font-size: 0.75rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      background: rgba(0, 240, 255, 0.1);
+      color: var(--accent);
+    }
+    .engine-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
     }
 
-    /* Sections general */
+    /* Secciones Generales */
     .section-wrap {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 6rem 2rem;
+      padding: 5rem 2rem;
     }
     .section-header {
-      margin-bottom: 3.5rem;
       text-align: center;
+      margin-bottom: 4rem;
     }
-    .section-header .sub-badge {
+    .sub-badge {
       font-family: var(--code-font);
       font-size: 0.85rem;
       color: var(--accent);
@@ -237,129 +293,147 @@
       margin-bottom: 0.6rem;
     }
     .section-header h2 {
-      font-size: 2.5rem;
+      font-size: 2.6rem;
       color: #fff;
     }
 
-    /* Portafolio Cards */
-    .portfolio-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 2rem;
+    /* PORTAFOLIO: Tarjetas Horizontales con Video */
+    .portfolio-list {
+      display: flex;
+      flex-direction: column;
+      gap: 3.5rem;
     }
-    .project-card {
+    .portfolio-item {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
-      border-radius: 14px;
+      border-radius: 20px;
       overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+      transition: transform 0.3s ease, border-color 0.3s ease;
     }
-    .project-card:hover {
-      transform: translateY(-6px);
-      border-color: var(--card-hover-border);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 240, 255, 0.15);
+    .portfolio-item:hover {
+      transform: translateY(-4px);
+      border-color: rgba(0, 240, 255, 0.5);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 240, 255, 0.15);
     }
-    .project-thumb {
-      height: 200px;
-      background: #0d121c;
+    .video-container {
       position: relative;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .thumb-pattern {
+      background: #000;
       width: 100%;
       height: 100%;
-      opacity: 0.3;
-      background-size: 24px 24px;
-      background-image: 
-        linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
+      min-height: 290px;
     }
-    .project-icon {
+    .video-container iframe {
       position: absolute;
-      font-size: 3rem;
-      filter: drop-shadow(0 0 15px var(--accent));
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
     }
-    .project-status {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      padding: 0.3rem 0.8rem;
-      border-radius: 50px;
-      font-size: 0.75rem;
-      font-family: var(--code-font);
-      background: rgba(0, 0, 0, 0.7);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      color: var(--accent);
-    }
-    .project-body {
-      padding: 1.8rem;
+    .project-content {
+      padding: 2.5rem;
       display: flex;
       flex-direction: column;
-      flex-grow: 1;
+      justify-content: space-between;
     }
-    .project-body h3 {
-      font-size: 1.4rem;
-      margin-bottom: 0.6rem;
+    .project-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    .project-category {
+      font-family: var(--code-font);
+      font-size: 0.8rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .status-badge {
+      font-family: var(--code-font);
+      font-size: 0.75rem;
+      padding: 0.3rem 0.7rem;
+      border-radius: 50px;
+      background: rgba(0, 240, 255, 0.1);
+      border: 1px solid rgba(0, 240, 255, 0.25);
+      color: var(--accent);
+    }
+    .project-content h3 {
+      font-size: 1.7rem;
+      margin-bottom: 1rem;
       color: #fff;
     }
-    .project-body p {
-      font-size: 0.92rem;
+    .project-content p {
+      font-size: 0.95rem;
       color: var(--text-muted);
       margin-bottom: 1.5rem;
-      flex-grow: 1;
+      line-height: 1.6;
     }
-    .tag-container {
+    .project-tags {
       display: flex;
       flex-wrap: wrap;
       gap: 0.5rem;
-      margin-bottom: 1.5rem;
+      margin-bottom: 2rem;
     }
-    .tag {
-      font-size: 0.75rem;
+    .p-tag {
       font-family: var(--code-font);
-      padding: 0.25rem 0.65rem;
-      border-radius: 4px;
+      font-size: 0.75rem;
       background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      color: #d1d5db;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 0.3rem 0.7rem;
+      border-radius: 6px;
+      color: #cbd5e1;
+    }
+    .project-actions {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+    .btn-download {
+      background: var(--accent);
+      color: #000;
+      font-weight: 700;
+      padding: 0.8rem 1.6rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s ease;
+    }
+    .btn-download:hover {
+      background: #fff;
+      transform: scale(1.02);
     }
 
     /* Servicios */
     .services-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.8rem;
+      gap: 2rem;
     }
     .service-card {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
-      border-radius: 12px;
+      border-radius: 14px;
       padding: 2.2rem;
-      transition: all 0.3s ease;
+      transition: all 0.3s;
     }
     .service-card:hover {
       border-color: var(--accent);
-      transform: translateY(-4px);
+      transform: translateY(-5px);
     }
-    .service-icon-box {
-      width: 52px;
-      height: 52px;
-      background: rgba(0, 240, 255, 0.08);
-      border: 1px solid rgba(0, 240, 255, 0.2);
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      margin-bottom: 1.4rem;
+    .service-icon {
+      font-size: 2rem;
+      margin-bottom: 1.2rem;
+      display: inline-block;
     }
     .service-card h3 {
-      font-size: 1.25rem;
+      font-size: 1.3rem;
       margin-bottom: 0.8rem;
     }
     .service-card p {
@@ -369,47 +443,62 @@
 
     /* Contacto */
     .contact-container {
-      background: linear-gradient(180deg, var(--card-bg) 0%, rgba(12, 17, 26, 0.9) 100%);
+      background: linear-gradient(180deg, var(--card-bg) 0%, rgba(10, 14, 22, 0.95) 100%);
       border: 1px solid var(--card-border);
-      border-radius: 20px;
+      border-radius: 24px;
       padding: 4.5rem 2rem;
       text-align: center;
       max-width: 850px;
       margin: 0 auto;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
     }
-    .email-display {
+    .email-box {
       display: inline-flex;
       align-items: center;
       gap: 1rem;
-      background: rgba(0, 0, 0, 0.4);
+      background: rgba(0, 0, 0, 0.6);
       border: 1px solid var(--card-border);
-      padding: 0.8rem 1.5rem;
-      border-radius: 10px;
-      margin: 2rem 0;
+      padding: 0.9rem 1.6rem;
+      border-radius: 12px;
+      margin: 2.2rem 0;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .email-text {
       font-family: var(--code-font);
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       color: var(--accent);
+      user-select: all;
     }
     .copy-btn {
-      background: rgba(255, 255, 255, 0.08);
-      border: none;
-      color: #fff;
-      padding: 0.4rem 0.8rem;
+      background: rgba(0, 240, 255, 0.15);
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      padding: 0.5rem 1rem;
       border-radius: 6px;
+      font-family: var(--code-font);
+      font-weight: 600;
+      font-size: 0.85rem;
       cursor: pointer;
-      font-size: 0.8rem;
-      transition: background 0.2s;
+      transition: all 0.2s ease;
     }
-    .copy-btn:hover { background: rgba(255, 255, 255, 0.2); }
+    .copy-btn:hover {
+      background: var(--accent);
+      color: #000;
+    }
+    .copy-btn.copied {
+      background: #10b981;
+      border-color: #10b981;
+      color: #fff;
+    }
 
     /* Footer */
     footer {
-      border-top: 1px solid var(--card-border);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
       padding: 3rem 2rem;
       text-align: center;
-      font-size: 0.85rem;
       color: var(--text-muted);
+      font-size: 0.85rem;
     }
     .footer-content {
       max-width: 1200px;
@@ -419,183 +508,250 @@
       gap: 1rem;
       align-items: center;
     }
-    .legal-tag {
-      font-family: var(--code-font);
-      font-size: 0.78rem;
-      color: #64748b;
-    }
 
-    @media (max-width: 768px) {
+    @media (max-width: 900px) {
+      .portfolio-item { grid-template-columns: 1fr; }
+      .video-container { height: 260px; min-height: auto; }
       .nav-links { display: none; }
-      .hero { padding-top: 5rem; }
-      .metrics-bar { grid-template-columns: 1fr; }
+      .hero { padding-top: 4.5rem; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Canvas animado interactivo -->
+  <!-- Lienzo interactivo & Orbes de luz -->
   <canvas id="bg-canvas"></canvas>
+  <div class="glow-orb-1"></div>
+  <div class="glow-orb-2"></div>
 
+  <!-- Barra de Navegación -->
   <header>
     <div class="nav-container">
       <a href="#" class="logo">
-        <div class="logo-dot"></div>
+        <div class="logo-pulse"></div>
         SPARC <span>INTERACTIVE</span>
       </a>
       <nav class="nav-links">
-        <a href="#proyectos">Proyectos</a>
+        <a href="#tecnologias">Motores</a>
+        <a href="#proyectos">Portafolio</a>
         <a href="#servicios">Servicios</a>
-        <a href="#nosotros">Especialidades</a>
         <a href="#contacto">Contacto</a>
-        <a href="https://github.com/sparc-interactive" target="_blank" rel="noopener" class="nav-btn">
-          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-          GitHub
+        <a href="https://github.com/sparc-interactive" target="_blank" rel="noopener" class="github-link-btn">
+          <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          GitHub Org
         </a>
       </nav>
     </div>
   </header>
 
   <main>
-    <!-- HERO SECTION -->
+    <!-- HERO -->
     <section class="hero">
-      <div class="hero-tag">Estudio de Desarrollo y Soluciones Interactivas</div>
+      <div class="hero-badge">Estudio Tecnológico & Desarrollo de Videojuegos</div>
       <h1>
-        Construyendo mundos virtuales, <br>
+        Ingeniería de software interactivo, <br>
         <span class="gradient-text">videojuegos y simulación 3D</span>
       </h1>
       <p>
-        Diseñamos software interactivo de alto rendimiento: desde mecánicas de gameplay y simulación física hasta experiencias inmersivas optimizadas para tiempo real.
+        Creamos experiencias en tiempo real de alto rendimiento. Arquitectura sólida, física aplicada y diseño técnico especializado para videojuegos y entornos corporativos.
       </p>
       <div class="hero-actions">
-        <a href="#contacto" class="btn-main">Cotizar Servicios</a>
-        <a href="#proyectos" class="btn-secondary">Ver Portafolio</a>
+        <a href="#contacto" class="btn-glow">Cotizar un Proyecto →</a>
+        <a href="#proyectos" class="btn-secondary">Explorar Portafolio</a>
       </div>
     </section>
 
-    <!-- METRICS STRIP -->
-    <div class="metrics-bar">
-      <div class="metric-item">
-        <h4>4</h4>
-        <p>Especialistas Técnicos</p>
-      </div>
-      <div class="metric-item">
-        <h4>100%</h4>
-        <p>Código & Assets Propios</p>
-      </div>
-      <div class="metric-item">
-        <h4>Unity / 3D</h4>
-        <p>Pipeline Especializado</p>
-      </div>
-      <div class="metric-item">
-        <h4>S.A.C.S.</h4>
-        <p>Empresa Constituida</p>
-      </div>
-    </div>
+    <!-- MOTORES Y TECH STACK -->
+    <section id="tecnologias" class="tech-stack-section">
+      <div class="tech-stack-box">
+        <div class="tech-stack-title">// Motores y Pipeline de Desarrollo</div>
+        <div class="engines-grid">
+          <div class="engine-card">
+            <div class="engine-header">
+              <span class="engine-name">Unity Engine</span>
+              <span class="engine-tag">Motor Principal</span>
+            </div>
+            <p class="engine-desc">
+              Desarrollo en C# con arquitectura limpia, shaders en URP, simulación de físicas vehiculares, realidad virtual (VR) y títulos de alto desempeño para PC y plataformas móviles.
+            </p>
+          </div>
 
-    <!-- PORTAFOLIO / PROYECTOS -->
+          <div class="engine-card">
+            <div class="engine-header">
+              <span class="engine-name">Roblox Studio</span>
+              <span class="engine-tag">Multiplayer & LiveOps</span>
+            </div>
+            <p class="engine-desc">
+              Diseño de sistemas multijugador masivos con scripting avanzado en Luau, gestión de replicación de red cliente-servidor, economías in-game y optimización multiplataforma.
+            </p>
+          </div>
+
+          <div class="engine-card">
+            <div class="engine-header">
+              <span class="engine-name">Pipeline 3D & Optimización</span>
+              <span class="engine-tag">Arte Técnico</span>
+            </div>
+            <p class="engine-desc">
+              Modelado en Blender con riguroso control de polígonos (low y mid poly), baking de normales, rigging técnico y preparación de assets optimizados para motores en tiempo real.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PORTAFOLIO CON VIDEOS Y DESCARGAS -->
     <section id="proyectos" class="section-wrap">
       <div class="section-header">
-        <span class="sub-badge">// Showcase de Ingeniería</span>
-        <h2>Proyectos & Prototipos</h2>
+        <span class="sub-badge">// Producción y Prototipos</span>
+        <h2>Portafolio de Proyectos</h2>
       </div>
 
-      <div class="portfolio-grid">
-        <!-- Proyecto 1 -->
-        <div class="project-card">
-          <div class="project-thumb">
-            <div class="thumb-pattern"></div>
-            <div class="project-icon">🏎️</div>
-            <div class="project-status">En Producción / MVP</div>
-          </div>
-          <div class="project-body">
-            <h3>Arcade Multiplayer Racing</h3>
-            <p>
-              Sistema de carreras multijugador con física arcade personalizada, sincronización de estado en tiempo real, integración de power-ups modulares y optimización de render en circuito.
-            </p>
-            <div class="tag-container">
-              <span class="tag">Networked Gameplay</span>
-              <span class="tag">Arcade Physics</span>
-              <span class="tag">Level Design</span>
-              <span class="tag">3D Assets</span>
-            </div>
-          </div>
-        </div>
+      <div class="portfolio-list">
 
-        <!-- Proyecto 2 -->
-        <div class="project-card">
-          <div class="project-thumb">
-            <div class="thumb-pattern"></div>
-            <div class="project-icon">🕹️</div>
-            <div class="project-status">Simulación Física</div>
+        <!-- PROYECTO 1 -->
+        <article class="portfolio-item">
+          <div class="video-container">
+            <!-- Reemplaza src con el enlace embed de tu video de YouTube -->
+            <iframe 
+              src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ" 
+              title="Demostración Proyecto 1" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allowfullscreen>
+            </iframe>
           </div>
-          <div class="project-body">
-            <h3>Simulador de Movimiento 3DOF</h3>
-            <p>
-              Módulo de físicas vehiculares avanzadas y telemetría para plataformas mecánicas de 3 grados de libertad (3DOF), calculando aceleración e inercias angulares en tiempo real.
-            </p>
-            <div class="tag-container">
-              <span class="tag">Unity 3D</span>
-              <span class="tag">C# Architecture</span>
-              <span class="tag">Kinematics</span>
-              <span class="tag">Simulators</span>
+          <div class="project-content">
+            <div>
+              <div class="project-meta">
+                <span class="project-category">Roblox / Multiplayer</span>
+                <span class="status-badge">Publicado / Jugable</span>
+              </div>
+              <h3>Multiplayer Arcade Racing</h3>
+              <p>
+                Videojuego de carreras arcade con física vehicular personalizada, redimensionamiento de pistas, sincronización en red de alta frecuencia y mecánicas de recolección de objetos en tiempo real.
+              </p>
+              <div class="project-tags">
+                <span class="p-tag">Roblox Studio</span>
+                <span class="p-tag">Luau Scripting</span>
+                <span class="p-tag">Network Replication</span>
+                <span class="p-tag">Multiplayer</span>
+              </div>
+            </div>
+            <div class="project-actions">
+              <!-- Reemplaza href con el enlace a tu juego en Roblox, Steam o web -->
+              <a href="https://www.roblox.com" target="_blank" rel="noopener" class="btn-download">
+                <span>🎮</span> Jugar / Descargar Proyecto
+              </a>
             </div>
           </div>
-        </div>
+        </article>
 
-        <!-- Proyecto 3 -->
-        <div class="project-card">
-          <div class="project-thumb">
-            <div class="thumb-pattern"></div>
-            <div class="project-icon">🥽</div>
-            <div class="project-status">Entrenamiento / VR</div>
+        <!-- PROYECTO 2 -->
+        <article class="portfolio-item">
+          <div class="video-container">
+            <!-- Reemplaza src con el enlace embed de tu video de YouTube -->
+            <iframe 
+              src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ" 
+              title="Demostración Proyecto 2" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allowfullscreen>
+            </iframe>
           </div>
-          <div class="project-body">
-            <h3>Serious Game: Protocolos de Seguridad</h3>
-            <p>
-              Entorno interactivo enfocado en capacitación técnica y prevención de riesgos, con registro analítico de decisiones, interacciones físicas y evaluación formativa del usuario.
-            </p>
-            <div class="tag-container">
-              <span class="tag">Serious Games</span>
-              <span class="tag">VR Interactions</span>
-              <span class="tag">Gamificación</span>
-              <span class="tag">Data Tracking</span>
+          <div class="project-content">
+            <div>
+              <div class="project-meta">
+                <span class="project-category">Unity 3D / Simulación</span>
+                <span class="status-badge">Prototipo Técnico</span>
+              </div>
+              <h3>Simulador Mecánico 3DOF</h3>
+              <p>
+                Simulador vehicular orientado a plataformas móviles de 3 grados de libertad (pitch, roll y heave). Incorpora cálculos cinemáticos en tiempo real y transmisión de telemetría por red local.
+              </p>
+              <div class="project-tags">
+                <span class="p-tag">Unity Engine</span>
+                <span class="p-tag">C# Architecture</span>
+                <span class="p-tag">Kinematics</span>
+                <span class="p-tag">Hardware Telemetry</span>
+              </div>
+            </div>
+            <div class="project-actions">
+              <!-- Reemplaza href con el enlace a tu ejecutable en Google Drive o Itch.io -->
+              <a href="#" target="_blank" rel="noopener" class="btn-download">
+                <span>⬇️</span> Descargar Build Ejecutable
+              </a>
             </div>
           </div>
-        </div>
+        </article>
+
+        <!-- PROYECTO 3 -->
+        <article class="portfolio-item">
+          <div class="video-container">
+            <!-- Reemplaza src con el enlace embed de tu video de YouTube -->
+            <iframe 
+              src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ" 
+              title="Demostración Proyecto 3" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allowfullscreen>
+            </iframe>
+          </div>
+          <div class="project-content">
+            <div>
+              <div class="project-meta">
+                <span class="project-category">Serious Games / VR</span>
+                <span class="status-badge">Entrenamiento</span>
+              </div>
+              <h3>Simulador de Prevención y Seguridad</h3>
+              <p>
+                Entorno interactivo para capacitación de personal en protocolos de contingencia y control de riesgos. Desarrollado con mecánicas de decisión bajo presión y registro evaluativo automatizado.
+              </p>
+              <div class="project-tags">
+                <span class="p-tag">Unity Engine</span>
+                <span class="p-tag">VR Interaction Toolkit</span>
+                <span class="p-tag">Gamificación</span>
+                <span class="p-tag">Serious Games</span>
+              </div>
+            </div>
+            <div class="project-actions">
+              <!-- Reemplaza href con el enlace de descarga o repositorio -->
+              <a href="#" target="_blank" rel="noopener" class="btn-download">
+                <span>📦</span> Obtener Instalador / Demo
+              </a>
+            </div>
+          </div>
+        </article>
+
       </div>
     </section>
 
-    <!-- SERVICIOS TÉCNICOS -->
+    <!-- SERVICIOS -->
     <section id="servicios" class="section-wrap">
       <div class="section-header">
-        <span class="sub-badge">// Soluciones Comerciales</span>
-        <h2>Servicios para Empresas & Clientes</h2>
+        <span class="sub-badge">// Propuesta de Valor</span>
+        <h2>Servicios Técnicos Especializados</h2>
       </div>
 
       <div class="services-grid">
         <div class="service-card">
-          <div class="service-icon-box">🎮</div>
-          <h3>Desarrollo de Videojuegos</h3>
-          <p>Creación completa de videojuegos en Unity para plataformas de escritorio, web o móviles con arquitectura modular y patrones de software sólidos.</p>
+          <div class="service-icon">🎮</div>
+          <h3>Desarrollo en Unity & Roblox</h3>
+          <p>Construcción de videojuegos de principio a fin, programación de sistemas mecánicos, shaders e integración de interfaces fluidas.</p>
         </div>
 
         <div class="service-card">
-          <div class="service-icon-box">🕶️</div>
-          <h3>Simuladores VR / AR</h3>
-          <p>Desarrollo de entornos inmersivos para visualización arquitectónica, capacitación operativa corporativa y experiencias de marca.</p>
+          <div class="service-icon">👓</div>
+          <h3>Simulación y Realidad Virtual</h3>
+          <p>Entornos interactivos para capacitación operativa industrial, entrenamiento en seguridad laboral y experiencias corporativas inmersivas.</p>
         </div>
 
         <div class="service-card">
-          <div class="service-icon-box">🧊</div>
-          <h3>Modelado 3D & Optimización</h3>
-          <p>Producción de modelos *low poly* y *mid poly*, texturizado UV, rigging y animaciones listas para motores de renderizado en tiempo real.</p>
+          <div class="service-icon">📐</div>
+          <h3>Modelado & Rigging 3D</h3>
+          <p>Assets de bajo consumo poligonil, rigging de personajes y vehículos, optimizados para sostener altos cuadros por segundo (FPS).</p>
         </div>
 
         <div class="service-card">
-          <div class="service-icon-box">⚙️</div>
-          <h3>Gamificación & Consultoría</h3>
-          <p>Integración de dinámicas interactivas y sistemas lúdicos para plataformas educativas, software publicitario o aplicaciones empresariales.</p>
+          <div class="service-icon">⚡</div>
+          <h3>Consultoría & Gamificación</h3>
+          <p>Implementación de mecánicas de juego en aplicaciones empresariales y educativas para dinamizar la interacción del usuario final.</p>
         </div>
       </div>
     </section>
@@ -603,29 +759,32 @@
     <!-- CONTACTO -->
     <section id="contacto" class="section-wrap">
       <div class="contact-container">
-        <span class="sub-badge" style="color: var(--accent); font-family: var(--code-font);">// Comunicación Directa</span>
-        <h2 style="font-size: 2.2rem; margin-top: 0.5rem;">Contrata nuestros servicios de desarrollo</h2>
+        <span class="sub-badge">// Venta de Servicios & Cotizaciones</span>
+        <h2 style="font-size: 2.3rem; margin-top: 0.5rem; color: #fff;">Inicia un Proyecto con Nosotros</h2>
         <p style="color: var(--text-muted); margin-top: 1rem; max-width: 600px; margin-left: auto; margin-right: auto;">
-          ¿Requieres un prototipo interactivo, desarrollo de simulación o producción de software a medida? Conversemos directamente por correo oficial.
+          Brindamos desarrollo de software interactivo, simulación y videojuegos a medida. Envíanos los requerimientos de tu empresa o institución para coordinar una cotización formal.
         </p>
 
-        <div class="email-display">
-          <span id="email-text">contacto@sparc-interactive.com</span>
-          <button class="copy-btn" onclick="copyEmail()">Copiar</button>
+        <div class="email-box">
+          <span class="email-text" id="email-text">contacto@sparc-interactive.com</span>
+          <button class="copy-btn" id="copy-btn" onclick="copyEmail()">Copiar Correo</button>
         </div>
 
-        <div style="margin-top: 1rem;">
-          <a href="mailto:contacto@sparc-interactive.com" class="btn-main" style="display: inline-block;">Escribir Correo</a>
+        <div>
+          <a href="mailto:contacto@sparc-interactive.com" class="btn-glow" style="display: inline-block;">
+            Abrir Bandeja de Correo ✉️
+          </a>
         </div>
       </div>
     </section>
   </main>
 
+  <!-- FOOTER -->
   <footer>
     <div class="footer-content">
       <p>© 2026 SPARC INTERACTIVE S.A.C.S. Todos los derechos reservados.</p>
-      <div class="legal-tag">
-        RUC: 20615871606 | Lima, Perú | Desarrollo y Edición de Programas Informáticos
+      <div style="font-family: var(--code-font); font-size: 0.8rem; color: #64748b;">
+        RUC: 20615871606 | Empresa Formal Constituida | Edición de Programas Informáticos y Software
       </div>
       <div>
         <a href="https://github.com/sparc-interactive" target="_blank" rel="noopener" style="color: var(--accent); font-family: var(--code-font);">
@@ -635,8 +794,9 @@
     </div>
   </footer>
 
+  <!-- SCRIPTS -->
   <script>
-    // Canvas animado: Partículas conectadas en tiempo real
+    // Canvas: Red interactiva cibernética
     const canvas = document.getElementById('bg-canvas');
     const ctx = canvas.getContext('2d');
     let width, height;
@@ -653,8 +813,8 @@
       constructor() {
         this.x = Math.random() * width;
         this.y = Math.random() * height;
-        this.vx = (Math.random() - 0.5) * 0.4;
-        this.vy = (Math.random() - 0.5) * 0.4;
+        this.vx = (Math.random() - 0.5) * 0.5;
+        this.vy = (Math.random() - 0.5) * 0.5;
         this.radius = Math.random() * 1.5 + 0.8;
       }
       update() {
@@ -666,12 +826,12 @@
       draw() {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(0, 240, 255, 0.4)';
+        ctx.fillStyle = 'rgba(0, 240, 255, 0.45)';
         ctx.fill();
       }
     }
 
-    const particleCount = Math.min(Math.floor(window.innerWidth / 20), 65);
+    const particleCount = Math.min(Math.floor(window.innerWidth / 18), 70);
     for (let i = 0; i < particleCount; i++) {
       particles.push(new Particle());
     }
@@ -685,11 +845,11 @@
           const dx = particles[i].x - particles[j].x;
           const dy = particles[i].y - particles[j].y;
           const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 130) {
+          if (dist < 135) {
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(0, 240, 255, ${0.15 * (1 - dist / 130)})`;
+            ctx.strokeStyle = `rgba(0, 240, 255, ${0.15 * (1 - dist / 135)})`;
             ctx.stroke();
           }
         }
@@ -698,20 +858,43 @@
     }
     animate();
 
-    // Función Copiar Correo
+    // Copiado universal compatible con PC (HTTP/HTTPS) y móviles
     function copyEmail() {
-      const email = document.getElementById('email-text').innerText;
-      navigator.clipboard.writeText(email).then(() => {
-        const btn = document.querySelector('.copy-btn');
-        btn.innerText = '¡Copiado!';
-        btn.style.background = 'var(--accent)';
-        btn.style.color = '#000';
+      const email = document.getElementById('email-text').innerText.trim();
+      const btn = document.getElementById('copy-btn');
+
+      function setSuccessUI() {
+        btn.innerText = '¡Copiado con éxito!';
+        btn.classList.add('copied');
         setTimeout(() => {
-          btn.innerText = 'Copiar';
-          btn.style.background = 'rgba(255, 255, 255, 0.08)';
-          btn.style.color = '#fff';
-        }, 2000);
-      });
+          btn.innerText = 'Copiar Correo';
+          btn.classList.remove('copied');
+        }, 2500);
+      }
+
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(email).then(setSuccessUI).catch(fallbackCopy);
+      } else {
+        fallbackCopy();
+      }
+
+      function fallbackCopy() {
+        const textArea = document.createElement('textarea');
+        textArea.value = email;
+        textArea.style.position = 'fixed';
+        textArea.style.left = '-999999px';
+        textArea.style.top = '-999999px';
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        try {
+          document.execCommand('copy');
+          setSuccessUI();
+        } catch (err) {
+          prompt('Copia manualmente este correo:', email);
+        }
+        document.body.removeChild(textArea);
+      }
     }
   </script>
 </body>
