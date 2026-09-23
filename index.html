@@ -4,14 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SPARC Interactive | Game Dev & Simulation Studio</title>
-  <meta name="description" content="Estudio de desarrollo de videojuegos, simuladores interactivos 3D y experiencias en tiempo real en Unity y Roblox.">
+  <meta name="description" content="Estudio formal de desarrollo de videojuegos, simuladores interactivos 3D y experiencias en tiempo real en Unity y Roblox.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #06080e;
-      --card-bg: rgba(13, 17, 27, 0.75);
+      --card-bg: rgba(13, 17, 27, 0.8);
       --card-border: rgba(0, 240, 255, 0.15);
       --accent: #00f0ff;
       --accent-glow: rgba(0, 240, 255, 0.35);
@@ -51,18 +51,18 @@
       height: 45vw;
       background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
       z-index: -1;
-      filter: blur(80px);
+      filter: blur(90px);
       pointer-events: none;
     }
     .glow-orb-2 {
       position: fixed;
-      bottom: 10vh;
+      bottom: 5vh;
       left: -15vw;
       width: 50vw;
       height: 50vw;
       background: radial-gradient(circle, var(--purple-glow) 0%, transparent 70%);
       z-index: -1;
-      filter: blur(100px);
+      filter: blur(110px);
       pointer-events: none;
     }
 
@@ -172,7 +172,7 @@
     .hero p {
       font-size: clamp(1.05rem, 2vw, 1.25rem);
       color: var(--text-muted);
-      max-width: 780px;
+      max-width: 800px;
       margin: 0 auto 2.8rem;
     }
     .hero-actions {
@@ -223,8 +223,8 @@
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: 16px;
-      padding: 2rem;
-      backdrop-filter: blur(10px);
+      padding: 2.2rem;
+      backdrop-filter: blur(12px);
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
     }
     .tech-stack-title {
@@ -297,11 +297,11 @@
       color: #fff;
     }
 
-    /* PORTAFOLIO: Tarjetas Horizontales con Video */
+    /* PORTAFOLIO: Tarjetas con Video Embebido */
     .portfolio-list {
       display: flex;
       flex-direction: column;
-      gap: 3.5rem;
+      gap: 4rem;
     }
     .portfolio-item {
       background: var(--card-bg);
@@ -309,7 +309,7 @@
       border-radius: 20px;
       overflow: hidden;
       display: grid;
-      grid-template-columns: 1.2fr 1fr;
+      grid-template-columns: 1.15fr 1fr;
       backdrop-filter: blur(12px);
       box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
       transition: transform 0.3s ease, border-color 0.3s ease;
@@ -324,7 +324,7 @@
       background: #000;
       width: 100%;
       height: 100%;
-      min-height: 290px;
+      min-height: 310px;
     }
     .video-container iframe {
       position: absolute;
@@ -356,11 +356,16 @@
     .status-badge {
       font-family: var(--code-font);
       font-size: 0.75rem;
-      padding: 0.3rem 0.7rem;
+      padding: 0.3rem 0.75rem;
       border-radius: 50px;
       background: rgba(0, 240, 255, 0.1);
       border: 1px solid rgba(0, 240, 255, 0.25);
       color: var(--accent);
+    }
+    .status-badge.award {
+      background: rgba(234, 179, 8, 0.15);
+      border-color: rgba(234, 179, 8, 0.4);
+      color: #facc15;
     }
     .project-content h3 {
       font-size: 1.7rem;
@@ -390,14 +395,15 @@
     }
     .project-actions {
       display: flex;
-      gap: 1rem;
+      gap: 0.8rem;
       align-items: center;
+      flex-wrap: wrap;
     }
     .btn-download {
       background: var(--accent);
       color: #000;
       font-weight: 700;
-      padding: 0.8rem 1.6rem;
+      padding: 0.75rem 1.4rem;
       border-radius: 8px;
       font-size: 0.9rem;
       display: inline-flex;
@@ -408,6 +414,23 @@
     .btn-download:hover {
       background: #fff;
       transform: scale(1.02);
+    }
+    .btn-download-alt {
+      background: rgba(0, 240, 255, 0.1);
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font-weight: 600;
+      padding: 0.75rem 1.4rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s ease;
+    }
+    .btn-download-alt:hover {
+      background: var(--accent);
+      color: #000;
     }
 
     /* Servicios */
@@ -553,7 +576,7 @@
         <span class="gradient-text">videojuegos y simulación 3D</span>
       </h1>
       <p>
-        Creamos experiencias en tiempo real de alto rendimiento. Arquitectura sólida, física aplicada y diseño técnico especializado para videojuegos y entornos corporativos.
+        Creamos experiencias en tiempo real de alto rendimiento. Arquitectura sólida, física aplicada y diseño técnico especializado para la industria lúdica y entornos corporativos.
       </p>
       <div class="hero-actions">
         <a href="#contacto" class="btn-glow">Cotizar un Proyecto →</a>
@@ -572,7 +595,7 @@
               <span class="engine-tag">Motor Principal</span>
             </div>
             <p class="engine-desc">
-              Desarrollo en C# con arquitectura limpia, shaders en URP, simulación de físicas vehiculares, realidad virtual (VR) y títulos de alto desempeño para PC y plataformas móviles.
+              Desarrollo integral en C# con patrones de arquitectura limpia, shaders URP, optimización física, realidad virtual (VR) y despliegue multiplataforma (PC y Móviles).
             </p>
           </div>
 
@@ -582,7 +605,7 @@
               <span class="engine-tag">Multiplayer & LiveOps</span>
             </div>
             <p class="engine-desc">
-              Diseño de sistemas multijugador masivos con scripting avanzado en Luau, gestión de replicación de red cliente-servidor, economías in-game y optimización multiplataforma.
+              Producción de experiencias masivas con scripting avanzado en Luau, replicación fluida de estado red cliente-servidor y economías dinámicas integradas.
             </p>
           </div>
 
@@ -592,29 +615,28 @@
               <span class="engine-tag">Arte Técnico</span>
             </div>
             <p class="engine-desc">
-              Modelado en Blender con riguroso control de polígonos (low y mid poly), baking de normales, rigging técnico y preparación de assets optimizados para motores en tiempo real.
+              Modelado técnico en Blender, rigging funcional de personajes/props y baking de texturas, diseñados estrictamente para sostener altas tasas de refresco (FPS).
             </p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- PORTAFOLIO CON VIDEOS Y DESCARGAS -->
+    <!-- PORTAFOLIO -->
     <section id="proyectos" class="section-wrap">
       <div class="section-header">
-        <span class="sub-badge">// Producción y Prototipos</span>
-        <h2>Portafolio de Proyectos</h2>
+        <span class="sub-badge">// Producción y Proyectos Reales</span>
+        <h2>Portafolio Destacado</h2>
       </div>
 
       <div class="portfolio-list">
 
-        <!-- PROYECTO 1 -->
+        <!-- PROYECTO 1: LLAMA RUSH -->
         <article class="portfolio-item">
           <div class="video-container">
-            <!-- Reemplaza src con el enlace embed de tu video de YouTube -->
             <iframe 
-              src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ" 
-              title="Demostración Proyecto 1" 
+              src="https://www.youtube-nocookie.com/embed/EOFsn8dTqjw" 
+              title="Llama Rush Gameplay Demo" 
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
               allowfullscreen>
             </iframe>
@@ -622,36 +644,34 @@
           <div class="project-content">
             <div>
               <div class="project-meta">
-                <span class="project-category">Roblox / Multiplayer</span>
-                <span class="status-badge">Publicado / Jugable</span>
+                <span class="project-category">Roblox / Arcade Racing</span>
+                <span class="status-badge">MVP / Jugable</span>
               </div>
-              <h3>Multiplayer Arcade Racing</h3>
+              <h3>Llama Rush</h3>
               <p>
-                Videojuego de carreras arcade con física vehicular personalizada, redimensionamiento de pistas, sincronización en red de alta frecuencia y mecánicas de recolección de objetos en tiempo real.
+                Videojuego de carreras arcade multijugador con física vehicular reactiva, diseñado para partidas dinámicas y altamente competitivas. Incorpora replicación de red de baja latencia en Luau, pistas temáticas con atajos estratégicos, trazado de colisiones y un sistema modular de recolección de items y ventajas en pista.
               </p>
               <div class="project-tags">
                 <span class="p-tag">Roblox Studio</span>
                 <span class="p-tag">Luau Scripting</span>
-                <span class="p-tag">Network Replication</span>
-                <span class="p-tag">Multiplayer</span>
+                <span class="p-tag">Multiplayer Replication</span>
+                <span class="p-tag">Arcade Physics</span>
               </div>
             </div>
             <div class="project-actions">
-              <!-- Reemplaza href con el enlace a tu juego en Roblox, Steam o web -->
-              <a href="https://www.roblox.com" target="_blank" rel="noopener" class="btn-download">
-                <span>🎮</span> Jugar / Descargar Proyecto
+              <a href="https://www.roblox.com/es/games/128421894521090/Llama-Rush" target="_blank" rel="noopener" class="btn-download">
+                <span>🎮</span> Jugar en Roblox
               </a>
             </div>
           </div>
         </article>
 
-        <!-- PROYECTO 2 -->
+        <!-- PROYECTO 2: INTERACTIVE EMERGENCY -->
         <article class="portfolio-item">
           <div class="video-container">
-            <!-- Reemplaza src con el enlace embed de tu video de YouTube -->
             <iframe 
-              src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ" 
-              title="Demostración Proyecto 2" 
+              src="https://www.youtube-nocookie.com/embed/InbaTndpJ24" 
+              title="Interactive Emergency Serious Game" 
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
               allowfullscreen>
             </iframe>
@@ -659,36 +679,37 @@
           <div class="project-content">
             <div>
               <div class="project-meta">
-                <span class="project-category">Unity 3D / Simulación</span>
-                <span class="status-badge">Prototipo Técnico</span>
+                <span class="project-category">Unity 3D / Serious Game</span>
+                <span class="status-badge">Demo Técnica</span>
               </div>
-              <h3>Simulador Mecánico 3DOF</h3>
+              <h3>Interactive Emergency</h3>
               <p>
-                Simulador vehicular orientado a plataformas móviles de 3 grados de libertad (pitch, roll y heave). Incorpora cálculos cinemáticos en tiempo real y transmisión de telemetría por red local.
+                Simulador interactivo y *Serious Game* orientado a la capacitación práctica frente a siniestros y situaciones críticas. Emplea mecánicas de toma de decisiones bajo presión temporal y evaluación de protocolos en tiempo real, adaptado con interfaz intuitiva y rendimiento optimizado tanto en computadoras como en dispositivos móviles.
               </p>
               <div class="project-tags">
-                <span class="p-tag">Unity Engine</span>
+                <span class="p-tag">Unity 3D</span>
                 <span class="p-tag">C# Architecture</span>
-                <span class="p-tag">Kinematics</span>
-                <span class="p-tag">Hardware Telemetry</span>
+                <span class="p-tag">Serious Games</span>
+                <span class="p-tag">Cross-Platform (PC & Móvil)</span>
               </div>
             </div>
             <div class="project-actions">
-              <!-- Reemplaza href con el enlace a tu ejecutable en Google Drive o Itch.io -->
-              <a href="#" target="_blank" rel="noopener" class="btn-download">
-                <span>⬇️</span> Descargar Build Ejecutable
+              <a href="https://drive.google.com/file/d/1ytOOmdqKOqZhNkZKsVmulKq7rTBXkGC7/view?usp=sharing" target="_blank" rel="noopener" class="btn-download">
+                <span>💻</span> Descargar Build (PC)
+              </a>
+              <a href="https://drive.google.com/file/d/1ywOMLsv5qdvKAH7LsyplZnRDc9UurWOt/view?usp=sharing" target="_blank" rel="noopener" class="btn-download-alt">
+                <span>📱</span> Descargar APK (Móviles)
               </a>
             </div>
           </div>
         </article>
 
-        <!-- PROYECTO 3 -->
+        <!-- PROYECTO 3: BEHIND THE PEEPHOLE -->
         <article class="portfolio-item">
           <div class="video-container">
-            <!-- Reemplaza src con el enlace embed de tu video de YouTube -->
             <iframe 
-              src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ" 
-              title="Demostración Proyecto 3" 
+              src="https://www.youtube-nocookie.com/embed/QRUiqBwYdp8" 
+              title="Behind the Peephole Gameplay Demo" 
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
               allowfullscreen>
             </iframe>
@@ -696,24 +717,58 @@
           <div class="project-content">
             <div>
               <div class="project-meta">
-                <span class="project-category">Serious Games / VR</span>
-                <span class="status-badge">Entrenamiento</span>
+                <span class="project-category">Unity / Point & Click Suspenso</span>
+                <span class="status-badge award">★ Ganador GameJam 2025</span>
               </div>
-              <h3>Simulador de Prevención y Seguridad</h3>
+              <h3>Behind the Peephole</h3>
               <p>
-                Entorno interactivo para capacitación de personal en protocolos de contingencia y control de riesgos. Desarrollado con mecánicas de decisión bajo presión y registro evaluativo automatizado.
+                Título de suspenso en perspectiva de mirilla galardonado con el 1er lugar en la *International GameJam Canadore & Tecsup 2025* (categoría Trick or Treat). Destaca por su opresiva narrativa ambiental, microgestión de interacción analítica y un diseño de sonido envolvente donde la observación deductiva del exterior define la supervivencia del jugador.
               </p>
               <div class="project-tags">
                 <span class="p-tag">Unity Engine</span>
-                <span class="p-tag">VR Interaction Toolkit</span>
-                <span class="p-tag">Gamificación</span>
-                <span class="p-tag">Serious Games</span>
+                <span class="p-tag">1er Lugar GameJam</span>
+                <span class="p-tag">Atmospheric Sound Design</span>
+                <span class="p-tag">Narrative Horror</span>
               </div>
             </div>
             <div class="project-actions">
-              <!-- Reemplaza href con el enlace de descarga o repositorio -->
-              <a href="#" target="_blank" rel="noopener" class="btn-download">
-                <span>📦</span> Obtener Instalador / Demo
+              <a href="https://arielc.itch.io/behind-the-peephole" target="_blank" rel="noopener" class="btn-download">
+                <span>🕹️</span> Jugar en Itch.io
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- PROYECTO 4: HOW TO REACT -->
+        <article class="portfolio-item">
+          <div class="video-container">
+            <iframe 
+              src="https://www.youtube-nocookie.com/embed/R98yCPJPNRE" 
+              title="How to react Gameplay Demo" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allowfullscreen>
+            </iframe>
+          </div>
+          <div class="project-content">
+            <div>
+              <div class="project-meta">
+                <span class="project-category">Unity 3D / Escape & Crisis Thriller</span>
+                <span class="status-badge">Proyecto Terminado</span>
+              </div>
+              <h3>How to React</h3>
+              <p>
+                Experiencia narrativa ramificada de escape ambiental en primera persona. El jugador debe analizar su entorno y definir la mejor ruta de evacuación ante una contingencia dentro de su departamento. Cada acción preventiva, objeto manipulado y segundo invertido altera dinámicamente el destino final del protagonista.
+              </p>
+              <div class="project-tags">
+                <span class="p-tag">Unity Engine</span>
+                <span class="p-tag">Branching Endings</span>
+                <span class="p-tag">Environmental Storytelling</span>
+                <span class="p-tag">Escape Dynamics</span>
+              </div>
+            </div>
+            <div class="project-actions">
+              <a href="https://said-carrollo.itch.io/como-reaccionar" target="_blank" rel="noopener" class="btn-download">
+                <span>🚪</span> Probar en Itch.io
               </a>
             </div>
           </div>
@@ -733,25 +788,25 @@
         <div class="service-card">
           <div class="service-icon">🎮</div>
           <h3>Desarrollo en Unity & Roblox</h3>
-          <p>Construcción de videojuegos de principio a fin, programación de sistemas mecánicos, shaders e integración de interfaces fluidas.</p>
+          <p>Construcción integral de experiencias lúdicas, sistemas de combate/movimiento, shaders optimizados e interfaces adaptadas a múltiples dispositivos.</p>
         </div>
 
         <div class="service-card">
           <div class="service-icon">👓</div>
-          <h3>Simulación y Realidad Virtual</h3>
-          <p>Entornos interactivos para capacitación operativa industrial, entrenamiento en seguridad laboral y experiencias corporativas inmersivas.</p>
+          <h3>Simuladores & Serious Games</h3>
+          <p>Software interactivo diseñado específicamente para capacitación de operarios, prevención ante riesgos laborales y experiencias formativas inmersivas.</p>
         </div>
 
         <div class="service-card">
           <div class="service-icon">📐</div>
-          <h3>Modelado & Rigging 3D</h3>
-          <p>Assets de bajo consumo poligonil, rigging de personajes y vehículos, optimizados para sostener altos cuadros por segundo (FPS).</p>
+          <h3>Modelado 3D & Arte Técnico</h3>
+          <p>Modelado de personajes y entornos con rigurosa topología low/mid poly, rigging dinámico y mapeado UV preparado para pipelines de render en tiempo real.</p>
         </div>
 
         <div class="service-card">
           <div class="service-icon">⚡</div>
-          <h3>Consultoría & Gamificación</h3>
-          <p>Implementación de mecánicas de juego en aplicaciones empresariales y educativas para dinamizar la interacción del usuario final.</p>
+          <h3>Gamificación de Procesos</h3>
+          <p>Transformación de flujos de aprendizaje o ventas tradicionales mediante mecánicas de juego interactivas que aumentan la retención del usuario.</p>
         </div>
       </div>
     </section>
@@ -762,7 +817,7 @@
         <span class="sub-badge">// Venta de Servicios & Cotizaciones</span>
         <h2 style="font-size: 2.3rem; margin-top: 0.5rem; color: #fff;">Inicia un Proyecto con Nosotros</h2>
         <p style="color: var(--text-muted); margin-top: 1rem; max-width: 600px; margin-left: auto; margin-right: auto;">
-          Brindamos desarrollo de software interactivo, simulación y videojuegos a medida. Envíanos los requerimientos de tu empresa o institución para coordinar una cotización formal.
+          ¿Requieres un videojuego a medida, simulador corporativo o desarrollo interactivo? Envíanos los detalles técnicos de tu requerimiento para preparar una cotización formal.
         </p>
 
         <div class="email-box">
@@ -858,7 +913,7 @@
     }
     animate();
 
-    // Copiado universal compatible con PC (HTTP/HTTPS) y móviles
+    // Función universal de copiado (compatible con PC/móviles y HTTP/HTTPS)
     function copyEmail() {
       const email = document.getElementById('email-text').innerText.trim();
       const btn = document.getElementById('copy-btn');
