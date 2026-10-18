@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIJICSA - Almacén Inteligente</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #1e293b; }
+        ::-webkit-scrollbar { display: none; }
+        
+        .bg-vijicsa-yellow { background-color: #FACC15; }
+        .text-vijicsa-yellow { color: #EAB308; }
+        .bg-vijicsa-dark { background-color: #1F2937; }
+        
+        @keyframes pulse-qr {
+            0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(34, 197, 94, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+        }
+        .qr-pulse { animation: pulse-qr 2s infinite; }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
+        }
+        .shake-animation { animation: shake 0.4s ease-in-out; }
+
+        .btn-pulse-ring {
+            box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.7);
+            animation: ringPulse 1.5s infinite;
+        }
+        @keyframes ringPulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.7); transform: scale(1); }
+            70% { box-shadow: 0 0 0 8px rgba(37, 99, 235, 0); transform: scale(1.02); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); transform: scale(1); }
+        }
+
+        @keyframes slideDownIn {
+            from { transform: translateY(-150%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .slide-down-in { animation: slideDownIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+        .slide-up-out { transform: translateY(-150%); opacity: 0; transition: all 0.4s ease; }
+
+        @keyframes textChange {
+            0% { opacity: 0; transform: translateY(5px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .text-change-anim { animation: textChange 0.4s ease forwards; }
+
+        #tutorial-bar { transition: transform 0.2s ease, background-color 0.3s ease; }
+
+        @keyframes flash {
+            0% { background-color: white; opacity: 1; }
+            100% { background-color: transparent; opacity: 0; }
+        }
+        .camera-flash { animation: flash 0.5s ease-out forwards; }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-0 sm:p-4">
+
+    <!-- SIMULADOR DE CELULAR -->
+    <div class="w-full h-[100dvh] sm:w-[400px] sm:h-[820px] bg-slate-100 sm:rounded-[2.5rem] sm:border-[10px] border-slate-900 shadow-2xl relative overflow-hidden flex flex-col">
+        
+        <!-- HEADER APP -->
+        <header class="bg-vijicsa-dark text-white pt-10 pb-4 px-5 shadow-md z-20 relative">
+            <div class="flex justify-between items-center">
+                <div>
+                    <div class="h-8 mb-1 flex items-center">
+                        <img src="https://www.vijicsa.com/wp-content/uploads/2021/04/logo-vijicsa-blanco.png" alt="VIJICSA" class="h-full w-auto object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                        <span style="display:none;" class="text-xl font-bold tracking-wider">VIJICSA</span>
+                    </div>
+                    <p class="text-[11px] text-slate-400 mt-1 uppercase tracking-widest flex items-center gap-1">
+                        <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse inline-block"></span> Almacén Central
+                    </p>
+                </div>
+                <div class="text-right flex flex-col items-end">
+                    <div class="w-8 h-8 rounded-full bg-vijicsa-yellow text-slate-900 flex items-center justify-center font-bold text-sm mb-1">JP</div>
+                    <p class="text-[10px] text-slate-300">Juan P.</p>
+                </div>
+            </div>
+        </header>
+
+        <!-- BARRA DE INSTRUCCIONES DEL TUTORIAL -->
+        <div id="tutorial-bar" class="absolute top-[88px] left-4 right-4 bg-blue-600 text-white p-3.5 rounded-xl shadow-[0_10px_25px_rgba(37,99,235,0.4)] z-50 slide-up-out pointer-events-none">
+            <div class="flex items-center gap-3" id="tut-content">
+                <span id="tut-emoji" class="text-2xl">👋</span>
+                <p id="tut-text" class="text-xs font-semibold leading-tight">Cargando tour guiado...</p>
+            </div>
+        </div>
+
+        <!-- CONTENEDOR DE VISTAS -->
+        <div class="relative flex-grow overflow-hidden bg-slate-100">
+            
+            <!-- VISTA 1: DASHBOARD PRINCIPAL -->
+            <div id="view-dashboard" class="absolute inset-0 w-full h-full overflow-y-auto p-5 pb-32 transition-all duration-300 pt-16">
+                <h2 class="text-lg font-bold text-slate-800 mb-4 mt-2">¿Qué deseas hacer hoy?</h2>
+                
+                <div class="space-y-4">
+                    <button id="btn-solicitar-mat" onclick="navTo('view-catalog'); advanceTutorial(1);" class="w-full bg-white rounded-2xl p-4 shadow-sm border border-slate-200 flex items-center gap-4 hover:border-blue-500 transition-all active:scale-95 text-left relative z-10">
+                        <div class="w-14 h-14 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center text-2xl shadow-inner">🛠️</div>
+                        <div>
+                            <h3 class="font-bold text-slate-800">Solicitar Material</h3>
+                            <p class="text-xs text-slate-500 mt-1 leading-tight">Pedir consumibles y herramientas a ventanilla.</p>
+                        </div>
+                    </button>
+
+                    <button id="btn-entrenamiento" onclick="navTo('view-training'); advanceTutorial('entrenamiento_inicio');" class="w-full bg-white rounded-2xl p-4 shadow-sm border border-slate-200 flex items-center gap-4 hover:border-purple-500 transition-all active:scale-95 text-left relative z-10">
+                        <div class="w-14 h-14 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center text-2xl shadow-inner">🧠</div>
+                        <div>
+                            <h3 class="font-bold text-slate-800">Entrenamiento Flash</h3>
+                            <p class="text-xs text-slate-500 mt-1 leading-tight">Memorizar códigos de almacén jugando.</p>
+                        </div>
+                    </button>
+
+                    <button id="btn-reporte" onclick="navTo('view-reporte'); advanceTutorial('reporte_inicio');" class="w-full bg-white rounded-2xl p-4 shadow-sm border border-slate-200 flex items-center gap-4 hover:border-red-500 transition-all active:scale-95 text-left relative z-10">
+                        <div class="w-14 h-14 rounded-xl bg-red-100 text-red-600 flex items-center justify-center text-2xl shadow-inner">⚠️</div>
+                        <div>
+                            <h3 class="font-bold text-slate-800">Reportar Equipo Dañado</h3>
+                            <p class="text-xs text-slate-500 mt-1 leading-tight">Notificar herramientas rotas o mermas.</p>
+                        </div>
+                    </button>
+                </div>
+
+                <div class="mt-8 bg-orange-50 border border-orange-200 rounded-xl p-4">
+                    <p class="text-xs font-bold text-orange-800 uppercase flex items-center gap-2 mb-1">📢 Alerta de Seguridad</p>
+                    <p class="text-xs text-orange-700 leading-relaxed">
+                        Queda prohibido utilizar discos de corte para labores de desbaste. Todo retiro requiere validación de EPP.
+                    </p>
+                </div>
+            </div>
+
+            <!-- VISTA 2: CATÁLOGO ANTI-ERRORES -->
+            <div id="view-catalog" class="absolute inset-0 w-full h-full overflow-y-auto p-5 pb-32 hidden transform translate-x-full bg-white transition-all duration-300 z-10 pt-16">
+                <div class="flex justify-between items-center mb-4 mt-2">
+                    <button onclick="navTo('view-dashboard', true)" class="text-blue-600 text-sm font-bold flex items-center gap-1">← Volver</button>
+                    <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded font-bold">Carrito: 0</span>
+                </div>
+                
+                <h2 class="text-xl font-bold text-slate-800 mb-1">Catálogo de Almacén</h2>
+                
+                <div class="flex gap-2 mb-5 overflow-x-auto pb-2">
+                    <button class="bg-slate-800 text-white px-4 py-1.5 rounded-full text-xs font-bold whitespace-nowrap">Abrasivos</button>
+                    <button class="bg-slate-100 text-slate-600 px-4 py-1.5 rounded-full text-xs font-bold whitespace-nowrap">Herramientas</button>
+                    <button class="bg-slate-100 text-slate-600 px-4 py-1.5 rounded-full text-xs font-bold whitespace-nowrap">EPP</button>
+                </div>
+
+                <div class="space-y-4">
+                    <!-- Producto 1: Disco de Corte -->
+                    <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm transition-all">
+                        <div class="flex items-start p-3 gap-3">
+                            <div class="w-16 h-16 bg-slate-100 rounded-xl flex items-center justify-center text-3xl">💿</div>
+                            <div class="flex-grow">
+                                <h3 class="font-bold text-slate-800 text-sm">Disco de Corte 4.5"</h3>
+                                <p class="text-[10px] text-slate-500 font-mono">COD-CRT-115</p>
+                                <span class="inline-block bg-red-100 text-red-700 text-[9px] font-bold px-1.5 py-0.5 rounded mt-1">NO DESBASTAR</span>
+                            </div>
+                            <button id="btn-pedir-corte" onclick="advanceTutorial(2); openProductModal('corte')" class="bg-blue-50 text-blue-600 px-3 py-1.5 rounded-lg text-xs font-bold">Pedir</button>
+                        </div>
+                    </div>
+
+                    <!-- Producto 2: Disco Flap -->
+                    <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
+                        <div class="flex items-start p-3 gap-3">
+                            <div class="w-16 h-16 bg-slate-100 rounded-xl flex items-center justify-center text-3xl">🪚</div>
+                            <div class="flex-grow">
+                                <h3 class="font-bold text-slate-800 text-sm">Disco Flap Grano 60</h3>
+                                <p class="text-[10px] text-slate-500 font-mono">COD-FLA-060</p>
+                                <span class="inline-block bg-green-100 text-green-700 text-[9px] font-bold px-1.5 py-0.5 rounded mt-1">PARA PULIDO</span>
+                            </div>
+                            <button onclick="openProductModal('flap')" class="bg-blue-50 text-blue-600 px-3 py-1.5 rounded-lg text-xs font-bold">Pedir</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal de Producto (Validación) -->
+                <div id="product-modal" class="hidden fixed inset-0 z-50 bg-slate-900/50 flex items-end justify-center sm:absolute">
+                    <div class="bg-white w-full rounded-t-3xl p-5 shadow-2xl transform translate-y-0 transition-transform mb-[64px]">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h3 id="modal-title" class="font-bold text-slate-800 text-lg">Disco de Corte</h3>
+                                <p id="modal-code" class="text-xs text-slate-500 font-mono">COD-CRT</p>
+                            </div>
+                            <button onclick="closeProductModal()" class="text-slate-400 text-xl font-bold px-2 pb-2">×</button>
+                        </div>
+                        
+                        <div id="modal-warning" class="bg-red-50 p-3 rounded-lg border border-red-100 mb-4">
+                            <span class="text-red-600 text-xs font-bold uppercase">❌ PELIGRO:</span>
+                            <p class="text-[11px] text-red-800 mt-1 leading-tight">No usar para limpieza de soldadura. Riesgo inminente de rotura y accidente.</p>
+                        </div>
+
+                        <div id="container-chk-material" class="border-t pt-4">
+                            <p class="text-xs font-bold text-slate-700 mb-2">Confirmación obligatoria:</p>
+                            <div id="highlight-box" class="p-2 -mx-2 rounded-lg transition-colors">
+                                <label class="flex items-start gap-2 text-xs text-slate-600 cursor-pointer w-full">
+                                    <input type="checkbox" id="chk-material" onclick="advanceTutorial(3); checkMaterialForm();" class="mt-0.5 rounded text-blue-600 focus:ring-blue-500 w-5 h-5 cursor-pointer">
+                                    <span class="mt-0.5 font-medium select-none">Confirmo que no usaré este disco para desbastar.</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <button id="btn-add-cart" onclick="closeProductModal(); advanceTutorial(4); navTo('view-checkout')" disabled class="w-full mt-4 bg-slate-300 text-slate-500 font-bold py-3 rounded-xl transition-all text-sm">
+                            Ir al Check-out
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VISTA 3: CHECKOUT DE SEGURIDAD -->
+            <div id="view-checkout" class="absolute inset-0 w-full h-full overflow-y-auto p-5 pb-32 hidden transform translate-x-full bg-slate-100 transition-all duration-300 z-10 pt-16">
+                <button onclick="navTo('view-catalog', true)" class="text-blue-600 text-sm font-bold flex items-center gap-1 mb-4 mt-2">← Volver al Catálogo</button>
+
+                <div class="text-center mb-6">
+                    <div class="w-16 h-16 bg-vijicsa-yellow rounded-full flex items-center justify-center text-2xl mx-auto shadow-md mb-2">🛡️</div>
+                    <h2 class="text-lg font-bold text-slate-800">Checklist de Seguridad</h2>
+                    <p class="text-xs text-slate-500 mt-1">Obligatorio antes de generar QR</p>
+                </div>
+
+                <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200 space-y-4">
+                    <label class="flex items-start gap-3 p-2 rounded-lg cursor-pointer">
+                        <input type="checkbox" class="chk-security mt-1 w-5 h-5 text-green-600 rounded">
+                        <div>
+                            <p class="text-sm font-semibold text-slate-800">Procedimiento seguro</p>
+                            <p class="text-[11px] text-slate-500">Conozco el encendido y uso adecuado.</p>
+                        </div>
+                    </label>
+                    <hr class="border-slate-100">
+                    <label class="flex items-start gap-3 p-2 rounded-lg cursor-pointer">
+                        <input type="checkbox" class="chk-security mt-1 w-5 h-5 text-green-600 rounded">
+                        <div>
+                            <p class="text-sm font-semibold text-slate-800">EPP Completo</p>
+                            <p class="text-[11px] text-slate-500">Cuento con careta facial, lentes y guantes.</p>
+                        </div>
+                    </label>
+                    <hr class="border-slate-100">
+                    <label class="flex items-start gap-3 p-2 rounded-lg cursor-pointer">
+                        <input type="checkbox" class="chk-security mt-1 w-5 h-5 text-green-600 rounded">
+                        <div>
+                            <p class="text-sm font-semibold text-slate-800">Compromiso de equipo</p>
+                            <p class="text-[11px] text-slate-500">Devolveré la herramienta con la guarda instalada.</p>
+                        </div>
+                    </label>
+                </div>
+
+                <button id="btn-generate-qr" disabled onclick="showQR()" class="w-full mt-6 bg-slate-300 text-slate-500 font-bold py-4 rounded-xl transition-all shadow-md">
+                    Firmar y Generar QR
+                </button>
+
+                <div id="qr-modal" class="hidden mt-6 bg-white rounded-2xl p-6 shadow-lg border-2 border-green-500 text-center qr-pulse relative z-20">
+                    <p class="text-sm font-bold text-green-600 mb-3">¡Aprobado para recojo!</p>
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=VIJICSA-REQ-8472&bgcolor=ffffff&color=1f2937" alt="QR Code" class="mx-auto w-32 h-32 rounded-lg">
+                    <p class="text-xs text-slate-500 mt-4 font-mono">REQ-8472</p>
+                    <button id="btn-finalizar-qr" onclick="navTo('view-dashboard'); advanceTutorial('catalogo_fin');" class="w-full mt-4 bg-slate-100 text-slate-700 font-bold py-2 rounded-lg text-sm border border-slate-300">Finalizar</button>
+                </div>
+            </div>
+
+            <!-- VISTA 4: ENTRENAMIENTO FLASH (MEMORAMA) -->
+            <div id="view-training" class="absolute inset-0 w-full h-full overflow-y-auto p-5 pb-32 hidden transform translate-x-full bg-slate-800 text-white transition-all duration-300 z-10 pt-16">
+                <div class="flex justify-between items-center mb-4 mt-2">
+                    <button onclick="navTo('view-dashboard', true)" class="text-slate-400 text-sm font-bold flex items-center gap-1">← Salir</button>
+                    <span id="score-display" class="bg-slate-700 text-xs px-2 py-1 rounded-full font-mono">Pts: 0</span>
+                </div>
+
+                <div class="text-center" id="training-content-area">
+                    <h2 class="text-lg font-bold mb-1">Memorización Rápida</h2>
+                    <p class="text-xs text-slate-400 mb-4" id="training-counter">Herramienta 1 de 3</p>
+                    
+                    <!-- Tarjeta de Herramienta -->
+                    <div class="bg-white p-4 rounded-2xl shadow-lg mb-6 relative overflow-hidden">
+                        <div id="training-emoji" class="w-full h-32 bg-slate-100 rounded-xl border-2 border-slate-200 border-dashed flex items-center justify-center text-6xl transition-transform duration-300">🪚</div>
+                        <p id="training-name" class="text-slate-800 font-bold mt-4 text-center text-sm">Disco Flap Grano 60</p>
+                        
+                        <!-- Panel Azul Oscuro (Fase Memorización) -->
+                        <div id="training-reveal-code" class="absolute inset-0 bg-blue-600 rounded-2xl flex flex-col items-center justify-center transition-opacity duration-300 z-20">
+                            <span class="text-xs font-bold text-blue-200 uppercase tracking-widest mb-2">Fíjate bien, el código es:</span>
+                            <span id="training-correct-code" class="text-2xl font-mono font-bold text-white bg-blue-800 px-4 py-3 rounded-lg border-2 border-blue-400 shadow-xl">COD-FLA-060</span>
+                            <p class="text-[10px] text-blue-200 mt-4 animate-pulse">Memoriza... <span id="training-timer" class="font-bold">3</span>s</p>
+                        </div>
+                    </div>
+
+                    <!-- Area de Interacción (Oculta al inicio) -->
+                    <div id="training-interaction-area" class="hidden opacity-0 transition-opacity duration-500">
+                        <p class="text-sm font-semibold text-slate-300 mb-3">¿A qué caja pertenece la herramienta?</p>
+                        <div class="grid grid-cols-2 gap-3" id="training-buttons">
+                            <!-- Botones autogenerados por JS -->
+                        </div>
+                    </div>
+
+                    <p id="training-feedback" class="h-10 mt-4 font-bold text-sm flex items-center justify-center rounded-lg"></p>
+                </div>
+                
+                <!-- Pantalla Final de Entrenamiento -->
+                <div id="training-final-screen" class="hidden h-full flex-col items-center justify-center -mt-10">
+                    <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center text-4xl mb-4">🏆</div>
+                    <h2 class="text-2xl font-bold text-white mb-2">¡Entrenamiento Finalizado!</h2>
+                    <p class="text-slate-300 mb-6">Puntaje obtenido: <span id="final-score" class="font-bold text-white text-lg font-mono">0</span></p>
+                    <button onclick="navTo('view-dashboard', true); advanceTutorial('entrenamiento_fin');" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 rounded-xl shadow-lg transition-colors btn-pulse-ring">Volver al Inicio</button>
+                    <button onclick="currentQuestionIdx=0; score=0; document.getElementById('score-display').innerText='Pts: 0'; document.getElementById('training-final-screen').classList.add('hidden'); document.getElementById('training-content-area').classList.remove('hidden'); startMemorizationPhase();" class="text-slate-400 text-sm mt-4 underline">Reintentar</button>
+                </div>
+            </div>
+
+             <!-- VISTA 5: REPORTE DE DAÑOS -->
+             <div id="view-reporte" class="absolute inset-0 w-full h-full overflow-y-auto p-5 pb-32 hidden transform translate-x-full bg-slate-100 transition-all duration-300 z-10 pt-16">
+                <button onclick="navTo('view-dashboard', true)" class="text-blue-600 text-sm font-bold flex items-center gap-1 mb-4 mt-2">← Volver al Inicio</button>
+                <h2 class="text-xl font-bold text-slate-800 mb-1">Reportar Daño o Merma</h2>
+                <p class="text-xs text-slate-500 mb-6">Bloquee herramientas defectuosas antes de usarlas.</p>
+                <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200">
+                    <label class="block text-xs font-bold text-slate-700 mb-2">Seleccione Herramienta / Insumo</label>
+                    <select class="w-full border border-slate-300 rounded-lg p-3 text-sm bg-slate-50 mb-4 outline-none focus:ring-2 focus:ring-red-500">
+                        <option>Amoladora Angular 9"</option>
+                        <option>Máquina Soldar Inverter 250A</option>
+                        <option>Esmeril de Banco (Planta Baja)</option>
+                        <option>Arnés de Seguridad 3 Anillos</option>
+                        <option>Taladro de Columna</option>
+                        <option>Caja de Discos (Incompleta)</option>
+                        <option>Otras herramientas manuales</option>
+                    </select>
+
+                    <label class="block text-xs font-bold text-slate-700 mb-2">Descripción del Daño</label>
+                    <select id="select-dano" onchange="checkOtroDano()" class="w-full border border-slate-300 rounded-lg p-3 text-sm bg-slate-50 mb-2 outline-none focus:ring-2 focus:ring-red-500">
+                        <option>Cable pelado o roto</option>
+                        <option>Guarda de seguridad faltante</option>
+                        <option>Carcasa exterior rajada</option>
+                        <option>Línea de vida / tejido desgastado</option>
+                        <option>Botón de encendido atascado</option>
+                        <option>Sobrecalentamiento excesivo</option>
+                        <option>Faltan piezas</option>
+                        <option value="otro">Otro (Especificar)</option>
+                    </select>
+
+                    <!-- Input para "Otro" daño, oculto por defecto -->
+                    <input type="text" id="input-otro-dano" placeholder="Describa el daño brevemente..." class="hidden w-full border border-slate-300 rounded-lg p-3 text-sm bg-white mb-4 outline-none focus:ring-2 focus:ring-red-500 transition-all">
+                    
+                    <label class="block text-xs font-bold text-slate-700 mb-2 mt-2">Evidencia (Foto obligatoria)</label>
+                    <div id="camera-btn" class="w-full h-32 bg-slate-100 border-2 border-dashed border-slate-300 rounded-xl flex flex-col items-center justify-center text-slate-400 cursor-pointer hover:bg-slate-200 transition-colors relative overflow-hidden">
+                        <div id="camera-flash-layer" class="absolute inset-0 hidden"></div>
+                        <span id="camera-icon" class="text-3xl mb-1">📷</span>
+                        <span id="camera-text" class="text-xs">Tocar para abrir cámara</span>
+                    </div>
+
+                    <button id="btn-enviar-reporte" onclick="alert('✅ Reporte enviado a Mantenimiento. Herramienta bloqueada en el sistema de inventario para evitar su uso.'); navTo('view-dashboard'); advanceTutorial('reporte_fin');" class="w-full mt-6 bg-red-600 text-white font-bold py-3 rounded-xl hover:bg-red-700 shadow-md transition-colors">Enviar Reporte</button>
+                </div>
+            </div>
+
+            <!-- VISTA 6: HISTORIAL -->
+            <div id="view-historial" class="absolute inset-0 w-full h-full overflow-y-auto p-5 pb-32 hidden transform translate-x-full bg-slate-100 transition-all duration-300 z-10 pt-16">
+                <h2 class="text-xl font-bold text-slate-800 mb-1 mt-2">Mi Historial</h2>
+                <p class="text-xs text-slate-500 mb-6">Últimos pedidos realizados a almacén.</p>
+                <div class="space-y-3">
+                    <div class="bg-white p-3 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between">
+                        <div class="flex items-center gap-3"><div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center text-xl">✅</div><div><p class="font-bold text-sm text-slate-800">Disco de Corte 4.5"</p><p class="text-[10px] text-slate-500">REQ-8472 • Hace 2 horas</p></div></div>
+                        <span class="text-[10px] bg-green-100 text-green-800 px-2 py-1 rounded font-bold">ENTREGADO</span>
+                    </div>
+                    <div class="bg-white p-3 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between">
+                        <div class="flex items-center gap-3"><div class="w-10 h-10 bg-slate-100 rounded-lg flex items-center justify-center text-xl">🔄</div><div><p class="font-bold text-sm text-slate-800">Amoladora 9"</p><p class="text-[10px] text-slate-500">Ayer, 14:30 pm</p></div></div>
+                        <span class="text-[10px] bg-slate-100 text-slate-600 px-2 py-1 rounded font-bold">DEVUELTO</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VISTA 7: PERFIL -->
+            <div id="view-perfil" class="absolute inset-0 w-full h-full overflow-y-auto p-5 pb-32 hidden transform translate-x-full bg-slate-100 transition-all duration-300 z-10 pt-16">
+                <div class="text-center mt-6 mb-6">
+                    <div class="w-24 h-24 bg-vijicsa-yellow rounded-full flex items-center justify-center text-3xl mx-auto shadow-md mb-3 border-4 border-white font-bold text-slate-800">JP</div>
+                    <h2 class="text-xl font-bold text-slate-800">Juan Pérez</h2>
+                    <p class="text-xs text-slate-500">Soldadura y Armado</p>
+                </div>
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm text-center">
+                        <p class="text-2xl font-bold text-green-600">100%</p>
+                        <p class="text-[10px] text-slate-500 font-semibold uppercase mt-1">Cumplimiento EPP</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm text-center">
+                        <p class="text-2xl font-bold text-blue-600">8</p>
+                        <p class="text-[10px] text-slate-500 font-semibold uppercase mt-1">Entrenamientos</p>
+                    </div>
+                </div>
+                <button class="w-full bg-slate-800 text-white font-bold py-3 rounded-xl text-sm shadow-md">Cerrar Sesión</button>
+            </div>
+        </div>
+
+        <!-- BOTTOM NAV BAR -->
+        <nav class="bg-white border-t border-slate-200 h-16 flex justify-around items-center px-2 z-40 absolute bottom-0 w-full shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
+            <button id="nav-btn-home" onclick="navTo('view-dashboard')" class="nav-bottom-btn flex flex-col items-center justify-center w-16 text-blue-600">
+                <span class="text-xl">🏠</span>
+                <span class="text-[10px] font-bold mt-1">Inicio</span>
+            </button>
+            <button id="nav-btn-historial" onclick="navTo('view-historial')" class="nav-bottom-btn flex flex-col items-center justify-center w-16 text-slate-400 hover:text-slate-600 transition-colors">
+                <span class="text-xl">📋</span>
+                <span class="text-[10px] font-bold mt-1">Historial</span>
+            </button>
+            <button id="nav-btn-perfil" onclick="navTo('view-perfil')" class="nav-bottom-btn flex flex-col items-center justify-center w-16 text-slate-400 hover:text-slate-600 transition-colors">
+                <span class="text-xl">👤</span>
+                <span class="text-[10px] font-bold mt-1">Perfil</span>
+            </button>
+        </nav>
+    </div>
+
+    <script>
+        // --- SISTEMA DE ONBOARDING FLOTANTE (TOUR COMPLETO) ---
+        let tutorialPhase = 0; 
+        const tutBar = document.getElementById('tutorial-bar');
+        const tutText = document.getElementById('tut-text');
+        const tutContent = document.getElementById('tut-content');
+        const tutEmoji = document.getElementById('tut-emoji');
+        
+        function animateTutorialText(newText, newEmoji) {
+            tutContent.classList.remove('text-change-anim');
+            void tutContent.offsetWidth; 
+            tutText.innerHTML = newText;
+            tutEmoji.innerHTML = newEmoji;
+            tutContent.classList.add('text-change-anim');
+            tutBar.classList.add('scale-[1.02]', 'bg-blue-500');
+            setTimeout(() => { tutBar.classList.remove('scale-[1.02]', 'bg-blue-500'); }, 200);
+        }
+
+        function clearAllPulses() {
+            document.querySelectorAll('.btn-pulse-ring').forEach(el => el.classList.remove('btn-pulse-ring'));
+            const highlightBox = document.getElementById('highlight-box');
+            if(highlightBox) highlightBox.classList.remove('bg-blue-50');
+        }
+
+        function initTutorial() {
+            tutBar.classList.remove('slide-up-out');
+            tutBar.classList.add('slide-down-in');
+            document.getElementById('btn-solicitar-mat').classList.add('btn-pulse-ring');
+            animateTutorialText("Toca <b>Solicitar Material</b> para iniciar el demo.", "👋");
+        }
+
+        function advanceTutorial(stepCompleted) {
+            if (tutorialPhase === 'terminado') return;
+            clearAllPulses();
+
+            if (stepCompleted === 1 && tutorialPhase === 0) {
+                tutorialPhase = 1;
+                animateTutorialText("Intenta <b>Pedir</b> el Disco de Corte.", "👆");
+                setTimeout(() => { document.getElementById('btn-pedir-corte').classList.add('btn-pulse-ring'); }, 400);
+            
+            } else if (stepCompleted === 2 && tutorialPhase === 1) {
+                tutorialPhase = 2;
+                animateTutorialText("Marca la <b>casilla de confirmación</b> para habilitar el checkout.", "☑️");
+                setTimeout(() => { 
+                    const box = document.getElementById('highlight-box');
+                    if(box) box.classList.add('bg-blue-50', 'btn-pulse-ring');
+                }, 200);
+            
+            } else if (stepCompleted === 3 && tutorialPhase === 2) {
+                tutorialPhase = 3;
+                animateTutorialText("¡Bien! Ahora toca <b>Ir al Check-out</b>.", "➡️");
+                document.getElementById('btn-add-cart').classList.add('btn-pulse-ring');
+            
+            } else if (stepCompleted === 4 && tutorialPhase === 3) {
+                tutorialPhase = 4;
+                animateTutorialText("Firma el checklist de seguridad para generar el código QR.", "🛡️");
+            
+            } else if (stepCompleted === 5 && tutorialPhase === 4) {
+                tutBar.classList.replace('bg-blue-600', 'bg-green-600');
+                animateTutorialText("¡Excelente! Has bloqueado un error de despacho. Toca <b>Finalizar</b>.", "✅");
+                document.getElementById('btn-finalizar-qr').classList.add('btn-pulse-ring');
+            
+            } else if (stepCompleted === 'catalogo_fin') {
+                tutorialPhase = 'entrenamiento';
+                tutBar.classList.replace('bg-green-600', 'bg-blue-600');
+                animateTutorialText("Ahora prueba el <b>Entrenamiento Flash</b>.", "🧠");
+                setTimeout(() => { document.getElementById('btn-entrenamiento').classList.add('btn-pulse-ring'); }, 500);
+
+            } else if (stepCompleted === 'entrenamiento_inicio' && tutorialPhase === 'entrenamiento') {
+                tutorialPhase = 'entrenamiento_activo';
+                animateTutorialText("Memoriza el código y luego toca la caja correcta.", "🎮");
+
+            } else if (stepCompleted === 'entrenamiento_fin' && tutorialPhase === 'entrenamiento_activo') {
+                tutorialPhase = 'reporte';
+                animateTutorialText("¡Genial! Por último, entra a <b>Reportar Equipo Dañado</b>.", "⚠️");
+                setTimeout(() => { document.getElementById('btn-reporte').classList.add('btn-pulse-ring'); }, 500);
+
+            } else if (stepCompleted === 'reporte_inicio' && tutorialPhase === 'reporte') {
+                tutorialPhase = 'reporte_activo';
+                animateTutorialText("Elige un daño, toca la <b>cámara</b> y envía el reporte.", "📷");
+                setTimeout(() => { document.getElementById('camera-btn').classList.add('btn-pulse-ring'); }, 500);
+                
+            } else if (stepCompleted === 'reporte_foto' && tutorialPhase === 'reporte_activo') {
+                animateTutorialText("Listo. Ahora dale a <b>Enviar Reporte</b>.", "📤");
+                document.getElementById('btn-enviar-reporte').classList.add('btn-pulse-ring');
+
+            } else if (stepCompleted === 'reporte_fin' && tutorialPhase === 'reporte_activo') {
+                tutorialPhase = 'terminado';
+                tutBar.classList.replace('bg-blue-600', 'bg-green-600');
+                animateTutorialText("¡Demo completada! Has visto todo el flujo preventivo.", "🎉");
+                setTimeout(() => {
+                    tutBar.classList.remove('slide-down-in');
+                    tutBar.classList.add('slide-up-out'); 
+                }, 4000);
+            }
+        }
+
+        window.onload = () => { setTimeout(initTutorial, 800); };
+
+        // --- NAVEGACIÓN ---
+        let currentView = 'view-dashboard';
+        let countdownInterval; // Guardar referencia al temporizador del entrenamiento
+
+        function navTo(targetViewId, isBack = false) {
+            if(currentView === targetViewId) return;
+            const current = document.getElementById(currentView);
+            const target = document.getElementById(targetViewId);
+            
+            target.classList.remove('hidden');
+            if(isBack) {
+                target.style.transform = 'translateX(-100%)';
+                setTimeout(() => { target.style.transform = 'translateX(0)'; }, 10);
+                current.style.transform = 'translateX(100%)';
+            } else {
+                target.style.transform = 'translateX(100%)';
+                setTimeout(() => { target.style.transform = 'translateX(0)'; }, 10);
+                current.style.transform = 'translateX(-100%)';
+            }
+            setTimeout(() => { current.classList.add('hidden'); }, 300);
+            currentView = targetViewId;
+
+            document.querySelectorAll('.nav-bottom-btn').forEach(btn => btn.classList.replace('text-blue-600', 'text-slate-400'));
+            
+            // Activar botón inferior correcto
+            if(['view-dashboard', 'view-catalog', 'view-training', 'view-reporte'].includes(targetViewId)) {
+                document.getElementById('nav-btn-home').classList.replace('text-slate-400', 'text-blue-600');
+            } else if (targetViewId === 'view-historial') {
+                document.getElementById('nav-btn-historial').classList.replace('text-slate-400', 'text-blue-600');
+            } else if (targetViewId === 'view-perfil') {
+                document.getElementById('nav-btn-perfil').classList.replace('text-slate-400', 'text-blue-600');
+            }
+
+            // --- MANEJO ESPECÍFICO AL ENTRAR A CADA VISTA ---
+            if(targetViewId === 'view-dashboard') {
+                // Reset de modales y catálogos
+                document.getElementById('product-modal').classList.add('hidden');
+                document.getElementById('qr-modal').classList.add('hidden');
+                document.getElementById('btn-generate-qr').classList.remove('hidden');
+                document.querySelectorAll('.chk-security').forEach(c => c.checked = false);
+                checkSecurityForm();
+                const chkMat = document.getElementById('chk-material');
+                if(chkMat) chkMat.checked = false;
+                checkMaterialForm();
+                
+                // Limpiar cámara del reporte
+                document.getElementById('camera-icon').innerText = '📷';
+                document.getElementById('camera-text').innerText = 'Tocar para abrir cámara';
+                document.getElementById('camera-btn').style.backgroundImage = 'none';
+                document.getElementById('input-otro-dano').classList.add('hidden');
+                document.getElementById('select-dano').selectedIndex = 0;
+                
+                // Detener cualquier temporizador del entrenamiento que siga corriendo
+                clearInterval(countdownInterval);
+                document.getElementById('training-final-screen').classList.add('hidden');
+                document.getElementById('training-content-area').classList.remove('hidden');
+
+            } else if (targetViewId === 'view-training') {
+                // SÓLO cuando entra al entrenamiento, arranca la memoria
+                currentQuestionIdx = 0;
+                score = 0;
+                document.getElementById('score-display').innerText = 'Pts: 0';
+                document.getElementById('training-final-screen').classList.add('hidden');
+                document.getElementById('training-content-area').classList.remove('hidden');
+                startMemorizationPhase();
+            }
+        }
+
+        // --- LÓGICA DEL REPORTE DE DAÑOS ---
+        function checkOtroDano() {
+            const select = document.getElementById('select-dano');
+            const input = document.getElementById('input-otro-dano');
+            if (select.value === 'otro') {
+                input.classList.remove('hidden');
+                input.focus();
+            } else {
+                input.classList.add('hidden');
+                input.value = '';
+            }
+        }
+
+        // --- LÓGICA DEL CATÁLOGO DINÁMICO ---
+        function openProductModal(type) {
+            const modal = document.getElementById('product-modal');
+            const title = document.getElementById('modal-title');
+            const code = document.getElementById('modal-code');
+            const warning = document.getElementById('modal-warning');
+            const chk = document.getElementById('chk-material');
+            const btn = document.getElementById('btn-add-cart');
+
+            chk.checked = false;
+            btn.disabled = true;
+            btn.classList.replace('bg-blue-600', 'bg-slate-300');
+            btn.classList.replace('text-white', 'text-slate-500');
+
+            if(type === 'corte') {
+                title.innerText = 'Disco de Corte 4.5"'; code.innerText = 'COD-CRT-115';
+                warning.innerHTML = '<span class="text-red-600 text-xs font-bold uppercase">❌ PELIGRO:</span><p class="text-[11px] text-red-800 mt-1 leading-tight">No usar para limpieza de soldadura. Riesgo inminente de rotura y accidente.</p>';
+            } else if(type === 'flap') {
+                title.innerText = 'Disco Flap Grano 60'; code.innerText = 'COD-FLA-060';
+                warning.innerHTML = '<span class="text-green-600 text-xs font-bold uppercase">✅ USO CORRECTO:</span><p class="text-[11px] text-green-800 mt-1 leading-tight">Ideal para desbaste suave y pulido de metales.</p>';
+            }
+            modal.classList.remove('hidden');
+        }
+
+        function closeProductModal() { document.getElementById('product-modal').classList.add('hidden'); }
+
+        function checkMaterialForm() {
+            const chkMaterial = document.getElementById('chk-material');
+            const btnAddCart = document.getElementById('btn-add-cart');
+            if(chkMaterial && chkMaterial.checked) {
+                btnAddCart.disabled = false;
+                btnAddCart.classList.replace('bg-slate-300', 'bg-blue-600');
+                btnAddCart.classList.replace('text-slate-500', 'text-white');
+            } else {
+                btnAddCart.disabled = true;
+                btnAddCart.classList.replace('bg-blue-600', 'bg-slate-300');
+                btnAddCart.classList.replace('text-white', 'text-slate-500');
+            }
+        }
+
+        // --- LÓGICA CHECKOUT SEGURIDAD ---
+        const secCheckboxes = document.querySelectorAll('.chk-security');
+        const btnGenerateQR = document.getElementById('btn-generate-qr');
+        function checkSecurityForm() {
+            const allChecked = Array.from(secCheckboxes).every(chk => chk.checked);
+            if(allChecked) {
+                btnGenerateQR.disabled = false;
+                btnGenerateQR.classList.replace('bg-slate-300', 'bg-[#1F2937]');
+                btnGenerateQR.classList.replace('text-slate-500', 'text-white');
+            } else {
+                btnGenerateQR.disabled = true;
+                btnGenerateQR.classList.replace('bg-[#1F2937]', 'bg-slate-300');
+                btnGenerateQR.classList.replace('text-white', 'text-slate-500');
+            }
+        }
+        secCheckboxes.forEach(chk => chk.addEventListener('change', checkSecurityForm));
+        
+        function showQR() {
+            btnGenerateQR.classList.add('hidden');
+            document.getElementById('qr-modal').classList.remove('hidden');
+            advanceTutorial(5); 
+        }
+
+        // --- FAKE CAMERA PARA REPORTE DE DAÑOS ---
+        const cameraBtn = document.getElementById('camera-btn');
+        cameraBtn.addEventListener('click', () => {
+            const flashLayer = document.getElementById('camera-flash-layer');
+            flashLayer.classList.remove('hidden');
+            flashLayer.classList.add('camera-flash');
+            setTimeout(() => {
+                flashLayer.classList.add('hidden');
+                flashLayer.classList.remove('camera-flash');
+                document.getElementById('camera-icon').innerText = '✅';
+                document.getElementById('camera-text').innerText = 'Foto adjuntada';
+                cameraBtn.style.backgroundImage = 'linear-gradient(to right, #475569, #334155)';
+                cameraBtn.style.color = 'white';
+                advanceTutorial('reporte_foto');
+            }, 500);
+        });
+
+        // --- LÓGICA DE ENTRENAMIENTO MULTIRETO (MEMORAMA Y LIMPIEZA) ---
+        const questions = [
+            { emoji: '🪚', name: 'Disco Flap Grano 60', code: 'COD-FLA-060', options: ['COD-CRT-115', 'COD-FLA-060', 'COD-DSK-001', 'COD-AMO-009'], correct: 1 },
+            { emoji: '🔌', name: 'Amoladora Angular 9"', code: 'COD-AMO-009', options: ['COD-AMO-009', 'COD-TAL-002', 'COD-MQS-001', 'COD-FLA-060'], correct: 0 },
+            { emoji: '💿', name: 'Disco de Corte 4.5"', code: 'COD-CRT-115', options: ['COD-FLA-060', 'COD-LIZ-004', 'COD-CRT-115', 'COD-AMO-009'], correct: 2 }
+        ];
+        let score = 0; let currentQuestionIdx = 0; let answerRevealed = false;
+
+        function startMemorizationPhase() {
+            answerRevealed = false;
+            
+            // 1. Limpiar feedback
+            document.getElementById('training-feedback').textContent = '';
+            document.getElementById('training-feedback').className = 'h-10 mt-4 font-bold text-sm flex items-center justify-center rounded-lg';
+            
+            // 2. Verificar si terminó el juego
+            if(currentQuestionIdx >= questions.length) {
+                document.getElementById('training-content-area').classList.add('hidden');
+                const finalScreen = document.getElementById('training-final-screen');
+                finalScreen.classList.remove('hidden'); 
+                document.getElementById('final-score').innerText = score;
+                return;
+            }
+
+            const q = questions[currentQuestionIdx];
+            document.getElementById('training-counter').innerText = `Herramienta ${currentQuestionIdx + 1} de ${questions.length}`;
+            document.getElementById('training-emoji').innerText = q.emoji;
+            document.getElementById('training-name').innerText = q.name;
+            document.getElementById('training-correct-code').innerText = q.code;
+            
+            // 3. Preparar los botones ocultos
+            const btnContainer = document.getElementById('training-buttons');
+            btnContainer.innerHTML = '';
+            q.options.forEach((opt, index) => {
+                const isCorrect = (index === q.correct);
+                btnContainer.innerHTML += `
+                    <button onclick="checkAnswer(this, ${isCorrect})" data-correct="${isCorrect}" class="bg-slate-700 hover:bg-slate-600 text-white font-mono py-6 rounded-xl border-b-4 border-slate-900 shadow-md transition-all active:translate-y-1 active:border-b-0 flex flex-col items-center justify-center">
+                        <span class="text-2xl mb-1">📦</span>
+                        <span class="text-[10px]">${opt}</span>
+                    </button>
+                `;
+            });
+            
+            // 4. Iniciar Fase de Memoria (3 Segundos)
+            const revealCard = document.getElementById('training-reveal-code');
+            const interactionArea = document.getElementById('training-interaction-area');
+            const timerEl = document.getElementById('training-timer');
+            
+            revealCard.style.opacity = '1';
+            revealCard.style.pointerEvents = 'auto';
+            interactionArea.classList.add('hidden');
+            interactionArea.classList.remove('opacity-100');
+            interactionArea.style.opacity = '0';
+
+            let timeLeft = 3;
+            timerEl.innerText = timeLeft;
+            
+            // Detener contador previo si existe
+            clearInterval(countdownInterval);
+            
+            countdownInterval = setInterval(() => {
+                timeLeft--;
+                timerEl.innerText = timeLeft;
+                if(timeLeft <= 0) {
+                    clearInterval(countdownInterval);
+                    // Ocultar código y mostrar opciones
+                    revealCard.style.opacity = '0';
+                    revealCard.style.pointerEvents = 'none';
+                    interactionArea.classList.remove('hidden');
+                    setTimeout(() => { interactionArea.style.opacity = '1'; }, 50);
+                }
+            }, 1000);
+            
+            // Efecto Pop de imagen
+            const emojiEl = document.getElementById('training-emoji');
+            emojiEl.style.transform = 'scale(0.8)';
+            setTimeout(() => { emojiEl.style.transform = 'scale(1)'; }, 100);
+        }
+
+        function checkAnswer(btn, isCorrect) {
+            if(answerRevealed) return; answerRevealed = true;
+            const feedback = document.getElementById('training-feedback');
+            const buttonsContainer = document.getElementById('training-buttons');
+
+            if(isCorrect) {
+                score += 10; document.getElementById('score-display').innerText = `Pts: ${score}`;
+                btn.classList.replace('bg-slate-700', 'bg-green-600'); 
+                btn.classList.replace('border-slate-900', 'border-green-800');
+                feedback.textContent = '¡Correcto! Excelente retención.';
+                feedback.className = 'h-10 mt-4 font-bold text-sm flex items-center justify-center rounded-lg bg-green-900/50 text-green-400 border border-green-800';
+            } else {
+                score = Math.max(0, score - 5); document.getElementById('score-display').innerText = `Pts: ${score}`;
+                btn.classList.replace('bg-slate-700', 'bg-red-600'); 
+                btn.classList.replace('border-slate-900', 'border-red-800');
+                btn.classList.add('shake-animation');
+                
+                const correctBtn = buttonsContainer.querySelector('[data-correct="true"]');
+                correctBtn.classList.replace('bg-slate-700', 'bg-green-600'); 
+                correctBtn.classList.replace('border-slate-900', 'border-green-800');
+
+                feedback.textContent = 'Incorrecto. Ese código no corresponde.';
+                feedback.className = 'h-10 mt-4 font-bold text-sm flex items-center justify-center rounded-lg bg-red-900/50 text-red-400 border border-red-800';
+                setTimeout(() => { btn.classList.remove('shake-animation'); }, 400);
+            }
+            
+            // Avanzar a la siguiente pregunta después de 1.8 seg
+            setTimeout(() => { 
+                currentQuestionIdx++; 
+                startMemorizationPhase(); 
+            }, 1800);
+        }
+    </script>
+</body>
+</html>

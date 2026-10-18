@@ -1,0 +1,969 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AUREA VOID · Joyería, carteras y accesorios</title>
+<meta name="description" content="AUREA VOID: joyería con baño de oro 18k, carteras y accesorios para mujer en Lima. Pedidos por WhatsApp, pago con Yape o Plin y envíos a todo el Perú.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ===== Tokens (ui-ux-pro-max: "Premium dark + gold accent", Cormorant / Montserrat), adaptados a vino + champagne ===== */
+:root {
+  --bg: #FBF7F4;
+  --surface: #FFFFFF;
+  --surface-2: #F4ECE6;
+  --text: #2A1B1F;
+  --text-muted: #6B5A5E;
+  --border: #E5D9D2;
+  --primary: #5B1A2E;
+  --on-primary: #FFFFFF;
+  --accent: #8C6118;
+  --gold: #C9A35B;
+  --blush: #EBD5CF;
+  --danger: #B91C1C;
+  --whatsapp: #128C4A;
+  --shadow: 0 12px 34px rgba(42, 27, 31, .09);
+  --radius: 6px;
+  --font-title: "Cormorant", Georgia, serif;
+  --font-body: "Montserrat", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --ease: cubic-bezier(.2, .7, .2, 1);
+  color-scheme: light;
+}
+:root[data-theme="dark"] {
+  --bg: #140C0F;
+  --surface: #1F1418;
+  --surface-2: #2A1C21;
+  --text: #F6EEEA;
+  --text-muted: #BBA9AC;
+  --border: #3E2C32;
+  --primary: #E9C9D2;
+  --on-primary: #2A1B1F;
+  --accent: #D9B26F;
+  --gold: #D9B26F;
+  --blush: #3A2830;
+  --danger: #F87171;
+  --whatsapp: #25D366;
+  --shadow: 0 12px 34px rgba(0, 0, 0, .45);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 400 16px/1.6 var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  transition: background-color .3s var(--ease), color .3s var(--ease);
+}
+img { display: block; max-width: 100%; }
+a { color: inherit; }
+button { font: inherit; color: inherit; cursor: pointer; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+.container { width: min(1200px, 100% - 32px); margin-inline: auto; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+.i.fill { fill: currentColor; stroke: none; }
+
+h1, h2, h3 { font-family: var(--font-title); font-weight: 600; line-height: 1.1; margin: 0; letter-spacing: -.01em; }
+.eyebrow { font-size: .75rem; letter-spacing: .22em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin: 0 0 12px; }
+.muted { color: var(--text-muted); }
+.section { padding: clamp(64px, 9vw, 112px) 0; }
+.section-head { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 40px; flex-wrap: wrap; }
+.section-head h2 { font-size: clamp(2rem, 4.4vw, 3.25rem); }
+.section-head p { margin: 10px 0 0; max-width: 520px; }
+em.serif { font-family: var(--font-title); font-style: italic; font-weight: 500; color: var(--accent); }
+
+/* ===== Botones ===== */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 48px; padding: 0 26px; border-radius: 999px; border: 1px solid var(--primary);
+  background: var(--primary); color: var(--on-primary); font-weight: 600; font-size: .875rem;
+  letter-spacing: .06em; text-transform: uppercase; text-decoration: none;
+  transition: transform .2s var(--ease), background-color .2s var(--ease), color .2s var(--ease), box-shadow .2s var(--ease);
+}
+.btn:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+.btn:active { transform: translateY(0); }
+.btn.outline { background: transparent; color: var(--primary); }
+.btn.outline:hover { background: var(--primary); color: var(--on-primary); }
+.btn.wa { background: var(--whatsapp); border-color: var(--whatsapp); color: #fff; }
+.btn.light { background: #fff; border-color: #fff; color: #5B1A2E; }
+.btn.block { width: 100%; }
+.icon-btn {
+  position: relative; width: 44px; height: 44px; display: grid; place-items: center;
+  border: 0; background: transparent; border-radius: 999px; transition: background-color .2s var(--ease);
+}
+.icon-btn:hover { background: var(--surface-2); }
+.badge-count {
+  position: absolute; top: 4px; right: 2px; min-width: 18px; height: 18px; padding: 0 5px;
+  border-radius: 999px; background: var(--primary); color: var(--on-primary);
+  font-size: .6875rem; font-weight: 700; display: grid; place-items: center;
+  transition: transform .25s var(--ease);
+}
+.badge-count[data-n="0"] { transform: scale(0); }
+.badge-count.bump { animation: bump .35s var(--ease); }
+@keyframes bump { 50% { transform: scale(1.35); } }
+
+/* ===== Barra superior + header ===== */
+.topbar { background: var(--primary); color: var(--on-primary); font-size: .8125rem; text-align: center; padding: 9px 16px; letter-spacing: .03em; }
+.topbar b { font-weight: 600; }
+header.site {
+  position: sticky; top: 0; z-index: 40;
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  backdrop-filter: saturate(1.4) blur(14px); -webkit-backdrop-filter: saturate(1.4) blur(14px);
+  border-bottom: 1px solid transparent; transition: border-color .3s var(--ease);
+}
+header.site.scrolled { border-bottom-color: var(--border); }
+.nav { display: flex; align-items: center; justify-content: space-between; height: 72px; gap: 16px; }
+.logo { font-family: var(--font-title); font-size: 1.875rem; font-weight: 700; letter-spacing: .28em; text-decoration: none; display: flex; align-items: center; gap: 10px; }
+.logo svg { width: 22px; height: 22px; color: var(--gold); }
+.logo-sub { font-family: var(--font-body); font-size: .6875rem; font-weight: 500; letter-spacing: .5em; color: var(--accent); border-left: 1px solid var(--gold); padding: 4px 0 4px 12px; margin-left: 2px; }
+.nav-links { display: flex; gap: 32px; list-style: none; margin: 0; padding: 0; }
+.nav-links a { text-decoration: none; font-size: .8125rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; padding: 8px 0; position: relative; }
+.nav-links a::after { content: ""; position: absolute; left: 0; right: 100%; bottom: 2px; height: 1px; background: var(--accent); transition: right .3s var(--ease); }
+.nav-links a:hover::after { right: 0; }
+.nav-actions { display: flex; align-items: center; gap: 2px; }
+.menu-btn { display: none; }
+.mobile-menu { display: none; }
+
+/* ===== Hero ===== */
+.hero { padding: clamp(32px, 6vw, 72px) 0 clamp(56px, 8vw, 96px); }
+.hero-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(32px, 6vw, 80px); align-items: center; }
+.hero h1 { font-size: clamp(3rem, 7.4vw, 6rem); line-height: .98; }
+.hero h1 em { font-style: italic; font-weight: 500; color: var(--accent); }
+.hero-copy p.lead { font-size: 1.0625rem; max-width: 470px; margin: 24px 0 32px; color: var(--text-muted); }
+.hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+.hero-stats { display: flex; gap: 32px; margin-top: 44px; padding-top: 28px; border-top: 1px solid var(--border); flex-wrap: wrap; }
+.hero-stats b { display: block; font-family: var(--font-title); font-size: 2rem; font-weight: 600; line-height: 1; }
+.hero-stats span { font-size: .8125rem; color: var(--text-muted); }
+.hero-visual { position: relative; aspect-ratio: 4 / 5; }
+.hero-visual .main { position: absolute; inset: 0 0 0 14%; border-radius: 240px 240px var(--radius) var(--radius); overflow: hidden; background: var(--blush); }
+.hero-visual .main img { width: 100%; height: 100%; object-fit: cover; }
+.hero-visual .mini { position: absolute; left: 0; bottom: 8%; width: 40%; aspect-ratio: 1; border-radius: 50%; overflow: hidden; border: 6px solid var(--bg); box-shadow: var(--shadow); background: var(--blush); }
+.hero-visual .mini img { width: 100%; height: 100%; object-fit: cover; }
+.hero-tag {
+  position: absolute; right: -8px; top: 12%; background: var(--surface); border: 1px solid var(--border);
+  padding: 14px 18px; border-radius: var(--radius); box-shadow: var(--shadow); display: flex; gap: 12px; align-items: center; max-width: 230px;
+}
+.hero-tag .dot { width: 40px; height: 40px; border-radius: 50%; background: var(--surface-2); color: var(--accent); display: grid; place-items: center; flex: none; }
+.hero-tag b { display: block; font-size: .875rem; }
+.hero-tag span { display: block; font-size: .75rem; line-height: 1.4; color: var(--text-muted); }
+
+/* ===== Beneficios ===== */
+.perks { border-block: 1px solid var(--border); background: var(--surface); }
+.perks ul { list-style: none; margin: 0 auto; padding: 22px 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.perks li { display: flex; gap: 14px; align-items: center; font-size: .875rem; }
+.perks li .i { width: 26px; height: 26px; color: var(--accent); }
+.perks strong { display: block; font-weight: 600; }
+.perks span { color: var(--text-muted); font-size: .8125rem; }
+
+/* ===== Categorías (bento) ===== */
+.cats { display: grid; grid-template-columns: 1.3fr 1fr 1fr; grid-template-rows: 280px 280px; gap: 16px; }
+.cat { position: relative; overflow: hidden; border-radius: var(--radius); text-decoration: none; color: #fff; background: var(--blush); isolation: isolate; }
+.cat:first-child { grid-row: span 2; }
+.cat:nth-child(4) { grid-column: span 2; }
+.cat img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; transition: transform .7s var(--ease); }
+.cat::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(20, 8, 12, 0) 35%, rgba(20, 8, 12, .72)); }
+.cat:hover img { transform: scale(1.05); }
+.cat-body { position: absolute; left: 24px; right: 24px; bottom: 22px; display: flex; justify-content: space-between; align-items: end; gap: 12px; }
+.cat h3 { font-size: clamp(1.75rem, 3vw, 2.25rem); color: #fff; }
+.cat small { font-size: .8125rem; opacity: .9; letter-spacing: .04em; }
+.cat .arrow { width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(255, 255, 255, .6); display: grid; place-items: center; transition: background-color .25s var(--ease), color .25s var(--ease); flex: none; }
+.cat:hover .arrow { background: #fff; color: #5B1A2E; }
+
+/* ===== Productos ===== */
+.chips { display: flex; gap: 8px; flex-wrap: wrap; }
+.chip {
+  min-height: 40px; padding: 0 18px; border-radius: 999px; border: 1px solid var(--border); background: transparent;
+  font-size: .8125rem; font-weight: 500; white-space: nowrap; transition: all .2s var(--ease);
+}
+.chip:hover { border-color: var(--primary); }
+.chip[aria-pressed="true"] { background: var(--primary); color: var(--on-primary); border-color: var(--primary); }
+.grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px 20px; margin-top: 32px; }
+.card { position: relative; display: flex; flex-direction: column; }
+.card .media { position: relative; aspect-ratio: 4 / 5; border-radius: var(--radius); overflow: hidden; background: var(--surface-2); }
+.card .media img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s var(--ease); }
+.card:hover .media img { transform: scale(1.06); }
+.card .tag { position: absolute; top: 12px; left: 12px; background: var(--surface); color: var(--text); font-size: .6875rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: 5px 10px; border-radius: 999px; }
+.card .tag.sale { background: var(--primary); color: var(--on-primary); }
+.card .fav { position: absolute; top: 8px; right: 8px; background: var(--surface); }
+.card .fav:hover { background: var(--surface); transform: scale(1.06); }
+.card .fav[aria-pressed="true"] { color: #BE123C; }
+.card .fav[aria-pressed="true"] .i { fill: currentColor; }
+.card .add {
+  position: absolute; left: 12px; right: 12px; bottom: 12px; min-height: 44px;
+  opacity: 0; transform: translateY(10px); transition: opacity .25s var(--ease), transform .25s var(--ease), background-color .2s;
+}
+.card:hover .add, .card:focus-within .add { opacity: 1; transform: none; }
+.card .info { padding-top: 14px; }
+.card .cat-name { font-size: .6875rem; letter-spacing: .16em; text-transform: uppercase; color: var(--text-muted); }
+.card h3 { font-family: var(--font-body); font-size: .9375rem; font-weight: 600; margin: 4px 0 6px; line-height: 1.35; letter-spacing: 0; }
+.price { display: flex; gap: 8px; align-items: baseline; font-weight: 600; }
+.price s { color: var(--text-muted); font-weight: 400; font-size: .875rem; }
+.price .now { color: var(--text); }
+.mat { font-size: .75rem; color: var(--text-muted); margin-top: 2px; }
+
+/* ===== Caja de regalo ===== */
+.gift { background: #3D1020; color: #F6EEEA; position: relative; overflow: hidden; }
+.gift::before { content: ""; position: absolute; inset: 0; background: url("https://images.unsplash.com/photo-1721807644561-9efcabee5c42?auto=format&fit=crop&w=1600&q=60") center/cover; opacity: .14; }
+.gift .container { position: relative; }
+.gift-grid { display: grid; grid-template-columns: 1fr 1.15fr; gap: clamp(32px, 6vw, 72px); align-items: start; }
+.gift .eyebrow { color: #E2C285; }
+.gift h2 { font-size: clamp(2.25rem, 5vw, 3.75rem); color: #fff; }
+.gift h2 em { color: #E2C285; font-weight: 500; }
+.gift p { color: #E4D3D6; }
+.gift-steps { list-style: none; padding: 0; margin: 28px 0 0; display: grid; gap: 14px; }
+.gift-steps li { display: flex; gap: 14px; align-items: center; font-size: .9375rem; }
+.gift-steps b { width: 32px; height: 32px; border-radius: 50%; border: 1px solid #E2C285; color: #E2C285; display: grid; place-items: center; font-family: var(--font-title); font-size: 1.125rem; flex: none; }
+.gift-box { background: rgba(255, 255, 255, .06); border: 1px solid rgba(255, 255, 255, .16); border-radius: 10px; padding: clamp(20px, 3vw, 32px); backdrop-filter: blur(6px); }
+.gift-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.gift-opt {
+  position: relative; border: 1px solid rgba(255, 255, 255, .18); background: rgba(255, 255, 255, .04); border-radius: var(--radius);
+  padding: 8px; text-align: left; color: #F6EEEA; transition: border-color .2s var(--ease), background-color .2s var(--ease);
+}
+.gift-opt:hover { border-color: #E2C285; }
+.gift-opt[aria-pressed="true"] { border-color: #E2C285; background: rgba(226, 194, 133, .14); }
+.gift-opt img { aspect-ratio: 1; object-fit: cover; border-radius: 4px; width: 100%; }
+.gift-opt span { display: block; font-size: .75rem; margin-top: 6px; line-height: 1.3; }
+.gift-opt small { color: #E2C285; font-weight: 600; font-size: .75rem; }
+.gift-opt .check { position: absolute; top: 12px; right: 12px; width: 24px; height: 24px; border-radius: 50%; background: #E2C285; color: #3D1020; display: grid; place-items: center; transform: scale(0); transition: transform .2s var(--ease); }
+.gift-opt[aria-pressed="true"] .check { transform: scale(1); }
+.gift-opt[disabled] { opacity: .45; cursor: not-allowed; }
+.gift-sum { margin-top: 20px; display: grid; gap: 6px; font-size: .9375rem; }
+.gift-sum div { display: flex; justify-content: space-between; }
+.gift-sum .total { font-size: 1.25rem; font-weight: 700; padding-top: 10px; border-top: 1px solid rgba(255, 255, 255, .18); margin-top: 4px; }
+.gift-sum .off { color: #E2C285; }
+.gift-hint { font-size: .8125rem; color: #CDB8BC; margin: 14px 0; min-height: 1.3em; }
+
+/* ===== Por qué AUREA VOID ===== */
+.why { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 80px); align-items: center; }
+.why-img { position: relative; aspect-ratio: 1; border-radius: var(--radius); overflow: hidden; background: var(--blush); }
+.why-img img { width: 100%; height: 100%; object-fit: cover; }
+.why-list { list-style: none; margin: 32px 0 0; padding: 0; display: grid; gap: 24px; }
+.why-list li { display: grid; grid-template-columns: 48px 1fr; gap: 16px; }
+.why-list .ic { width: 48px; height: 48px; border-radius: 50%; background: var(--surface-2); color: var(--accent); display: grid; place-items: center; }
+.why-list h3 { font-family: var(--font-body); font-size: 1rem; font-weight: 600; letter-spacing: 0; margin-bottom: 4px; }
+.why-list p { margin: 0; color: var(--text-muted); font-size: .9375rem; }
+
+/* ===== Reseñas ===== */
+.reviews { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.review { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; display: flex; flex-direction: column; gap: 16px; }
+.stars { display: flex; gap: 2px; color: var(--gold); }
+.stars .i { width: 16px; height: 16px; }
+.review blockquote { margin: 0; font-family: var(--font-title); font-size: 1.375rem; line-height: 1.35; font-weight: 500; }
+.review footer { display: flex; align-items: center; gap: 12px; margin-top: auto; font-size: .875rem; }
+.review .av { width: 40px; height: 40px; border-radius: 50%; background: var(--surface-2); color: var(--accent); display: grid; place-items: center; font-weight: 700; }
+.review footer span { display: block; color: var(--text-muted); font-size: .8125rem; }
+
+/* ===== Galería ===== */
+.gallery { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; }
+.gallery a { position: relative; aspect-ratio: 1; overflow: hidden; border-radius: 4px; background: var(--surface-2); }
+.gallery img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s var(--ease), opacity .3s; }
+.gallery a:hover img { transform: scale(1.06); opacity: .85; }
+
+/* ===== FAQ ===== */
+.faq-wrap { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(32px, 6vw, 80px); }
+.faq details { border-bottom: 1px solid var(--border); }
+.faq summary {
+  list-style: none; cursor: pointer; padding: 22px 0; display: flex; justify-content: space-between; gap: 16px;
+  font-weight: 600; font-size: 1rem; align-items: center;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary .i { transition: transform .25s var(--ease); color: var(--accent); }
+.faq details[open] summary .i { transform: rotate(45deg); }
+.faq details p { margin: 0 0 22px; color: var(--text-muted); max-width: 620px; }
+
+/* ===== CTA final + footer ===== */
+.cta-final { text-align: center; background: var(--surface-2); }
+.cta-final h2 { font-size: clamp(2.25rem, 5vw, 4rem); max-width: 760px; margin: 0 auto; }
+.cta-final p { max-width: 520px; margin: 18px auto 32px; color: var(--text-muted); }
+.cta-final .hero-ctas { justify-content: center; }
+footer.site { background: var(--surface); border-top: 1px solid var(--border); padding: 64px 0 28px; font-size: .875rem; }
+.foot-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.2fr; gap: 32px; }
+.foot-grid h4 { font-size: .75rem; letter-spacing: .18em; text-transform: uppercase; margin: 0 0 16px; color: var(--accent); }
+.foot-grid ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.foot-grid a { text-decoration: none; color: var(--text-muted); }
+.foot-grid a:hover { color: var(--text); }
+.socials { display: flex; gap: 8px; margin-top: 16px; }
+.socials a { width: 44px; height: 44px; border: 1px solid var(--border); border-radius: 50%; display: grid; place-items: center; color: var(--text); }
+.socials a:hover { border-color: var(--primary); }
+.pay { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+.pay span { border: 1px solid var(--border); border-radius: 4px; padding: 4px 10px; font-size: .75rem; font-weight: 600; }
+.foot-bottom { margin-top: 48px; padding-top: 22px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; color: var(--text-muted); font-size: .8125rem; }
+
+/* ===== WhatsApp flotante ===== */
+.wa-float {
+  position: fixed; right: 20px; bottom: 20px; z-index: 30; width: 56px; height: 56px; border-radius: 50%;
+  background: var(--whatsapp); color: #fff; display: grid; place-items: center; box-shadow: var(--shadow);
+  transition: transform .2s var(--ease);
+}
+.wa-float:hover { transform: scale(1.08); }
+.wa-float .i { width: 28px; height: 28px; }
+
+/* ===== Carrito (drawer) ===== */
+.overlay { position: fixed; inset: 0; background: rgba(20, 8, 12, .45); z-index: 50; opacity: 0; pointer-events: none; transition: opacity .3s var(--ease); }
+.overlay.open { opacity: 1; pointer-events: auto; }
+.drawer {
+  position: fixed; top: 0; right: 0; bottom: 0; width: min(420px, 100%); z-index: 60; background: var(--bg);
+  display: flex; flex-direction: column; transform: translateX(100%); transition: transform .35s var(--ease); box-shadow: var(--shadow);
+}
+.drawer.open { transform: none; }
+.drawer-head { display: flex; justify-content: space-between; align-items: center; padding: 18px 20px; border-bottom: 1px solid var(--border); }
+.drawer-head h2 { font-size: 1.75rem; }
+.drawer-body { flex: 1; overflow-y: auto; padding: 8px 20px; }
+.line { display: grid; grid-template-columns: 72px 1fr auto; gap: 14px; padding: 16px 0; border-bottom: 1px solid var(--border); align-items: center; }
+.line img { width: 72px; height: 88px; object-fit: cover; border-radius: 4px; background: var(--surface-2); }
+.line h3 { font-family: var(--font-body); font-size: .875rem; font-weight: 600; letter-spacing: 0; line-height: 1.3; }
+.line .p { font-size: .875rem; color: var(--text-muted); margin-top: 2px; }
+.qty { display: inline-flex; align-items: center; border: 1px solid var(--border); border-radius: 999px; margin-top: 8px; }
+.qty button { width: 34px; height: 34px; border: 0; background: transparent; display: grid; place-items: center; border-radius: 50%; }
+.qty button .i { width: 16px; height: 16px; }
+.qty span { min-width: 24px; text-align: center; font-size: .875rem; font-weight: 600; }
+.line .rm { align-self: start; }
+.empty { text-align: center; padding: 64px 12px; color: var(--text-muted); }
+.empty .i { width: 40px; height: 40px; margin: 0 auto 12px; color: var(--accent); }
+.drawer-foot { border-top: 1px solid var(--border); padding: 18px 20px 22px; display: grid; gap: 10px; }
+.row { display: flex; justify-content: space-between; font-size: .9375rem; }
+.row.total { font-weight: 700; font-size: 1.125rem; }
+.ship-bar { height: 4px; background: var(--surface-2); border-radius: 999px; overflow: hidden; }
+.ship-bar i { display: block; height: 100%; background: var(--accent); width: 0; transition: width .4s var(--ease); }
+.ship-msg { font-size: .8125rem; color: var(--text-muted); margin: 0; }
+.gift-wrap { display: flex; gap: 10px; align-items: center; font-size: .875rem; min-height: 44px; cursor: pointer; }
+.gift-wrap input { width: 18px; height: 18px; accent-color: var(--primary); }
+
+/* ===== Toast ===== */
+.toast {
+  position: fixed; left: 50%; bottom: 24px; z-index: 70; transform: translate(-50%, 140%);
+  background: var(--text); color: var(--bg); padding: 12px 20px; border-radius: 999px; font-size: .875rem; font-weight: 500;
+  display: flex; align-items: center; gap: 10px; box-shadow: var(--shadow); transition: transform .35s var(--ease); max-width: calc(100% - 32px);
+}
+.toast.show { transform: translate(-50%, 0); }
+
+/* ===== Animación de entrada ===== */
+.reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s var(--ease), transform .7s var(--ease); transition-delay: var(--d, 0s); }
+.reveal.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+  .reveal { opacity: 1; transform: none; }
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 1024px) {
+  .grid { grid-template-columns: repeat(3, 1fr); }
+  .perks ul { grid-template-columns: repeat(2, 1fr); }
+  .foot-grid { grid-template-columns: 1fr 1fr; }
+  .gallery { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 860px) {
+  .nav-links { display: none; }
+  .menu-btn { display: grid; }
+  .mobile-menu { display: block; position: absolute; top: 100%; left: 0; right: 0; background: var(--bg); border-bottom: 1px solid var(--border); padding: 8px 16px 16px; transform-origin: top; transform: scaleY(0); opacity: 0; transition: transform .25s var(--ease), opacity .2s; pointer-events: none; }
+  .mobile-menu.open { transform: none; opacity: 1; pointer-events: auto; }
+  .mobile-menu a { display: flex; align-items: center; min-height: 48px; text-decoration: none; border-bottom: 1px solid var(--border); font-weight: 500; letter-spacing: .08em; text-transform: uppercase; font-size: .875rem; }
+  .hero-grid, .gift-grid, .why, .faq-wrap { grid-template-columns: 1fr; }
+  .hero-visual { max-width: 520px; width: 100%; margin-inline: auto; }
+  .cats { grid-template-columns: 1fr 1fr; grid-template-rows: 300px 220px 220px; }
+  .cat:first-child { grid-column: span 2; grid-row: auto; }
+  .cat:nth-child(4) { grid-column: span 1; }
+  .reviews { grid-template-columns: 1fr; }
+  .card .add { opacity: 1; transform: none; left: auto; right: 10px; bottom: 10px; width: 44px; min-height: 44px; padding: 0; box-shadow: var(--shadow); }
+  .card .add-txt { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .card .info { padding-top: 12px; }
+}
+@media (max-width: 600px) {
+  .logo { font-size: 1.375rem; letter-spacing: .16em; gap: 8px; }
+  .logo > svg { display: none; }
+  .logo-sub { font-size: .625rem; letter-spacing: .3em; padding-left: 8px; }
+  .nav { gap: 8px; }
+  .grid { grid-template-columns: repeat(2, 1fr); gap: 24px 12px; }
+  .perks ul { grid-template-columns: 1fr 1fr; gap: 18px 12px; }
+  .perks li { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .cats { grid-template-columns: 1fr; grid-template-rows: none; grid-auto-rows: 240px; }
+  .cat:first-child, .cat:nth-child(4) { grid-column: auto; }
+  .gift-options { grid-template-columns: repeat(2, 1fr); }
+  .gallery { grid-template-columns: repeat(2, 1fr); }
+  .foot-grid { grid-template-columns: 1fr; }
+  .hero-tag { right: 0; top: 6%; max-width: 200px; padding: 10px 12px; }
+  .hero-stats { gap: 20px; }
+  .chips { flex-wrap: nowrap; overflow-x: auto; margin-inline: -16px; padding: 0 16px 6px; scrollbar-width: none; }
+  .chips::-webkit-scrollbar { display: none; }
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-gem" viewBox="0 0 24 24"><path d="M6 3h12l4 6-10 12L2 9l4-6Z"/><path d="M2 9h20M12 21 8 9l4-6 4 6-4 12"/></symbol>
+  <symbol id="i-bag" viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7-4.4-9.2-9A5 5 0 0 1 12 6a5 5 0 0 1 9.2 5C19 15.6 12 20 12 20Z"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 5 5 9-10"/></symbol>
+  <symbol id="i-truck" viewBox="0 0 24 24"><path d="M3 6h11v10H3zM14 9h4l3 3v4h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></symbol>
+  <symbol id="i-gift" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="4"/><path d="M5 12v9h14v-9M12 8v13M12 8S10.5 3 8 3.5 6.5 8 12 8ZM12 8s1.5-5 4-4.5S17.5 8 12 8Z"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 5 6v6c0 4.5 3 7.5 7 9 4-1.5 7-4.5 7-9V6l-7-3Z"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-card" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18M7 15h3"/></symbol>
+  <symbol id="i-sparkle" viewBox="0 0 24 24"><path d="M12 3c.6 4.5 2.5 6.4 7 7-4.5.6-6.4 2.5-7 7-.6-4.5-2.5-6.4-7-7 4.5-.6 6.4-2.5 7-7Z"/><path d="M19 16c.2 1.4.8 2 2.2 2.2-1.4.2-2 .8-2.2 2.2-.2-1.4-.8-2-2.2-2.2 1.4-.2 2-.8 2.2-2.2Z"/></symbol>
+  <symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11Z"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 11a8 8 0 0 0-14.6-4.5L4 8M4 4v4h4M4 13a8 8 0 0 0 14.6 4.5L20 16M20 20v-4h-4"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1 6.2L12 17.3 6.5 20.2l1-6.2L3 9.6l6.2-.9L12 3Z"/></symbol>
+  <symbol id="i-insta" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6"/></symbol>
+  <symbol id="i-tiktok" viewBox="0 0 24 24"><path d="M14 3v12a3.5 3.5 0 1 1-3.5-3.5M14 3c.5 2.5 2.5 4.5 5 4.5"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
+  <symbol id="i-wa" viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.6 14.1c-.2.7-1.4 1.3-2 1.4-.5.1-1.2.1-1.9-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5.1-4.5-.1-.2-1.2-1.6-1.2-3.1s.8-2.2 1-2.5c.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.3.5-.4.5c-.2.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.7-.1l1-1.2c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.5.3.1.2.1.7-.2 1.4Z"/></symbol>
+</svg>
+
+<a class="sr-only" href="#coleccion">Saltar a la colección</a>
+
+<div class="topbar"><b>Envío gratis en Lima</b> por compras desde S/ 149 · Paga con Yape, Plin o tarjeta</div>
+
+<header class="site" id="header">
+  <nav class="nav container" aria-label="Principal">
+    <a href="#inicio" class="logo" aria-label="AUREA VOID, inicio"><svg class="i"><use href="#i-sparkle"/></svg>AUREA<span class="logo-sub">VOID</span></a>
+    <ul class="nav-links">
+      <li><a href="#coleccion" data-go="Joyería">Joyería</a></li>
+      <li><a href="#coleccion" data-go="Carteras">Carteras</a></li>
+      <li><a href="#coleccion" data-go="Accesorios">Accesorios</a></li>
+      <li><a href="#regalo">Regalos</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="icon-btn" id="btn-tema" aria-label="Cambiar a modo oscuro"><svg class="i"><use href="#i-moon"/></svg></button>
+      <button class="icon-btn" id="btn-favs" aria-label="Favoritos: 0"><svg class="i"><use href="#i-heart"/></svg><span class="badge-count" id="fav-count" data-n="0">0</span></button>
+      <button class="icon-btn" id="btn-carrito" aria-label="Abrir bolsa de compras" aria-controls="drawer"><svg class="i"><use href="#i-bag"/></svg><span class="badge-count" id="cart-count" data-n="0">0</span></button>
+      <button class="icon-btn menu-btn" id="btn-menu" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu"><svg class="i"><use href="#i-menu"/></svg></button>
+    </div>
+  </nav>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#coleccion" data-go="Joyería">Joyería</a>
+    <a href="#coleccion" data-go="Carteras">Carteras</a>
+    <a href="#coleccion" data-go="Accesorios">Accesorios</a>
+    <a href="#regalo">Caja de regalo</a>
+    <a href="#contacto">Contacto</a>
+  </div>
+</header>
+
+<main id="inicio">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow reveal">Nueva colección · Primavera 2026</p>
+        <h1 class="reveal" style="--d:.08s">Detalles que <em>brillan</em> contigo</h1>
+        <p class="lead reveal" style="--d:.16s">Joyería con baño de oro 18k, carteras de cuero sintético premium y accesorios elegidos a mano. Piezas para tu día a día y para regalar a quien más quieres.</p>
+        <div class="hero-ctas reveal" style="--d:.24s">
+          <a href="#coleccion" class="btn">Ver colección <svg class="i"><use href="#i-arrow"/></svg></a>
+          <a href="#" class="btn outline js-wa" data-msg="Hola AUREA VOID, quiero información sobre sus productos.">Pedir por WhatsApp</a>
+        </div>
+        <div class="hero-stats reveal" style="--d:.32s">
+          <div><b>+2,500</b><span>clientas felices</span></div>
+          <div><b>4.9</b><span>en reseñas</span></div>
+          <div><b>24 h</b><span>envíos en Lima</span></div>
+        </div>
+      </div>
+      <div class="hero-visual reveal" style="--d:.12s">
+        <div class="main"><img src="https://images.unsplash.com/photo-1616837874254-8d5aaa63e273?auto=format&fit=crop&w=1100&q=72" alt="Mujer con blazer negro luciendo un collar de oro" fetchpriority="high" width="1100" height="1375"></div>
+        <div class="mini"><img src="https://images.unsplash.com/photo-1617038220319-276d3cfab638?auto=format&fit=crop&w=500&q=70" alt="Argollas doradas torcidas sobre piedras blancas" width="500" height="500"></div>
+        <div class="hero-tag">
+          <span class="dot"><svg class="i"><use href="#i-gem"/></svg></span>
+          <div><b>Baño de oro 18k</b><span>Hipoalergénico · 6 meses de garantía</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Beneficios -->
+  <section class="perks" aria-label="Beneficios">
+    <ul class="container">
+      <li><svg class="i"><use href="#i-truck"/></svg><div><strong>Envíos a todo el Perú</strong><span>Lima en 24 h · Provincias 2–4 días</span></div></li>
+      <li><svg class="i"><use href="#i-gift"/></svg><div><strong>Empaque de regalo</strong><span>Cajita y tarjeta sin costo</span></div></li>
+      <li><svg class="i"><use href="#i-shield"/></svg><div><strong>Garantía 6 meses</strong><span>En toda la joyería</span></div></li>
+      <li><svg class="i"><use href="#i-card"/></svg><div><strong>Paga como quieras</strong><span>Yape, Plin, tarjeta o contraentrega</span></div></li>
+    </ul>
+  </section>
+
+  <!-- Categorías -->
+  <section class="section" id="categorias">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow reveal">Explora</p>
+          <h2 class="reveal" style="--d:.06s">Todo para <em class="serif">completar</em> tu look</h2>
+        </div>
+        <p class="muted reveal" style="--d:.12s">Desde una cadenita fina hasta la cartera que combina con todo. Elige por categoría.</p>
+      </div>
+      <div class="cats">
+        <a href="#coleccion" class="cat reveal" data-go="Joyería">
+          <img src="https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?auto=format&fit=crop&w=900&q=70" alt="Colección de collares, aretes y anillos de oro" loading="lazy">
+          <div class="cat-body"><div><small>Collares · Aretes · Anillos · Pulseras</small><h3>Joyería</h3></div><span class="arrow"><svg class="i"><use href="#i-arrow"/></svg></span></div>
+        </a>
+        <a href="#coleccion" class="cat reveal" style="--d:.08s" data-go="Carteras">
+          <img src="https://images.unsplash.com/photo-1758171692659-024183c2c272?auto=format&fit=crop&w=700&q=70" alt="Mujer sosteniendo una cartera beige acolchada" loading="lazy">
+          <div class="cat-body"><div><small>Bandoleras · Bolsos</small><h3>Carteras</h3></div><span class="arrow"><svg class="i"><use href="#i-arrow"/></svg></span></div>
+        </a>
+        <a href="#coleccion" class="cat reveal" style="--d:.16s" data-go="Accesorios">
+          <img src="https://images.unsplash.com/photo-1589363358751-ab05797e5629?auto=format&fit=crop&w=700&q=70" alt="Bolso metálico y reloj de oro rosa sobre un abrigo beige" loading="lazy">
+          <div class="cat-body"><div><small>Relojes · Billeteras</small><h3>Accesorios</h3></div><span class="arrow"><svg class="i"><use href="#i-arrow"/></svg></span></div>
+        </a>
+        <a href="#regalo" class="cat reveal" style="--d:.24s">
+          <img src="https://images.unsplash.com/photo-1650455221359-3aebf920bcc5?auto=format&fit=crop&w=1000&q=70" alt="Bandeja con varias joyas de oro" loading="lazy">
+          <div class="cat-body"><div><small>Arma tu caja y ahorra 15%</small><h3>Sets de regalo</h3></div><span class="arrow"><svg class="i"><use href="#i-arrow"/></svg></span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Colección -->
+  <section class="section" id="coleccion" style="padding-top:0">
+    <div class="container">
+      <div class="section-head" style="margin-bottom:0">
+        <div>
+          <p class="eyebrow reveal">Lo más pedido</p>
+          <h2 class="reveal" style="--d:.06s">Favoritos de la semana</h2>
+        </div>
+        <div class="chips reveal" style="--d:.12s" id="filtros" role="group" aria-label="Filtrar por categoría"></div>
+      </div>
+      <p class="sr-only" id="conteo" aria-live="polite"></p>
+      <div class="grid" id="grid"></div>
+    </div>
+  </section>
+
+  <!-- Caja de regalo -->
+  <section class="section gift" id="regalo">
+    <div class="container gift-grid">
+      <div>
+        <p class="eyebrow reveal">Sets de regalo</p>
+        <h2 class="reveal" style="--d:.06s">Arma tu <em>caja AUREA VOID</em> y ahorra 15%</h2>
+        <p class="reveal" style="--d:.12s">Ideal para cumpleaños, aniversarios o para darte un gusto. Elige 3 piezas de joyería y te la enviamos en una caja de regalo con lazo y tarjeta personalizada.</p>
+        <ol class="gift-steps reveal" style="--d:.18s">
+          <li><b>1</b>Elige 3 joyas de la lista</li>
+          <li><b>2</b>Se aplica 15% de descuento al instante</li>
+          <li><b>3</b>Envíanos tu caja por WhatsApp con tu dedicatoria</li>
+        </ol>
+      </div>
+      <div class="gift-box reveal" style="--d:.1s">
+        <div class="gift-options" id="gift-options" role="group" aria-label="Elige 3 joyas para tu caja"></div>
+        <p class="gift-hint" id="gift-hint" aria-live="polite">Elige 3 piezas (0 de 3).</p>
+        <div class="gift-sum">
+          <div><span>Subtotal</span><span id="g-sub">S/ 0</span></div>
+          <div class="off"><span>Descuento caja (15%)</span><span id="g-off">– S/ 0</span></div>
+          <div class="total"><span>Total</span><span id="g-total">S/ 0</span></div>
+        </div>
+        <button class="btn light block" id="g-pedir" style="margin-top:20px" disabled>Pedir mi caja por WhatsApp</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Por qué AUREA VOID -->
+  <section class="section">
+    <div class="container why">
+      <div class="why-img reveal"><img src="https://images.unsplash.com/photo-1585960622850-ed33c41d6418?auto=format&fit=crop&w=900&q=70" alt="Mujer con camisa blanca luciendo un collar de oro" loading="lazy"></div>
+      <div>
+        <p class="eyebrow reveal">Por qué AUREA VOID</p>
+        <h2 class="reveal" style="--d:.06s; font-size:clamp(2rem,4.4vw,3.25rem)">Piezas lindas que <em class="serif">duran</em></h2>
+        <ul class="why-list">
+          <li class="reveal" style="--d:.1s"><span class="ic"><svg class="i"><use href="#i-drop"/></svg></span><div><h3>No se pone negro</h3><p>Base de acero quirúrgico con baño de oro 18k. Resiste el agua y el sudor del día a día.</p></div></li>
+          <li class="reveal" style="--d:.16s"><span class="ic"><svg class="i"><use href="#i-sparkle"/></svg></span><div><h3>Seleccionado a mano</h3><p>Revisamos cada pieza antes de enviarla. Si algo no está perfecto, no sale de la tienda.</p></div></li>
+          <li class="reveal" style="--d:.22s"><span class="ic"><svg class="i"><use href="#i-refresh"/></svg></span><div><h3>Cambios sin complicaciones</h3><p>Tienes 7 días para cambiar tu producto si no te convence. Solo escríbenos.</p></div></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reseñas -->
+  <section class="section" id="resenas" style="background:var(--surface-2)">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow reveal">Reseñas</p>
+          <h2 class="reveal" style="--d:.06s">Lo que dicen nuestras clientas</h2>
+        </div>
+        <p class="muted reveal" style="--d:.12s"><b style="color:var(--text)">4.9 de 5</b> · más de 480 reseñas verificadas</p>
+      </div>
+      <div class="reviews" id="reviews"></div>
+    </div>
+  </section>
+
+  <!-- Galería -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow reveal">@aureavoid.pe</p>
+          <h2 class="reveal" style="--d:.06s">Así lucen nuestras clientas</h2>
+        </div>
+        <a href="#" class="btn outline reveal" style="--d:.12s"><svg class="i"><use href="#i-insta"/></svg>Síguenos</a>
+      </div>
+      <div class="gallery" id="gallery"></div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" id="faq" style="padding-top:0">
+    <div class="container faq-wrap">
+      <div>
+        <p class="eyebrow reveal">Preguntas frecuentes</p>
+        <h2 class="reveal" style="--d:.06s; font-size:clamp(2rem,4.4vw,3.25rem)">Resolvemos tus dudas</h2>
+        <p class="muted reveal" style="--d:.12s">¿No encuentras tu respuesta? Escríbenos por WhatsApp y te atendemos al momento.</p>
+      </div>
+      <div class="faq reveal" style="--d:.1s">
+        <details><summary>¿La joyería se pone negra o da alergia?<svg class="i"><use href="#i-plus"/></svg></summary><p>No. Trabajamos con acero quirúrgico 316L con baño de oro 18k, que es hipoalergénico y no se oxida con el agua. Para que dure más, evita perfumes y cremas directamente sobre la pieza.</p></details>
+        <details><summary>¿Cuánto cuesta el envío y cuánto demora?<svg class="i"><use href="#i-plus"/></svg></summary><p>En Lima Metropolitana el envío cuesta S/ 10 y llega en 24 horas (gratis desde S/ 149). A provincias enviamos por Shalom u Olva en 2 a 4 días hábiles.</p></details>
+        <details><summary>¿Cómo pago mi pedido?<svg class="i"><use href="#i-plus"/></svg></summary><p>Aceptamos Yape, Plin, transferencia, tarjeta de crédito o débito, y pago contraentrega en algunos distritos de Lima.</p></details>
+        <details><summary>¿Puedo cambiar un producto?<svg class="i"><use href="#i-plus"/></svg></summary><p>Sí, tienes 7 días desde que recibes tu pedido. El producto debe estar sin uso y con su empaque original. Por higiene, los aretes no tienen cambio.</p></details>
+        <details><summary>¿Hacen empaque de regalo?<svg class="i"><use href="#i-plus"/></svg></summary><p>Claro. Todas las joyas llegan en su cajita AUREA VOID y puedes pedir una tarjeta con dedicatoria sin costo adicional.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA final -->
+  <section class="section cta-final" id="contacto">
+    <div class="container">
+      <p class="eyebrow reveal">Atención personalizada</p>
+      <h2 class="reveal" style="--d:.06s">¿Buscas un regalo especial? <em class="serif">Te ayudamos a elegir</em></h2>
+      <p class="reveal" style="--d:.12s">Cuéntanos para quién es y tu presupuesto. Te mandamos fotos y videos de las piezas por WhatsApp.</p>
+      <div class="hero-ctas reveal" style="--d:.18s">
+        <a href="#" class="btn wa js-wa" data-msg="Hola AUREA VOID, quiero ayuda para elegir un regalo."><svg class="i fill"><use href="#i-wa"/></svg>Escríbenos por WhatsApp</a>
+        <a href="#coleccion" class="btn outline">Ver colección</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <a href="#inicio" class="logo"><svg class="i"><use href="#i-sparkle"/></svg>AUREA<span class="logo-sub">VOID</span></a>
+        <p class="muted" style="max-width:300px">Joyería, carteras y accesorios para mujer. Hecho con cariño en Lima, Perú.</p>
+        <div class="socials">
+          <a href="#" aria-label="Instagram"><svg class="i"><use href="#i-insta"/></svg></a>
+          <a href="#" aria-label="TikTok"><svg class="i"><use href="#i-tiktok"/></svg></a>
+          <a href="#" class="js-wa" data-msg="Hola AUREA VOID" aria-label="WhatsApp"><svg class="i fill"><use href="#i-wa"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h4>Tienda</h4>
+        <ul>
+          <li><a href="#coleccion" data-go="Joyería">Joyería</a></li>
+          <li><a href="#coleccion" data-go="Carteras">Carteras</a></li>
+          <li><a href="#coleccion" data-go="Accesorios">Accesorios</a></li>
+          <li><a href="#regalo">Cajas de regalo</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Ayuda</h4>
+        <ul>
+          <li><a href="#faq">Envíos y entregas</a></li>
+          <li><a href="#faq">Cambios</a></li>
+          <li><a href="#faq">Cuidado de joyas</a></li>
+          <li><a href="#resenas">Reseñas</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Showroom</h4>
+        <p class="muted" style="margin:0;display:flex;gap:8px"><svg class="i" style="color:var(--accent)"><use href="#i-pin"/></svg><span>Av. Larco 345, Of. 502, Miraflores<br>Lun a sáb · 10:00 a. m. – 8:00 p. m.<br>WhatsApp: 987 654 321</span></p>
+        <div class="pay"><span>Yape</span><span>Plin</span><span>Visa</span><span>Mastercard</span></div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 AUREA VOID Joyería &amp; Accesorios</span>
+      <span>Libro de reclamaciones · Términos y condiciones</span>
+    </div>
+  </div>
+</footer>
+
+<a href="#" class="wa-float js-wa" data-msg="Hola AUREA VOID, quiero hacer un pedido." aria-label="Escríbenos por WhatsApp"><svg class="i fill"><use href="#i-wa"/></svg></a>
+
+<!-- Bolsa de compras -->
+<div class="overlay" id="overlay"></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" aria-hidden="true">
+  <div class="drawer-head">
+    <h2 id="drawer-title">Tu bolsa</h2>
+    <button class="icon-btn" id="cerrar-drawer" aria-label="Cerrar bolsa"><svg class="i"><use href="#i-close"/></svg></button>
+  </div>
+  <div class="drawer-body" id="cart-lines"></div>
+  <div class="drawer-foot" id="cart-foot">
+    <div class="ship-bar" aria-hidden="true"><i id="ship-fill"></i></div>
+    <p class="ship-msg" id="ship-msg"></p>
+    <label class="gift-wrap"><input type="checkbox" id="envolver"> Agregar tarjeta con dedicatoria (gratis)</label>
+    <div class="row"><span>Subtotal</span><span id="c-sub">S/ 0</span></div>
+    <div class="row"><span>Envío Lima</span><span id="c-env">S/ 10</span></div>
+    <div class="row total"><span>Total</span><span id="c-total">S/ 0</span></div>
+    <button class="btn wa block" id="enviar-pedido"><svg class="i fill"><use href="#i-wa"/></svg>Enviar pedido por WhatsApp</button>
+  </div>
+</aside>
+
+<div class="toast" id="toast" role="status" aria-live="polite"><svg class="i"><use href="#i-check"/></svg><span id="toast-txt"></span></div>
+
+<script>
+const WHATSAPP = "51987654321";
+const ENVIO = 10, ENVIO_GRATIS = 149;
+const U = (id, w = 700) => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=70`;
+const soles = n => "S/ " + n.toLocaleString("es-PE", { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+
+const PRODUCTOS = [
+  { id: 1, n: "Collar Barra Dorada", c: "Joyería", t: "Collares", p: 89, img: "1569397288884-4d43d6738fbd", m: "Acero 316L · baño de oro 18k", tag: "Nuevo" },
+  { id: 2, n: "Cartera Camel Clásica", c: "Carteras", t: "Carteras", p: 189, img: "1598532163257-ae3c6b2524b6", m: "Cuero sintético premium" },
+  { id: 3, n: "Argollas Torcidas", c: "Joyería", t: "Aretes", p: 59, img: "1617038220319-276d3cfab638", m: "Baño de oro 18k", tag: "Top ventas" },
+  { id: 4, n: "Pulseras Charm (set x3)", c: "Joyería", t: "Pulseras", p: 69, antes: 85, img: "1778000000743-87e855360c51", m: "Acero 316L · baño de oro 18k" },
+  { id: 5, n: "Bolso Rojo Cereza", c: "Carteras", t: "Carteras", p: 169, img: "1584917865442-de89df76afd3", m: "Cuero sintético premium", tag: "Nuevo" },
+  { id: 6, n: "Trío de Anillos", c: "Joyería", t: "Anillos", p: 75, img: "1631982690223-8aa4be0a2497", m: "Ajustables · baño de oro 18k" },
+  { id: 7, n: "Reloj Malla Dorada", c: "Accesorios", t: "Relojes", p: 129, img: "1576053139778-7e32f2ae3cfd", m: "Malla milanesa · resistente al agua" },
+  { id: 8, n: "Collar Medalla Oval", c: "Joyería", t: "Collares", p: 79, img: "1783541507490-edb026e2a961", m: "Acero 316L · baño de oro 18k" },
+  { id: 9, n: "Bandolera Cuero Marrón", c: "Carteras", t: "Carteras", p: 135, antes: 159, img: "1600857062241-98e5dba7f214", m: "Correa ajustable" },
+  { id: 10, n: "Argollas Brillo", c: "Joyería", t: "Aretes", p: 69, img: "1777999745582-781ebbd8c7b9", m: "Circones · baño de oro 18k" },
+  { id: 11, n: "Billetera Caramelo", c: "Accesorios", t: "Billeteras", p: 69, img: "1537832816519-689ad163238b", m: "Cuero sintético · 6 bolsillos" },
+  { id: 12, n: "Bolso Rosa Mini", c: "Carteras", t: "Carteras", p: 139, img: "1566150905458-1bf1fc113f0d", m: "Cuero sintético · cadena dorada", tag: "Top ventas" },
+  { id: 13, n: "Esclava Cadena Gruesa", c: "Joyería", t: "Pulseras", p: 65, img: "1602173574767-37ac01994b2a", m: "Acero 316L · baño de oro 18k" },
+  { id: 14, n: "Aretes Concha Dorada", c: "Joyería", t: "Aretes", p: 55, img: "1778182553300-7593326ca29d", m: "Baño de oro 18k" },
+  { id: 15, n: "Bolso Negro Noche", c: "Carteras", t: "Carteras", p: 199, img: "1614179689702-355944cd0918", m: "Herrajes plateados" },
+  { id: 16, n: "Anillos Finos (set x3)", c: "Joyería", t: "Anillos", p: 49, img: "1599458349289-18f0ee82e6ed", m: "Ajustables · baño de oro 18k" }
+];
+const FILTROS = ["Todo", "Joyería", "Collares", "Aretes", "Anillos", "Pulseras", "Carteras", "Accesorios"];
+const REGALO_IDS = [1, 3, 4, 6, 8, 10, 13, 14, 16];
+const RESENAS = [
+  { q: "Me compré las argollas torcidas hace 5 meses y siguen igualitas. Las uso hasta para ducharme.", a: "Andrea R.", d: "San Miguel" },
+  { q: "Pedí la caja de regalo para mi mamá y llegó preciosa, con lazo y su tarjeta. Lloró de la emoción.", a: "Valeria M.", d: "Surco" },
+  { q: "La cartera camel es hermosa y súper espaciosa. Me atendieron por WhatsApp rapidísimo.", a: "Camila T.", d: "Arequipa" }
+];
+const GALERIA = [
+  ["1633934542430-0905ccb5f050", "Clienta con anillos y collar dorado"],
+  ["1590166223826-12dee1677420", "Clienta con arete de perla"],
+  ["1694062045776-f48d9b6de57e", "Clienta con collar y aretes de oro"],
+  ["1613482184972-f9c1022d0928", "Clienta sosteniendo una cartera marrón"],
+  ["1625516152414-8f33eef3d660", "Clienta con arete y anillo dorados"],
+  ["1601821765780-754fa98637c1", "Clienta con collar de oro y camisa blanca"]
+];
+
+/* ===== Estado (solo en este navegador) ===== */
+const store = {
+  get(k, def) { try { return JSON.parse(localStorage.getItem("aurea-" + k)) ?? def; } catch { return def; } },
+  set(k, v) { try { localStorage.setItem("aurea-" + k, JSON.stringify(v)); } catch {} }
+};
+let carrito = store.get("carrito", []);
+let favs = new Set(store.get("favs", []));
+let filtro = "Todo";
+let regalo = [];
+const $ = s => document.querySelector(s);
+const byId = id => PRODUCTOS.find(p => p.id === id);
+
+/* ===== Tema ===== */
+const root = document.documentElement;
+function aplicarTema(t) {
+  root.dataset.theme = t;
+  const btn = $("#btn-tema");
+  btn.innerHTML = `<svg class="i"><use href="#i-${t === "dark" ? "sun" : "moon"}"/></svg>`;
+  btn.setAttribute("aria-label", t === "dark" ? "Cambiar a modo claro" : "Cambiar a modo oscuro");
+}
+aplicarTema(store.get("tema", matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"));
+$("#btn-tema").addEventListener("click", () => {
+  const t = root.dataset.theme === "dark" ? "light" : "dark";
+  aplicarTema(t); store.set("tema", t);
+});
+
+/* ===== Header y menú móvil ===== */
+const header = $("#header");
+addEventListener("scroll", () => header.classList.toggle("scrolled", scrollY > 8), { passive: true });
+const menu = $("#mobile-menu"), btnMenu = $("#btn-menu");
+btnMenu.addEventListener("click", () => {
+  const abierto = menu.classList.toggle("open");
+  btnMenu.setAttribute("aria-expanded", abierto);
+  btnMenu.innerHTML = `<svg class="i"><use href="#i-${abierto ? "close" : "menu"}"/></svg>`;
+});
+menu.addEventListener("click", e => { if (e.target.closest("a")) btnMenu.click(); });
+
+/* ===== Filtros y grilla ===== */
+function renderFiltros() {
+  $("#filtros").innerHTML = FILTROS.map(f => `<button class="chip" aria-pressed="${f === filtro}" data-f="${f}">${f}</button>`).join("");
+}
+function card(p) {
+  const desc = p.antes ? Math.round((1 - p.p / p.antes) * 100) : 0;
+  const tag = desc ? `<span class="tag sale">-${desc}%</span>` : p.tag ? `<span class="tag">${p.tag}</span>` : "";
+  return `<article class="card reveal in">
+    <div class="media">
+      <img src="${U(p.img, 600)}" alt="${p.n}" loading="lazy" width="600" height="750">
+      ${tag}
+      <button class="icon-btn fav" data-fav="${p.id}" aria-pressed="${favs.has(p.id)}" aria-label="Guardar ${p.n} en favoritos"><svg class="i"><use href="#i-heart"/></svg></button>
+      <button class="btn add" data-add="${p.id}" aria-label="Agregar ${p.n} a la bolsa"><svg class="i"><use href="#i-plus"/></svg><span class="add-txt">Agregar</span></button>
+    </div>
+    <div class="info">
+      <span class="cat-name">${p.t}</span>
+      <h3>${p.n}</h3>
+      <div class="price"><span class="now">${soles(p.p)}</span>${p.antes ? `<s>${soles(p.antes)}</s>` : ""}</div>
+      <div class="mat">${p.m}</div>
+    </div>
+  </article>`;
+}
+function renderGrid() {
+  const lista = filtro === "Todo" ? PRODUCTOS : PRODUCTOS.filter(p => p.c === filtro || p.t === filtro);
+  $("#grid").innerHTML = lista.map(card).join("");
+  $("#conteo").textContent = `${lista.length} productos en ${filtro}`;
+}
+function setFiltro(f) { filtro = f; renderFiltros(); renderGrid(); }
+$("#filtros").addEventListener("click", e => { const b = e.target.closest("[data-f]"); if (b) setFiltro(b.dataset.f); });
+document.querySelectorAll("[data-go]").forEach(a => a.addEventListener("click", () => setFiltro(a.dataset.go)));
+
+$("#grid").addEventListener("click", e => {
+  const add = e.target.closest("[data-add]"), fav = e.target.closest("[data-fav]");
+  if (add) agregar(+add.dataset.add);
+  if (fav) {
+    const id = +fav.dataset.fav;
+    favs.has(id) ? favs.delete(id) : favs.add(id);
+    fav.setAttribute("aria-pressed", favs.has(id));
+    store.set("favs", [...favs]); contarFavs();
+    toast(favs.has(id) ? "Guardado en favoritos" : "Quitado de favoritos");
+  }
+});
+function contarFavs() {
+  const el = $("#fav-count"); el.textContent = el.dataset.n = favs.size;
+  $("#btn-favs").setAttribute("aria-label", `Favoritos: ${favs.size}`);
+}
+$("#btn-favs").addEventListener("click", () => {
+  if (!favs.size) return toast("Aún no tienes favoritos. Toca el corazón de un producto.");
+  toast(`Tienes ${favs.size} favorito${favs.size > 1 ? "s" : ""} guardado${favs.size > 1 ? "s" : ""}`);
+});
+
+/* ===== Bolsa ===== */
+function agregar(id, cant = 1) {
+  const l = carrito.find(x => x.id === id);
+  l ? l.q += cant : carrito.push({ id, q: cant });
+  guardar(); toast(`${byId(id).n} agregado a tu bolsa`);
+  const b = $("#cart-count"); b.classList.remove("bump"); void b.offsetWidth; b.classList.add("bump");
+}
+function guardar() { store.set("carrito", carrito); renderCarrito(); }
+function totales() {
+  const sub = carrito.reduce((s, l) => s + byId(l.id).p * l.q, 0);
+  const env = sub === 0 || sub >= ENVIO_GRATIS ? 0 : ENVIO;
+  return { sub, env, total: sub + env };
+}
+function renderCarrito() {
+  const n = carrito.reduce((s, l) => s + l.q, 0);
+  const c = $("#cart-count"); c.textContent = c.dataset.n = n;
+  $("#btn-carrito").setAttribute("aria-label", `Abrir bolsa de compras: ${n} producto${n === 1 ? "" : "s"}`);
+  const { sub, env, total } = totales();
+  $("#cart-foot").hidden = !carrito.length;
+  $("#cart-lines").innerHTML = carrito.length ? carrito.map(l => {
+    const p = byId(l.id);
+    return `<div class="line">
+      <img src="${U(p.img, 160)}" alt="" loading="lazy">
+      <div><h3>${p.n}</h3><div class="p">${soles(p.p)}</div>
+        <div class="qty"><button data-q="-1" data-id="${p.id}" aria-label="Quitar uno de ${p.n}"><svg class="i"><use href="#i-minus"/></svg></button><span>${l.q}</span><button data-q="1" data-id="${p.id}" aria-label="Agregar uno de ${p.n}"><svg class="i"><use href="#i-plus"/></svg></button></div>
+      </div>
+      <button class="icon-btn rm" data-rm="${p.id}" aria-label="Eliminar ${p.n}"><svg class="i"><use href="#i-trash"/></svg></button>
+    </div>`;
+  }).join("") : `<div class="empty"><svg class="i"><use href="#i-bag"/></svg><p>Tu bolsa está vacía.</p><a href="#coleccion" class="btn outline" id="seguir">Ver colección</a></div>`;
+  $("#c-sub").textContent = soles(sub);
+  $("#c-env").textContent = env ? soles(env) : "Gratis";
+  $("#c-total").textContent = soles(total);
+  const falta = ENVIO_GRATIS - sub;
+  $("#ship-fill").style.width = Math.min(100, sub / ENVIO_GRATIS * 100) + "%";
+  $("#ship-msg").textContent = falta > 0 ? `Te faltan ${soles(falta)} para el envío gratis en Lima.` : "¡Tienes envío gratis en Lima!";
+}
+$("#cart-lines").addEventListener("click", e => {
+  const q = e.target.closest("[data-q]"), rm = e.target.closest("[data-rm]");
+  if (e.target.closest("#seguir")) cerrarBolsa();
+  if (q) {
+    const l = carrito.find(x => x.id === +q.dataset.id); l.q += +q.dataset.q;
+    if (l.q < 1) carrito = carrito.filter(x => x !== l);
+    guardar();
+  }
+  if (rm) { carrito = carrito.filter(x => x.id !== +rm.dataset.rm); guardar(); }
+});
+const drawer = $("#drawer"), overlay = $("#overlay");
+let ultimoFoco;
+function abrirBolsa() {
+  ultimoFoco = document.activeElement;
+  drawer.classList.add("open"); overlay.classList.add("open"); drawer.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden"; $("#cerrar-drawer").focus();
+}
+function cerrarBolsa() {
+  drawer.classList.remove("open"); overlay.classList.remove("open"); drawer.setAttribute("aria-hidden", "true");
+  document.body.style.overflow = ""; ultimoFoco?.focus();
+}
+$("#btn-carrito").addEventListener("click", abrirBolsa);
+$("#cerrar-drawer").addEventListener("click", cerrarBolsa);
+overlay.addEventListener("click", cerrarBolsa);
+addEventListener("keydown", e => {
+  if (e.key === "Escape" && drawer.classList.contains("open")) cerrarBolsa();
+  if (e.key === "Tab" && drawer.classList.contains("open")) {
+    const f = [...drawer.querySelectorAll("button, a, input")].filter(x => x.offsetParent);
+    if (e.shiftKey && document.activeElement === f[0]) { e.preventDefault(); f.at(-1).focus(); }
+    else if (!e.shiftKey && document.activeElement === f.at(-1)) { e.preventDefault(); f[0].focus(); }
+  }
+});
+$("#enviar-pedido").addEventListener("click", () => {
+  const { sub, env, total } = totales();
+  const lineas = carrito.map(l => { const p = byId(l.id); return `• ${l.q} x ${p.n} — ${soles(p.p * l.q)}`; }).join("\n");
+  const tarjeta = $("#envolver").checked ? "\nQuiero tarjeta con dedicatoria." : "";
+  abrirWA(`Hola AUREA VOID, quiero hacer este pedido:\n${lineas}\n\nSubtotal: ${soles(sub)}\nEnvío: ${env ? soles(env) : "Gratis"}\nTotal: ${soles(total)}${tarjeta}`);
+});
+
+/* ===== Caja de regalo ===== */
+function renderRegalo() {
+  const lleno = regalo.length >= 3;
+  $("#gift-options").innerHTML = REGALO_IDS.map(id => {
+    const p = byId(id), on = regalo.includes(id);
+    return `<button class="gift-opt" data-g="${id}" aria-pressed="${on}" ${lleno && !on ? "disabled" : ""}>
+      <img src="${U(p.img, 240)}" alt="" loading="lazy"><span>${p.n}</span><small>${soles(p.p)}</small>
+      <i class="check" aria-hidden="true"><svg class="i" style="width:14px;height:14px"><use href="#i-check"/></svg></i>
+    </button>`;
+  }).join("");
+  const sub = regalo.reduce((s, id) => s + byId(id).p, 0);
+  const off = lleno ? Math.round(sub * .15 * 100) / 100 : 0;
+  $("#g-sub").textContent = soles(sub);
+  $("#g-off").textContent = "– " + soles(off);
+  $("#g-total").textContent = soles(sub - off);
+  $("#gift-hint").textContent = lleno ? "¡Tu caja está lista! Ya tienes el 15% de descuento." : `Elige 3 piezas (${regalo.length} de 3).`;
+  $("#g-pedir").disabled = !lleno;
+}
+$("#gift-options").addEventListener("click", e => {
+  const b = e.target.closest("[data-g]"); if (!b || b.disabled) return;
+  const id = +b.dataset.g;
+  regalo = regalo.includes(id) ? regalo.filter(x => x !== id) : [...regalo, id];
+  renderRegalo();
+  $(`[data-g="${id}"]`).focus();
+});
+$("#g-pedir").addEventListener("click", () => {
+  const sub = regalo.reduce((s, id) => s + byId(id).p, 0);
+  const piezas = regalo.map(id => `• ${byId(id).n}`).join("\n");
+  abrirWA(`Hola AUREA VOID, quiero armar mi caja de regalo con:\n${piezas}\n\nTotal con 15% de descuento: ${soles(Math.round(sub * .85 * 100) / 100)}\nDedicatoria: `);
+});
+
+/* ===== Reseñas y galería ===== */
+const estrellas = `<div class="stars" aria-label="5 de 5 estrellas">${'<svg class="i fill"><use href="#i-star"/></svg>'.repeat(5)}</div>`;
+$("#reviews").innerHTML = RESENAS.map((r, i) => `<figure class="review reveal" style="--d:${i * .08}s;margin:0">
+  ${estrellas}<blockquote>“${r.q}”</blockquote>
+  <footer><span class="av" aria-hidden="true">${r.a[0]}</span><div><b>${r.a}</b><span>${r.d} · Compra verificada</span></div></footer>
+</figure>`).join("");
+$("#gallery").innerHTML = GALERIA.map(([id, alt], i) => `<a href="#" class="reveal" style="--d:${i * .05}s" aria-label="Ver publicación: ${alt}"><img src="${U(id, 400)}" alt="${alt}" loading="lazy"></a>`).join("");
+
+/* ===== WhatsApp ===== */
+function abrirWA(texto) { window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(texto)}`, "_blank", "noopener"); }
+document.querySelectorAll(".js-wa").forEach(a => a.addEventListener("click", e => { e.preventDefault(); abrirWA(a.dataset.msg); }));
+
+/* ===== Toast ===== */
+let tt;
+function toast(msg) {
+  $("#toast-txt").textContent = msg; $("#toast").classList.add("show");
+  clearTimeout(tt); tt = setTimeout(() => $("#toast").classList.remove("show"), 2200);
+}
+
+/* ===== Animación al hacer scroll ===== */
+const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); } }), { threshold: .12, rootMargin: "0px 0px -40px" });
+document.querySelectorAll(".reveal:not(.in)").forEach(el => io.observe(el));
+
+renderFiltros(); renderGrid(); renderCarrito(); contarFavs(); renderRegalo();
+</script>
+</body>
+</html>

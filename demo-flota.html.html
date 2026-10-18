@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Omajay - Control de flota v11 (Final)</title>
+<style>
+:root{--bg:#f3f3f1;--card:#fff;--ink:#1b1b1b;--mut:#666;--wine:#8a1c1c;--line:#e0e0dc;--g:#1d7a40;--y:#b88200;--r:#c0282d;--gb:#e1f2e7;--yb:#fbf1cf;--rb:#f8dcdd;--car:#3a3a3a;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#171a1e;--card:#22272d;--ink:#eee;--mut:#a5adb5;--wine:#e58a8a;--line:#363d45;--g:#5fd08a;--y:#f0c43c;--r:#ff7b80;--gb:#1c3a28;--yb:#463d14;--rb:#4a2226;--car:#cfd4d9}}
+:root[data-theme="dark"]{--bg:#171a1e;--card:#22272d;--ink:#eee;--mut:#a5adb5;--wine:#e58a8a;--line:#363d45;--g:#5fd08a;--y:#f0c43c;--r:#ff7b80;--gb:#1c3a28;--yb:#463d14;--rb:#4a2226;--car:#cfd4d9}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 "Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+.top{background:var(--card);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.logo{width:42px;height:42px;border-radius:50%;background:#111;color:#fff;border:3px solid #bbb;display:grid;place-items:center;font:800 9px/1.05 sans-serif;text-align:center}
+.top b{font-size:17px}.top small{display:block;color:var(--mut);font-size:12px}.sp{flex:1}
+nav{display:flex;gap:6px;padding:10px 16px;overflow-x:auto;background:var(--card);border-bottom:1px solid var(--line)}
+nav button{border:1px solid var(--line);background:none;color:var(--ink);padding:9px 14px;border-radius:20px;font:inherit;font-size:14px;cursor:pointer;white-space:nowrap}
+nav button[aria-selected=true]{background:var(--wine);color:#fff;border-color:var(--wine)}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--wine);outline-offset:2px}
+.pres{background:var(--wine);color:#fff;padding:10px 16px;font-size:14px}.pres b{margin-right:6px}
+main{max-width:980px;margin:0 auto;padding:18px 16px 40px}
+h1{font-size:24px;margin:0 0 4px}h2{font-size:18px;margin:0 0 10px}.mut{color:var(--mut);font-size:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:14px}
+.btn{border:0;border-radius:8px;background:var(--wine);color:#fff;padding:12px 18px;font:inherit;font-weight:600;cursor:pointer;transition:all 0.2s}
+.btn.alt{background:none;color:var(--ink);border:1px solid var(--line)}.btn.red{background:var(--r)}.btn:disabled{opacity:.45;cursor:not-allowed}
+.sum{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0}
+.sum div{border-radius:12px;padding:12px;text-align:center;font-size:14px}.sum b{display:block;font-size:30px}
+.sg{background:var(--gb);color:var(--g)}.sy{background:var(--yb);color:var(--y)}.sr{background:var(--rb);color:var(--r)}
+.tools{display:flex;gap:10px;align-items:center;margin-bottom:12px;flex-wrap:wrap}
+.row{display:grid;grid-template-columns:96px 1fr 1fr 165px;gap:14px;align-items:center;width:100%;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin-bottom:10px;font:inherit;color:inherit;cursor:pointer}
+.row:hover{border-color:var(--wine)}.car{width:92px;height:44px;color:var(--car)}
+.plate{font-weight:800;font-size:18px;letter-spacing:.5px}
+.pill{display:inline-block;border-radius:20px;padding:3px 10px;font-size:13px;font-weight:600}
+.pill.g{background:var(--gb);color:var(--g)}.pill.y{background:var(--yb);color:var(--y)}.pill.r{background:var(--rb);color:var(--r)}
+.bar{height:9px;background:var(--line);border-radius:5px;overflow:hidden;margin:5px 0}.bar i{display:block;height:100%}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.kv{display:flex;justify-content:space-between;gap:10px;padding:7px 0;border-bottom:1px solid var(--line);font-size:15px}
+label{display:block;font-size:14px;font-weight:600;margin-bottom:12px}
+input,select{display:block;width:100%;margin-top:4px;font:inherit;padding:11px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink)}
+.cam{height:130px;border-radius:10px;background:repeating-linear-gradient(45deg,#333,#333 10px,#3b3b3b 10px,#3b3b3b 20px);display:grid;place-items:center;color:#fff;font-size:14px;text-align:center;margin-bottom:12px;cursor:pointer;transition:transform .15s}.cam:active{transform:scale(.97)}
+.cam.ok{background:var(--g);border:3px solid #fff}
+.msg{padding:10px 12px;border-radius:8px;font-size:14px;margin:10px 0}.msg.e{background:var(--rb);color:var(--r)}.msg.w{background:var(--yb);color:var(--y)}
+.phone{width:300px;max-width:100%;border:10px solid #222;border-radius:30px;background:#e5ddd5;padding:14px;min-height:340px}
+.phone .hd{background:#075e54;color:#fff;margin:-14px -14px 12px;padding:10px 14px;font-weight:600;font-size:14px}
+.bub{background:#fff;color:#111;border-radius:8px;padding:10px;font-size:14px;box-shadow:0 1px 1px rgba(0,0,0,.15);margin-bottom:10px;white-space:pre-line}
+.login{max-width:420px;margin:30px auto}.who{display:flex;gap:10px;margin-bottom:14px}.who button{flex:1;padding:16px 8px}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom,0px));background:#111;color:#fff;padding:12px 18px;border-radius:8px;font-size:15px;max-width:90%;z-index:99;box-shadow:0 5px 15px rgba(0,0,0,0.3)}
+main{transition:opacity .2s ease,transform .2s ease}main.out{opacity:0;transform:translateY(-8px)}
+@keyframes in{from{opacity:0;transform:translateY(15px) scale(.985)}to{opacity:1;transform:none}}
+@keyframes fd{from{opacity:0}}@keyframes grow{from{width:0}}
+.view>*{animation:in .4s cubic-bezier(.22,.8,.3,1) both}
+.view>:nth-child(2){animation-delay:.06s}.view>:nth-child(3){animation-delay:.12s}.view>:nth-child(4){animation-delay:.18s}.view>:nth-child(5){animation-delay:.24s}.view>:nth-child(6){animation-delay:.3s}.view>:nth-child(n+7){animation-delay:.36s}
+.fade{animation:fd .6s ease both}.bar i{animation:grow .9s cubic-bezier(.22,.8,.3,1) both}.toast{animation:in .35s both}
+.row{transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}.row:hover{transform:translateY(-2px);box-shadow:0 8px 18px rgba(0,0,0,.1)}
+.btn,nav button{transition:transform .15s ease,opacity .2s ease,background .25s ease,color .25s ease,border-color .25s ease}.btn:active{transform:scale(.97)}
+.logo{background:#fff;border:0;display:block;object-fit:contain;width:46px;height:46px}
+table{width:100%;border-collapse:collapse;font-size:15px}th,td{padding:10px 8px;text-align:left;border-bottom:1px solid var(--line)}.num{text-align:center}tr[data-c]{cursor:pointer}tr[data-c]:hover{background:var(--bg)}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media(max-width:720px){.row{grid-template-columns:80px 1fr}.row>:nth-child(n+3){grid-column:1/3}.g2{grid-template-columns:1fr}.car{width:76px}}
+
+/* Estilos para el vehículo bloqueado */
+.row.locked { opacity: 0.6; cursor: not-allowed; border-color: transparent; }
+.row.locked:hover { transform: none; box-shadow: none; border-color: transparent; }
+.row.locked .car { color: #aaa; }
+
+/* Estilos para etiquetas de checklist seleccionadas */
+.ztag[data-sel="1"] { background-color: var(--r); color: #fff; border-color: var(--r); }
+</style></head><body>
+<div class="top"><img class="logo" id="hl" alt="Omajay Rent a Car"><div><b>Omajay Rent a Car</b><small>Control de flota · Maqueta v11 (Final)</small></div><span class="sp"></span><span id="who" class="mut"></span><button class="btn alt" id="out" style="display:none">Salir</button><button class="btn alt" id="pt">Ocultar explicación</button></div>
+<nav id="nav" role="tablist"></nav><div class="pres" id="pres"></div><main id="v"></main>
+<script>
+const INT=5000;const LOGO="data:image/png;base64,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";document.getElementById("hl").src=LOGO;
+let role=null,view="login",sel=null,showP=true,filt=false,pend=null,warned=false;
+let chk={f:0, c:0, i:0, d:0, p:0}, chkZ=null, chkTxt=null;
+let chkSel=[]; 
+let fotoTomada = false; // Variable global para validación de foto
+
+let F=[
+{p:"ABC-123",m:"Toyota Hilux 4x4",t:"p",km:34120,last:30000,kd:210,reg:0,soat:120,rt:210},
+{p:"BKD-482",m:"Toyota Hilux 4x4",t:"p",km:48660,last:44000,kd:260,reg:1,soat:12,rt:45},
+{p:"CHT-905",m:"Hilux cerrada 4x4",t:"c",km:62340,last:57000,kd:180,reg:2,soat:3,rt:90},
+{p:"D2P-117",m:"Toyota Hilux 4x4",t:"p",km:21980,last:20000,kd:90,reg:4,soat:200,rt:150},
+{p:"EFR-640",m:"Mini van",t:"v",km:15400,last:15000,kd:60,reg:0,soat:45,rt:30},
+{p:"F7K-228",m:"Toyota Hilux 4x4",t:"p",km:71200,last:65000,kd:300,reg:9,soat:80,rt:10},
+{p:"G3M-559",m:"Toyota Hilux 4x4",t:"p",km:39800,last:35000,kd:240,reg:1,soat:300,rt:250},
+{p:"H8T-731",m:"Hilux cerrada 4x4",t:"c",km:27500,last:25000,kd:110,reg:0,soat:60,rt:180}];
+F.forEach(f=>{f.ev=14});let B=[],me=null,gsel=null,csel=null,qv="",fs="todas",mconf=null,srt="rate";
+let U=[{n:"Administración",u:"admin",pin:"1234",r:"Administración",on:1},{n:"Juan Pérez",u:"jperez",pin:"1111",r:"Conductor",on:1},{n:"Luis Quispe",u:"lquispe",pin:"2222",r:"Conductor",on:1},{n:"Mario Rojas",u:"mrojas",pin:"3333",r:"Conductor",on:1},{n:"Pedro Salas",u:"psalas",pin:"4444",r:"Conductor",on:1}];
+let DR={"Juan Pérez":{km:41200,uso:["ABC-123","D2P-117"],acc:[{d:"12/08/2026",p:"ABC-123",g:"Leve",t:"Raspón al estacionar",c:350}]},
+"Luis Quispe":{km:52300,uso:["BKD-482","G3M-559"],acc:[{d:"03/06/2026",p:"BKD-482",g:"Moderado",t:"Choque lateral en curva",c:2800},{d:"20/09/2026",p:"BKD-482",g:"Grave",t:"Choque por exceso de velocidad en bajada",c:9500}]},
+"Mario Rojas":{km:18900,uso:["CHT-905"],acc:[{d:"15/07/2026",p:"CHT-905",g:"Leve",t:"Rotura de espejo",c:180},{d:"02/09/2026",p:"CHT-905",g:"Leve",t:"Rayón en lateral",c:400}]},
+"Pedro Salas":{km:36500,uso:["D2P-117","H8T-731"],acc:[]}};
+const AS={"ABC-123":"Juan Pérez","BKD-482":"Luis Quispe"};
+const GP={"ABC-123":[150,250,"Panamericana Sur, Chincha"],"BKD-482":[420,90,"Carretera Central, Cerro de Pasco"],"CHT-905":[300,170,"Ruta a la mina, Junín"],"D2P-117":[95,200,"Base La Victoria, Lima"],"EFR-640":[125,222,"Base La Victoria, Lima"],"F7K-228":[500,150,"Proyecto minero, Pasco"],"G3M-559":[250,110,"Carretera Central, Huancayo"],"H8T-731":[125,305,"Pisco, Ica"]};
+
+// NUEVA MÉTRICA: Los graves valen por 3 para la tabla.
+const stat=n=>{
+    const a=DR[n].acc;
+    const leves = a.filter(x=>x.g==="Leve").length;
+    const mod = a.filter(x=>x.g==="Moderado").length;
+    const graves = a.filter(x=>x.g==="Grave").length;
+    const score = leves + (mod * 2) + (graves * 3); // Ponderación de gravedad
+    return{t:a.length, l:leves, m:mod, g:graves, r:DR[n].km ? score/(DR[n].km/10000) : 0};
+};
+
+const gp=g=>g==="Grave"?"r":"y";
+const N=n=>n.toLocaleString("es-PE"),col={g:"var(--g)",y:"var(--y)",r:"var(--r)"};
+const calc=f=>{const left=f.last+INT-f.km,days=left>0?Math.round(left/f.kd):0;return{left,days,s:left<=0?"r":days<=f.ev?"y":"g",pct:Math.min(100,Math.max(0,(f.km-f.last)/INT*100))}};
+const freq=f=>{const k=calc(f);return k.left<=0?1:k.days<=f.ev?2:7};
+const rg=f=>{const q=freq(f);return f.reg===0?["g","✅ Registrada hoy"]:f.reg<q?["g","✅ Al día (hace "+f.reg+" d)"]:f.reg<=q+2?["y","⏳ Falta registrar"]:["r","⚠️ Atrasada "+f.reg+" días"]};
+function car(t){const b={p:'<path d="M4 30h4v-9h12l8-9h14l5 9h20c3 0 5 2 5 5v4h-4a6 6 0 0 0-12 0H29a6 6 0 0 0-12 0H4z"/>',
+c:'<path d="M4 30h4V14c0-2 1-3 3-3h40l6 10h14c3 0 5 2 5 5v4h-4a6 6 0 0 0-12 0H29a6 6 0 0 0-12 0H4z"/>',
+v:'<path d="M4 30h4V16c0-3 2-5 5-5h38c4 0 6 2 8 6l6 6c2 1 3 3 3 5v2h-4a6 6 0 0 0-12 0H29a6 6 0 0 0-12 0H4z"/>'}[t];
+return`<svg class="car" viewBox="0 0 92 44" fill="currentColor" aria-hidden="true">${b}<circle cx="23" cy="34" r="5" fill="var(--card)" stroke="currentColor" stroke-width="2"/><circle cx="66" cy="34" r="5" fill="var(--card)" stroke="currentColor" stroke-width="2"/></svg>`}
+const tabs=[["panel","Panel de flota"],["mapa","Mapa"],["registro","Registro de fin de jornada"],["conductores","Conductores"],["usuarios","Usuarios"],["agregar","Agregar camioneta"],["bajas","Bajas"],["wa","Aviso por WhatsApp"]];
+const expl={login:["Ingreso con usuario y PIN","Cada persona entra con su usuario y PIN propios. Administración ve todo; el conductor solo elige su camioneta del día."],
+panel:["Panel de flota","Administración ve toda la flota de un vistazo. El color indica el mantenimiento y la etiqueta indica si ya se registró el kilometraje."],
+detalle:["Detalle de camioneta","Todo el historial de una unidad en un lugar. Sirve también para mostrarle a la minera que la unidad está al día."],
+registro:["Registro de fin de jornada","Administración registra el kilometraje de todas las camionetas. No depende de la voluntad de los conductores."],
+mant:["Registrar visita a taller","Al guardar, el contador de los 5,000 km vuelve a cero. Requiere check de confirmación para evitar errores."],
+agregar:["Agregar camioneta","Administración agrega unidades. Los conductores no tienen acceso."],
+baja:["Dar de baja","No se borra: se da de baja con motivo y confirmación. Queda registrado quién y cuándo, se avisa a Administración y se puede reactivar."],
+mapa:["Mapa de la flota","Ubicación en tiempo real de cada camioneta con el GPS que ya tienen. En esta maqueta es simulada; el dato real depende de su proveedor de GPS."],
+conductores:["Conductores y accidentes","El ratio penaliza más los choques graves. Es un resumen: la decisión sobre quién es más confiable es de Administración."],
+ficha:["Ficha del conductor","Camionetas que usó y accidentes con fecha, gravedad y costo."],
+acc:["Registrar accidente","Administración registra cada accidente con su gravedad. Con el tiempo se ve quién es más confiable."],
+usuarios:["Usuarios","Administración crea usuarios con nombre y PIN propios. Cada acción queda a nombre de una persona."],
+mi:["Pantalla del conductor","Si una camioneta ya está siendo usada, se bloquea. Al recibirla, el checklist y las alertas por ruta son obligatorias."],
+checklist:["Firma con peso legal","El conductor debe declarar la veracidad y tomar fotos obligatorias si reporta un daño antes de recibir la llave."],
+sos:["Emergencia en Ruta","Guía anti-pánico paso a paso para que el conductor sepa exactamente qué hacer, a quién llamar y qué fotos tomar, evitando errores legales o de cobertura."],
+cierre:["Cierre de turno obligatorio","Para terminar la jornada, el sistema obliga al chofer a digitar y fotografiar el kilometraje final. Adiós al olvido de reportes."],
+bajas:["Bajas","Lista de camionetas dadas de baja. Con un botón rápido para reactivarlas en caso de error administrativo."],
+wa:["Aviso por WhatsApp","Administración no necesita abrir la app: el sistema le escribe cuando una camioneta se acerca al mantenimiento."]};
+function toast(t){const d=document.createElement("div");d.className="toast";d.textContent=t;document.body.appendChild(d);setTimeout(()=>d.remove(),3200)}
+
+// Función para calcular fecha exacta basada en hoy (6 oct 2026)
+function fechaVencimiento(dias) {
+    const hoy = new Date('2026-10-06T12:00:00Z');
+    hoy.setDate(hoy.getDate() + dias);
+    return hoy.toLocaleDateString("es-PE", { day: 'numeric', month: 'short', year: 'numeric' });
+}
+
+function panel(){const c={g:0,y:0,r:0};F.forEach(f=>c[calc(f).s]++);const o={r:0,y:1,g:2};
+let L=[...F].sort((a,b)=>o[calc(a).s]-o[calc(b).s]||calc(a).days-calc(b).days);const qq=qv.trim().toUpperCase();if(qq)L=L.filter(f=>f.p.includes(qq));
+if(fs==="pend")L=L.filter(f=>f.reg>=freq(f));else if(fs!=="todas")L=L.filter(f=>calc(f).s===fs);
+return`<h1>Estado de la flota</h1><p class="mut">Amarillo: faltan 14 días o menos de uso estimado. Toque una camioneta para ver el detalle.</p>
+<div class="sum"><div class="sg"><b>${c.g}</b>Al día</div><div class="sy"><b>${c.y}</b>Programar pronto</div><div class="sr"><b>${c.r}</b>Vencidas</div></div>
+<div class="tools"><input id="q" placeholder="🔍 Buscar por placa" value="${qv}" autocomplete="off" aria-label="Buscar por placa" style="max-width:240px;margin:0"><select id="fs" aria-label="Filtrar" style="max-width:260px;margin:0">${[["todas","Todas"],["g","Al día"],["y","Programar pronto"],["r","Vencidas"],["pend","Pendientes de registrar Km manual"]].map(([k,l])=>`<option value="${k}" ${fs===k?"selected":""}>${l}</option>`).join("")}</select></div>
+${L.length?L.map(f=>{const k=calc(f),r=rg(f);const stS = f.soat<=7?'r':f.soat<=30?'y':'g';const stR = f.rt<=7?'r':f.rt<=30?'y':'g';
+return`<button class="row" data-p="${f.p}">${car(f.t)}<span><span class="plate">${f.p}</span><br><span class="mut">${f.m}</span><br><span class="mut">Hoy: ${AS[f.p]||"Sin asignar"}</span></span>
+<span><span class="pill ${k.s}">${k.s==="r"?"Pasó "+N(-k.left)+" km":"Faltan "+N(k.left)+" km (≈ "+k.days+" d, estim.)"}</span><div class="bar"><i style="width:${k.pct}\%;background:${col[k.s]}"></i></div></span>
+<span><span class="pill ${r[0]}">${r[1]}</span><br><span class="mut">${N(f.km)} km</span><br><div style="margin-top:6px;display:flex;gap:4px;flex-wrap:wrap"><span class="pill ${stS}" style="font-size:11px">SOAT: ${f.soat}d</span><span class="pill ${stR}" style="font-size:11px">RT: ${f.rt}d</span></div></span></button>`}).join(""):'<div class="card mut">No se encontró ninguna camioneta.</div>'}`}
+function detalle(f){
+    const k=calc(f);
+    const h=[0,1,2,3,4,5].map(i=> Math.round(f.kd * 7 * (0.85 + Math.abs(Math.sin(f.p.charCodeAt(0) + i)) * 0.3)));
+    const mx=Math.max(...h),mn=0;
+    const cs=U.filter(u=>u.r==="Conductor"&&u.on).map(u=>u.n);
+    
+    return `<button class="btn alt" id="back">← Volver al panel</button>
+    <div style="display:flex;gap:14px;align-items:center;margin:14px 0">${car(f.t)}<div><h1>${f.p}</h1><span class="mut">${f.m}</span></div></div>
+    <div class="g2">
+        <div class="card">
+            <h2>Datos Operativos</h2>
+            <div class="kv"><span>Kilometraje actual</span><b>${N(f.km)} km</b></div>
+            <div class="kv"><span>Último mantenimiento</span><b>${N(f.last)} km</b></div>
+            <div class="kv" style="border-bottom:none;padding-bottom:0"><span>Próximo taller</span><b>${N(f.last+INT)} km</b></div>
+            <div style="margin-bottom:12px; border-bottom:1px solid var(--line); padding-bottom:12px">
+                <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--mut);margin-top:6px;margin-bottom:4px"><span>Desgaste del aceite</span><span>${Math.round(k.pct)}%</span></div>
+                <div class="bar" style="height:10px"><i style="width:${k.pct}%;background:${col[k.s]}"></i></div>
+            </div>
+            <div class="kv"><span>Promedio de uso diario</span><b>${f.kd} km/día</b></div>
+            <div class="kv"><span>El sistema pide Km cada</span><b>${freq(f)} ${freq(f)===1?'día':'días'}</b></div>
+            <div class="kv"><span>Días para próximo taller</span><b>${k.left<=0?"Ya venció":"≈ "+k.days+" "+(k.days===1?"día":"días")}</b></div>
+            
+            <label style="margin-top:16px">Conductor de hoy<select id="asg"><option value="">Sin asignar</option>${cs.map(n=>`<option ${AS[f.p]===n?"selected":""}>${n}</option>`).join("")}</select></label>
+            
+        </div>
+        
+        <div class="card" style="display:flex;flex-direction:column">
+            <h2>Distancia recorrida por semana</h2>
+            <p class="mut" style="margin-top:-6px;font-size:13px">Kilómetros netos (últimas 6 semanas)</p>
+            <svg viewBox="0 0 300 130" width="100%" role="img" aria-label="Kilometraje recorrido por semana">
+                ${h.map((v,i)=>{
+                    const ht=(v/mx)*80;
+                    const x=8+i*48;
+                    return `<rect x="${x}" y="${108-ht}" width="36" height="${ht}" rx="3" fill="var(--y)"/><text x="${x+18}" y="${103-ht}" font-size="9" font-weight="700" text-anchor="middle" fill="currentColor">${N(v)}</text><text x="${x+18}" y="122" font-size="9" text-anchor="middle" fill="currentColor">Sem ${i+1}</text>`
+                }).join("")}
+            </svg>
+            
+            <div style="margin-top:auto; padding:12px; background:var(--bg); border-radius:8px">
+                <label style="margin-bottom:4px; font-size:13px">Aviso de alerta administrativa en taller:</label>
+                <div style="display:flex; gap:8px">
+                    <input type="number" id="ev" value="${f.ev}" min="1" style="flex:1; margin:0"> 
+                    <button class="btn alt" id="sev" style="margin:0">Guardar días</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <h2>Historial y Documentos</h2>
+        <div class="kv"><span>Registro de kilometraje</span><span class="mut">${N(f.km)} km · ${f.reg===0?"hoy":"hace "+f.reg+" días"}</span></div>
+        <div class="kv"><span>Mantenimiento: aceite y filtros</span><span class="mut">${N(f.last)} km · Taller Central</span></div>
+        <div class="kv"><span>Vencimiento SOAT</span><b style="color:${f.soat<=7?'var(--r)':f.soat<=30?'var(--y)':'var(--g)'}">${fechaVencimiento(f.soat)} (en ${f.soat} días)</b></div>
+        <div class="kv"><span>Vencimiento Revisión Técnica</span><b style="color:${f.rt<=7?'var(--r)':f.rt<=30?'var(--y)':'var(--g)'}">${fechaVencimiento(f.rt)} (en ${f.rt} días)</b></div>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <button class="btn" id="mant">Registrar visita a taller</button>
+        <button class="btn alt" id="vermap">📍 Ver ubicación</button>
+        <button class="btn alt" id="bj">Dar de baja</button>
+    </div>`
+}
+function mapa(){const f=gsel&&F.find(x=>x.p===gsel),G=p=>GP[p]||[300,200,"Sin señal GPS aún"];
+return`<h1>Ubicación de la flota</h1><div class="msg w">Ubicación simulada para la maqueta. En el sistema real se conecta al GPS que ya tienen, según el proveedor.</div>
+<div class="card" style="padding:8px"><svg viewBox="0 0 600 360" width="100%" role="img" aria-label="Mapa simulado de la flota"><rect width="600" height="360" rx="10" fill="var(--bg)"/><path d="M0 0h70c25 90-15 170 20 250s10 80 30 110H0z" fill="#8fc1e3" opacity=".55"/><text x="22" y="200" font-size="11" fill="currentColor" opacity=".6" transform="rotate(-90 22 200)">Océano Pacífico</text>
+<g fill="none" stroke="var(--line)" stroke-width="6" stroke-linecap="round"><path d="M110 215C250 190 330 130 520 140"/><path d="M250 110C330 100 380 95 430 90"/><path d="M110 215C140 260 135 290 125 330"/><path d="M300 170C360 190 450 190 500 150"/></g>
+<text x="100" y="186" font-size="10" font-weight="700" fill="currentColor">Base Lima</text>
+${F.map(x=>{const g=G(x.p),s=calc(x).s;return`<g data-g="${x.p}" style="cursor:pointer"><circle cx="${g[0]}" cy="${g[1]}" r="${gsel===x.p?16:11}" fill="${col[s]}" stroke="${gsel===x.p?"var(--wine)":"#fff"}" stroke-width="3"/><text x="${g[0]}" y="${g[1]-17}" font-size="9" font-weight="700" text-anchor="middle" fill="currentColor">${x.p}</text></g>`}).join("")}</svg></div>
+${f?`<div class="card"><h2>${f.p} ·${f.m}</h2><div class="kv"><span>Ubicación</span><b>${G(f.p)[2]}</b></div><div class="kv"><span>Conductor de hoy</span><b>${AS[f.p]||"Sin asignar"}</b></div><div class="kv"><span>Actualizado</span><span class="mut">hace 1 min (simulado)</span></div></div>`:'<p class="mut">Toque una camioneta del mapa para ver su ubicación.</p>'}
+<div class="card"><h2>Todas las camionetas</h2>${F.map(x=>`<div class="kv"><span><b>${x.p}</b> ·${G(x.p)[2]}</span><span class="mut">Hoy: ${AS[x.p]||"Sin asignar"}</span></div>`).join("")}</div>`}
+function conductores(){const ns=Object.keys(DR).sort((a,b)=>srt==="g"?stat(b).g-stat(a).g:srt==="tot"?stat(b).t-stat(a).t:stat(b).r-stat(a).r);
+return`<h1>Conductores y accidentes</h1><p class="mut">El ratio penaliza más los choques graves para una lectura justa del riesgo. Es un resumen administrativo.</p>
+<div class="tools"><button class="btn" id="nacc">+ Registrar accidente</button><select id="srt" aria-label="Ordenar" style="max-width:260px;margin:0"><option value="rate" ${srt==="rate"?"selected":""}>Ordenar: Ratio Riesgo</option><option value="g" ${srt==="g"?"selected":""}>Ordenar: más graves</option><option value="tot" ${srt==="tot"?"selected":""}>Ordenar: total</option></select></div>
+<div class="card" style="overflow-x:auto"><table><tr><th>Conductor</th><th class="num">Km</th><th class="num">Leves</th><th class="num">Moderados</th><th class="num">Graves</th><th class="num">Ratio de Riesgo<br><small style="font-size:10px;font-weight:normal">(Fórmula Ponderada)</small></th></tr>
+${ns.map(n=>{const t=stat(n);return`<tr data-c="${n}"><td><b>${n}</b></td><td class="num">${N(DR[n].km)}</td><td class="num">${t.l}</td><td class="num">${t.m}</td><td class="num">${t.g?`<span class="pill r">${t.g}</span>`:0}</td><td class="num"><b>${t.r.toFixed(1)}</b></td></tr>`}).join("")}</table></div><p class="mut">Toque un conductor para ver su ficha. Dato sensible: solo lo ve Administración.</p>`}
+function ficha(){const n=csel,d=DR[n],t=stat(n);
+return`<button class="btn alt" id="back">← Volver a conductores</button><h1 style="margin-top:12px">${n}</h1><div class="g2"><div class="card"><h2>Resumen</h2><div class="kv"><span>Km recorridos</span><b>${N(d.km)}</b></div><div class="kv"><span>Accidentes (leve / moderado / grave)</span><b>${t.l} / ${t.m} / ${t.g}</b></div><div class="kv"><span>Ratio de riesgo</span><b>${t.r.toFixed(1)}</b></div><div class="kv"><span>Camioneta de hoy</span><b>${Object.keys(AS).find(p=>AS[p]===n)||"Sin elegir"}</b></div></div>
+<div class="card"><h2>Camionetas que ha usado</h2>${d.uso.length?d.uso.map(p=>`<div class="kv"><span class="plate">${p}</span></div>`).join(""):'<span class="mut">Aún ninguna.</span>'}</div></div>
+<div class="card"><h2>Accidentes</h2>${d.acc.length?d.acc.map(a=>`<div class="kv"><span><span class="pill ${gp(a.g)}">${a.g}</span> ${a.t} ·${a.p}</span><span class="mut">${a.d} · S/ ${N(a.c)}</span></div>`).join(""):'<span class="mut">Sin accidentes registrados.</span>'}</div>`}
+function accForm(){return`<button class="btn alt" id="back">← Volver</button><h1 style="margin-top:12px">Registrar accidente</h1><div class="card" style="max-width:520px">
+<label>Conductor<select id="ac">${Object.keys(DR).map(n=>`<option ${n===csel?"selected":""}>${n}</option>`).join("")}</select></label><label>Camioneta<select id="ap">${F.map(f=>`<option>${f.p}</option>`).join("")}</select></label>
+<label>Gravedad<select id="ag"><option>Leve</option><option>Moderado</option><option>Grave</option></select></label><label>Fecha<input type="date" id="fd" value="2026-10-04"></label>
+<label>Descripción<input id="at" placeholder="Ej. Raspón al estacionar"></label><label>Costo estimado (S/)<input type="number" id="co" value="0"></label><div id="er"></div><button class="btn" id="sacc">Guardar accidente</button></div>`}
+function usuarios(){return`<h1>Usuarios</h1><p class="mut">Administración crea usuarios con nombre y PIN propios. El PIN no se comparte.</p><div class="card" style="max-width:520px"><h2>Crear usuario</h2>
+<label>Nombre completo<input id="un"></label><label>Nombre de usuario<input id="uu" autocapitalize="none" autocomplete="off"></label><label>PIN (4 dígitos)<input id="up" inputmode="numeric" maxlength="4"></label>
+<label>Perfil<select id="ur"><option>Conductor</option><option>Administración</option></select></label><div id="er"></div><button class="btn" id="cu">Crear usuario</button></div>
+<div class="card"><h2>Usuarios (${U.length})</h2>${U.map((x,i)=>`<div class="kv"><span><b>${x.n}</b> ·${x.u} · <span class="mut">${x.r}${x.on?"":" · Desactivado"}</span></span><span><button class="btn alt" data-rp="${i}" style="padding:6px 10px">Restablecer PIN</button> <button class="btn alt" data-tg="${i}" style="padding:6px 10px">${x.on?"Desactivar":"Activar"}</button></span></div>`).join("")}</div>`}
+
+function mi(){
+  const mine=Object.keys(AS).find(p=>AS[p]===me.n),nm=me.n.split(" ")[0];
+  if(mine){
+    const f=F.find(x=>x.p===mine);
+    const ruta = GP[mine][2];
+    const alertaRuta = (ruta.includes("Cerro de Pasco") || ruta.includes("Carretera Central")) 
+        ? `<div class="msg e" style="margin-top:16px; text-align:left"><b>⚠ ALERTA DE RUTA: ${ruta}</b><br>Zona de pendiente prolongada. Obligatorio el uso constante de <b>freno de motor</b> para evitar recalentamiento y pérdida de frenos. Mantenga su distancia.</div>` 
+        : '';
+    return`<div class="card" style="max-width:420px;margin:20px auto;text-align:center"><h1>Hola, ${nm}</h1><p>Hoy usas</p><div style="display:grid;place-items:center">${car(f.t)}</div><div class="plate" style="font-size:30px">${mine}</div><p class="mut">${f.m}</p>
+    ${alertaRuta}
+    <button class="btn red" id="msos" style="width:100%;padding:18px;font-size:18px;margin:20px 0 14px;box-shadow:0 4px 14px rgba(192,40,45,0.4)">🚨 EMERGENCIA EN RUTA</button>
+    <button class="btn alt" id="mrel" style="width:100%">Terminar turno (Registrar Km)</button></div>`;
+  }
+  if(mconf){
+    const f=F.find(x=>x.p===mconf);
+    return`<div class="card" style="max-width:420px;margin:20px auto;text-align:center"><h1>¿Es esta tu camioneta?</h1><div style="display:grid;place-items:center">${car(f.t)}</div><div class="plate" style="font-size:34px">${f.p}</div><p class="mut">Revisa que la placa sea la misma que ves en el vehículo.</p><button class="btn big" id="mok" style="width:100%;padding:18px;font-size:19px">Sí, es esta</button><br><br><button class="btn alt" id="mno" style="width:100%">No, volver</button></div>`;
+  }
+  
+  return`<div style="max-width:440px;margin:0 auto"><h1>Hola, ${nm}</h1><p class="mut">Elige la camioneta que vas a usar hoy.</p>
+  ${F.map(f=>{
+      const enUso = AS[f.p];
+      if(enUso) {
+         return `<button class="row locked" disabled style="grid-template-columns:80px 1fr">${car(f.t)}<span><span class="plate">${f.p}</span><br><span class="mut" style="color:var(--r);font-weight:600">En uso por ${enUso}</span></span></button>`;
+      } else {
+         return `<button class="row" style="grid-template-columns:80px 1fr" data-m="${f.p}">${car(f.t)}<span><span class="plate">${f.p}</span><br><span class="mut">${f.m}</span></span></button>`;
+      }
+  }).join("")}</div>`;
+}
+
+function cierre(){
+  const mine=Object.keys(AS).find(p=>AS[p]===me.n);
+  const f=F.find(x=>x.p===mine);
+  return `<button class="btn alt" id="cx_cierre">← Volver</button>
+  <h1 style="margin-top:12px;text-align:center">Cierre de Turno</h1>
+  <div class="card" style="max-width:420px;margin:20px auto">
+    <h2 style="text-align:center">${mine}</h2>
+    <div style="text-align:center; margin:16px 0">
+        <button class="btn alt" id="btn_foto_km" style="padding:16px; width:100%; border-color:var(--wine); color:var(--wine)">📷 Tomar foto del tablero (Obligatorio)</button>
+        <div id="foto_ok" style="display:none; color:var(--g); font-weight:bold; margin-top:8px">✅ Foto guardada</div>
+    </div>
+    <p class="mut" style="text-align:center;margin-top:0">Último registro del sistema: ${N(f.km)} km</p>
+    <label>Kilometraje Final (Obligatorio)<input type="number" id="kfin" placeholder="Min. ${f.km}" inputmode="numeric"></label>
+    <div id="er_cierre"></div>
+    <button class="btn" id="scierre" style="width:100%;margin-top:14px;background:#999;color:#ddd" disabled>Terminar Jornada y Liberar Vehículo</button>
+  </div>`;
+}
+
+function sosView(){
+  return `<button class="btn alt" id="sos_back">← Volver</button>
+  <h1 style="margin-top:12px; color:var(--r)">🚨 Protocolo de Emergencia</h1>
+  
+  <div class="card" style="border-color:var(--r); border-width:2px; padding:18px">
+      <h2 style="color:var(--r); margin-bottom:6px">1. Asegura la zona</h2>
+      <p style="margin:0; font-size:15px">Enciende luces intermitentes. Si es seguro salir, coloca los conos. <b>No muevas la camioneta</b> a menos que bloquee totalmente una vía rápida.</p>
+  </div>
+  
+  <div class="card">
+      <h2 style="margin-bottom:6px">2. Llama Inmediatamente</h2>
+      <p class="mut" style="margin-top:0">Ten a la mano la tarjeta de propiedad antes de llamar.</p>
+      <button class="btn" style="width:100%; font-size:17px; padding:16px; background:#25D366; color:#fff; border:none; border-radius:8px; margin-bottom:12px; box-shadow:0 3px 8px rgba(37,211,102,0.3)">📞 Seguro MAPFRE: (01) 213-3333</button>
+      <button class="btn" style="width:100%; font-size:17px; padding:16px; background:var(--ink); color:#fff; border:none; border-radius:8px;">📞 Base Operaciones (Omajay)</button>
+  </div>
+  
+  <div class="card">
+      <h2 style="margin-bottom:6px">3. Toma fotos clave</h2>
+      <p style="margin-top:0; font-size:15px">Antes de que el otro vehículo se mueva:</p>
+      <ul style="padding-left:20px; font-size:15px; margin-bottom:14px">
+          <li>Foto clara de la <b>placa</b> del otro vehículo.</li>
+          <li>Fotos de los daños de <b>ambos</b> vehículos.</li>
+          <li>Una foto panorámica donde se vea la calle o el cruce completo.</li>
+      </ul>
+      <button class="btn alt" style="width:100%; font-size:16px; padding:14px" onclick="toast('📸 Cámara abierta')">📷 Abrir Cámara y Guardar Fotos</button>
+  </div>
+  
+  <div class="msg e" style="margin-top:16px; text-align:center; font-size:15px">
+      <b>⚠ REGLA DE ORO:</b> No asumas la culpa ni firmes ningún acuerdo con la otra parte sin la presencia de tu supervisor o el asesor del seguro.
+  </div>`;
+}
+
+function checklist(){
+  const zc=(z)=>chk[z]===1?'var(--g)':chk[z]===2?'var(--r)':'var(--mut)';
+  const zn={f:"Frente / Motor", c:"Cabina / Interior", i:"Lateral Izquierdo", d:"Lateral Derecho", p:"Posterior / Tolva"};
+  const done = Object.values(chk).every(v=>v!==0);
+  
+  return `<button class="btn alt" id="cx">← Cancelar y volver</button>
+  <h1 style="margin-top:12px;text-align:center">Inspección 360°</h1>
+  <p class="mut" style="text-align:center">Toca cada zona de la camioneta para reportar su estado.</p>
+  <div class="card" style="max-width:380px;margin:0 auto;padding:20px 16px 16px">
+    <svg viewBox="0 0 120 260" height="${chkZ?'130':'260'}" style="margin:0 auto;display:block;transition:height 0.35s cubic-bezier(0.22, 1, 0.36, 1)">
+      <rect data-z="f" x="25" y="15" width="70" height="45" rx="8" fill="${zc('f')}" stroke="var(--card)" stroke-width="4" style="cursor:pointer;transition:fill .2s"/>
+      <text x="60" y="42" font-size="11" text-anchor="middle" fill="#fff" pointer-events="none">FRENTE</text>
+      
+      <rect data-z="c" x="30" y="65" width="60" height="60" rx="10" fill="${zc('c')}" stroke="var(--card)" stroke-width="4" style="cursor:pointer;transition:fill .2s"/>
+      <text x="60" y="100" font-size="11" text-anchor="middle" fill="#fff" pointer-events="none">CABINA</text>
+      
+      <rect data-z="i" x="10" y="55" width="15" height="150" rx="5" fill="${zc('i')}" stroke="var(--card)" stroke-width="4" style="cursor:pointer;transition:fill .2s"/>
+      <text x="17" y="130" font-size="9" text-anchor="middle" fill="#fff" transform="rotate(-90, 17, 130)" pointer-events="none">IZQ</text>
+      
+      <rect data-z="d" x="95" y="55" width="15" height="150" rx="5" fill="${zc('d')}" stroke="var(--card)" stroke-width="4" style="cursor:pointer;transition:fill .2s"/>
+      <text x="102" y="130" font-size="9" text-anchor="middle" fill="#fff" transform="rotate(90, 102, 130)" pointer-events="none">DER</text>
+      
+      <rect data-z="p" x="25" y="130" width="70" height="85" rx="5" fill="${zc('p')}" stroke="var(--card)" stroke-width="4" style="cursor:pointer;transition:fill .2s"/>
+      <text x="60" y="176" font-size="11" text-anchor="middle" fill="#fff" pointer-events="none">POSTERIOR</text>
+    </svg>
+    ${chkZ ? `
+    <div style="margin-top:16px; padding-top:16px; border-top:1px solid var(--line); animation:in 0.25s both">
+       <h3 style="margin:0 0 12px;font-size:16px">Inspeccionando: ${zn[chkZ]}</h3>${chkTxt === 'tag' ? `
+         <p style="margin:0 0 10px;font-size:14px">Seleccione los daños (puede marcar varios):</p>
+         <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px">
+           ${["Rayón", "Abolladura", "Mica/Faro roto", "Llantas/Aros", "Sucio interior"].map(t=>`<button class="btn alt ztag" data-t="${t}" data-sel="${chkSel.includes(t)?'1':'0'}" style="padding:8px 12px;font-size:13px">${t}</button>`).join("")}
+         </div>
+         <button class="btn alt" id="zbtnfoto_tag" style="width:100%;margin-bottom:10px;border-color:var(--wine);color:var(--wine)">📷 Tomar foto obligatoria</button>
+         <div id="foto_ok_tag" style="display:none; text-align:center; color:var(--g); font-weight:bold; margin-bottom:10px">✅ Foto de evidencia guardada</div>
+         <button class="btn" id="zsavetags" style="width:100%;margin-bottom:10px;background:#999;color:#ddd" disabled>Guardar daños</button>
+         <div style="display:flex;gap:8px;"><button class="btn alt" style="flex:1" id="zcn">Cancelar</button><button class="btn alt" id="zot" style="flex:1;">Otro (Escribir)</button></div>
+       ` : chkTxt === 'txt' ? `
+         <label>Describe el daño encontrado:<input id="ztxt" placeholder="Ej. Espejo retrovisor roto" autocomplete="off" autofocus></label>
+         <button class="btn alt" id="zbtnfoto_txt" style="width:100%;margin-top:8px;border-color:var(--wine);color:var(--wine)">📷 Tomar foto obligatoria</button>
+         <div id="foto_ok_txt" style="display:none; text-align:center; color:var(--g); font-weight:bold; margin-top:8px">✅ Foto de evidencia guardada</div>
+         <div style="display:flex;gap:8px;margin-top:14px"><button class="btn alt" style="flex:1" id="zcn">Cancelar</button><button class="btn" id="zbadok" style="flex:1;background:#999;color:#ddd" disabled>Guardar daño</button></div>
+       ` : `
+         <button class="btn" id="zok" style="width:100%;margin-bottom:10px;background:var(--g)">✅ Limpio / Sin daños</button>
+         <button class="btn alt" id="zbad" style="width:100%;color:var(--r);border-color:var(--r)">⚠ Reportar daño rápido</button>
+       `}
+    </div>
+    ` : ''}
+  </div>
+  ${done ? `
+  <div style="max-width:380px; margin:0 auto; padding:0 16px;">
+      <label style="display:flex; gap:10px; font-weight:normal; font-size:14px; background:var(--card); padding:12px; border-radius:8px; border:1px solid var(--line);">
+          <input type="checkbox" id="chk_legal" style="width:20px; height:20px; margin:0">
+          Declaro que la inspección es veraz y asumo responsabilidad por daños posteriores no reportados aquí.
+      </label>
+      <button class="btn" id="cdone" style="width:100%; margin-top:14px; padding:16px; background:#999; color:#ddd" disabled>Firmar y Recibir Llave Virtual</button>
+  </div>
+  ` : `
+  <button class="btn alt" style="width:100%;max-width:380px;display:block;margin:16px auto;padding:16px" disabled>Completa las 5 zonas para continuar</button>
+  `}
+  `;
+}
+
+function mant(f){return`<button class="btn alt" id="back">← Volver</button><h1 style="margin-top:12px">Mantenimiento: ${f.p}</h1><div class="card" style="max-width:520px">
+<label>Tipo de servicio<select><option>Cambio de aceite y filtros</option><option>Frenos</option><option>Revisión completa</option></select></label>
+<label>Taller<input value="Taller Central, La Victoria"></label><label>Costo (S/)<input type="number" value="480"></label><label>Kilometraje del servicio<input type="number" id="mk" value="${f.km}"></label>
+<p class="mut">Al guardar, el contador de ${N(INT)} km de desgaste de aceite se reinicia a 0%.</p>
+<label style="display:flex;gap:8px;align-items:center;margin:16px 0;font-size:13px;padding:12px;background:var(--yb);border-radius:8px;color:var(--y)">
+    <input type="checkbox" id="ck_mant" style="width:auto;margin:0"> Confirmo que el mantenimiento se realizó. El contador volverá a cero.
+</label>
+<button class="btn" id="sv" style="background:#999;color:#ddd" disabled>Registrar visita a taller</button></div>`}
+
+function registro(){
+if(pend){const f=F.find(x=>x.p===pend);return`<button class="btn alt" id="back">← Volver a la lista</button><h1 style="margin-top:12px">${f.p}</h1><div class="card" style="max-width:480px">
+<div class="cam">📷 Aquí se abre la cámara<br>para foto del tablero</div><p class="mut">Último dato: ${N(f.km)} km</p>
+<label>Kilometraje que muestra el tablero<input type="number" inputmode="numeric" id="kmin" placeholder="Ej. ${N(f.km+f.kd)}"></label>
+<div id="er"></div><button class="btn" id="gu" style="width:100%">Guardar registro</button></div>`}
+const row=f=>{const r=rg(f);return`<button class="row" data-r="${f.p}">${car(f.t)}<span><span class="plate">${f.p}</span><br><span class="mut">${f.m}</span></span><span class="mut">${N(f.km)} km<br>Se registra cada ${freq(f)} día(s)</span><span><span class="pill ${r[0]}">${r[1]}</span></span></button>`};
+const T=F.filter(f=>f.reg>=freq(f)).sort((a,b)=>b.reg-a.reg),Rr=F.filter(f=>f.reg<freq(f));
+return`<h1>Registro manual de fin de jornada</h1><p class="mut">El sistema calcula qué camionetas hay que registrar hoy según su uso y su cercanía al mantenimiento.</p><h2>Toca registrar hoy (${T.length})</h2>${T.length?T.map(row).join(""):'<div class="card mut">No hay pendientes.</div>'}<h2 style="margin-top:20px">No hace falta hoy (${Rr.length})</h2>${Rr.map(row).join("")}`}
+
+function bajas(){return`<h1>Camionetas dadas de baja</h1><p class="mut">Queda registrado quién la dio de baja y cuándo.</p>${B.length?B.map((b,i)=>`<div class="card" style="display:flex;gap:14px;align-items:center;flex-wrap:wrap">${car(b.f.t)}<div style="flex:1"><b class="plate">${b.f.p}</b><br><span class="mut">${b.motivo} · por ${b.por} ·${b.fecha}</span></div><button class="btn alt" data-re="${i}" onclick="toast('¿Reactivar? Deshaciendo baja...')">Reactivar</button></div>`).join(""):'<div class="card mut">Aún no hay bajas. Pruebe dar de baja una camioneta desde su detalle.</div>'}`}
+function agregar(){return`<h1>Agregar camioneta</h1><p class="mut">Disponible para Administración.</p><div class="card" style="max-width:520px">
+<label>Placa<input id="np" placeholder="Ej. XYZ-123"></label><label>Tipo<select id="nt"><option value="p">Camioneta 4x4</option><option value="c">Camioneta cerrada</option><option value="v">Mini van</option></select></label>
+<label>Modelo<input id="nm" value="Toyota Hilux 4x4"></label><label>Foto de la unidad<input type="file" accept="image/*"></label><label>Kilometraje actual<input type="number" id="nk" placeholder="Ej. 12000"></label>
+<label>Km del último mantenimiento<input type="number" id="nl" placeholder="Ej. 10000"></label><label>Uso estimado (km/día)<input type="number" id="nu" placeholder="Ej. 150"></label><label>Intervalo de mantenimiento (km)<input type="number" value="5000"></label><div id="er"></div><button class="btn" id="ad">Agregar al inventario</button></div>`}
+function baja(f){return`<button class="btn alt" id="back">← Volver</button><h1 style="margin-top:12px">Dar de baja ${f.p}</h1><div class="card" style="max-width:520px">
+<label>Motivo<select><option>Vendida</option><option>Siniestro total</option><option>Fin de contrato</option></select></label>
+<label style="display:flex;gap:8px;align-items:center"><input type="checkbox" id="ck" style="width:auto;margin:0"> Confirmo que esta camioneta sale de la flota</label>
+<p class="mut">Se conserva todo su historial. Quedará registrado quién y cuándo, y se avisará a Administración.</p><button class="btn red" id="bg" disabled>Dar de baja</button></div>`}
+function wa(){const f=[...F].sort((a,b)=>calc(a).days-calc(b).days)[0],k=calc(f);
+return`<h1>Aviso por WhatsApp</h1><p class="mut">Así le llegaría a Administración. Ejemplo con datos de la maqueta.</p><div class="phone"><div class="hd">Control de flota Omajay</div>
+<div class="bub">🟡 Mantenimiento próximo\n${f.p} · ${f.m}\nKilometraje: ${N(f.km)} km\n${k.left<=0?"Se pasó "+N(-k.left)+" km.":"Faltan "+N(k.left)+" km (≈ "+k.days+" días)."}\nPrograme el servicio esta semana.</div>
+<div class="bub">⚠️ Sin registro de kilometraje\nF7K-228 lleva 9 días sin dato.</div><div class="bub">🗑️ Baja registrada\nUna camioneta fue dada de baja por Administración.</div></div>`}
+function render(){const k0=view+"|"+pend+"|"+sel+"|"+mconf+"|"+csel;if(window._k!==undefined&&k0!==window._k&&!window._busy){window._busy=true;const m=document.getElementById("v");m.classList.add("out");setTimeout(()=>{window._busy=false;m.classList.remove("out");_render()},200);return}_render()}
+function _render(){const nv=document.getElementById("nav");
+document.getElementById("who").textContent=me?me.n+" · "+role:"";const ob=document.getElementById("out");ob.style.display=role?"":"none";ob.onclick=()=>{role=null;me=null;view="login";sel=null;pend=null;mconf=null;render()};
+const TT=role==="Administración"?tabs:[];nv.style.display=TT.length?"flex":"none";nv.innerHTML=TT.map(([k,l])=>`<button role="tab" aria-selected="${view===k||(k==="panel"&&["detalle","mant","baja"].includes(view))||(k==="conductores"&&["ficha","acc"].includes(view))}" data-k="${k}">${l}</button>`).join("");
+nv.querySelectorAll("button").forEach(b=>b.onclick=()=>{view=b.dataset.k;sel=null;pend=null;render()});
+const e=expl[view]||expl["mi"];const pr=document.getElementById("pres");pr.style.display=showP?"block":"none";pr.innerHTML=`<b>${e[0]}:</b>${e[1]}`;
+const v=document.getElementById("v"),f=F.find(x=>x.p===sel);const key=view+"|"+pend+"|"+sel+"|"+mconf+"|"+csel;if(key!==window._k){window._k=key;const p2=document.getElementById("pres");p2.classList.remove("fade");void p2.offsetWidth;p2.classList.add("fade");v.classList.remove("view");void v.offsetWidth;v.classList.add("view")}
+if(view==="login"){v.innerHTML=`<div class="login card" style="text-align:center"><img class="logo" style="width:110px;height:110px;margin:0 auto 10px" src="${LOGO}" alt="Omajay Rent a Car"><h1>Ingresar</h1><p class="mut">Control de flota</p><div style="text-align:left"><label>Usuario<input id="lu" autocapitalize="none" autocomplete="off"></label><label>PIN<input id="lp" type="password" inputmode="numeric" maxlength="4"></label></div><div id="er"></div><button class="btn" id="li" style="width:100%">Entrar</button><p class="mut" style="margin-top:14px">Demostración: acceso rápido</p><div class="who"><button class="btn alt" data-d="admin">Administración</button><button class="btn alt" data-d="psalas">Conductor</button></div></div>`;
+const dl=(u,p)=>{const x=U.find(y=>y.u===u.trim().toLowerCase()&&y.pin===p),er=v.querySelector("#er");if(!x){er.innerHTML='<div class="msg e">Usuario o PIN incorrecto.</div>';return}if(!x.on){er.innerHTML='<div class="msg e">Este usuario está desactivado.</div>';return}me=x;role=x.r;view=role==="Conductor"?"mi":"panel";mconf=null;render()};
+v.querySelector("#li").onclick=()=>dl(v.querySelector("#lu").value,v.querySelector("#lp").value);
+v.querySelectorAll("[data-d]").forEach(b=>b.onclick=()=>{const x=U.find(y=>y.u===b.dataset.d);dl(x.u,x.pin)});return}
+v.innerHTML={panel:panel,registro:registro,agregar:agregar,wa:wa,bajas:bajas,mapa:mapa,conductores:conductores,ficha:ficha,acc:accForm,usuarios:usuarios,mi:mi,checklist:checklist,sos:sosView,cierre:cierre,detalle:()=>detalle(f),mant:()=>mant(f),baja:()=>baja(f)}[view]();
+const q=(s,fn)=>{const x=v.querySelector(s);if(x)x.onclick=fn},go=(w)=>{view=w;render();scrollTo(0,0)};
+v.querySelectorAll("[data-p]").forEach(b=>b.onclick=()=>{sel=b.dataset.p;go("detalle")});
+v.querySelectorAll("[data-r]").forEach(b=>b.onclick=()=>{pend=b.dataset.r;warned=false;render();scrollTo(0,0)});
+const qi=v.querySelector("#q");if(qi)qi.oninput=e=>{qv=e.target.value.replace(/"/g,"");render();const i=document.getElementById("q");i.focus();i.setSelectionRange(qv.length,qv.length)};
+const fo=v.querySelector("#fs");if(fo)fo.onchange=e=>{fs=e.target.value;render()};
+v.querySelectorAll("[data-g]").forEach(g=>g.onclick=()=>{gsel=g.dataset.g;render()});q("#vermap",()=>{gsel=sel;go("mapa")});
+const as=v.querySelector("#asg");if(as)as.onchange=()=>{const n=as.value;Object.keys(AS).forEach(p=>{if(AS[p]===n)delete AS[p]});if(n)AS[f.p]=n;else delete AS[f.p];toast(n?n+" usa hoy la "+f.p:"Camioneta "+f.p+" sin asignar")};
+v.querySelectorAll("[data-c]").forEach(r=>r.onclick=()=>{csel=r.dataset.c;go("ficha")});q("#nacc",()=>go("acc"));const so=v.querySelector("#srt");if(so)so.onchange=e=>{srt=e.target.value;render()};
+q("#sacc",()=>{const n=v.querySelector("#ac").value,t=v.querySelector("#at").value.trim(),er=v.querySelector("#er");if(!t){er.innerHTML='<div class="msg e">Escriba una descripción breve.</div>';return}
+ DR[n].acc.push({d:v.querySelector("#fd").value.split("-").reverse().join("/"),p:v.querySelector("#ap").value,g:v.querySelector("#ag").value,t,c:+v.querySelector("#co").value||0});csel=n;toast("Accidente registrado en la ficha de "+n);go("ficha")});
+q("#cu",()=>{const n=v.querySelector("#un").value.trim(),u=v.querySelector("#uu").value.trim().toLowerCase(),p=v.querySelector("#up").value.trim(),r=v.querySelector("#ur").value,er=v.querySelector("#er");
+ if(!n||!/^[a-z0-9._]+$/.test(u)){er.innerHTML='<div class="msg e">Escriba el nombre y un usuario sin espacios ni tildes.</div>';return}
+ if(U.some(x=>x.u===u)){er.innerHTML='<div class="msg e">Ese nombre de usuario ya existe.</div>';return}
+ if(!/^\d{4}$/.test(p)){er.innerHTML='<div class="msg e">El PIN debe tener 4 números.</div>';return}
+ U.push({n,u,pin:p,r,on:1});if(r==="Conductor")DR[n]={km:0,uso:[],acc:[]};toast("Usuario "+u+" creado");render()});
+v.querySelectorAll("[data-rp]").forEach(b=>b.onclick=()=>{const x=U[+b.dataset.rp];x.pin=String(1000+Math.floor(Math.random()*9000));toast("Nuevo PIN de "+x.n+": "+x.pin+" (se muestra una sola vez)")});
+v.querySelectorAll("[data-tg]").forEach(b=>b.onclick=()=>{const x=U[+b.dataset.tg];if(x===me){toast("No puede desactivar su propio usuario");return}x.on=x.on?0:1;render()});
+v.querySelectorAll("[data-m]").forEach(b=>b.onclick=()=>{mconf=b.dataset.m;render()});q("#mno",()=>{mconf=null;render()});
+
+// BOTON SOS
+q("#msos",()=>{view="sos";render()});
+q("#sos_back",()=>{view="mi";render()});
+
+// LÓGICA CHECKLIST MULTI-OPCIÓN Y FOTO
+q("#mok",()=>{
+  view="checklist";
+  chk={f:0,c:0,i:0,d:0,p:0};
+  chkZ=null; chkTxt=null; chkSel=[]; fotoTomada=false;
+  render();
+});
+if(view==="checklist"){
+  q("#cx",()=>{view="mi";render()});
+  v.querySelectorAll("[data-z]").forEach(el=>el.onclick=()=>{chkZ=el.dataset.z;chkTxt=null;chkSel=[];fotoTomada=false;render()});
+  q("#zok",()=>{chk[chkZ]=1;chkZ=null;render()});
+  
+  q("#zbad",()=>{chkTxt='tag';chkSel=[];fotoTomada=false;render()});
+  
+  v.querySelectorAll(".ztag").forEach(el=>el.onclick=()=>{
+     const t = el.dataset.t;
+     if(chkSel.includes(t)) {
+         chkSel = chkSel.filter(x => x !== t);
+     } else {
+         chkSel.push(t);
+     }
+     // Validar si activamos botón guardar
+     const btn = v.querySelector("#zsavetags");
+     if(btn) {
+         if(chkSel.length > 0 && fotoTomada) { btn.disabled = false; btn.style.background = 'var(--r)'; btn.style.color = '#fff'; } 
+         else { btn.disabled = true; btn.style.background = '#999'; btn.style.color = '#ddd'; }
+     }
+     render();
+  });
+  
+  q("#zbtnfoto_tag",()=>{
+      fotoTomada = true; 
+      toast('📸 Cámara abierta. Foto guardada temporalmente.');
+      v.querySelector("#foto_ok_tag").style.display = "block";
+      v.querySelector("#zbtnfoto_tag").style.display = "none";
+      const btn = v.querySelector("#zsavetags");
+      if(chkSel.length > 0) { btn.disabled = false; btn.style.background = 'var(--r)'; btn.style.color = '#fff'; }
+  });
+  
+  q("#zbtnfoto_txt",()=>{
+      fotoTomada = true; 
+      toast('📸 Cámara abierta. Foto guardada temporalmente.');
+      v.querySelector("#foto_ok_txt").style.display = "block";
+      v.querySelector("#zbtnfoto_txt").style.display = "none";
+      const btn = v.querySelector("#zbadok");
+      btn.disabled = false; btn.style.background = 'var(--r)'; btn.style.color = '#fff';
+  });
+  
+  q("#zsavetags",()=>{
+     if(chkSel.length > 0 && fotoTomada) {
+         chk[chkZ]=2; 
+         toast("Daños reportados: " + chkSel.join(", ")); 
+         chkZ=null; chkSel=[]; fotoTomada=false; render();
+     }
+  });
+  
+  q("#zot",()=>{chkTxt='txt';fotoTomada=false;render()});
+  
+  q("#zcn",()=>{chkZ=null;chkTxt=null;chkSel=[];fotoTomada=false;render()});
+  q("#zbadok",()=>{
+     const txt = v.querySelector("#ztxt").value.trim();
+     if(!txt){ toast("Por favor escriba una descripción del daño."); return; }
+     if(!fotoTomada){ toast("Debe tomar una foto de evidencia."); return; }
+     chk[chkZ]=2; toast("Daño reportado: "+txt); chkZ=null; fotoTomada=false; render();
+  });
+  
+  // Firma legal final
+  const chkL = v.querySelector("#chk_legal");
+  if(chkL) {
+      chkL.onchange = () => {
+          const btn = v.querySelector("#cdone");
+          if(chkL.checked) { btn.disabled = false; btn.style.background = 'var(--wine)'; btn.style.color = '#fff'; }
+          else { btn.disabled = true; btn.style.background = '#999'; btn.style.color = '#ddd'; }
+      };
+  }
+  
+  q("#cdone",()=>{
+     AS[mconf]=me.n;
+     const d=DR[me.n]; if(d&&!d.uso.includes(mconf)) d.uso.push(mconf);
+     toast("Inspección guardada y firmada. Llave virtual entregada.");
+     mconf=null; view="mi"; render();
+  });
+}
+
+// CIERRE DE TURNO
+q("#mrel",()=>{ view="cierre"; fotoTomada=false; render(); });
+if(view==="cierre"){
+  q("#cx_cierre", ()=>{view="mi"; render();});
+  
+  q("#btn_foto_km", ()=>{
+      fotoTomada = true;
+      toast('📸 Cámara abierta. Foto del odómetro guardada.');
+      v.querySelector("#foto_ok").style.display = "block";
+      v.querySelector("#btn_foto_km").style.display = "none";
+      const btn = v.querySelector("#scierre");
+      btn.disabled = false; btn.style.background = 'var(--wine)'; btn.style.color = '#fff';
+  });
+
+  q("#scierre", ()=>{
+     const mine=Object.keys(AS).find(p=>AS[p]===me.n);
+     const f=F.find(x=>x.p===mine);
+     const k = +v.querySelector("#kfin").value;
+     const er = v.querySelector("#er_cierre");
+     if(!fotoTomada) { er.innerHTML='<div class="msg e">Debe tomar la foto del tablero.</div>'; return; }
+     if(!k) { er.innerHTML='<div class="msg e">Debe digitar el kilometraje final.</div>'; return; }
+     if(k < f.km) { er.innerHTML='<div class="msg e">El kilometraje no puede ser menor al inicial ('+N(f.km)+').</div>'; return; }
+     
+     f.kd = Math.max(10, Math.round((f.kd + (k - f.km)) / 2));
+     f.km = k;
+     f.reg = 0; 
+     delete AS[mine];
+     
+     toast("Jornada terminada. Kilometraje actualizado a "+N(k)+" km.");
+     view="mi"; render();
+  });
+}
+
+q("#back",()=>{if(view==="registro"){pend=null;render()}else go(view==="detalle"?"panel":["ficha","acc"].includes(view)?"conductores":"detalle")});
+q("#mant",()=>go("mant"));
+q("#sev",()=>{f.ev=Math.max(1,+v.querySelector("#ev").value||14);toast("Aviso de alerta administrativa guardado");render()});
+v.querySelectorAll("[data-re]").forEach(b=>b.onclick=()=>{const x=B.splice(+b.dataset.re,1)[0];F.push(x.f);toast(x.f.p+" reactivada");render()});q("#bj",()=>go("baja"));
+
+// CHECKBOX EN MANTENIMIENTO
+const ck_mant = v.querySelector("#ck_mant");
+if(ck_mant) {
+    ck_mant.onchange = () => {
+        const btn = v.querySelector("#sv");
+        if(ck_mant.checked) { btn.disabled = false; btn.style.background = 'var(--wine)'; btn.style.color = '#fff'; }
+        else { btn.disabled = true; btn.style.background = '#999'; btn.style.color = '#ddd'; }
+    }
+}
+q("#sv",()=>{f.last=+v.querySelector("#mk").value||f.km;toast("Mantenimiento guardado. El desgaste de aceite volvió a 0%.");go("detalle")});
+
+q("#bg",()=>{B.push({f,por:me.n,fecha:new Date().toLocaleString("es-PE",{dateStyle:"short",timeStyle:"short"}),motivo:v.querySelector("select").value});F=F.filter(x=>x!==f);toast("Baja registrada por "+me.n+". Aviso enviado a Administración.");sel=null;go("panel")});
+const ck=v.querySelector("#ck");if(ck)ck.onchange=()=>v.querySelector("#bg").disabled=!ck.checked;
+q("#gu",()=>{const f2=F.find(x=>x.p===pend),n=+v.querySelector("#kmin").value,er=v.querySelector("#er");
+ if(!n){er.innerHTML='<div class="msg e">Escriba el kilometraje del tablero.</div>';return}
+ if(n<f2.km){er.innerHTML=`<div class="msg e">El número es menor al último registro (${N(f2.km)} km). Revise la foto.</div>`;return}
+ if(n-f2.km>1500&&!warned){warned=true;er.innerHTML=`<div class="msg w">Son ${N(n-f2.km)} km más que el último registro. ¿Es correcto? Toque de nuevo para confirmar.</div>`;return}
+ if(f2.reg>0)f2.kd=Math.max(10,Math.round((f2.kd+(n-f2.km)/f2.reg)/2));f2.km=n;f2.reg=0;toast("Registrado: "+f2.p+" · "+N(n)+" km · "+me.n+" · hoy");pend=null;render()});
+q("#ad",()=>{const p=v.querySelector("#np").value.trim().toUpperCase(),k=+v.querySelector("#nk").value,l=+v.querySelector("#nl").value,er=v.querySelector("#er");
+ if(!p||!k||!l||F.some(x=>x.p===p)){er.innerHTML='<div class="msg e">Complete placa, kilometraje y último mantenimiento. La placa no debe estar repetida.</div>';return}
+ F.push({p,m:v.querySelector("#nm").value,t:v.querySelector("#nt").value,km:k,last:l,kd:+v.querySelector("#nu").value||150,ev:14,cond:"",reg:0,soat:365,rt:365});toast("Camioneta "+p+" agregada al inventario");go("panel")});
+}
+document.getElementById("pt").onclick=()=>{showP=!showP;document.getElementById("pt").textContent=showP?"Ocultar explicación":"Mostrar explicación";render()};
+render();
+</script></body></html>

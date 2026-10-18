@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="es-PE">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Huellitas Pet Shop · Accesorios, juguetes y ropita para tu mascota</title>
+<meta name="description" content="Maqueta de tienda de mascotas en Lima: correas, juguetes, ropita, camas y más. Pide por WhatsApp. Demo con datos ficticios.">
+<meta name="theme-color" content="#F97316">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* Paleta "Pet Tech App" (ui-ux-pro-max) · Estilo Claymorphism + Vibrant & Block-based · Fredoka + Nunito */
+:root{
+  --primary:#F97316; --primary-dark:#C2410C; --on-primary:#0F172A;
+  --secondary:#FB923C;
+  --accent:#2563EB; --accent-dark:#1D4ED8; --on-accent:#FFFFFF;
+  --bg:#FFF7ED; --fg:#9A3412; --text:#431407; --card:#FFFFFF;
+  --muted:#F1F0F0; --muted-fg:#475569; --border:#FED7AA;
+  --danger:#DC2626; --ok:#15803D; --ok-bg:#DCFCE7;
+  --p-peach:#FFEDD5; --p-blue:#DBEAFE; --p-mint:#DCFCE7; --p-pink:#FCE7F3; --p-lilac:#EDE9FE; --p-lemon:#FEF9C3;
+  --radius:22px; --radius-sm:14px;
+  --clay:0 6px 0 rgba(154,52,18,.10), 0 14px 24px -12px rgba(154,52,18,.25), inset -3px -3px 8px rgba(154,52,18,.05), inset 3px 3px 8px rgba(255,255,255,.8);
+  --font-t:'Fredoka','Nunito',system-ui,'Segoe UI',Roboto,Arial,sans-serif;
+  --font:'Nunito',system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;
+  --rebote:cubic-bezier(.34,1.56,.64,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+body.sin-scroll{overflow:hidden}
+h1,h2,h3,h4{font-family:var(--font-t);color:var(--fg);line-height:1.15;margin:0;font-weight:600}
+p{margin:0}
+a{color:inherit}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+img,svg{display:block}
+svg.i{width:22px;height:22px;flex:none;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+svg.i.sm{width:18px;height:18px}
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:8px}
+[hidden]{display:none!important}
+.contenedor{max-width:1160px;margin:0 auto;padding:0 16px}
+.muted{color:var(--muted-fg)}
+.precio{font-family:var(--font-t);font-weight:600;color:var(--text)}
+
+/* ---------- Botones ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:10px 20px;border-radius:999px;border:3px solid transparent;font-weight:800;font-size:16px;line-height:1.1;text-decoration:none;transition:transform .2s ease-out,box-shadow .2s ease-out,background-color .2s;-webkit-tap-highlight-color:transparent;touch-action:manipulation;white-space:nowrap}
+.btn:active{transform:translateY(3px)}
+.btn-primario{background:var(--primary);color:var(--on-primary);box-shadow:0 4px 0 var(--primary-dark)}
+.btn-primario:hover{background:#FB8a3c}
+.btn-primario:active{box-shadow:0 1px 0 var(--primary-dark)}
+.btn-wsp{background:#15803D;color:#fff;box-shadow:0 4px 0 #14532D}
+.btn-wsp:hover{background:#166534}
+.btn-wsp:active{box-shadow:0 1px 0 #14532D}
+.btn-azul{background:var(--accent);color:#fff;box-shadow:0 4px 0 #1E3A8A}
+.btn-azul:hover{background:var(--accent-dark)}
+.btn-borde{background:var(--card);color:var(--text);border-color:var(--border);box-shadow:0 4px 0 var(--border)}
+.btn-borde:hover{border-color:var(--secondary)}
+.btn-bloque{width:100%}
+.btn-sm{min-height:44px;padding:8px 14px;font-size:15px}
+.btn[disabled]{opacity:.55;cursor:not-allowed;transform:none}
+.btn-icono{position:relative;display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:50%;border:0;background:transparent;color:var(--text);transition:background-color .2s}
+.btn-icono:hover{background:var(--p-peach)}
+.contador{position:absolute;top:2px;right:0;min-width:20px;height:20px;padding:0 5px;border-radius:10px;background:var(--danger);color:#fff;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;border:2px solid #fff}
+.link-btn{background:none;border:0;padding:6px 0;min-height:40px;text-decoration:underline;text-underline-offset:3px;font-weight:600;color:inherit;text-align:left}
+
+/* ---------- Cabecera ---------- */
+.franja{background:var(--fg);color:#FFEDD5;font-size:14px;font-weight:700;text-align:center;padding:7px 12px}
+.franja b{color:#fff}
+.cabecera{position:sticky;top:0;z-index:40;background:rgba(255,247,237,.94);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:2px solid var(--border)}
+.cab-fila{display:flex;align-items:center;gap:8px;min-height:66px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;margin-right:auto}
+.logo-ic{width:44px;height:44px;border-radius:14px;background:var(--primary);color:var(--on-primary);display:flex;align-items:center;justify-content:center;box-shadow:0 3px 0 var(--primary-dark)}
+.logo-ic svg{width:28px;height:28px}
+.logo-txt{font-family:var(--font-t);font-weight:700;font-size:22px;color:var(--fg);line-height:1}
+.logo-txt small{display:block;font-family:var(--font);font-size:12px;font-weight:700;color:var(--muted-fg);letter-spacing:.04em}
+.buscador{display:none;flex:1;max-width:420px;position:relative}
+.buscador svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--muted-fg);pointer-events:none}
+.buscador input,.buscador-movil input{width:100%;height:48px;padding:0 16px 0 44px;border-radius:999px;border:3px solid var(--border);background:#fff;font-size:16px;transition:border-color .2s}
+.buscador input:focus,.buscador-movil input:focus{outline:none;border-color:var(--primary)}
+.buscador-movil{position:relative;padding:0 0 12px}
+.buscador-movil svg{position:absolute;left:14px;top:24px;transform:translateY(-50%);color:var(--muted-fg);pointer-events:none}
+.nav-cats{display:none;gap:4px}
+.nav-cats a{padding:10px 12px;border-radius:999px;text-decoration:none;font-weight:700;font-size:15px;white-space:nowrap}
+.nav-cats a:hover{background:var(--p-peach)}
+
+/* ---------- Hero ---------- */
+.hero{padding:28px 0 12px}
+.hero-grid{display:grid;gap:20px;align-items:center}
+.hero h1{font-size:clamp(32px,8.4vw,58px);font-weight:700;letter-spacing:-.01em}
+.hero h1 span{color:var(--primary-dark)}
+.hero-sub{font-size:18px;margin-top:12px;max-width:520px}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
+.hero-ilu{background:var(--p-peach);border:3px solid #fff;border-radius:32px;box-shadow:var(--clay);aspect-ratio:5/4;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.hero-ilu svg.mascotas{width:92%;height:auto}
+.burbuja{position:absolute;background:#fff;border-radius:18px;padding:8px 12px;font-weight:800;font-size:14px;box-shadow:0 4px 0 var(--border);display:flex;align-items:center;gap:6px}
+.burbuja svg{color:var(--primary-dark)}
+.ventajas{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:22px}
+.ventaja{display:flex;gap:10px;align-items:center;background:var(--card);border-radius:var(--radius-sm);padding:12px;border:2px solid var(--border);font-size:14px;font-weight:600;line-height:1.3}
+.ventaja .ic{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex:none;background:var(--p-peach);color:var(--primary-dark)}
+.ventaja b{display:block;font-size:15px;color:var(--text)}
+
+/* ---------- Secciones ---------- */
+.seccion{padding:40px 0;scroll-margin-top:124px}
+@media (min-width:960px){.seccion{scroll-margin-top:70px}}
+.seccion-cab{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:18px;flex-wrap:wrap}
+.seccion h2{font-size:clamp(26px,6vw,38px)}
+.seccion .bajada{margin-top:6px;color:var(--muted-fg);font-size:17px}
+.para-quien{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tarjeta-mascota{display:flex;flex-direction:column;align-items:center;gap:6px;padding:16px 10px;border-radius:var(--radius);border:3px solid #fff;box-shadow:var(--clay);text-decoration:none;cursor:pointer;transition:transform .25s var(--rebote);font-family:var(--font-t);font-size:20px;font-weight:600;color:var(--fg);min-height:44px}
+.tarjeta-mascota:hover{transform:translateY(-4px)}
+.tarjeta-mascota svg{width:96px;height:96px}
+.tarjeta-mascota small{font-family:var(--font);font-size:14px;font-weight:700;color:var(--muted-fg)}
+.tarjeta-mascota.perro{background:var(--p-peach)}
+.tarjeta-mascota.gato{background:var(--p-blue)}
+.categorias{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.cat-tile{display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 4px;border-radius:var(--radius-sm);border:0;background:transparent;font-weight:700;font-size:13.5px;line-height:1.2;text-align:center;transition:transform .25s var(--rebote)}
+.cat-tile:hover{transform:translateY(-3px)}
+.cat-tile .bola{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:3px solid #fff;box-shadow:var(--clay)}
+.cat-tile .bola svg{width:44px;height:44px}
+
+/* ---------- Productos ---------- */
+.fila-scroll{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(210px,72%);gap:14px;overflow-x:auto;padding:6px 16px 18px;margin:0 -16px;scroll-snap-type:x mandatory;scrollbar-width:thin}
+.fila-scroll > *{scroll-snap-align:start}
+.grilla{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.prod{background:var(--card);border-radius:var(--radius);border:3px solid #fff;box-shadow:var(--clay);display:flex;flex-direction:column;overflow:hidden;position:relative;transition:transform .25s var(--rebote)}
+.prod:hover{transform:translateY(-3px)}
+.prod-ilu{display:block;width:100%;aspect-ratio:1/1;border:0;padding:0;position:relative;cursor:pointer}
+.prod-ilu svg.ilu{width:72%;height:72%;margin:14% auto 0}
+.prod-tags{position:absolute;left:8px;top:8px;display:flex;flex-direction:column;gap:4px;align-items:flex-start}
+.tag{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:800;padding:3px 9px;border-radius:999px;line-height:1.3}
+.tag.oferta{background:var(--danger);color:#fff}
+.tag.nuevo{background:var(--accent);color:#fff}
+.tag.top{background:#FDE68A;color:#78350F}
+.tag.agotado{background:#1F2937;color:#fff}
+.fav{position:absolute;right:6px;top:6px;width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center;color:var(--fg);transition:transform .25s var(--rebote)}
+.fav:active{transform:scale(.85)}
+.fav[aria-pressed="true"] svg{fill:var(--danger);stroke:var(--danger)}
+.prod-info{padding:10px 12px 12px;display:flex;flex-direction:column;gap:4px;flex:1}
+.prod-para{font-size:12.5px;font-weight:800;color:var(--muted-fg);text-transform:uppercase;letter-spacing:.05em;display:flex;align-items:center;gap:4px}
+.prod-nombre{font-weight:700;font-size:15.5px;line-height:1.3;color:var(--text);background:none;border:0;padding:0;text-align:left}
+.prod-nombre:hover{text-decoration:underline;text-underline-offset:3px}
+.prod-precios{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-top:auto;padding-top:4px}
+.prod-precios .precio{font-size:20px}
+.antes{color:var(--muted-fg);text-decoration:line-through;font-size:14px;font-weight:600}
+.swatches{display:flex;gap:4px;align-items:center}
+.swatch{width:14px;height:14px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.18)}
+.prod .btn{margin-top:8px}
+
+/* ---------- Filtros ---------- */
+.filtros{display:grid;gap:10px;margin-bottom:16px}
+.segmento{display:flex;background:var(--card);border-radius:999px;padding:5px;border:2px solid var(--border);gap:4px}
+.segmento button{flex:1;min-height:42px;border:0;border-radius:999px;background:transparent;font-weight:800;font-size:15px;display:flex;align-items:center;justify-content:center;gap:6px;transition:background-color .2s}
+.segmento button[aria-pressed="true"]{background:var(--primary);color:var(--on-primary)}
+.segmento button svg{width:26px;height:26px}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:4px 16px 6px;margin:0 -16px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;min-height:42px;padding:8px 16px;border-radius:999px;border:2px solid var(--border);background:var(--card);font-weight:700;font-size:14.5px;white-space:nowrap;display:inline-flex;align-items:center;gap:6px;transition:background-color .2s,border-color .2s}
+.chip[aria-pressed="true"]{background:var(--fg);border-color:var(--fg);color:#fff}
+.filtro-fila{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.filtro-fila label{font-weight:700;font-size:14.5px}
+select,.input{min-height:46px;padding:8px 14px;border:2.5px solid var(--border);border-radius:14px;background:#fff;font-size:16px}
+select:focus,.input:focus{outline:none;border-color:var(--primary)}
+.input{width:100%}
+textarea.input{min-height:90px;resize:vertical}
+.check{display:inline-flex;align-items:center;gap:8px;min-height:44px;font-weight:700;font-size:14.5px;cursor:pointer}
+.check input{width:22px;height:22px;accent-color:var(--primary-dark)}
+.resultado-info{font-weight:700;color:var(--muted-fg);font-size:15px;margin-bottom:12px}
+.vacio{text-align:center;padding:32px 16px;background:var(--card);border-radius:var(--radius);border:3px dashed var(--border)}
+.vacio svg{width:80px;height:80px;margin:0 auto 8px}
+.vacio strong{display:block;font-family:var(--font-t);font-size:22px;color:var(--fg)}
+
+/* ---------- Placa / tallas / pasos ---------- */
+.banda{border-radius:28px;border:3px solid #fff;box-shadow:var(--clay);padding:22px 18px;display:grid;gap:18px;align-items:center}
+.banda.placa{background:var(--p-lilac)}
+.banda.tallas{background:var(--p-mint)}
+.banda h2{font-size:clamp(24px,5.6vw,34px)}
+.banda p{margin-top:8px;font-size:16.5px}
+.banda .acciones{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.placa-demo{display:flex;justify-content:center}
+.placa-demo svg{width:min(280px,80%);height:auto}
+.pasos{display:grid;gap:12px;counter-reset:paso}
+.paso{background:var(--card);border-radius:var(--radius);border:3px solid #fff;box-shadow:var(--clay);padding:18px;display:flex;gap:14px;align-items:flex-start}
+.paso .num{width:48px;height:48px;border-radius:16px;background:var(--primary);color:var(--on-primary);font-family:var(--font-t);font-weight:700;font-size:24px;display:flex;align-items:center;justify-content:center;flex:none;box-shadow:0 3px 0 var(--primary-dark)}
+.paso h3{font-size:20px}
+.paso p{margin-top:4px;color:var(--muted-fg)}
+.resenas{display:grid;gap:12px}
+.resena{background:var(--card);border-radius:var(--radius);border:3px solid #fff;box-shadow:var(--clay);padding:18px}
+.estrellas{display:flex;gap:2px;color:#F59E0B;margin-bottom:8px}
+.estrellas svg{width:18px;height:18px;fill:currentColor;stroke:none}
+.resena p{font-size:16px}
+.resena-autor{display:flex;gap:10px;align-items:center;margin-top:12px;font-weight:700}
+.avatar{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:none}
+.avatar svg{width:34px;height:34px}
+.resena-autor small{display:block;font-weight:600;color:var(--muted-fg);font-size:13.5px}
+.visita{display:grid;gap:16px}
+.mapa{border-radius:var(--radius);border:3px solid #fff;box-shadow:var(--clay);overflow:hidden;background:#E0F2FE;aspect-ratio:16/10;position:relative}
+.mapa svg{width:100%;height:100%}
+.datos-tienda{background:var(--card);border-radius:var(--radius);border:3px solid #fff;box-shadow:var(--clay);padding:20px;display:grid;gap:14px}
+.dato{display:flex;gap:12px;align-items:flex-start}
+.dato .ic{width:42px;height:42px;border-radius:12px;background:var(--p-peach);color:var(--primary-dark);display:flex;align-items:center;justify-content:center;flex:none}
+.dato b{display:block}
+.faq{display:grid;gap:10px}
+.faq details{background:var(--card);border-radius:var(--radius-sm);border:2px solid var(--border)}
+.faq summary{list-style:none;cursor:pointer;padding:14px 16px;min-height:52px;display:flex;align-items:center;justify-content:space-between;gap:10px;font-weight:800;font-size:16.5px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary svg{transition:transform .2s}
+.faq details[open] summary svg{transform:rotate(45deg)}
+.faq details p{padding:0 16px 16px;color:var(--text)}
+
+/* ---------- Pie ---------- */
+.pie{background:var(--fg);color:#FFEDD5;margin-top:40px;padding:36px 0 120px}
+.pie h3,.pie h4{color:#fff}
+.pie-grid{display:grid;gap:24px}
+.pie ul{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:2px}
+.pie .link-btn,.pie a{color:#FFEDD5}
+.pie-demo{border-top:1px solid rgba(255,237,213,.25);margin-top:28px;padding-top:16px;font-size:13.5px;text-align:center;color:#FED7AA}
+.libro{display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--text)!important;border-radius:12px;padding:8px 12px;font-weight:800;text-decoration:none;border:0;min-height:44px}
+
+/* ---------- Barra de pedido (móvil) ---------- */
+.barra-pedido{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:35;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 10px 10px 18px;border-radius:999px;background:var(--text);color:#fff;box-shadow:0 10px 30px -8px rgba(67,20,7,.6);animation:subir .35s var(--rebote)}
+.barra-pedido b{font-family:var(--font-t);font-size:18px}
+.barra-pedido span{font-size:14px;opacity:.85;display:block}
+@keyframes subir{from{transform:translateY(30px);opacity:0}to{transform:none;opacity:1}}
+
+/* ---------- Modal / cajón ---------- */
+.modal{position:fixed;inset:0;z-index:60;background:rgba(67,20,7,.45);display:flex;align-items:flex-end;justify-content:center}
+.hoja{width:100%;max-height:94vh;max-height:94dvh;background:var(--bg);border-radius:28px 28px 0 0;display:flex;flex-direction:column;animation:subir .3s var(--rebote)}
+.hoja-cab{display:flex;align-items:center;gap:8px;padding:12px 10px 12px 20px;border-bottom:2px solid var(--border)}
+.hoja-cab h2{flex:1;font-size:22px}
+.hoja-cuerpo{padding:18px 20px;overflow-y:auto;flex:1}
+.hoja-pie{padding:12px 20px;padding-bottom:max(14px,env(safe-area-inset-bottom));border-top:2px solid var(--border);display:grid;gap:10px;background:var(--card);border-radius:0 0 0 0}
+.detalle-grid{display:grid;gap:16px}
+.detalle-ilu{border-radius:var(--radius);aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;border:3px solid #fff;box-shadow:var(--clay)}
+.detalle-ilu{overflow:hidden}
+.detalle-ilu svg.ilu{height:82%;width:auto}
+.detalle-ilu > svg:not(.ilu){width:auto;height:92%;max-width:92%}
+.opcion{margin-top:16px}
+.opcion > .etq,.opcion > label{display:flex;justify-content:space-between;align-items:center;gap:8px;font-weight:800;margin-bottom:8px}
+.opciones{display:flex;flex-wrap:wrap;gap:8px}
+.op{min-width:52px;min-height:46px;padding:6px 14px;border-radius:14px;border:2.5px solid var(--border);background:#fff;font-weight:800;display:inline-flex;align-items:center;gap:8px;transition:border-color .2s,background-color .2s}
+.op[aria-pressed="true"]{border-color:var(--fg);background:var(--p-peach)}
+.op .swatch{width:20px;height:20px}
+.cantidad{display:inline-flex;align-items:center;gap:6px;background:#fff;border:2.5px solid var(--border);border-radius:999px;padding:3px}
+.cantidad button{width:42px;height:42px;border-radius:50%;border:0;background:var(--p-peach);display:flex;align-items:center;justify-content:center}
+.cantidad output{min-width:32px;text-align:center;font-family:var(--font-t);font-weight:700;font-size:19px}
+.aviso{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border-radius:var(--radius-sm);background:var(--p-blue);color:#1E3A8A;font-size:15px;font-weight:600}
+.error{color:var(--danger);font-weight:800;font-size:14.5px;margin-top:6px}
+.item{display:flex;gap:12px;align-items:center;padding:12px 0;border-bottom:2px dashed var(--border)}
+.item-ilu{width:72px;height:72px;border-radius:18px;flex:none;display:flex;align-items:center;justify-content:center}
+.item-ilu svg.ilu{width:52px;height:52px}
+.item-info{flex:1;min-width:0}
+.item-info strong{display:block;line-height:1.3}
+.item-info small{display:block;color:var(--muted-fg);font-size:13.5px;font-weight:600}
+.item-der{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+.item .cantidad{padding:2px}
+.item .cantidad button{width:36px;height:36px}
+.totales{display:grid;gap:4px;font-weight:700}
+.totales div{display:flex;justify-content:space-between}
+.totales .total{font-family:var(--font-t);font-size:22px;color:var(--fg)}
+.campo{margin-top:12px}
+.campo label{display:block;font-weight:800;margin-bottom:4px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+table{width:100%;border-collapse:collapse;background:#fff;border-radius:14px;overflow:hidden;font-size:15px}
+th,td{padding:10px;text-align:left;border-bottom:2px solid var(--muted)}
+th{background:var(--p-peach);font-weight:800}
+.talla-resultado{margin-top:10px;padding:14px;border-radius:var(--radius-sm);background:var(--ok-bg);color:#14532D;font-weight:700}
+.panel-fila{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;align-items:center;padding:10px 0;border-bottom:2px dashed var(--border)}
+.panel-fila .item-ilu{width:52px;height:52px;border-radius:14px}
+.panel-fila .item-ilu svg.ilu{width:38px;height:38px}
+.panel-ctrl{grid-column:1/-1;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.panel-ctrl .input{width:110px;min-height:44px}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:12px 0}
+.stat{background:#fff;border-radius:14px;padding:10px;border:2px solid var(--border);text-align:center}
+.stat b{display:block;font-family:var(--font-t);font-size:22px;color:var(--fg)}
+.stat span{font-size:13px;font-weight:700;color:var(--muted-fg)}
+
+/* ---------- Toast ---------- */
+.toasts{position:fixed;left:12px;right:12px;top:calc(12px + env(safe-area-inset-top));z-index:80;display:flex;flex-direction:column;align-items:center;gap:8px;pointer-events:none}
+.toast{display:flex;gap:10px;align-items:center;max-width:440px;width:100%;padding:12px 16px;border-radius:18px;background:var(--text);color:#fff;font-weight:700;box-shadow:0 10px 30px -10px rgba(67,20,7,.6);animation:bajar .3s var(--rebote);pointer-events:auto}
+.toast svg{color:#86EFAC}
+@keyframes bajar{from{transform:translateY(-20px);opacity:0}to{transform:none;opacity:1}}
+
+/* ---------- Escritorio ---------- */
+@media (min-width:640px){
+  .grilla{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+  .fila-scroll{grid-auto-columns:minmax(220px,38%)}
+  .ventajas{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .categorias{grid-template-columns:repeat(8,minmax(0,1fr))}
+  .resenas{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .pasos{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .pie-grid{grid-template-columns:1.4fr 1fr 1fr}
+  .modal{align-items:center;padding:24px}
+  .hoja{max-width:620px;border-radius:28px;max-height:90vh}
+  .hoja .hoja-pie{border-radius:0 0 28px 28px}
+  .modal.cajon{justify-content:flex-end;align-items:stretch;padding:0}
+  .modal.cajon .hoja{max-width:460px;max-height:none;height:100%;border-radius:28px 0 0 28px;animation:entrar .3s ease-out}
+  .modal.cajon .hoja-pie{border-radius:0 0 0 28px}
+  .detalle-grid{grid-template-columns:1fr 1fr;align-items:start}
+  .detalle-ilu{aspect-ratio:4/3}
+  .banda{grid-template-columns:1.3fr 1fr;padding:32px}
+  .visita{grid-template-columns:1.2fr 1fr}
+  .filtros{grid-template-columns:minmax(0,320px) 1fr;align-items:center}
+  .filtros .chips{grid-column:1/-1}
+}
+@keyframes entrar{from{transform:translateX(40px);opacity:.5}to{transform:none;opacity:1}}
+@media (min-width:960px){
+  .buscador{display:block}
+  .buscador-movil{display:none}
+  .nav-cats{display:flex}
+  .hero{padding:48px 0 20px}
+  .hero-grid{grid-template-columns:1.1fr 1fr;gap:40px}
+  .grilla{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .fila-scroll{grid-auto-columns:calc((100% - 42px)/4);margin:0;padding:6px 0 18px}
+  .barra-pedido{display:none}
+  .pie{padding-bottom:40px}
+  .seccion{padding:56px 0}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+<defs>
+  <!-- Íconos de interfaz (24×24) -->
+  <symbol id="i-buscar" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></symbol>
+  <symbol id="i-corazon" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.6-9.3C.9 8.3 3.1 4.5 6.7 4.5c2.1 0 3.6 1.2 5.3 3.1 1.7-1.9 3.2-3.1 5.3-3.1 3.6 0 5.8 3.8 4.3 7.2C19.5 16.4 12 21 12 21z"/></symbol>
+  <symbol id="i-bolsa" viewBox="0 0 24 24"><path d="M5 8h14l-1.2 12.1a1 1 0 0 1-1 .9H7.2a1 1 0 0 1-1-.9z"/><path d="M9 10V7a3 3 0 0 1 6 0v3"/></symbol>
+  <symbol id="i-mas" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-menos" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M3.5 20.5l1.3-4.2A8.5 8.5 0 1 1 8 19.6z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1.2-1.4-2-1-.9.8a4 4 0 0 1-2.2-2.2l.8-.9-1-2L9 9.5z"/></symbol>
+  <symbol id="i-camion" viewBox="0 0 24 24"><path d="M2 6h12v10H2zM14 9h4l3 3.5V16h-7"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="17.5" cy="17.5" r="1.8"/></symbol>
+  <symbol id="i-tienda" viewBox="0 0 24 24"><path d="M3 9l1.5-5h15L21 9M4 9v11h16V9"/><path d="M3 9c0 1.7 1.3 3 3 3s3-1.3 3-3c0 1.7 1.3 3 3 3s3-1.3 3-3c0 1.7 1.3 3 3 3s3-1.3 3-3M10 20v-5h4v5"/></symbol>
+  <symbol id="i-billetera" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M16 12.5h2M3 10h18"/></symbol>
+  <symbol id="i-estrella" viewBox="0 0 24 24"><path d="M12 2.8l2.8 5.8 6.4.9-4.6 4.5 1.1 6.3L12 17.3l-5.7 3 1.1-6.3-4.6-4.5 6.4-.9z"/></symbol>
+  <symbol id="i-regla" viewBox="0 0 24 24"><rect x="2" y="8" width="20" height="8" rx="1.5"/><path d="M6 8v3M10 8v4M14 8v3M18 8v4"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+  <symbol id="i-reloj" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="i-libro" viewBox="0 0 24 24"><path d="M4 4h11a3 3 0 0 1 3 3v13H7a3 3 0 0 1-3-3z"/><path d="M4 17a3 3 0 0 1 3-3h11M8 8h6"/></symbol>
+  <symbol id="i-ajustes" viewBox="0 0 24 24"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/></symbol>
+  <symbol id="i-flecha" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-basura" viewBox="0 0 24 24"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></symbol>
+  <symbol id="i-regalo" viewBox="0 0 24 24"><rect x="3" y="9" width="18" height="12" rx="1.5"/><path d="M3 13h18M12 9v12M12 9c-2-4-6-4-6-1.5S10 9 12 9c2 0 6 .9 6-1.5S14 5 12 9z"/></symbol>
+  <symbol id="i-huella" viewBox="0 0 24 24"><ellipse cx="12" cy="16" rx="4.6" ry="3.8" fill="currentColor" stroke="none"/><circle cx="5.8" cy="10.6" r="2.1" fill="currentColor" stroke="none"/><circle cx="9.4" cy="6.4" r="2.2" fill="currentColor" stroke="none"/><circle cx="14.6" cy="6.4" r="2.2" fill="currentColor" stroke="none"/><circle cx="18.2" cy="10.6" r="2.1" fill="currentColor" stroke="none"/></symbol>
+
+  <!-- Formas base de ilustración -->
+  <g id="forma-hueso"><circle cx="30" cy="48" r="13"/><circle cx="30" cy="72" r="13"/><circle cx="90" cy="48" r="13"/><circle cx="90" cy="72" r="13"/><rect x="30" y="46" width="60" height="28"/></g>
+  <path id="forma-ropa" d="M38 26h44l22 18-12 16-10-7v47c0 3-2 5-5 5H43c-3 0-5-2-5-5V53l-10 7-12-16z"/>
+
+  <!-- Caras de mascotas (120×120) -->
+  <symbol id="cara-perro" viewBox="0 0 120 120"><g stroke="#431407" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M30 34c-16 4-20 36-8 46 6 5 14-4 16-16z" fill="#9A3412"/><path d="M90 34c16 4 20 36 8 46-6 5-14-4-16-16z" fill="#9A3412"/>
+    <circle cx="60" cy="58" r="35" fill="#FDBA74"/><path d="M68 26c10 2 20 10 22 22-8 0-18-6-22-22z" fill="#EA580C" stroke="none" opacity=".5"/>
+    <ellipse cx="60" cy="75" rx="19" ry="14" fill="#FFF7ED" stroke-width="3"/>
+    <path d="M55 82c0 9 10 9 10 0z" fill="#F87171" stroke-width="3"/>
+    <ellipse cx="60" cy="67" rx="8" ry="5.5" fill="#431407"/><path d="M60 72v5M52 78c4 3 12 3 16 0" stroke-width="3" fill="none"/>
+    <circle cx="45" cy="52" r="5" fill="#431407" stroke="none"/><circle cx="75" cy="52" r="5" fill="#431407" stroke="none"/>
+    <circle cx="46.5" cy="50.5" r="1.6" fill="#fff" stroke="none"/><circle cx="76.5" cy="50.5" r="1.6" fill="#fff" stroke="none"/>
+    <circle cx="36" cy="66" r="5" fill="#FB7185" stroke="none" opacity=".45"/><circle cx="84" cy="66" r="5" fill="#FB7185" stroke="none" opacity=".45"/>
+  </g></symbol>
+  <symbol id="cara-gato" viewBox="0 0 120 120"><g stroke="#431407" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M28 46l2-32 26 18z" fill="#94A3B8"/><path d="M92 46l-2-32-26 18z" fill="#94A3B8"/>
+    <path d="M33 38l1-14 12 8z" fill="#F9A8D4" stroke="none"/><path d="M87 38l-1-14-12 8z" fill="#F9A8D4" stroke="none"/>
+    <ellipse cx="60" cy="64" rx="38" ry="33" fill="#CBD5E1"/>
+    <path d="M52 34l2 9M60 32v10M68 34l-2 9" stroke="#64748B" stroke-width="3.5"/>
+    <ellipse cx="45" cy="60" rx="5.5" ry="7" fill="#431407" stroke="none"/><ellipse cx="75" cy="60" rx="5.5" ry="7" fill="#431407" stroke="none"/>
+    <circle cx="46.8" cy="57.5" r="1.8" fill="#fff" stroke="none"/><circle cx="76.8" cy="57.5" r="1.8" fill="#fff" stroke="none"/>
+    <path d="M55 71h10l-5 5z" fill="#F472B6" stroke-width="2.5"/><path d="M60 76c-1 5-8 5-9 1M60 76c1 5 8 5 9 1" fill="none" stroke-width="3"/>
+    <path d="M30 70l-14-2M30 76l-13 4M90 70l14-2M90 76l13 4" stroke-width="2.5"/>
+  </g></symbol>
+
+  <!-- Ilustraciones de producto (120×120). Color principal: --c -->
+  <symbol id="ilu-correa" viewBox="0 0 120 120"><g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M38 16c-18 0-22 24-4 26 12 1 22 6 30 16s12 28 30 34" stroke="#431407" stroke-width="15"/>
+    <path d="M38 16c-18 0-22 24-4 26 12 1 22 6 30 16s12 28 30 34" stroke="var(--c,#F97316)" stroke-width="8"/>
+    <path d="M34 22c-8 2-8 12 0 13" stroke="#fff" stroke-width="3" opacity=".7"/>
+    <circle cx="97" cy="96" r="9" fill="#CBD5E1" stroke="#431407" stroke-width="4"/><rect x="90" y="100" width="14" height="12" rx="3" fill="#94A3B8" stroke="#431407" stroke-width="4"/></g></symbol>
+  <symbol id="ilu-collar" viewBox="0 0 120 120"><g stroke-linejoin="round" stroke-linecap="round">
+    <ellipse cx="60" cy="54" rx="40" ry="24" fill="none" stroke="#431407" stroke-width="17"/>
+    <ellipse cx="60" cy="54" rx="40" ry="24" fill="none" stroke="var(--c,#F97316)" stroke-width="10"/>
+    <ellipse cx="60" cy="54" rx="40" ry="24" fill="none" stroke="#fff" stroke-width="2.5" stroke-dasharray="4 7" opacity=".8"/>
+    <rect x="12" y="44" width="18" height="22" rx="4" fill="#FDE68A" stroke="#431407" stroke-width="4"/>
+    <path d="M60 78v6" stroke="#431407" stroke-width="4"/><circle cx="60" cy="96" r="13" fill="#FDE68A" stroke="#431407" stroke-width="4"/>
+    <path d="M55 96h10" stroke="#431407" stroke-width="3"/></g></symbol>
+  <symbol id="ilu-arnes" viewBox="0 0 120 120"><g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <ellipse cx="60" cy="34" rx="24" ry="11" stroke="#431407" stroke-width="15"/><ellipse cx="60" cy="80" rx="38" ry="18" stroke="#431407" stroke-width="15"/><path d="M60 45v17" stroke="#431407" stroke-width="15"/>
+    <ellipse cx="60" cy="34" rx="24" ry="11" stroke="var(--c,#2563EB)" stroke-width="8"/><ellipse cx="60" cy="80" rx="38" ry="18" stroke="var(--c,#2563EB)" stroke-width="8"/><path d="M60 45v17" stroke="var(--c,#2563EB)" stroke-width="8"/>
+    <rect x="86" y="70" width="16" height="20" rx="4" fill="#FDE68A" stroke="#431407" stroke-width="4"/>
+    <circle cx="60" cy="58" r="7" fill="#CBD5E1" stroke="#431407" stroke-width="4"/></g></symbol>
+  <symbol id="ilu-placa" viewBox="0 0 120 120"><g stroke-linejoin="round">
+    <use href="#forma-hueso" fill="#431407" stroke="#431407" stroke-width="9"/><use href="#forma-hueso" fill="var(--c,#FBBF24)"/>
+    <circle cx="27" cy="60" r="5" fill="var(--bgc,#fff)" stroke="#431407" stroke-width="3"/>
+    <rect x="42" y="54" width="42" height="5" rx="2.5" fill="#431407" opacity=".75"/><rect x="48" y="63" width="30" height="4" rx="2" fill="#431407" opacity=".5"/>
+    <path d="M86 44c-4 0-8 2-10 6" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" opacity=".8"/></g></symbol>
+  <symbol id="ilu-pelota" viewBox="0 0 120 120"><g stroke-linecap="round">
+    <ellipse cx="60" cy="104" rx="30" ry="5" fill="#431407" opacity=".12"/>
+    <circle cx="60" cy="58" r="38" fill="var(--c,#22C55E)" stroke="#431407" stroke-width="4"/>
+    <path d="M27 40c14 14 52 14 66 0M27 76c14-14 52-14 66 0" fill="none" stroke="#fff" stroke-width="5" opacity=".85"/>
+    <path d="M40 30c-6 4-10 10-11 16" fill="none" stroke="#fff" stroke-width="4" opacity=".6"/></g></symbol>
+  <symbol id="ilu-hueso" viewBox="0 0 120 120"><g transform="rotate(-20 60 60)">
+    <use href="#forma-hueso" fill="#431407" stroke="#431407" stroke-width="9"/><use href="#forma-hueso" fill="var(--c,#E2E8F0)"/>
+    <path d="M40 52h42" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".8"/></g></symbol>
+  <symbol id="ilu-galleta" viewBox="0 0 120 120"><g transform="rotate(-12 60 60) translate(6 6) scale(.9)">
+    <use href="#forma-hueso" fill="#431407" stroke="#431407" stroke-width="9"/><use href="#forma-hueso" fill="var(--c,#D97706)"/>
+    <circle cx="44" cy="56" r="3.5" fill="#78350F"/><circle cx="60" cy="64" r="3.5" fill="#78350F"/><circle cx="76" cy="55" r="3.5" fill="#78350F"/></g>
+    <circle cx="24" cy="100" r="5" fill="var(--c,#D97706)" stroke="#431407" stroke-width="3"/><circle cx="100" cy="24" r="4" fill="var(--c,#D97706)" stroke="#431407" stroke-width="3"/></symbol>
+  <symbol id="ilu-soga" viewBox="0 0 120 120"><g fill="none" stroke-linecap="round">
+    <path d="M28 66C46 40 74 92 92 60" stroke="#431407" stroke-width="20"/><path d="M28 66C46 40 74 92 92 60" stroke="var(--c,#F87171)" stroke-width="13"/>
+    <path d="M28 66C46 40 74 92 92 60" stroke="#fff" stroke-width="13" stroke-dasharray="4 8" opacity=".7"/>
+    <circle cx="24" cy="70" r="13" fill="var(--c,#F87171)" stroke="#431407" stroke-width="4"/><circle cx="96" cy="56" r="13" fill="var(--c,#F87171)" stroke="#431407" stroke-width="4"/>
+    <path d="M14 82l-6 12M22 84l-2 13M30 82l4 12M104 44l6-12M96 42l2-13M88 45l-4-12" stroke="#431407" stroke-width="3.5"/></g></symbol>
+  <symbol id="ilu-raton" viewBox="0 0 120 120"><g stroke="#431407" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M32 78c-14 4-18 16-8 24" fill="none"/>
+    <path d="M30 80c0-24 20-42 44-42 18 0 28 14 28 26 0 10-8 16-20 16z" fill="var(--c,#A78BFA)"/>
+    <circle cx="74" cy="40" r="11" fill="var(--c,#A78BFA)"/><circle cx="74" cy="40" r="5" fill="#F9A8D4" stroke="none"/>
+    <circle cx="88" cy="60" r="3.5" fill="#431407" stroke="none"/><circle cx="102" cy="66" r="4" fill="#F472B6"/>
+    <path d="M44 66c6-8 14-12 22-12" stroke="#fff" stroke-width="3" fill="none" opacity=".7"/></g></symbol>
+  <symbol id="ilu-varita" viewBox="0 0 120 120"><g stroke-linecap="round" stroke-linejoin="round">
+    <path d="M18 106 66 28" stroke="#431407" stroke-width="10"/><path d="M18 106 66 28" stroke="#FDE68A" stroke-width="4"/>
+    <path d="M66 28c16 6 12 30 24 40" fill="none" stroke="#431407" stroke-width="3"/>
+    <g stroke="#431407" stroke-width="3.5"><ellipse cx="90" cy="82" rx="7" ry="18" fill="var(--c,#F472B6)" transform="rotate(-25 90 82)"/><ellipse cx="100" cy="80" rx="6" ry="16" fill="#60A5FA" transform="rotate(15 100 80)"/><ellipse cx="94" cy="86" rx="6" ry="15" fill="#FACC15"/></g></g></symbol>
+  <symbol id="ilu-dispensador" viewBox="0 0 120 120"><g stroke="#431407" stroke-width="4" stroke-linejoin="round">
+    <ellipse cx="60" cy="106" rx="30" ry="5" fill="#431407" opacity=".12" stroke="none"/>
+    <path d="M60 18c24 0 36 34 36 54 0 18-15 28-36 28S24 90 24 72c0-20 12-54 36-54z" fill="var(--c,#38BDF8)"/>
+    <ellipse cx="60" cy="68" rx="10" ry="7" fill="#431407"/>
+    <path d="M42 40c3-8 8-12 14-14" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".7"/>
+    <circle cx="96" cy="100" r="4" fill="#B45309" stroke-width="2.5"/><circle cx="106" cy="94" r="3.5" fill="#B45309" stroke-width="2.5"/></g></symbol>
+  <symbol id="ilu-peluche" viewBox="0 0 120 120"><g stroke="#431407" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M50 96v12M66 96v12M46 108h8M62 108h8" fill="none" stroke="#F97316"/>
+    <circle cx="58" cy="62" r="36" fill="var(--c,#FACC15)"/>
+    <path d="M56 26c-2-8 4-12 8-8M60 26c2-10 10-8 8-2" fill="none"/>
+    <circle cx="72" cy="52" r="4.5" fill="#431407" stroke="none"/><path d="M92 58l16 6-16 7z" fill="#F97316" stroke-width="3"/>
+    <path d="M38 66c8 10 24 10 28-2" fill="none"/><circle cx="80" cy="66" r="5" fill="#FB7185" stroke="none" opacity=".5"/></g></symbol>
+  <symbol id="ilu-polo" viewBox="0 0 120 120"><g stroke="#431407" stroke-width="4" stroke-linejoin="round">
+    <use href="#forma-ropa" fill="var(--c,#F97316)"/><path d="M48 26c4 10 20 10 24 0" fill="none"/>
+    <rect x="46" y="58" width="28" height="6" rx="3" fill="#fff" stroke="none"/><rect x="50" y="70" width="20" height="5" rx="2.5" fill="#fff" stroke="none" opacity=".8"/></g></symbol>
+  <symbol id="ilu-casaca" viewBox="0 0 120 120"><g stroke="#431407" stroke-width="4" stroke-linejoin="round">
+    <path d="M42 28c0-14 36-14 36 0" fill="var(--c2,#1E3A8A)"/>
+    <use href="#forma-ropa" fill="var(--c,#2563EB)"/><path d="M60 30v74" fill="none" stroke-dasharray="5 5"/>
+    <rect x="42" y="66" width="12" height="12" rx="3" fill="none" stroke-width="3"/><rect x="66" y="66" width="12" height="12" rx="3" fill="none" stroke-width="3"/></g></symbol>
+  <symbol id="ilu-impermeable" viewBox="0 0 120 120"><g stroke="#431407" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M40 30c0-18 40-18 40 0" fill="var(--c,#FACC15)"/>
+    <use href="#forma-ropa" fill="var(--c,#FACC15)"/><path d="M60 32v72" fill="none"/>
+    <circle cx="68" cy="50" r="3" fill="#431407" stroke="none"/><circle cx="68" cy="66" r="3" fill="#431407" stroke="none"/><circle cx="68" cy="82" r="3" fill="#431407" stroke="none"/>
+    <path d="M14 18c-3 5-3 8 0 9 3-1 3-4 0-9zM104 92c-3 5-3 8 0 9 3-1 3-4 0-9zM108 18c-3 5-3 8 0 9 3-1 3-4 0-9z" fill="#60A5FA" stroke-width="2.5"/></g></symbol>
+  <symbol id="ilu-chompa" viewBox="0 0 120 120"><g stroke="#431407" stroke-width="4" stroke-linejoin="round">
+    <use href="#forma-ropa" fill="var(--c,#DC2626)"/><path d="M48 26c4 10 20 10 24 0" fill="none"/>
+    <path d="M38 62l6-6 6 6 6-6 6 6 6-6 6 6 6-6 4 4" fill="none" stroke="#fff" stroke-width="4"/>
+    <path d="M38 80l6-6 6 6 6-6 6 6 6-6 6 6 6-6 4 4" fill="none" stroke="#15803D" stroke-width="4"/>
+    <circle cx="60" cy="96" r="3" fill="#fff" stroke="none"/></g></symbol>
+  <symbol id="ilu-disfraz" viewBox="0 0 120 120"><g stroke="#431407" stroke-width="4" stroke-linejoin="round">
+    <path d="M46 24l6-12 6 12M60 24l6-14 6 14" fill="#FACC15" stroke-width="3.5"/>
+    <use href="#forma-ropa" fill="var(--c,#22C55E)"/>
+    <path d="M52 40l8-10 8 10M52 60l8-10 8 10M52 80l8-10 8 10" fill="#FACC15" stroke-width="3"/>
+    <circle cx="44" cy="92" r="4" fill="#15803D" stroke="none"/><circle cx="78" cy="48" r="4" fill="#15803D" stroke="none"/></g></symbol>
+  <symbol id="ilu-bandana" viewBox="0 0 120 120"><g stroke="#431407" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M10 34l14 6M110 34l-14 6" fill="none"/>
+    <path d="M20 36h80L60 98z" fill="var(--c,#EF4444)"/>
+    <g fill="#fff" stroke="none"><circle cx="42" cy="48" r="4"/><circle cx="60" cy="50" r="4"/><circle cx="78" cy="48" r="4"/><circle cx="52" cy="66" r="4"/><circle cx="68" cy="66" r="4"/><circle cx="60" cy="82" r="3.5"/></g></g></symbol>
+  <symbol id="ilu-cama" viewBox="0 0 120 120"><g stroke="#431407" stroke-width="4" stroke-linejoin="round">
+    <ellipse cx="60" cy="72" rx="50" ry="30" fill="var(--c,#A78BFA)"/>
+    <ellipse cx="60" cy="66" rx="30" ry="15" fill="var(--c2,#EDE9FE)"/>
+    <path d="M22 58c6-8 16-12 26-14" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".6"/></g></symbol>
+  <symbol id="ilu-colchoneta" viewBox="0 0 120 120"><g stroke="#431407" stroke-width="4" stroke-linejoin="round">
+    <rect x="12" y="42" width="96" height="48" rx="18" fill="var(--c,#64748B)"/>
+    <rect x="22" y="52" width="76" height="28" rx="10" fill="none" stroke="#fff" stroke-width="3" stroke-dasharray="5 5"/>
+    <use href="#i-huella" x="48" y="54" width="24" height="24" style="color:#fff" stroke="none"/></g></symbol>
+  <symbol id="ilu-manta" viewBox="0 0 120 120"><g stroke="#431407" stroke-width="4" stroke-linejoin="round">
+    <rect x="18" y="30" width="84" height="64" rx="12" fill="var(--c,#F9A8D4)"/>
+    <path d="M18 66h84" fill="none"/><path d="M80 94l22-28v16c0 6-6 12-12 12z" fill="#fff" opacity=".7"/>
+    <use href="#i-huella" x="32" y="38" width="18" height="18" style="color:#fff" stroke="none"/><use href="#i-huella" x="66" y="40" width="14" height="14" style="color:#fff" stroke="none"/></g></symbol>
+  <symbol id="ilu-rascador" viewBox="0 0 120 120"><g stroke="#431407" stroke-width="4" stroke-linejoin="round">
+    <rect x="14" y="98" width="92" height="12" rx="5" fill="#A16207"/>
+    <rect x="62" y="30" width="18" height="68" fill="#FDE68A"/><path d="M62 42l18 6M62 56l18 6M62 70l18 6M62 84l18 6" stroke-width="3"/>
+    <rect x="44" y="18" width="56" height="14" rx="7" fill="var(--c,#14B8A6)"/>
+    <rect x="18" y="62" width="40" height="36" rx="8" fill="var(--c,#14B8A6)"/><circle cx="38" cy="82" r="9" fill="#431407"/></g></symbol>
+  <symbol id="ilu-plato" viewBox="0 0 120 120"><g stroke="#431407" stroke-width="4" stroke-linejoin="round">
+    <rect x="6" y="76" width="108" height="16" rx="8" fill="var(--c2,#CBD5E1)"/>
+    <path d="M12 60h44l-6 24H18z" fill="var(--c,#94A3B8)"/><ellipse cx="34" cy="60" rx="22" ry="6" fill="#E2E8F0"/>
+    <path d="M64 60h44l-6 24H70z" fill="var(--c,#94A3B8)"/><ellipse cx="86" cy="60" rx="22" ry="6" fill="#93C5FD"/>
+    <g fill="#B45309" stroke-width="2.5"><circle cx="28" cy="58" r="3.5"/><circle cx="38" cy="57" r="3.5"/><circle cx="33" cy="54" r="3.5"/></g></g></symbol>
+  <symbol id="ilu-fuente" viewBox="0 0 120 120"><g stroke="#431407" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M18 70h84l-8 30H26z" fill="var(--c,#F1F5F9)"/><ellipse cx="60" cy="70" rx="42" ry="9" fill="#93C5FD"/>
+    <path d="M60 68V42" fill="none" stroke="#3B82F6" stroke-width="5"/>
+    <path d="M60 42c-10-8-22-4-26 8M60 42c10-8 22-4 26 8" fill="none" stroke="#3B82F6" stroke-width="5"/>
+    <path d="M32 30c-3 5-3 8 0 9 3-1 3-4 0-9zM88 30c-3 5-3 8 0 9 3-1 3-4 0-9z" fill="#60A5FA" stroke-width="2.5"/></g></symbol>
+  <symbol id="ilu-lento" viewBox="0 0 120 120"><g stroke="#431407" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+    <ellipse cx="60" cy="100" rx="40" ry="6" fill="#431407" opacity=".12" stroke="none"/>
+    <circle cx="60" cy="60" r="42" fill="var(--c,#22C55E)"/>
+    <path d="M60 60c6 0 8 8 2 10-8 3-14-6-10-13 6-10 22-8 24 4 2 14-14 22-26 16C36 70 38 46 56 40c20-6 36 10 32 28" fill="none" stroke="#fff" stroke-width="6"/></g></symbol>
+  <symbol id="ilu-shampoo" viewBox="0 0 120 120"><g stroke="#431407" stroke-width="4" stroke-linejoin="round">
+    <rect x="48" y="12" width="24" height="18" rx="4" fill="var(--c2,#FDE68A)"/>
+    <path d="M44 30h32v10c10 4 14 12 14 22v40a8 8 0 0 1-8 8H38a8 8 0 0 1-8-8V62c0-10 4-18 14-22z" fill="var(--c,#34D399)"/>
+    <rect x="38" y="62" width="44" height="30" rx="8" fill="#fff"/>
+    <use href="#i-huella" x="50" y="66" width="20" height="20" style="color:#9A3412" stroke="none"/>
+    <path d="M40 50c2-4 4-6 8-8" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" opacity=".7"/></g></symbol>
+  <symbol id="ilu-bolsas" viewBox="0 0 120 120"><g stroke="#431407" stroke-width="4" stroke-linejoin="round">
+    <path d="M70 86h22v22H70z" fill="#86EFAC"/>
+    <rect x="22" y="30" width="76" height="56" rx="26" fill="var(--c,#22C55E)"/>
+    <circle cx="48" cy="58" r="14" fill="#fff"/><circle cx="48" cy="58" r="5" fill="#431407"/>
+    <path d="M12 46c4-10 12-16 20-16" fill="none" stroke-linecap="round"/></g></symbol>
+  <symbol id="ilu-arena" viewBox="0 0 120 120"><g stroke="#431407" stroke-width="4" stroke-linejoin="round">
+    <path d="M30 26h60l8 76a6 6 0 0 1-6 6H28a6 6 0 0 1-6-6z" fill="var(--c,#0EA5E9)"/>
+    <path d="M30 26l-4-8h68l-4 8" fill="var(--c2,#0369A1)"/>
+    <circle cx="60" cy="66" r="22" fill="#fff"/><use href="#cara-gato" x="42" y="48" width="36" height="36"/></g></symbol>
+  <symbol id="ilu-cepillo" viewBox="0 0 120 120"><g stroke="#431407" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+    <rect x="76" y="46" width="38" height="16" rx="8" fill="var(--c2,#F9A8D4)"/>
+    <rect x="14" y="34" width="66" height="38" rx="12" fill="var(--c,#EC4899)"/>
+    <path d="M24 72v16M34 72v18M44 72v16M54 72v18M64 72v16M72 72v14" fill="none" stroke-width="3.5"/></g></symbol>
+  <symbol id="ilu-snack" viewBox="0 0 120 120"><g stroke="#431407" stroke-width="4" stroke-linejoin="round">
+    <g transform="rotate(-14 60 60)"><rect x="40" y="14" width="40" height="92" rx="8" fill="var(--c,#F472B6)"/>
+    <path d="M40 24h40M40 96h40" stroke-dasharray="4 4" stroke-width="3"/>
+    <path d="M48 60c6-8 18-8 22 0-4 8-16 8-22 0zM70 60l8-6v12z" fill="#fff" stroke-width="3"/></g></g></symbol>
+  <symbol id="mapa-ilu" viewBox="0 0 320 200"><rect width="320" height="200" fill="#E0F2FE"/><path d="M0 70h320M0 150h320M90 0v200M220 0v200" stroke="#fff" stroke-width="16"/><path d="M0 70h320M90 0v200" stroke="#FDE68A" stroke-width="16"/><rect x="110" y="88" width="90" height="48" rx="8" fill="#BBF7D0"/><rect x="236" y="88" width="70" height="48" rx="8" fill="#FED7AA"/><rect x="12" y="88" width="64" height="48" rx="8" fill="#DDD6FE"/><text x="236" y="62" font-family="Nunito,Arial" font-weight="800" font-size="13" fill="#9A3412">Av. Brasil</text><text x="96" y="190" font-family="Nunito,Arial" font-weight="700" font-size="12" fill="#475569" transform="rotate(-90 96 190)">Jr. Huiracocha</text></symbol>
+</defs>
+</svg>
+<a href="#catalogo" class="sr-only">Saltar al catálogo</a>
+<div class="franja"><b>Delivery en Lima</b> · Gratis en compras desde S/ 149</div>
+<header class="cabecera">
+  <div class="contenedor">
+    <div class="cab-fila">
+      <a class="logo" href="#inicio" aria-label="Huellitas Pet Shop, inicio">
+        <span class="logo-ic"><svg class="i" style="width:28px;height:28px"><use href="#i-huella"/></svg></span>
+        <span class="logo-txt">Huellitas<small>PET SHOP · JESÚS MARÍA</small></span>
+      </a>
+      <nav class="nav-cats" aria-label="Secciones">
+        <a href="#catalogo" data-ir-cat="correas">Correas</a>
+        <a href="#catalogo" data-ir-cat="juguetes">Juguetes</a>
+        <a href="#catalogo" data-ir-cat="ropa">Ropita</a>
+        <a href="#placa">Placa con nombre</a>
+      </nav>
+      <div class="buscador" role="search">
+        <svg class="i sm"><use href="#i-buscar"/></svg>
+        <label for="buscar" class="sr-only">Buscar productos</label>
+        <input id="buscar" class="campo-buscar" type="search" placeholder="Busca correa, pelota, casaca…" autocomplete="off">
+      </div>
+      <button class="btn-icono" data-accion="ver-favs" aria-label="Ver mis favoritos"><svg class="i"><use href="#i-corazon"/></svg><span class="contador" id="cont-favs" hidden></span></button>
+      <button class="btn-icono" data-accion="abrir-carrito" aria-label="Ver mi pedido"><svg class="i"><use href="#i-bolsa"/></svg><span class="contador" id="cont-carrito" hidden></span></button>
+    </div>
+    <div class="buscador-movil" role="search">
+      <svg class="i sm"><use href="#i-buscar"/></svg>
+      <label for="buscar-movil" class="sr-only">Buscar productos</label>
+      <input id="buscar-movil" class="campo-buscar" type="search" placeholder="Busca correa, pelota, casaca…" autocomplete="off">
+    </div>
+  </div>
+</header>
+
+<main id="inicio">
+  <section class="hero">
+    <div class="contenedor hero-grid">
+      <div>
+        <h1>Todo para consentir a tu <span>engreído</span></h1>
+        <p class="hero-sub">Correas, juguetes, ropita, camitas y más para perros y gatos. Pide por WhatsApp y te lo llevamos a casa.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-primario" href="#catalogo">Ver productos <svg class="i"><use href="#i-flecha"/></svg></a>
+          <button class="btn btn-wsp" data-accion="wsp-consulta"><svg class="i"><use href="#i-chat"/></svg>Escríbenos</button>
+        </div>
+      </div>
+      <div class="hero-ilu" aria-hidden="true">
+        <svg class="mascotas" viewBox="0 0 400 300">
+          <ellipse cx="200" cy="270" rx="170" ry="16" fill="#FDBA74" opacity=".45"/>
+          <use href="#ilu-pelota" x="290" y="190" width="90" height="90" style="--c:#22C55E"/>
+          <use href="#ilu-hueso" x="24" y="196" width="90" height="90" style="--c:#fff"/>
+          <use href="#cara-perro" x="60" y="40" width="200" height="200"/>
+          <use href="#cara-gato" x="215" y="70" width="160" height="160"/>
+          <use href="#ilu-bandana" x="112" y="172" width="96" height="96" style="--c:#2563EB"/>
+          <g style="color:#FB923C" opacity=".6"><use href="#i-huella" x="18" y="20" width="34" height="34"/><use href="#i-huella" x="340" y="24" width="28" height="28"/><use href="#i-huella" x="300" y="8" width="20" height="20"/></g>
+        </svg>
+        <span class="burbuja" style="left:14px;top:14px"><svg class="i sm"><use href="#i-estrella"/></svg>4.9 en Google</span>
+        <span class="burbuja" style="right:14px;bottom:14px"><svg class="i sm"><use href="#i-camion"/></svg>Llega hoy</span>
+      </div>
+    </div>
+    <div class="contenedor">
+      <div class="ventajas">
+        <div class="ventaja"><span class="ic"><svg class="i"><use href="#i-camion"/></svg></span><span><b>Delivery en Lima</b>Gratis desde S/ 149</span></div>
+        <div class="ventaja"><span class="ic"><svg class="i"><use href="#i-billetera"/></svg></span><span><b>Paga fácil</b>Yape, Plin o efectivo</span></div>
+        <div class="ventaja"><span class="ic"><svg class="i"><use href="#i-tienda"/></svg></span><span><b>Recojo gratis</b>En Av. Brasil 1450</span></div>
+        <div class="ventaja"><span class="ic"><svg class="i"><use href="#i-regla"/></svg></span><span><b>Cambio de talla</b>Hasta 7 días</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion" aria-labelledby="t-quien">
+    <div class="contenedor">
+      <div class="seccion-cab"><div><h2 id="t-quien">¿Para quién compras hoy?</h2><p class="bajada">Te mostramos solo lo que le queda.</p></div></div>
+      <div class="para-quien">
+        <button class="tarjeta-mascota perro" data-accion="elegir-para" data-v="perro"><svg><use href="#cara-perro"/></svg>Para mi perro<small id="n-perro"></small></button>
+        <button class="tarjeta-mascota gato" data-accion="elegir-para" data-v="gato"><svg><use href="#cara-gato"/></svg>Para mi gato<small id="n-gato"></small></button>
+      </div>
+      <h3 style="font-size:22px;margin:28px 0 12px">Categorías</h3>
+      <div class="categorias" id="categorias"></div>
+    </div>
+  </section>
+
+  <section class="seccion" aria-labelledby="t-ofertas" style="padding-top:0">
+    <div class="contenedor">
+      <div class="seccion-cab"><div><h2 id="t-ofertas">Ofertas de la semana</h2><p class="bajada">Precios especiales hasta el domingo.</p></div>
+        <button class="btn btn-borde btn-sm" data-accion="ver-ofertas">Ver todas</button></div>
+      <div class="fila-scroll" id="ofertas"></div>
+    </div>
+  </section>
+
+  <section class="seccion" id="catalogo" aria-labelledby="t-catalogo" style="padding-top:8px">
+    <div class="contenedor">
+      <div class="seccion-cab"><div><h2 id="t-catalogo">Nuestros productos</h2><p class="bajada">Elige, agrega a tu pedido y envíalo por WhatsApp.</p></div></div>
+      <div class="filtros">
+        <div class="segmento" role="group" aria-label="Para qué mascota">
+          <button data-accion="filtro-para" data-v="" aria-pressed="true">Todos</button>
+          <button data-accion="filtro-para" data-v="perro" aria-pressed="false"><svg aria-hidden="true"><use href="#cara-perro"/></svg>Perro</button>
+          <button data-accion="filtro-para" data-v="gato" aria-pressed="false"><svg aria-hidden="true"><use href="#cara-gato"/></svg>Gato</button>
+        </div>
+        <div class="filtro-fila">
+          <label for="orden">Ordenar</label>
+          <select id="orden"><option value="">Recomendados</option><option value="menor">Menor precio</option><option value="mayor">Mayor precio</option></select>
+          <label class="check"><input type="checkbox" id="solo-ofertas">Solo ofertas</label>
+          <label class="check"><input type="checkbox" id="solo-favs">Mis favoritos</label>
+        </div>
+        <div class="chips" id="chips-cat" aria-label="Filtrar por categoría"></div>
+      </div>
+      <p class="resultado-info" id="resultado-info" aria-live="polite"></p>
+      <div class="grilla" id="grilla"></div>
+    </div>
+  </section>
+
+  <section class="seccion" id="placa" aria-labelledby="t-placa">
+    <div class="contenedor">
+      <div class="banda placa">
+        <div>
+          <h2 id="t-placa">Su placa con nombre y tu número</h2>
+          <p>Si se pierde, quien lo encuentre te puede llamar. Elige la forma y el color, escribe su nombre y mira cómo queda antes de pedirla.</p>
+          <div class="acciones"><button class="btn btn-primario" data-accion="abrir-placa"><svg class="i"><use href="#i-regalo"/></svg>Diseñar su placa · S/ 19.90</button></div>
+        </div>
+        <div class="placa-demo" id="placa-demo" aria-hidden="true"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion" aria-labelledby="t-tallas" style="padding-top:0">
+    <div class="contenedor">
+      <div class="banda tallas">
+        <div>
+          <h2 id="t-tallas">¿No sabes su talla?</h2>
+          <p>Escribe cuánto pesa tu perro o gato y te decimos qué talla pedir en ropita y arneses. Y si no le queda, la cambiamos.</p>
+          <div class="acciones"><button class="btn btn-azul" data-accion="abrir-tallas"><svg class="i"><use href="#i-regla"/></svg>Ver guía de tallas</button></div>
+        </div>
+        <div class="placa-demo" aria-hidden="true"><svg viewBox="0 0 120 120" style="width:min(220px,70%)"><use href="#ilu-casaca" style="--c:#2563EB;--c2:#1E3A8A"/></svg></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion" aria-labelledby="t-como" style="padding-top:0">
+    <div class="contenedor">
+      <div class="seccion-cab"><h2 id="t-como">¿Cómo hago mi pedido?</h2></div>
+      <div class="pasos">
+        <div class="paso"><span class="num">1</span><div><h3>Elige</h3><p>Agrega a tu pedido lo que te gusta, con su talla y color.</p></div></div>
+        <div class="paso"><span class="num">2</span><div><h3>Envía por WhatsApp</h3><p>Tu pedido nos llega listo, sin escribir nada de nuevo.</p></div></div>
+        <div class="paso"><span class="num">3</span><div><h3>Recibe y paga</h3><p>Pagas con Yape, Plin o efectivo. Delivery el mismo día si pides antes de las 3 p. m.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion" aria-labelledby="t-resenas" style="padding-top:0">
+    <div class="contenedor">
+      <div class="seccion-cab"><h2 id="t-resenas">Lo que dicen nuestros clientes</h2></div>
+      <div class="resenas" id="resenas"></div>
+    </div>
+  </section>
+
+  <section class="seccion" id="visitanos" aria-labelledby="t-visita" style="padding-top:0">
+    <div class="contenedor">
+      <div class="seccion-cab"><h2 id="t-visita">Visítanos</h2></div>
+      <div class="visita">
+        <div class="mapa"><svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Mapa: la tienda está en Av. Brasil, esquina con Jr. Huiracocha"><use href="#mapa-ilu"/><g transform="translate(140 40)"><circle cx="20" cy="46" r="10" fill="#9A3412" opacity=".25"/><path d="M20 46s-18-16-18-28a18 18 0 0 1 36 0c0 12-18 28-18 28z" fill="#F97316" stroke="#431407" stroke-width="3"/><circle cx="20" cy="18" r="6" fill="#fff"/></g></svg></div>
+        <div class="datos-tienda">
+          <div class="dato"><span class="ic"><svg class="i"><use href="#i-pin"/></svg></span><div><b>Av. Brasil 1450, Jesús María</b>Frente al parque, a media cuadra de Jr. Huiracocha.</div></div>
+          <div class="dato"><span class="ic"><svg class="i"><use href="#i-reloj"/></svg></span><div><b>Lunes a sábado: 9 a. m. – 8 p. m.</b>Domingos: 10 a. m. – 2 p. m.</div></div>
+          <div class="dato"><span class="ic"><svg class="i"><use href="#i-camion"/></svg></span><div><b>Delivery en Lima Centro y Moderna</b>S/ 10 · Gratis desde S/ 149.</div></div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <a class="btn btn-borde btn-sm" href="https://www.google.com/maps/search/?api=1&query=Av.+Brasil+1450+Jesus+Maria+Lima" target="_blank" rel="noopener"><svg class="i sm"><use href="#i-pin"/></svg>Cómo llegar</a>
+            <button class="btn btn-wsp btn-sm" data-accion="wsp-consulta"><svg class="i sm"><use href="#i-chat"/></svg>Escríbenos</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion" aria-labelledby="t-faq" style="padding-top:0">
+    <div class="contenedor" style="max-width:820px">
+      <div class="seccion-cab"><h2 id="t-faq">Preguntas frecuentes</h2></div>
+      <div class="faq">
+        <details><summary>¿Cuánto demora el delivery?<svg class="i"><use href="#i-mas"/></svg></summary><p>Si pides antes de las 3 p. m., te llega el mismo día en Lima Centro y Lima Moderna. Después de esa hora, al día siguiente.</p></details>
+        <details><summary>¿Y si la ropita no le queda?<svg class="i"><use href="#i-mas"/></svg></summary><p>La cambias por otra talla hasta 7 días después, con su etiqueta y sin usar. El cambio es gratis si lo traes a la tienda.</p></details>
+        <details><summary>¿Cómo pago?<svg class="i"><use href="#i-mas"/></svg></summary><p>Con Yape, Plin, transferencia o efectivo al recibir. Te confirmamos el total por WhatsApp antes de enviarlo.</p></details>
+        <details><summary>¿La placa se graba en el momento?<svg class="i"><use href="#i-mas"/></svg></summary><p>Sí. Si vienes a la tienda la grabamos en 10 minutos. Por delivery, la mandamos junto con tu pedido.</p></details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="pie">
+  <div class="contenedor">
+    <div class="pie-grid">
+      <div>
+        <h3 style="font-size:26px">Huellitas Pet Shop</h3>
+        <p style="margin-top:8px">Accesorios, juguetes y ropita para perros y gatos en Jesús María, Lima.</p>
+        <p style="margin-top:12px"><button class="libro" data-accion="abrir-libro"><svg class="i"><use href="#i-libro"/></svg>Libro de Reclamaciones</button></p>
+      </div>
+      <div>
+        <h4>Comprar</h4>
+        <ul>
+          <li><button class="link-btn" data-ir-cat="correas">Correas y collares</button></li>
+          <li><button class="link-btn" data-ir-cat="juguetes">Juguetes</button></li>
+          <li><button class="link-btn" data-ir-cat="ropa">Ropita</button></li>
+          <li><button class="link-btn" data-accion="abrir-tallas">Guía de tallas</button></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Tienda</h4>
+        <ul>
+          <li><a class="link-btn" href="#visitanos" style="display:inline-block">Dirección y horario</a></li>
+          <li><button class="link-btn" data-accion="wsp-consulta">WhatsApp: 987 654 321</button></li>
+          <li><button class="link-btn" data-accion="abrir-panel">Panel de la tienda (demo)</button></li>
+        </ul>
+      </div>
+    </div>
+    <p class="pie-demo">DEMO · Diseñado por SPARC Interactive · Datos, precios y reseñas ficticios</p>
+  </div>
+</footer>
+
+<button class="barra-pedido" id="barra-pedido" data-accion="abrir-carrito" hidden><span><b id="barra-total"></b><span id="barra-cant"></span></span><span class="btn btn-primario btn-sm" style="box-shadow:none">Ver pedido<svg class="i sm"><use href="#i-flecha"/></svg></span></button>
+<div id="modal" class="modal" hidden></div>
+<div class="toasts" id="toasts" aria-live="polite"></div>
+<script>
+'use strict';
+/* =========================================================
+   Huellitas Pet Shop — DEMO con datos ficticios
+   Diseñado por SPARC Interactive
+   ========================================================= */
+const WHATSAPP = '51987654321';
+const TIENDA = 'Huellitas Pet Shop';
+const DELIVERY = 10, GRATIS_DESDE = 149;
+
+const COLORES = {
+  rojo: ['Rojo', '#EF4444'], azul: ['Azul', '#2563EB'], negro: ['Negro', '#334155'], rosado: ['Rosado', '#F472B6'],
+  celeste: ['Celeste', '#38BDF8'], lila: ['Lila', '#A78BFA'], verde: ['Verde', '#22C55E'], amarillo: ['Amarillo', '#FACC15'],
+  naranja: ['Naranja', '#F97316'], gris: ['Gris', '#94A3B8'], turquesa: ['Turquesa', '#14B8A6'], beige: ['Beige', '#E7C9A0']
+};
+const CATEGORIAS = [
+  { id: 'correas', n: 'Correas y collares', ilu: 'ilu-correa', c: '#F97316', bg: 'var(--p-peach)' },
+  { id: 'juguetes', n: 'Juguetes', ilu: 'ilu-pelota', c: '#22C55E', bg: 'var(--p-mint)' },
+  { id: 'ropa', n: 'Ropita', ilu: 'ilu-polo', c: '#2563EB', bg: 'var(--p-blue)' },
+  { id: 'camas', n: 'Camas y mantas', ilu: 'ilu-cama', c: '#A78BFA', bg: 'var(--p-lilac)' },
+  { id: 'comederos', n: 'Comederos', ilu: 'ilu-plato', c: '#94A3B8', bg: 'var(--p-lemon)' },
+  { id: 'higiene', n: 'Higiene', ilu: 'ilu-shampoo', c: '#34D399', bg: 'var(--p-mint)' },
+  { id: 'premios', n: 'Premios', ilu: 'ilu-galleta', c: '#D97706', bg: 'var(--p-peach)' }
+];
+const TALLAS = ['XS', 'S', 'M', 'L', 'XL'];
+const GUIA = [
+  ['XS', 'Hasta 3 kg', '30 – 38 cm', 'Chihuahua, gato pequeño'],
+  ['S', '3 a 6 kg', '38 – 46 cm', 'Shih tzu, poodle toy, gato adulto'],
+  ['M', '6 a 12 kg', '46 – 56 cm', 'Schnauzer, cocker, beagle chico'],
+  ['L', '12 a 25 kg', '56 – 70 cm', 'Border collie, bulldog, mestizo mediano'],
+  ['XL', 'Más de 25 kg', '70 – 85 cm', 'Labrador, golden, pastor alemán']
+];
+function tallaPorPeso(kg) { return kg <= 3 ? 'XS' : kg <= 6 ? 'S' : kg <= 12 ? 'M' : kg <= 25 ? 'L' : 'XL'; }
+
+/* p: precio · a: precio antes (oferta) · pt: precio por talla · col: colores · tal: tallas */
+const PRODUCTOS_BASE = [
+  { id: 'correa-retractil', n: 'Correa retráctil 5 m', cat: 'correas', para: 'perro', p: 59.9, ilu: 'ilu-correa', col: ['rojo', 'azul', 'negro'], tag: 'top', d: 'Se enrolla sola y tiene botón de freno. Para perros de hasta 25 kg.' },
+  { id: 'collar-acolchado', n: 'Collar acolchado ajustable', cat: 'correas', para: 'perro', p: 24.9, ilu: 'ilu-collar', col: ['naranja', 'azul', 'rosado', 'verde'], tal: ['S', 'M', 'L'], d: 'Acolchado por dentro para que no le roce. Hebilla de seguridad y argolla para la placa.' },
+  { id: 'collar-cascabel', n: 'Collar con cascabel para gato', cat: 'correas', para: 'gato', p: 14.9, ilu: 'ilu-collar', col: ['rosado', 'celeste', 'lila'], d: 'Con broche que se suelta si se engancha. Cascabel suave para saber dónde anda.' },
+  { id: 'arnes-pechera', n: 'Arnés pechera antijalones', cat: 'correas', para: 'perro', p: 49.9, a: 64.9, ilu: 'ilu-arnes', col: ['azul', 'rojo', 'negro'], tal: TALLAS, d: 'La argolla delantera evita que jale en el paseo. Tela transpirable y cintas reflectivas.' },
+  { id: 'correa-reflectiva', n: 'Correa reflectiva 1.5 m', cat: 'correas', para: 'perro', p: 29.9, ilu: 'ilu-correa', col: ['verde', 'naranja', 'negro'], d: 'Nylon resistente con costura reflectiva para los paseos de noche.' },
+  { id: 'placa', n: 'Placa con nombre grabado', cat: 'correas', para: 'ambos', p: 19.9, ilu: 'ilu-placa', placa: true, tag: 'nuevo', d: 'Grabamos su nombre y tu teléfono. Elige forma y color, y mira cómo queda.' },
+  { id: 'pelota-sonido', n: 'Pelota de caucho con sonido', cat: 'juguetes', para: 'perro', p: 12.9, ilu: 'ilu-pelota', col: ['verde', 'naranja', 'azul'], tag: 'top', d: 'Caucho natural que rebota y suena. Resiste mordidas fuertes.' },
+  { id: 'hueso-nylon', n: 'Hueso mordedor de nylon', cat: 'juguetes', para: 'perro', p: 18.9, ilu: 'ilu-hueso', col: ['gris', 'celeste'], tal: ['S', 'M', 'L'], d: 'Ayuda a limpiar sus dientes y calma la ansiedad de morder.' },
+  { id: 'soga-jalar', n: 'Soga de algodón para jalar', cat: 'juguetes', para: 'perro', p: 15.9, ilu: 'ilu-soga', col: ['rojo', 'azul'], d: 'Para jugar a jalar juntos. Algodón resistente y lavable.' },
+  { id: 'raton-catnip', n: 'Ratoncitos con catnip (x3)', cat: 'juguetes', para: 'gato', p: 16.9, ilu: 'ilu-raton', col: ['lila', 'gris', 'rosado'], tag: 'top', d: 'Rellenos de hierba gatera. Los vuelve locos de felicidad.' },
+  { id: 'varita-plumas', n: 'Varita con plumas', cat: 'juguetes', para: 'gato', p: 13.9, ilu: 'ilu-varita', col: ['rosado', 'celeste'], d: 'Para jugar a cazar. Plumas de colores y cordón resistente.' },
+  { id: 'dispensador', n: 'Juguete dispensador de premios', cat: 'juguetes', para: 'perro', p: 34.9, ilu: 'ilu-dispensador', col: ['celeste', 'rojo'], tag: 'nuevo', d: 'Le pones croquetas o premios y los suelta mientras juega. Lo mantiene ocupado.' },
+  { id: 'pollito', n: 'Peluche que suena "Pollito"', cat: 'juguetes', para: 'perro', p: 22.9, a: 26.9, ilu: 'ilu-peluche', col: ['amarillo'], d: 'Suave y con chifle por dentro. Ideal para cachorros.' },
+  { id: 'polo-engreido', n: 'Polo "Engreído de la casa"', cat: 'ropa', para: 'perro', p: 29.9, ilu: 'ilu-polo', col: ['naranja', 'celeste', 'rosado'], tal: TALLAS, tag: 'top', d: 'Algodón peinado, fresco para el verano. Estampado que no se borra al lavar.' },
+  { id: 'casaca-polar', n: 'Casaca polar con capucha', cat: 'ropa', para: 'perro', p: 54.9, ilu: 'ilu-casaca', col: ['azul', 'rojo', 'gris'], tal: TALLAS, d: 'Abrigadora para el invierno limeño. Cierre por la espalda, fácil de poner.' },
+  { id: 'impermeable', n: 'Impermeable con capucha', cat: 'ropa', para: 'perro', p: 44.9, a: 52.9, ilu: 'ilu-impermeable', col: ['amarillo', 'rojo', 'azul'], tal: TALLAS, d: 'Para la garúa: lo mantiene seco y se seca rápido.' },
+  { id: 'chompa-navidena', n: 'Chompa tejida navideña', cat: 'ropa', para: 'ambos', p: 39.9, ilu: 'ilu-chompa', col: ['rojo', 'verde'], tal: TALLAS, tag: 'nuevo', d: 'Tejida a mano en Lima. Para la foto familiar de fin de año.' },
+  { id: 'bandana', n: 'Pañoleta (bandana)', cat: 'ropa', para: 'ambos', p: 12.9, ilu: 'ilu-bandana', col: ['rojo', 'azul', 'rosado', 'amarillo'], tal: ['S', 'M', 'L'], d: 'Se amarra al cuello. Le queda a perros y gatos.' },
+  { id: 'disfraz-dino', n: 'Disfraz de dinosaurio', cat: 'ropa', para: 'perro', p: 49.9, ilu: 'ilu-disfraz', col: ['verde'], tal: TALLAS, d: 'Con crestas suaves en la espalda. Para Halloween o para el día a día.' },
+  { id: 'cama-dona', n: 'Cama redonda tipo dona', cat: 'camas', para: 'ambos', p: 69.9, pt: { S: 69.9, M: 89.9, L: 119.9 }, ilu: 'ilu-cama', col: ['lila', 'gris', 'beige'], tal: ['S', 'M', 'L'], tag: 'top', d: 'Bordes altos y relleno esponjoso: le da seguridad para dormir. Funda lavable.' },
+  { id: 'colchoneta', n: 'Colchoneta lavable', cat: 'camas', para: 'perro', p: 69.9, pt: { M: 69.9, L: 89.9, XL: 109.9 }, ilu: 'ilu-colchoneta', col: ['gris', 'azul'], tal: ['M', 'L', 'XL'], d: 'Base antideslizante. Se lava entera en lavadora.' },
+  { id: 'rascador', n: 'Rascador con casita', cat: 'camas', para: 'gato', p: 129.9, ilu: 'ilu-rascador', col: ['turquesa', 'gris'], d: 'Poste de soga, casita para esconderse y plataforma arriba. 70 cm de alto.' },
+  { id: 'manta-polar', n: 'Manta suave de polar', cat: 'camas', para: 'ambos', p: 24.9, ilu: 'ilu-manta', col: ['rosado', 'celeste', 'gris'], d: 'Para el sillón o su camita. 70 × 100 cm.' },
+  { id: 'plato-doble', n: 'Plato doble de acero', cat: 'comederos', para: 'ambos', p: 27.9, ilu: 'ilu-plato', col: ['gris', 'rosado', 'celeste'], d: 'Agua y comida en una base antideslizante. El acero no guarda olores.' },
+  { id: 'fuente-agua', n: 'Fuente de agua para gatos', cat: 'comederos', para: 'gato', p: 79.9, a: 95, ilu: 'ilu-fuente', col: ['gris'], d: 'El agua en movimiento los anima a tomar más. Filtro incluido, 2 litros.' },
+  { id: 'comedero-lento', n: 'Comedero lento antiansiedad', cat: 'comederos', para: 'perro', p: 32.9, ilu: 'ilu-lento', col: ['verde', 'azul'], d: 'Para los que comen muy rápido. Evita que se atore.' },
+  { id: 'shampoo-avena', n: 'Shampoo de avena y aloe 500 ml', cat: 'higiene', para: 'ambos', p: 26.9, ilu: 'ilu-shampoo', col: ['verde'], d: 'Para piel sensible. Deja el pelo suave y con olor rico.' },
+  { id: 'bolsitas', n: 'Bolsitas biodegradables (x120)', cat: 'higiene', para: 'perro', p: 18.9, ilu: 'ilu-bolsas', col: ['verde'], d: 'Incluye dispensador que se engancha a la correa.' },
+  { id: 'arena-10kg', n: 'Arena aglomerante 10 kg', cat: 'higiene', para: 'gato', p: 39.9, ilu: 'ilu-arena', col: ['celeste'], agotado: true, d: 'Forma bolitas fáciles de sacar y controla el olor por 2 semanas.' },
+  { id: 'cepillo', n: 'Cepillo quitapelos', cat: 'higiene', para: 'ambos', p: 21.9, a: 25.9, ilu: 'ilu-cepillo', col: ['rosado', 'celeste'], d: 'Saca el pelo muerto en una pasada. Botón para limpiarlo fácil.' },
+  { id: 'galletas-pollo', n: 'Galletas de pollo horneadas 200 g', cat: 'premios', para: 'perro', p: 16.9, ilu: 'ilu-galleta', col: ['beige'], tag: 'top', d: 'Hechas en Lima, sin colorantes. Ideales para premiar en el entrenamiento.' },
+  { id: 'snack-cremoso', n: 'Snack cremoso para gato (x4)', cat: 'premios', para: 'gato', p: 12.9, ilu: 'ilu-snack', col: ['rosado'], d: 'Sabor atún. Se lo das directo del sobre.' }
+];
+const COLOR_ILU_FIJO = { 'galletas-pollo': '#D97706', placa: '#FBBF24' };
+
+const RESENAS = [
+  { t: 'Le compré el arnés antijalones a Toby y por fin podemos pasear tranquilos. Me ayudaron con la talla por WhatsApp.', a: 'Andrea R.', m: 'mamá de Toby, shih tzu', cara: 'cara-perro' },
+  { t: 'La fuente de agua es lo máximo, Michi ahora toma más agua. Llegó el mismo día a Pueblo Libre.', a: 'Jorge L.', m: 'papá de Michi', cara: 'cara-gato' },
+  { t: 'La placa con su nombre quedó lindísima y la grabaron al toque. Súper buena atención.', a: 'Lucía P.', m: 'mamá de Rocky, mestizo', cara: 'cara-perro' }
+];
+const PLACA_FORMAS = [['hueso', 'Hueso'], ['corazon', 'Corazón'], ['circulo', 'Círculo']];
+const PLACA_COLORES = [['dorado', 'Dorado', '#FBBF24'], ['plateado', 'Plateado', '#CBD5E1'], ['rosado', 'Rosado', '#F9A8D4'], ['azul', 'Azul', '#93C5FD']];
+const DISTRITOS = ['Jesús María', 'Lince', 'Pueblo Libre', 'Magdalena', 'San Isidro', 'Breña', 'Cercado de Lima', 'Miraflores', 'San Miguel', 'Surquillo', 'San Borja', 'Otro distrito'];
+
+/* ---------------- Almacenamiento (siempre con try/catch) ---------------- */
+const PREF = 'huellitas-';
+function leer(k, def) { try { const v = window.localStorage.getItem(PREF + k); return v ? JSON.parse(v) : def; } catch (e) { return def; } }
+function guardar(k, v) { try { window.localStorage.setItem(PREF + k, JSON.stringify(v)); } catch (e) { /* sin almacenamiento: sigue en memoria */ } }
+
+/* ---------------- Estado ---------------- */
+let ajustes = leer('ajustes', {});           // cambios del dueño: { id: { p, a, agotado } }
+let carrito = leer('carrito', []);           // [{ k, id, cant, talla, color, placa }]
+let favs = new Set(leer('favs', []));
+let datos = leer('datos', { entrega: 'delivery', distrito: '', direccion: '', nombre: '', pago: 'Yape o Plin' });
+let pedidosEnviados = leer('pedidos', 0);
+const f = { para: '', cat: '', q: '', orden: '', ofertas: false, favs: false };
+let PRODUCTOS = [];
+let modalAlCerrar = null, focoPrevio = null;
+
+function aplicarAjustes() {
+  PRODUCTOS = PRODUCTOS_BASE.map(p => Object.assign({}, p, ajustes[p.id] || {}));
+  PRODUCTOS.forEach(p => { if (p.a != null && !(p.a > p.p)) delete p.a; });
+}
+
+/* ---------------- Utilidades ---------------- */
+const $ = (s, el = document) => el.querySelector(s);
+const $$ = (s, el = document) => [...el.querySelectorAll(s)];
+function h(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
+const norm = s => String(s == null ? '' : s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+const soles = n => 'S/ ' + (Number(n) || 0).toFixed(2);
+const ico = (id, cls = '') => `<svg class="i ${cls}" aria-hidden="true"><use href="#${id}"/></svg>`;
+const prod = id => PRODUCTOS.find(p => p.id === id);
+const cat = id => CATEGORIAS.find(c => c.id === id) || CATEGORIAS[0];
+const colorHex = k => (COLORES[k] || ['', '#F97316'])[1];
+const colorNom = k => (COLORES[k] || [k])[0];
+const textoPara = p => p.para === 'perro' ? 'Para perro' : p.para === 'gato' ? 'Para gato' : 'Perro y gato';
+function precioDe(p, talla) { return p.pt && talla && p.pt[talla] != null ? p.pt[talla] : p.p; }
+function iluSVG(p, color, cls = 'ilu') {
+  const c = COLOR_ILU_FIJO[p.id] || colorHex(color || (p.col && p.col[0]));
+  return `<svg class="${cls}" viewBox="0 0 120 120" style="--c:${c}" aria-hidden="true"><use href="#${p.ilu}"/></svg>`;
+}
+function toast(msg) {
+  const t = document.createElement('div');
+  t.className = 'toast'; t.setAttribute('role', 'status');
+  t.innerHTML = ico('i-check') + `<span>${h(msg)}</span>`;
+  $('#toasts').appendChild(t);
+  setTimeout(() => t.remove(), 3200);
+}
+
+/* ---------------- Placa ---------------- */
+function placaSVG(forma, colorK, nombre, tel) {
+  const col = (PLACA_COLORES.find(c => c[0] === colorK) || PLACA_COLORES[0])[2];
+  const nom = (nombre || 'Toby').slice(0, 10), t = tel || '987 654 321';
+  let forma1 = '', cy = 82;
+  if (forma === 'corazon') { forma1 = `<path d="M120 146C44 98 22 52 64 34c26-10 46 6 56 22 10-16 30-32 56-22 42 18 20 64-56 112z" fill="${col}" stroke="#431407" stroke-width="6" stroke-linejoin="round"/>`; cy = 78; }
+  else if (forma === 'circulo') forma1 = `<circle cx="120" cy="84" r="68" fill="${col}" stroke="#431407" stroke-width="6"/>`;
+  else forma1 = `<g transform="translate(-23.8 -60) scale(2.4)"><use href="#forma-hueso" fill="#431407" stroke="#431407" stroke-width="5"/><use href="#forma-hueso" fill="${col}"/></g>`;
+  const hole = forma === 'hueso' ? '<circle cx="44" cy="84" r="7" fill="#fff" stroke="#431407" stroke-width="3"/>' : `<circle cx="120" cy="${forma === 'circulo' ? 28 : 42}" r="6" fill="#fff" stroke="#431407" stroke-width="3"/>`;
+  const tam = nom.length > 7 ? 26 : 32;
+  return `<svg viewBox="0 0 240 160" role="img" aria-label="Vista previa de la placa: ${h(nom)}, ${h(t)}">${forma1}${hole}
+    <text x="120" y="${cy}" text-anchor="middle" font-family="Fredoka,Nunito,Arial" font-weight="700" font-size="${tam}" fill="#431407">${h(nom)}</text>
+    <text x="120" y="${cy + 26}" text-anchor="middle" font-family="Nunito,Arial" font-weight="800" font-size="15" fill="#431407" opacity=".85">${h(t)}</text></svg>`;
+}
+
+/* ---------------- Render: categorías, ofertas, catálogo ---------------- */
+function renderCategorias() {
+  $('#categorias').innerHTML = CATEGORIAS.map(c => `<button class="cat-tile" data-ir-cat="${c.id}">
+      <span class="bola" style="background:${c.bg}"><svg viewBox="0 0 120 120" style="--c:${c.c}" aria-hidden="true"><use href="#${c.ilu}"/></svg></span>${h(c.n)}</button>`).join('') +
+    `<button class="cat-tile" data-accion="abrir-placa"><span class="bola" style="background:var(--p-lilac)"><svg viewBox="0 0 120 120" style="--c:#FBBF24" aria-hidden="true"><use href="#ilu-placa"/></svg></span>Placa con nombre</button>`;
+  $('#chips-cat').innerHTML = `<button class="chip" data-accion="filtro-cat" data-v="" aria-pressed="${!f.cat}">Todo</button>` +
+    CATEGORIAS.map(c => `<button class="chip" data-accion="filtro-cat" data-v="${c.id}" aria-pressed="${f.cat === c.id}">${h(c.n)}</button>`).join('');
+  $('#n-perro').textContent = PRODUCTOS.filter(p => p.para !== 'gato').length + ' productos';
+  $('#n-gato').textContent = PRODUCTOS.filter(p => p.para !== 'perro').length + ' productos';
+}
+function tarjeta(p) {
+  const c = cat(p.cat);
+  const tags = [];
+  if (p.agotado) tags.push('<span class="tag agotado">Agotado</span>');
+  else if (p.a) tags.push(`<span class="tag oferta">-${Math.round((1 - p.p / p.a) * 100)}%</span>`);
+  if (p.tag === 'nuevo') tags.push('<span class="tag nuevo">Nuevo</span>');
+  if (p.tag === 'top') tags.push(`<span class="tag top">${ico('i-estrella', 'sm').replace('class="i sm"', 'class="i" style="width:12px;height:12px;fill:currentColor;stroke:none"')}Más vendido</span>`);
+  const elegir = p.tal || p.placa;
+  const fav = favs.has(p.id);
+  const sw = p.col && p.col.length > 1 ? `<span class="swatches" aria-label="Colores: ${p.col.map(colorNom).join(', ')}">${p.col.map(k => `<span class="swatch" style="background:${colorHex(k)}"></span>`).join('')}</span>` : '';
+  return `<article class="prod">
+    <button class="prod-ilu" style="background:${c.bg}" data-accion="ver" data-id="${p.id}" aria-label="Ver ${h(p.n)}" tabindex="-1">${iluSVG(p)}</button>
+    <div class="prod-tags">${tags.join('')}</div>
+    <button class="fav" data-accion="fav" data-id="${p.id}" aria-pressed="${fav}" aria-label="${fav ? 'Quitar de' : 'Guardar en'} favoritos: ${h(p.n)}">${ico('i-corazon')}</button>
+    <div class="prod-info">
+      <span class="prod-para">${textoPara(p)}</span>
+      <button class="prod-nombre" data-accion="ver" data-id="${p.id}">${h(p.n)}</button>
+      ${sw}
+      <div class="prod-precios"><span class="precio">${p.pt ? '<small style="font-size:13px;font-family:var(--font)">Desde </small>' : ''}${soles(p.p)}</span>${p.a ? `<span class="antes">${soles(p.a)}</span>` : ''}</div>
+      ${p.agotado ? '<button class="btn btn-borde btn-sm btn-bloque" disabled>Agotado</button>'
+        : `<button class="btn btn-primario btn-sm btn-bloque" data-accion="${elegir ? 'ver' : 'agregar-rapido'}" data-id="${p.id}">${elegir ? (p.placa ? 'Diseñar' : 'Elegir talla') : ico('i-mas', 'sm') + 'Agregar'}</button>`}
+    </div>
+  </article>`;
+}
+function renderOfertas() {
+  const of = PRODUCTOS.filter(p => p.a && !p.agotado);
+  $('#ofertas').innerHTML = of.length ? of.map(tarjeta).join('') : '<p class="muted">Esta semana no hay ofertas.</p>';
+}
+function filtrar() {
+  const q = norm(f.q).split(/\s+/).filter(Boolean);
+  let lista = PRODUCTOS.filter(p => {
+    if (f.para && p.para !== 'ambos' && p.para !== f.para) return false;
+    if (f.cat && p.cat !== f.cat) return false;
+    if (f.ofertas && !p.a) return false;
+    if (f.favs && !favs.has(p.id)) return false;
+    if (q.length) {
+      const t = norm([p.n, cat(p.cat).n, p.d, textoPara(p), (p.col || []).map(colorNom).join(' ')].join(' '));
+      return q.every(w => t.includes(w) || (w.length > 3 && w.endsWith('s') && t.includes(w.slice(0, -1))));
+    }
+    return true;
+  });
+  if (f.orden === 'menor') lista.sort((a, b) => a.p - b.p);
+  else if (f.orden === 'mayor') lista.sort((a, b) => b.p - a.p);
+  else lista.sort((a, b) => (a.agotado ? 1 : 0) - (b.agotado ? 1 : 0));
+  return lista;
+}
+function renderCatalogo() {
+  const lista = filtrar();
+  const partes = [];
+  if (f.para) partes.push(f.para === 'perro' ? 'para perro' : 'para gato');
+  if (f.cat) partes.push('en ' + cat(f.cat).n.toLowerCase());
+  if (f.q.trim()) partes.push(`que ${lista.length === 1 ? 'coincide' : 'coinciden'} con «${f.q.trim()}»`);
+  if (f.ofertas) partes.push('en oferta'); if (f.favs) partes.push('en tus favoritos');
+  $('#resultado-info').textContent = `${lista.length} ${lista.length === 1 ? 'producto' : 'productos'}${partes.length ? ' ' + partes.join(', ') : ''}`;
+  $('#grilla').innerHTML = lista.length ? lista.map(tarjeta).join('') :
+    `<div class="vacio" style="grid-column:1/-1"><svg viewBox="0 0 120 120" aria-hidden="true"><use href="#cara-perro"/></svg><strong>No encontramos eso</strong>
+      <p>${f.favs ? 'Todavía no guardas favoritos. Toca el corazón de un producto.' : 'Prueba con otra palabra, o escríbenos y lo buscamos por ti.'}</p>
+      <p style="margin-top:12px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><button class="btn btn-borde btn-sm" data-accion="limpiar-filtros">Ver todo</button><button class="btn btn-wsp btn-sm" data-accion="wsp-consulta">${ico('i-chat', 'sm')}Preguntar</button></p></div>`;
+  $$('[data-accion="filtro-para"]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.v === f.para)));
+  $$('[data-accion="filtro-cat"]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.v === f.cat)));
+  $('#solo-ofertas').checked = f.ofertas; $('#solo-favs').checked = f.favs; $('#orden').value = f.orden;
+}
+function renderResenas() {
+  $('#resenas').innerHTML = RESENAS.map((r, i) => `<figure class="resena" style="margin:0">
+    <div class="estrellas" aria-label="5 de 5 estrellas">${ico('i-estrella').repeat(5)}</div>
+    <blockquote style="margin:0"><p>"${h(r.t)}"</p></blockquote>
+    <figcaption class="resena-autor"><span class="avatar" style="background:${['var(--p-peach)', 'var(--p-blue)', 'var(--p-mint)'][i]}"><svg viewBox="0 0 120 120" aria-hidden="true"><use href="#${r.cara}"/></svg></span><span>${h(r.a)}<small>${h(r.m)}</small></span></figcaption>
+  </figure>`).join('');
+}
+function renderTodo() { renderCategorias(); renderOfertas(); renderCatalogo(); renderContadores(); }
+function irACatalogo() { const el = $('#catalogo'); if (el) el.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' }); }
+
+/* ---------------- Carrito ---------------- */
+function claveLinea(l) { return [l.id, l.talla || '', l.color || '', l.placa ? JSON.stringify(l.placa) : ''].join('|'); }
+function precioLinea(l) { const p = prod(l.id); return p ? precioDe(p, l.talla) : 0; }
+function subtotal() { return carrito.reduce((s, l) => s + precioLinea(l) * l.cant, 0); }
+function costoEnvio() { return datos.entrega === 'recojo' ? 0 : (subtotal() >= GRATIS_DESDE ? 0 : DELIVERY); }
+function unidades() { return carrito.reduce((s, l) => s + l.cant, 0); }
+function guardarCarrito() { carrito = carrito.filter(l => prod(l.id)); guardar('carrito', carrito); renderContadores(); }
+function agregar(linea) {
+  linea.k = claveLinea(linea);
+  const ex = carrito.find(l => l.k === linea.k);
+  if (ex) ex.cant = Math.min(20, ex.cant + linea.cant); else carrito.push(linea);
+  guardarCarrito();
+  const p = prod(linea.id);
+  toast(`Agregado: ${p.n}${linea.talla ? ' · talla ' + linea.talla : ''}${linea.color ? ' · ' + colorNom(linea.color) : ''}`);
+}
+function renderContadores() {
+  const n = unidades(), cf = $('#cont-favs'), cc = $('#cont-carrito');
+  cc.hidden = !n; cc.textContent = n;
+  cf.hidden = !favs.size; cf.textContent = favs.size;
+  const barra = $('#barra-pedido');
+  barra.hidden = !n || !$('#modal').hidden;
+  $('#barra-total').textContent = soles(subtotal());
+  $('#barra-cant').textContent = n + (n === 1 ? ' producto' : ' productos');
+}
+function detalleLinea(l) {
+  const d = [];
+  if (l.talla) d.push('Talla ' + l.talla);
+  if (l.color) d.push(colorNom(l.color));
+  if (l.placa) d.push(`${PLACA_FORMAS.find(x => x[0] === l.placa.forma)[1]} ${PLACA_COLORES.find(x => x[0] === l.placa.color)[1].toLowerCase()} · "${l.placa.nombre}" · ${l.placa.tel}`);
+  return d.join(' · ');
+}
+
+/* ---------------- Modal ---------------- */
+function abrirModal(html, opc = {}) {
+  const m = $('#modal');
+  if (m.hidden) focoPrevio = document.activeElement;
+  m.className = 'modal' + (opc.cajon ? ' cajon' : '');
+  m.innerHTML = `<div class="hoja" role="dialog" aria-modal="true" aria-labelledby="modal-titulo">${html}</div>`;
+  m.hidden = false;
+  document.body.classList.add('sin-scroll');
+  modalAlCerrar = opc.alCerrar || null;
+  renderContadores();
+  const foco = (opc.foco && m.querySelector(opc.foco)) || m.querySelector('.hoja-cab .btn-icono');
+  if (foco) setTimeout(() => foco.focus(), 40);
+}
+function cerrarModal() {
+  const m = $('#modal'); if (m.hidden) return;
+  if (modalAlCerrar) { const fn = modalAlCerrar; modalAlCerrar = null; fn(); }
+  m.hidden = true; m.innerHTML = '';
+  document.body.classList.remove('sin-scroll');
+  renderContadores();
+  if (focoPrevio && document.body.contains(focoPrevio)) focoPrevio.focus();
+}
+const cab = t => `<header class="hoja-cab"><h2 id="modal-titulo">${t}</h2><button class="btn-icono" data-accion="cerrar" aria-label="Cerrar">${ico('i-x')}</button></header>`;
+
+/* ---------------- Detalle de producto ---------------- */
+let sel = null; // selección en el detalle: { id, talla, color, cant, placa }
+function abrirDetalle(id) {
+  const p = prod(id); if (!p) return;
+  sel = { id, talla: null, color: p.col ? p.col[0] : null, cant: 1, placa: p.placa ? { forma: 'hueso', color: 'dorado', nombre: '', tel: '' } : null };
+  const c = cat(p.cat);
+  const opColor = p.col && p.col.length > 1 && !p.placa ? `<div class="opcion"><span class="etq" id="et-color"><span>Color: <span id="color-nom" style="font-weight:600">${colorNom(sel.color)}</span></span></span>
+      <div class="opciones" role="group" aria-labelledby="et-color">${p.col.map((k, i) => `<button class="op" data-accion="sel-color" data-v="${k}" aria-pressed="${i === 0}"><span class="swatch" style="background:${colorHex(k)}"></span>${colorNom(k)}</button>`).join('')}</div></div>` : '';
+  const opTalla = p.tal ? `<div class="opcion"><span class="etq" id="et-talla">Talla <button class="link-btn" data-accion="abrir-tallas" style="min-height:32px;font-size:14px">Guía de tallas</button></span>
+      <div class="opciones" role="group" aria-labelledby="et-talla">${p.tal.map(t => `<button class="op" data-accion="sel-talla" data-v="${t}" aria-pressed="false">${t}${p.pt ? ` <small style="font-weight:600">${soles(p.pt[t])}</small>` : ''}</button>`).join('')}</div>
+      <p class="error" id="error-talla" role="alert" hidden>Elige una talla para continuar.</p>
+      <div class="campo" style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:10px"><label for="peso" style="margin:0;font-weight:700;font-size:14.5px">¿Cuánto pesa? </label>
+        <input id="peso" class="input" type="number" inputmode="decimal" min="0.5" max="90" step="0.5" placeholder="kg" style="width:90px"><span id="sugerencia" class="muted" style="font-weight:700;font-size:14.5px"></span></div></div>` : '';
+  const opPlaca = p.placa ? `<div class="opcion"><span class="etq" id="et-forma">Forma</span><div class="opciones" role="group" aria-labelledby="et-forma">${PLACA_FORMAS.map((x, i) => `<button class="op" data-accion="placa-forma" data-v="${x[0]}" aria-pressed="${i === 0}">${x[1]}</button>`).join('')}</div></div>
+    <div class="opcion"><span class="etq" id="et-pcolor">Color</span><div class="opciones" role="group" aria-labelledby="et-pcolor">${PLACA_COLORES.map((x, i) => `<button class="op" data-accion="placa-color" data-v="${x[0]}" aria-pressed="${i === 0}"><span class="swatch" style="background:${x[2]}"></span>${x[1]}</button>`).join('')}</div></div>
+    <div class="grid-2"><div class="campo"><label for="placa-nombre">Su nombre</label><input id="placa-nombre" class="input" maxlength="10" placeholder="Ej: Toby" autocomplete="off"></div>
+    <div class="campo"><label for="placa-tel">Tu celular</label><input id="placa-tel" class="input" type="tel" inputmode="tel" maxlength="11" placeholder="987 654 321" autocomplete="off"></div></div>
+    <p class="error" id="error-placa" role="alert" hidden></p>` : '';
+  abrirModal(`${cab(h(p.n))}<div class="hoja-cuerpo"><div class="detalle-grid">
+      <div><div class="detalle-ilu" id="detalle-ilu" style="background:${p.placa ? 'var(--p-lilac)' : c.bg}">${p.placa ? placaSVG('hueso', 'dorado', '', '') : iluSVG(p, sel.color)}</div></div>
+      <div>
+        <p class="prod-para">${textoPara(p)} · ${h(c.n)}</p>
+        <p style="margin-top:6px"><span class="precio" style="font-size:28px" id="det-precio">${soles(p.p)}</span> ${p.a ? `<span class="antes">${soles(p.a)}</span> <span class="tag oferta">-${Math.round((1 - p.p / p.a) * 100)}%</span>` : ''}</p>
+        <p style="margin-top:10px">${h(p.d)}</p>
+        ${p.agotado ? `<div class="aviso" style="margin-top:12px">${ico('i-reloj')}<span>Agotado por ahora. Escríbenos y te avisamos cuando llegue.</span></div>` : ''}
+        ${opColor}${opTalla}${opPlaca}
+        ${p.agotado ? '' : `<div class="opcion"><span class="etq">Cantidad</span><div class="cantidad"><button data-accion="det-menos" aria-label="Quitar uno">${ico('i-menos')}</button><output id="det-cant" aria-live="polite">1</output><button data-accion="det-mas" aria-label="Agregar uno">${ico('i-mas')}</button></div></div>`}
+      </div></div></div>
+    <footer class="hoja-pie">${p.agotado ? `<button class="btn btn-wsp btn-bloque" data-accion="wsp-producto" data-id="${p.id}">${ico('i-chat')}Avísame cuando llegue</button>`
+      : `<button class="btn btn-primario btn-bloque" data-accion="det-agregar">${ico('i-bolsa')}<span id="det-boton">Agregar al pedido · ${soles(p.p)}</span></button>`}</footer>`);
+}
+function actualizarDetalle() {
+  const p = prod(sel.id); if (!p) return;
+  const precio = precioDe(p, sel.talla);
+  const dp = $('#det-precio'); if (dp) dp.textContent = soles(precio);
+  const b = $('#det-boton'); if (b) b.textContent = `Agregar al pedido · ${soles(precio * sel.cant)}`;
+  const c = $('#det-cant'); if (c) c.textContent = sel.cant;
+  if (p.placa) $('#detalle-ilu').innerHTML = placaSVG(sel.placa.forma, sel.placa.color, sel.placa.nombre, sel.placa.tel);
+  else if (sel.color) { $('#detalle-ilu').innerHTML = iluSVG(p, sel.color); const cn = $('#color-nom'); if (cn) cn.textContent = colorNom(sel.color); }
+}
+function detAgregar() {
+  const p = prod(sel.id);
+  if (p.tal && !sel.talla) { $('#error-talla').hidden = false; $('[data-accion="sel-talla"]').focus(); return; }
+  if (p.placa) {
+    const e = $('#error-placa'), nom = sel.placa.nombre.trim(), tel = sel.placa.tel.replace(/\D/g, '');
+    if (!nom) { e.textContent = 'Escribe el nombre de tu mascota.'; e.hidden = false; $('#placa-nombre').focus(); return; }
+    if (tel.length < 7) { e.textContent = 'Escribe un teléfono de al menos 7 números.'; e.hidden = false; $('#placa-tel').focus(); return; }
+    sel.placa.nombre = nom; sel.placa.tel = sel.placa.tel.trim();
+  }
+  agregar({ id: p.id, cant: sel.cant, talla: sel.talla, color: p.placa ? null : (p.col && p.col.length > 1 ? sel.color : null), placa: p.placa ? Object.assign({}, sel.placa) : null });
+  cerrarModal();
+}
+
+/* ---------------- Guía de tallas ---------------- */
+function abrirTallas() {
+  abrirModal(`${cab('Guía de tallas')}<div class="hoja-cuerpo">
+    <p>Para ropita y arneses. Si está entre dos tallas, elige la más grande.</p>
+    <div class="campo" style="margin-top:14px"><label for="peso-guia">¿Cuánto pesa tu mascota? (kg)</label>
+      <input id="peso-guia" class="input" type="number" inputmode="decimal" min="0.5" max="90" step="0.5" placeholder="Ej: 8" style="max-width:160px"></div>
+    <div class="talla-resultado" id="talla-resultado" role="status" hidden></div>
+    <div style="overflow-x:auto;margin-top:16px"><table><thead><tr><th>Talla</th><th>Peso</th><th>Pecho</th><th>Razas de ejemplo</th></tr></thead>
+      <tbody>${GUIA.map(g => `<tr data-talla="${g[0]}"><td><b>${g[0]}</b></td><td>${g[1]}</td><td>${g[2]}</td><td>${g[3]}</td></tr>`).join('')}</tbody></table></div>
+    <div class="aviso" style="margin-top:14px">${ico('i-regla')}<span>¿Cómo medir el pecho? Pasa una cinta por la parte más ancha, justo detrás de las patas delanteras.</span></div>
+  </div>`, { foco: '#peso-guia' });
+}
+
+/* ---------------- Pedido (carrito) ---------------- */
+function abrirCarrito() {
+  if (!carrito.length) {
+    abrirModal(`${cab('Tu pedido')}<div class="hoja-cuerpo"><div class="vacio" style="border:0;background:none"><svg viewBox="0 0 120 120" aria-hidden="true"><use href="#cara-gato"/></svg><strong>Tu pedido está vacío</strong><p>Agrega algo para tu engreído y lo envías por WhatsApp.</p></div></div>
+      <footer class="hoja-pie"><button class="btn btn-primario btn-bloque" data-accion="ir-catalogo">Ver productos</button></footer>`, { cajon: true });
+    return;
+  }
+  const items = carrito.map((l, i) => {
+    const p = prod(l.id);
+    const ilu = l.placa ? `<svg class="ilu" viewBox="0 0 120 120" style="--c:${(PLACA_COLORES.find(x => x[0] === l.placa.color) || PLACA_COLORES[0])[2]}" aria-hidden="true"><use href="#ilu-placa"/></svg>` : iluSVG(p, l.color);
+    return `<div class="item"><span class="item-ilu" style="background:${p.placa ? 'var(--p-lilac)' : cat(p.cat).bg}">${ilu}</span>
+      <div class="item-info"><strong>${h(p.n)}</strong><small>${h(detalleLinea(l)) || textoPara(p)}</small><span class="precio">${soles(precioLinea(l) * l.cant)}</span></div>
+      <div class="item-der"><div class="cantidad"><button data-accion="lin-menos" data-i="${i}" aria-label="Quitar uno de ${h(p.n)}">${l.cant === 1 ? ico('i-basura', 'sm') : ico('i-menos', 'sm')}</button><output>${l.cant}</output><button data-accion="lin-mas" data-i="${i}" aria-label="Agregar uno de ${h(p.n)}">${ico('i-mas', 'sm')}</button></div></div></div>`;
+  }).join('');
+  const sub = subtotal(), falta = GRATIS_DESDE - sub, env = costoEnvio();
+  const del = datos.entrega === 'delivery';
+  abrirModal(`${cab(`Tu pedido (${unidades()})`)}<div class="hoja-cuerpo">
+      ${items}
+      ${del && falta > 0 ? `<div class="aviso" style="margin-top:14px;background:var(--p-lemon);color:#713F12">${ico('i-camion')}<span>Te faltan <b>${soles(falta)}</b> para el delivery gratis.</span></div>` : ''}
+      <div class="opcion"><span class="etq" id="et-entrega">¿Cómo lo recibes?</span><div class="opciones" role="group" aria-labelledby="et-entrega">
+        <button class="op" data-accion="entrega" data-v="delivery" aria-pressed="${del}">${ico('i-camion', 'sm')}Delivery</button>
+        <button class="op" data-accion="entrega" data-v="recojo" aria-pressed="${!del}">${ico('i-tienda', 'sm')}Recojo en tienda</button></div></div>
+      ${del ? `<div class="grid-2"><div class="campo"><label for="ped-distrito">Distrito</label><select id="ped-distrito" class="input"><option value="">Elige…</option>${DISTRITOS.map(d => `<option ${d === datos.distrito ? 'selected' : ''}>${d}</option>`).join('')}</select></div>
+        <div class="campo"><label for="ped-direccion">Dirección</label><input id="ped-direccion" class="input" value="${h(datos.direccion)}" placeholder="Calle y número" autocomplete="street-address"></div></div>`
+      : `<p class="muted" style="margin-top:8px;font-weight:600">Av. Brasil 1450, Jesús María · Lun a sáb 9 a. m. – 8 p. m.</p>`}
+      <div class="campo"><label for="ped-nombre">Tu nombre</label><input id="ped-nombre" class="input" value="${h(datos.nombre)}" placeholder="Para saber quién pide" autocomplete="given-name"></div>
+      <div class="opcion"><span class="etq" id="et-pago">¿Cómo pagas?</span><div class="opciones" role="group" aria-labelledby="et-pago">
+        ${['Yape o Plin', 'Efectivo', 'Transferencia'].map(x => `<button class="op" data-accion="pago" data-v="${x}" aria-pressed="${datos.pago === x}">${x}</button>`).join('')}</div></div>
+      <p class="error" id="error-pedido" role="alert" hidden></p>
+    </div>
+    <footer class="hoja-pie">
+      <div class="totales"><div><span>Productos</span><span>${soles(sub)}</span></div><div><span>${del ? 'Delivery' : 'Recojo en tienda'}</span><span>${env ? soles(env) : 'Gratis'}</span></div><div class="total"><span>Total</span><span>${soles(sub + env)}</span></div></div>
+      <button class="btn btn-wsp btn-bloque" data-accion="enviar-pedido">${ico('i-chat')}Enviar pedido por WhatsApp</button>
+    </footer>`, { cajon: true });
+}
+function guardarDatosPedido() {
+  const d = $('#ped-distrito'), dir = $('#ped-direccion'), n = $('#ped-nombre');
+  if (d) datos.distrito = d.value; if (dir) datos.direccion = dir.value.trim(); if (n) datos.nombre = n.value.trim();
+  guardar('datos', datos);
+}
+function textoPedido() {
+  const lineas = carrito.map((l, i) => { const p = prod(l.id); const det = detalleLinea(l); return `${i + 1}) ${l.cant} x ${p.n}${det ? ' (' + det + ')' : ''} — ${soles(precioLinea(l) * l.cant)}`; });
+  const env = costoEnvio(), del = datos.entrega === 'delivery';
+  return `Hola ${TIENDA}, quiero hacer este pedido:\n\n${lineas.join('\n')}\n\nProductos: ${soles(subtotal())}\n${del ? `Delivery a ${datos.distrito}: ${env ? soles(env) : 'gratis'}` : 'Recojo en tienda'}\nTotal: ${soles(subtotal() + env)}\nPago: ${datos.pago}\n${del ? `Dirección: ${datos.direccion}\n` : ''}Nombre: ${datos.nombre}`;
+}
+function enviarPedido() {
+  guardarDatosPedido();
+  const e = $('#error-pedido');
+  const falla = (t, sel) => { e.textContent = t; e.hidden = false; const el = $(sel); if (el) el.focus(); };
+  if (datos.entrega === 'delivery' && !datos.distrito) return falla('Elige tu distrito para el delivery.', '#ped-distrito');
+  if (datos.entrega === 'delivery' && datos.direccion.length < 5) return falla('Escribe tu dirección para el delivery.', '#ped-direccion');
+  if (!datos.nombre) return falla('Escribe tu nombre.', '#ped-nombre');
+  const url = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(textoPedido())}`;
+  pedidosEnviados++; guardar('pedidos', pedidosEnviados);
+  window.open(url, '_blank', 'noopener');
+  toast('Abrimos WhatsApp con tu pedido listo para enviar.');
+}
+function wsp(texto) { window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(texto)}`, '_blank', 'noopener'); }
+
+/* ---------------- Libro de Reclamaciones ---------------- */
+function abrirLibro() {
+  abrirModal(`${cab('Libro de Reclamaciones')}<form class="hoja-cuerpo" id="form-libro" novalidate>
+    <p class="muted" style="font-weight:600">Huellitas Pet Shop · Av. Brasil 1450, Jesús María. Te respondemos en un máximo de 15 días hábiles.</p>
+    <div class="campo"><label for="lr-nombre">Nombre completo</label><input id="lr-nombre" class="input" autocomplete="name" required></div>
+    <div class="grid-2"><div class="campo"><label for="lr-dni">DNI o CE</label><input id="lr-dni" class="input" inputmode="numeric" maxlength="12" required></div>
+      <div class="campo"><label for="lr-tel">Celular o correo</label><input id="lr-tel" class="input" required></div></div>
+    <div class="opcion"><span class="etq" id="et-lr">Tipo</span><div class="opciones" role="group" aria-labelledby="et-lr"><button type="button" class="op" data-accion="lr-tipo" data-v="Reclamo" aria-pressed="true">Reclamo</button><button type="button" class="op" data-accion="lr-tipo" data-v="Queja" aria-pressed="false">Queja</button></div>
+      <p class="muted" style="font-size:14px;margin-top:6px">Reclamo: sobre un producto o servicio. Queja: sobre la atención.</p></div>
+    <div class="campo"><label for="lr-detalle">Cuéntanos qué pasó</label><textarea id="lr-detalle" class="input" required></textarea></div>
+    <p class="error" id="error-libro" role="alert" hidden></p>
+  </form><footer class="hoja-pie"><button class="btn btn-primario btn-bloque" data-accion="lr-enviar">Registrar</button></footer>`, { foco: '#lr-nombre' });
+}
+function enviarLibro() {
+  const v = id => $(id).value.trim(), e = $('#error-libro');
+  for (const [id, t] of [['#lr-nombre', 'Escribe tu nombre.'], ['#lr-dni', 'Escribe tu DNI o CE.'], ['#lr-tel', 'Escribe tu celular o correo.'], ['#lr-detalle', 'Cuéntanos qué pasó.']]) {
+    if (!v(id)) { e.textContent = t; e.hidden = false; $(id).focus(); return; }
+  }
+  const n = leer('reclamos', 0) + 1; guardar('reclamos', n);
+  const tipo = ($('[data-accion="lr-tipo"][aria-pressed="true"]') || {}).dataset.v || 'Reclamo';
+  abrirModal(`${cab('Libro de Reclamaciones')}<div class="hoja-cuerpo"><div class="vacio" style="border:0;background:none"><svg viewBox="0 0 120 120" aria-hidden="true"><use href="#cara-perro"/></svg>
+    <strong>${tipo === 'Queja' ? 'Queja registrada' : 'Reclamo registrado'}</strong><p>Hoja N.º ${new Date().getFullYear()}-${String(n).padStart(4, '0')}. Te escribiremos para darte una respuesta.</p>
+    <p class="muted" style="margin-top:8px;font-size:14px">Demo: el formulario no envía datos a ningún lado.</p></div></div>
+    <footer class="hoja-pie"><button class="btn btn-borde btn-bloque" data-accion="cerrar">Cerrar</button></footer>`);
+}
+
+/* ---------------- Panel de la tienda (demo) ---------------- */
+function statsPanel() {
+  const ago = PRODUCTOS.filter(p => p.agotado).length, ofe = PRODUCTOS.filter(p => p.a).length;
+  return `<div class="stat"><b>${PRODUCTOS.length}</b><span>productos</span></div><div class="stat"><b>${ofe}</b><span>en oferta</span></div><div class="stat"><b>${ago}</b><span>${ago === 1 ? 'agotado' : 'agotados'}</span></div>`;
+}
+function abrirPanel() {
+  const filas = PRODUCTOS.map(p => `<div class="panel-fila">
+      <span class="item-ilu" style="background:${cat(p.cat).bg}">${iluSVG(p)}</span>
+      <div><strong style="display:block;line-height:1.3">${h(p.n)}</strong><small class="muted" style="font-weight:600">${h(cat(p.cat).n)} · ${textoPara(p)}</small></div>
+      <div class="panel-ctrl">
+        <label class="sr-only" for="pp-${p.id}">Precio de ${h(p.n)}</label>
+        <span style="font-weight:700">S/</span><input id="pp-${p.id}" class="input" type="number" inputmode="decimal" min="1" step="0.1" value="${p.p}" data-panel="precio" data-id="${p.id}">
+        <label class="check"><input type="checkbox" data-panel="oferta" data-id="${p.id}" ${p.a ? 'checked' : ''}>Oferta -20%</label>
+        <label class="check"><input type="checkbox" data-panel="agotado" data-id="${p.id}" ${p.agotado ? 'checked' : ''}>Agotado</label>
+      </div></div>`).join('');
+  abrirModal(`${cab('Panel de la tienda')}<div class="hoja-cuerpo">
+    <div class="aviso">${ico('i-ajustes')}<span><b>Así de fácil actualizas tu tienda.</b> Cambia un precio, pon algo en oferta o márcalo como agotado. Se ve al instante en la página.</span></div>
+    <div class="stats" id="panel-stats" aria-live="polite">${statsPanel()}</div>
+    <p class="muted" style="font-weight:700;font-size:14.5px">Pedidos enviados por WhatsApp desde este navegador: ${pedidosEnviados}</p>
+    ${filas}
+  </div><footer class="hoja-pie"><button class="btn btn-borde btn-bloque" data-accion="panel-restaurar">${ico('i-ajustes', 'sm')}Volver a los precios de ejemplo</button></footer>`, { ancho: true });
+}
+function cambioPanel(el) {
+  const id = el.dataset.id, base = PRODUCTOS_BASE.find(p => p.id === id), aj = ajustes[id] = ajustes[id] || {};
+  const actual = prod(id);
+  if (el.dataset.panel === 'precio') {
+    const v = Math.round(parseFloat(el.value) * 10) / 10;
+    if (!(v > 0)) { el.value = actual.p; return; }
+    if (base.pt) { el.value = actual.p; toast('Este producto tiene precio por talla; en la demo no se cambia aquí.'); return; }
+    aj.p = v; if (actual.a) aj.a = Math.round(v / 0.8 * 10) / 10;
+  } else if (el.dataset.panel === 'oferta') {
+    if (el.checked) { aj.a = actual.a || actual.p; aj.p = Math.round(aj.a * 0.8 * 10) / 10; }
+    else { aj.p = actual.a || actual.p; aj.a = null; }
+  } else if (el.dataset.panel === 'agotado') aj.agotado = el.checked;
+  guardar('ajustes', ajustes); aplicarAjustes(); renderTodo();
+  const st = $('#panel-stats'); if (st) st.innerHTML = statsPanel();
+  const p = prod(id);
+  const inp = $(`#pp-${id}`); if (inp && el.dataset.panel !== 'precio') inp.value = p.p;
+  toast(`${p.n}: ${p.agotado ? 'agotado' : soles(p.p)}${p.a ? ' (oferta)' : ''}`);
+}
+
+/* ---------------- Acciones ---------------- */
+const ACC = {
+  cerrar: () => cerrarModal(),
+  ver: d => abrirDetalle(d.id),
+  fav: (d, b) => {
+    favs.has(d.id) ? favs.delete(d.id) : favs.add(d.id);
+    guardar('favs', [...favs]);
+    const on = favs.has(d.id), p = prod(d.id);
+    $$(`.fav[data-id="${d.id}"]`).forEach(x => { x.setAttribute('aria-pressed', String(on)); x.setAttribute('aria-label', `${on ? 'Quitar de' : 'Guardar en'} favoritos: ${p.n}`); });
+    renderContadores(); if (f.favs) renderCatalogo();
+    toast(on ? 'Guardado en tus favoritos' : 'Quitado de tus favoritos');
+  },
+  'ver-favs': () => { f.favs = true; renderCatalogo(); irACatalogo(); },
+  'agregar-rapido': d => { const p = prod(d.id); agregar({ id: p.id, cant: 1, talla: null, color: p.col && p.col.length > 1 ? p.col[0] : null, placa: null }); },
+  'abrir-carrito': () => abrirCarrito(),
+  'ir-catalogo': () => { cerrarModal(); irACatalogo(); },
+  'elegir-para': d => { f.para = d.v; f.cat = ''; renderCatalogo(); irACatalogo(); },
+  'filtro-para': d => { f.para = d.v; renderCatalogo(); },
+  'filtro-cat': d => { f.cat = d.v; renderCatalogo(); },
+  'ver-ofertas': () => { f.ofertas = true; f.cat = ''; renderCatalogo(); irACatalogo(); },
+  'limpiar-filtros': () => { Object.assign(f, { para: '', cat: '', q: '', orden: '', ofertas: false, favs: false }); $$('.campo-buscar').forEach(i => i.value = ''); renderCatalogo(); },
+  'abrir-placa': () => abrirDetalle('placa'),
+  'abrir-tallas': () => abrirTallas(),
+  'abrir-libro': () => abrirLibro(),
+  'abrir-panel': () => abrirPanel(),
+  'wsp-consulta': () => wsp(`Hola ${TIENDA}, tengo una consulta.`),
+  'wsp-producto': d => wsp(`Hola ${TIENDA}, ¿cuándo les llega "${prod(d.id).n}"? Me avisan, por favor.`),
+  'sel-color': (d, b) => { sel.color = d.v; marcar(b); actualizarDetalle(); },
+  'sel-talla': (d, b) => { sel.talla = d.v; marcar(b); $('#error-talla').hidden = true; actualizarDetalle(); },
+  'placa-forma': (d, b) => { sel.placa.forma = d.v; marcar(b); actualizarDetalle(); },
+  'placa-color': (d, b) => { sel.placa.color = d.v; marcar(b); actualizarDetalle(); },
+  'det-menos': () => { sel.cant = Math.max(1, sel.cant - 1); actualizarDetalle(); },
+  'det-mas': () => { sel.cant = Math.min(20, sel.cant + 1); actualizarDetalle(); },
+  'det-agregar': () => detAgregar(),
+  'lin-menos': d => { guardarDatosPedido(); const l = carrito[+d.i]; if (!l) return; l.cant--; if (l.cant < 1) carrito.splice(+d.i, 1); guardarCarrito(); abrirCarrito(); },
+  'lin-mas': d => { guardarDatosPedido(); const l = carrito[+d.i]; if (!l) return; l.cant = Math.min(20, l.cant + 1); guardarCarrito(); abrirCarrito(); },
+  entrega: d => { guardarDatosPedido(); datos.entrega = d.v; guardar('datos', datos); abrirCarrito(); },
+  pago: (d, b) => { datos.pago = d.v; guardar('datos', datos); marcar(b); },
+  'enviar-pedido': () => enviarPedido(),
+  'lr-tipo': (d, b) => marcar(b),
+  'lr-enviar': () => enviarLibro(),
+  'panel-restaurar': () => { ajustes = {}; guardar('ajustes', ajustes); aplicarAjustes(); renderTodo(); abrirPanel(); toast('Precios de ejemplo restaurados.'); }
+};
+function marcar(b) { b.parentElement.querySelectorAll('[aria-pressed]').forEach(x => x.setAttribute('aria-pressed', String(x === b))); }
+
+document.addEventListener('click', e => {
+  const irCat = e.target.closest('[data-ir-cat]');
+  if (irCat) { e.preventDefault(); f.cat = irCat.dataset.irCat; f.ofertas = false; f.favs = false; renderCatalogo(); irACatalogo(); return; }
+  const b = e.target.closest('[data-accion]');
+  if (b) { if (b.disabled) return; const fn = ACC[b.dataset.accion]; if (fn) { e.preventDefault(); fn(b.dataset, b, e); } return; }
+  if (e.target.id === 'modal') cerrarModal();
+});
+document.addEventListener('keydown', e => {
+  const m = $('#modal');
+  if (e.key === 'Escape' && !m.hidden) { e.preventDefault(); cerrarModal(); }
+  if (e.key === 'Tab' && !m.hidden) {
+    const el = $$('button:not([disabled]),input,select,textarea,a[href]', m).filter(x => x.offsetParent !== null);
+    if (!el.length) return;
+    if (e.shiftKey && document.activeElement === el[0]) { e.preventDefault(); el[el.length - 1].focus(); }
+    else if (!e.shiftKey && document.activeElement === el[el.length - 1]) { e.preventDefault(); el[0].focus(); }
+  }
+});
+let tBusca = null;
+document.addEventListener('input', e => {
+  const t = e.target;
+  if (t.classList.contains('campo-buscar')) {
+    f.q = t.value; $$('.campo-buscar').forEach(i => { if (i !== t) i.value = t.value; });
+    clearTimeout(tBusca); tBusca = setTimeout(() => { renderCatalogo(); }, 120);
+  } else if (t.id === 'peso' || t.id === 'peso-guia') {
+    const kg = parseFloat(t.value);
+    if (t.id === 'peso') {
+      const s = $('#sugerencia');
+      if (!(kg > 0)) { s.textContent = ''; return; }
+      const tl = tallaPorPeso(kg), p = prod(sel.id);
+      if (p.tal.includes(tl)) { s.textContent = `Te recomendamos la ${tl}`; sel.talla = tl; marcar($(`[data-accion="sel-talla"][data-v="${tl}"]`)); $('#error-talla').hidden = true; actualizarDetalle(); }
+      else s.textContent = `Talla ${tl}: no la tenemos en este producto.`;
+    } else {
+      const r = $('#talla-resultado');
+      $$('tr[data-talla]').forEach(tr => tr.style.background = '');
+      if (!(kg > 0)) { r.hidden = true; return; }
+      const tl = tallaPorPeso(kg); r.hidden = false; r.textContent = `Para ${kg} kg te recomendamos la talla ${tl}.`;
+      const tr = $(`tr[data-talla="${tl}"]`); if (tr) tr.style.background = 'var(--ok-bg)';
+    }
+  } else if (t.id === 'placa-nombre' || t.id === 'placa-tel') {
+    sel.placa[t.id === 'placa-nombre' ? 'nombre' : 'tel'] = t.value; $('#error-placa').hidden = true; actualizarDetalle();
+  }
+});
+document.addEventListener('change', e => {
+  const t = e.target;
+  if (t.id === 'orden') { f.orden = t.value; renderCatalogo(); }
+  else if (t.id === 'solo-ofertas') { f.ofertas = t.checked; renderCatalogo(); }
+  else if (t.id === 'solo-favs') { f.favs = t.checked; renderCatalogo(); }
+  else if (t.dataset && t.dataset.panel) cambioPanel(t);
+  else if (t.id === 'ped-distrito' || t.id === 'ped-direccion' || t.id === 'ped-nombre') guardarDatosPedido();
+});
+document.addEventListener('submit', e => { if (e.target.id === 'form-libro') { e.preventDefault(); enviarLibro(); } });
+
+/* ---------------- Inicio ---------------- */
+aplicarAjustes();
+renderTodo();
+renderResenas();
+$('#placa-demo').innerHTML = placaSVG('hueso', 'dorado', 'Toby', '987 654 321');
+</script>
+</body>
+</html>

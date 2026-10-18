@@ -1,0 +1,1080 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dulce Abril · Pastelería artesanal en Surco</title>
+<meta name="description" content="Dulce Abril: tortas artesanales para cumpleaños, bodas y baby showers en Lima. Diseña tu torta, pide por WhatsApp y recíbela en tu casa.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Karla:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+<style>
+/* ===== Tokens (paleta "Bakery/Cafe" de ui-ux-pro-max: marrón cálido + crema + acento apetitoso) ===== */
+:root {
+  --bg: #FFF8EC;
+  --surface: #FFFFFF;
+  --cream: #FEF3C7;
+  --cream-2: #FDE9C9;
+  --text: #451A03;
+  --text-muted: #7C5A3A;
+  --border: #F1DDB8;
+  --primary: #92400E;
+  --primary-hover: #78350F;
+  --secondary: #B45309;
+  --berry: #BE185D;
+  --berry-soft: #FCE7F3;
+  --success: #15803D;
+  --whatsapp: #128C4A;
+  --radius: 20px;
+  --radius-sm: 12px;
+  --shadow: 0 8px 24px rgba(146, 64, 14, .10);
+  --shadow-lg: 0 18px 40px rgba(146, 64, 14, .16);
+  --font-title: "Playfair Display", Georgia, serif;
+  --font-body: "Karla", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-hand: "Caveat", cursive;
+  --ease: cubic-bezier(.2, .7, .2, 1);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 400 17px/1.6 var(--font-body); -webkit-font-smoothing: antialiased; }
+img { display: block; max-width: 100%; }
+a { color: inherit; }
+button, input, select, textarea { font: inherit; color: inherit; }
+h1, h2, h3 { font-family: var(--font-title); line-height: 1.12; margin: 0; font-weight: 700; }
+h2 { font-size: clamp(2rem, 4.4vw, 2.9rem); }
+.hand { font-family: var(--font-hand); color: var(--berry); font-size: 1.6rem; line-height: 1; margin: 0 0 6px; font-weight: 700; }
+.muted { color: var(--text-muted); }
+.container { width: min(1200px, 100% - 32px); margin-inline: auto; }
+.section { padding: clamp(56px, 8vw, 100px) 0; }
+.section-head { text-align: center; max-width: 640px; margin: 0 auto 40px; }
+.section-head p { margin: 12px 0 0; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+:focus-visible { outline: 3px solid var(--secondary); outline-offset: 2px; }
+svg.i { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+
+/* ===== Botones ===== */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 50px; padding: 0 26px;
+  border-radius: 999px; border: 2px solid var(--primary); background: var(--primary); color: #fff;
+  font-weight: 700; font-size: 1rem; cursor: pointer; text-decoration: none;
+  transition: background-color .2s, transform .2s var(--ease), box-shadow .2s;
+}
+.btn:hover { background: var(--primary-hover); border-color: var(--primary-hover); box-shadow: var(--shadow); }
+.btn:active { transform: scale(.97); }
+.btn.ghost { background: transparent; color: var(--primary); }
+.btn.ghost:hover { background: var(--cream); }
+.btn.wa { background: var(--whatsapp); border-color: var(--whatsapp); }
+.btn.wa:hover { background: #0E7A40; border-color: #0E7A40; }
+.btn.block { width: 100%; }
+.btn.small { min-height: 44px; padding: 0 18px; font-size: .9375rem; }
+.btn:disabled { opacity: .5; cursor: not-allowed; }
+.icon-btn { position: relative; display: inline-grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; border: 0; background: transparent; cursor: pointer; transition: background-color .2s; }
+.icon-btn:hover { background: var(--cream); }
+.badge-count { position: absolute; top: 2px; right: 0; min-width: 20px; height: 20px; padding: 0 6px; border-radius: 10px; background: var(--berry); color: #fff; font-size: .75rem; font-weight: 700; display: grid; place-items: center; }
+.badge-count[data-n="0"] { display: none; }
+
+/* ===== Header ===== */
+.topbar { background: var(--primary); color: #FEF3C7; text-align: center; font-size: .875rem; padding: 8px 16px; }
+header.site { position: sticky; top: 0; z-index: 30; background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); }
+.nav { display: flex; align-items: center; gap: 12px; height: 74px; }
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; margin-right: auto; }
+.logo-mark { width: 44px; height: 44px; border-radius: 50%; background: var(--primary); color: #FEF3C7; display: grid; place-items: center; }
+.logo b { font-family: var(--font-title); font-size: 1.375rem; display: block; line-height: 1; }
+.logo small { font-family: var(--font-hand); font-size: 1.05rem; color: var(--berry); }
+.menu { display: none; gap: 26px; list-style: none; margin: 0 20px 0 0; padding: 0; }
+.menu a { text-decoration: none; font-weight: 600; padding: 10px 0; }
+.menu a:hover { color: var(--secondary); }
+@media (min-width: 980px) { .menu { display: flex; } }
+
+/* ===== Hero ===== */
+.hero { padding: clamp(32px, 6vw, 72px) 0; }
+.hero-grid { display: grid; gap: 32px; align-items: center; }
+@media (min-width: 900px) { .hero-grid { grid-template-columns: 1.05fr 1fr; } }
+.hero h1 { font-size: clamp(2.6rem, 6.5vw, 4.4rem); }
+.hero h1 em { color: var(--berry); font-style: italic; }
+.hero p.lead { font-size: 1.15rem; color: var(--text-muted); margin: 18px 0 28px; max-width: 46ch; }
+.hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+.hero-facts { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 32px; font-size: .9375rem; }
+.hero-facts div { display: flex; align-items: center; gap: 8px; }
+.hero-facts svg { color: var(--secondary); }
+.hero-media { position: relative; }
+.hero-media .main { aspect-ratio: 4 / 5; border-radius: 200px 200px var(--radius) var(--radius); overflow: hidden; box-shadow: var(--shadow-lg); background: var(--cream); }
+.hero-media .main img { width: 100%; height: 100%; object-fit: cover; }
+.hero-badge { position: absolute; left: -8px; bottom: 32px; background: var(--surface); border-radius: var(--radius-sm); padding: 14px 18px; box-shadow: var(--shadow); display: flex; gap: 12px; align-items: center; }
+.hero-badge b { font-family: var(--font-title); font-size: 1.75rem; line-height: 1; color: var(--primary); }
+.hero-badge span { font-size: .8125rem; color: var(--text-muted); }
+.hero-sticker { position: absolute; right: 8px; top: 20px; width: 110px; height: 110px; border-radius: 50%; background: var(--berry); color: #fff; display: grid; place-items: center; text-align: center; font-family: var(--font-hand); font-size: 1.35rem; line-height: 1; transform: rotate(10deg); box-shadow: var(--shadow); padding: 10px; }
+
+/* ===== Categorías ===== */
+.cats { display: flex; gap: 10px; overflow-x: auto; padding: 4px 2px 12px; scrollbar-width: none; justify-content: flex-start; }
+.cats::-webkit-scrollbar { display: none; }
+@media (min-width: 900px) { .cats { justify-content: center; flex-wrap: wrap; } }
+.cat { flex: none; min-height: 44px; padding: 0 20px; border-radius: 999px; border: 2px solid var(--border); background: var(--surface); font-weight: 600; cursor: pointer; transition: all .2s; }
+.cat:hover { border-color: var(--secondary); }
+.cat[aria-pressed="true"] { background: var(--primary); border-color: var(--primary); color: #fff; }
+
+/* ===== Tarjetas de tortas ===== */
+.grid { display: grid; gap: 20px; grid-template-columns: repeat(2, 1fr); margin-top: 24px; }
+@media (min-width: 760px) { .grid { grid-template-columns: repeat(3, 1fr); gap: 28px; } }
+@media (min-width: 1100px) { .grid { grid-template-columns: repeat(4, 1fr); } }
+.card { background: var(--surface); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); display: flex; flex-direction: column; transition: transform .25s var(--ease), box-shadow .25s; }
+.card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.card-media { position: relative; aspect-ratio: 1; background: var(--cream); overflow: hidden; border: 0; padding: 0; cursor: pointer; width: 100%; }
+.card-media img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s var(--ease); }
+.card:hover .card-media img { transform: scale(1.05); }
+.card-tag { position: absolute; top: 10px; left: 10px; background: var(--surface); color: var(--primary); font-size: .75rem; font-weight: 700; padding: 4px 10px; border-radius: 999px; }
+.card-tag.hot { background: var(--berry); color: #fff; }
+.card-body { padding: 14px 16px 16px; display: grid; gap: 4px; flex: 1; align-content: start; }
+.card-body h3 { font-size: 1.125rem; }
+.card-body .meta { font-size: .8125rem; color: var(--text-muted); }
+.card-foot { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+.price { font-weight: 700; font-size: 1.0625rem; color: var(--primary); }
+.price small { font-weight: 500; color: var(--text-muted); font-size: .8125rem; }
+
+/* ===== Personalizador ===== */
+.builder { background: var(--cream); }
+.builder-grid { display: grid; gap: 28px; align-items: start; }
+@media (min-width: 960px) { .builder-grid { grid-template-columns: 1fr 1.1fr; } .preview-card { position: sticky; top: 96px; } }
+.preview-card { background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow); padding: 24px; display: grid; gap: 16px; }
+.preview-stage { background: radial-gradient(circle at 50% 30%, #FFF 0%, var(--cream-2) 75%); border-radius: var(--radius-sm); display: grid; place-items: center; padding: 12px; min-height: 300px; }
+.preview-stage svg { width: 100%; max-width: 340px; height: auto; }
+.summary { display: grid; gap: 4px; font-size: .9375rem; }
+.summary div { display: flex; justify-content: space-between; gap: 12px; }
+.summary .total { font-size: 1.25rem; font-weight: 700; border-top: 2px dashed var(--border); padding-top: 10px; margin-top: 6px; color: var(--primary); }
+.steps { display: grid; gap: 16px; }
+.step { background: var(--surface); border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow); border: 0; margin: 0; }
+.step legend { font-family: var(--font-title); font-weight: 700; font-size: 1.25rem; padding: 0; float: left; width: 100%; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+.step legend span.n { width: 30px; height: 30px; border-radius: 50%; background: var(--primary); color: #fff; font-family: var(--font-body); font-size: .9375rem; display: grid; place-items: center; flex: none; }
+.step > *:not(legend) { clear: both; }
+.options { display: flex; flex-wrap: wrap; gap: 10px; }
+.opt { position: relative; }
+.opt input { position: absolute; opacity: 0; inset: 0; cursor: pointer; margin: 0; }
+.opt span { display: grid; gap: 2px; min-height: 48px; padding: 10px 16px; border: 2px solid var(--border); border-radius: var(--radius-sm); font-weight: 600; font-size: .9375rem; cursor: pointer; transition: all .2s; background: var(--surface); }
+.opt span small { font-weight: 500; color: var(--text-muted); font-size: .8125rem; }
+.opt input:checked + span { border-color: var(--primary); background: var(--cream); box-shadow: inset 0 0 0 1px var(--primary); }
+.opt input:focus-visible + span { outline: 3px solid var(--secondary); outline-offset: 2px; }
+.color-dot { display: inline-block; width: 14px; height: 14px; border-radius: 50%; border: 1px solid rgba(0,0,0,.15); vertical-align: -2px; margin-right: 6px; }
+.guests { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; background: var(--berry-soft); border-radius: var(--radius-sm); padding: 12px 14px; margin-bottom: 14px; font-size: .9375rem; }
+.guests input { width: 90px; }
+.input, .select { min-height: 48px; padding: 0 14px; border: 2px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); width: 100%; }
+textarea.input { padding: 12px 14px; min-height: 90px; }
+.input:focus, .select:focus { border-color: var(--secondary); outline: none; }
+label.field { display: grid; gap: 6px; font-weight: 600; font-size: .9375rem; }
+.help { font-size: .8125rem; color: var(--text-muted); font-weight: 400; }
+.two { display: grid; gap: 12px; }
+@media (min-width: 560px) { .two { grid-template-columns: 1fr 1fr; } }
+.upload { display: flex; gap: 12px; align-items: center; border: 2px dashed var(--border); border-radius: var(--radius-sm); padding: 12px; }
+.upload img { width: 64px; height: 64px; object-fit: cover; border-radius: 8px; }
+.error { color: #B91C1C; font-size: .875rem; font-weight: 600; }
+
+/* ===== Bocaditos ===== */
+.snacks { display: grid; gap: 16px; }
+@media (min-width: 760px) { .snacks { grid-template-columns: repeat(2, 1fr); } }
+.snack { display: grid; grid-template-columns: 96px 1fr auto; gap: 16px; align-items: center; background: var(--surface); border-radius: var(--radius); padding: 12px; box-shadow: var(--shadow); }
+.snack .ph { aspect-ratio: 1; border-radius: var(--radius-sm); overflow: hidden; background: var(--cream); }
+.snack .ph img { width: 100%; height: 100%; object-fit: cover; }
+.snack h3 { font-size: 1.0625rem; }
+.snack p { margin: 2px 0 0; font-size: .875rem; color: var(--text-muted); }
+
+/* ===== Cómo pedir ===== */
+.how { display: grid; gap: 16px; counter-reset: paso; }
+@media (min-width: 760px) { .how { grid-template-columns: repeat(4, 1fr); } }
+.how li { list-style: none; background: var(--surface); border-radius: var(--radius); padding: 24px 20px; box-shadow: var(--shadow); position: relative; }
+.how li::before { counter-increment: paso; content: counter(paso); font-family: var(--font-title); font-size: 3rem; color: var(--cream-2); position: absolute; right: 16px; top: 4px; line-height: 1; }
+.how li svg { color: var(--secondary); width: 32px; height: 32px; }
+.how li h3 { font-size: 1.1875rem; margin: 12px 0 6px; }
+.how li p { margin: 0; font-size: .9375rem; color: var(--text-muted); }
+
+/* ===== Galería ===== */
+.gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+@media (min-width: 760px) { .gallery { grid-template-columns: repeat(4, 1fr); } .gallery figure:nth-child(1) { grid-column: span 2; grid-row: span 2; } }
+.gallery figure { margin: 0; position: relative; border-radius: var(--radius-sm); overflow: hidden; aspect-ratio: 1; background: var(--cream); }
+.gallery img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s var(--ease); }
+.gallery figure:hover img { transform: scale(1.05); }
+.gallery figcaption { position: absolute; left: 10px; bottom: 10px; background: rgba(255,255,255,.92); color: var(--text); font-size: .8125rem; font-weight: 600; padding: 4px 10px; border-radius: 999px; }
+
+/* ===== Reseñas ===== */
+.reviews { display: grid; gap: 20px; }
+@media (min-width: 860px) { .reviews { grid-template-columns: repeat(3, 1fr); } }
+.review { background: var(--surface); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); display: grid; gap: 12px; align-content: start; }
+.stars { display: flex; gap: 2px; color: #D97706; }
+.stars svg { width: 18px; height: 18px; fill: currentColor; stroke: none; }
+.review p { margin: 0; }
+.review footer { display: flex; align-items: center; gap: 12px; font-size: .875rem; }
+.avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--cream-2); color: var(--primary); display: grid; place-items: center; font-weight: 700; }
+
+/* ===== Ubicación y delivery ===== */
+.visit-grid { display: grid; gap: 20px; }
+@media (min-width: 900px) { .visit-grid { grid-template-columns: 1fr 1fr; } }
+.box { background: var(--surface); border-radius: var(--radius); padding: clamp(20px, 3vw, 32px); box-shadow: var(--shadow); display: grid; gap: 16px; align-content: start; }
+.box h3 { font-size: 1.5rem; }
+.hours { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.hours li { display: flex; justify-content: space-between; border-bottom: 1px dashed var(--border); padding-bottom: 6px; }
+.open-now { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; font-size: .9375rem; }
+.open-now i { width: 10px; height: 10px; border-radius: 50%; background: var(--success); }
+.open-now.closed i { background: #B91C1C; }
+.map { border: 0; width: 100%; height: 240px; border-radius: var(--radius-sm); background: var(--cream); }
+.ship-out { background: var(--cream); border-radius: var(--radius-sm); padding: 14px 16px; }
+.pay { display: flex; flex-wrap: wrap; gap: 8px; }
+.pay span { background: var(--cream); border-radius: 999px; padding: 6px 14px; font-weight: 600; font-size: .875rem; }
+
+/* ===== Preguntas frecuentes ===== */
+.faq { max-width: 760px; margin: 0 auto; display: grid; gap: 12px; }
+.faq details { background: var(--surface); border-radius: var(--radius-sm); box-shadow: var(--shadow); }
+.faq summary { cursor: pointer; list-style: none; padding: 18px 20px; font-weight: 700; display: flex; justify-content: space-between; gap: 12px; align-items: center; min-height: 56px; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; font-size: 1.5rem; color: var(--secondary); transition: transform .2s; }
+.faq details[open] summary::after { transform: rotate(45deg); }
+.faq details p { margin: 0; padding: 0 20px 18px; color: var(--text-muted); }
+
+/* ===== Footer ===== */
+footer.site { background: var(--primary); color: #FEF3C7; padding: 56px 0 24px; font-size: .9375rem; }
+footer.site a, footer.site .link { color: #FEF3C7; text-decoration: none; }
+footer.site a:hover, footer.site .link:hover { text-decoration: underline; }
+.foot-grid { display: grid; gap: 28px; }
+@media (min-width: 860px) { .foot-grid { grid-template-columns: 1.4fr 1fr 1fr; } }
+footer h4 { font-family: var(--font-title); font-size: 1.125rem; margin: 0 0 12px; color: #fff; }
+footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.link { background: none; border: 0; padding: 0; cursor: pointer; min-height: 32px; text-align: left; }
+.libro { display: inline-flex; gap: 10px; align-items: center; border: 2px solid rgba(254,243,199,.4); border-radius: var(--radius-sm); padding: 10px 14px; background: transparent; color: #FEF3C7; cursor: pointer; min-height: 48px; text-align: left; }
+.libro small { display: block; opacity: .8; font-size: .75rem; }
+.foot-bottom { margin-top: 36px; padding-top: 18px; border-top: 1px solid rgba(254,243,199,.25); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: .8125rem; opacity: .85; }
+
+.wa-float { position: fixed; right: 16px; bottom: 16px; z-index: 25; width: 58px; height: 58px; border-radius: 50%; background: var(--whatsapp); color: #fff; display: grid; place-items: center; box-shadow: var(--shadow-lg); transition: transform .2s var(--ease); }
+.wa-float:hover { transform: scale(1.07); }
+.wa-float svg { width: 30px; height: 30px; fill: currentColor; stroke: none; }
+
+/* ===== Diálogos ===== */
+dialog { border: 0; padding: 0; background: var(--surface); color: var(--text); border-radius: var(--radius); box-shadow: var(--shadow-lg); max-width: calc(100% - 32px); }
+dialog::backdrop { background: rgba(69, 26, 3, .45); backdrop-filter: blur(3px); }
+dialog[open] { animation: up .25s var(--ease); }
+@keyframes up { from { opacity: 0; transform: translateY(14px); } }
+.dlg-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 16px 20px; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: var(--surface); z-index: 2; }
+.dlg-head h2 { font-size: 1.5rem; }
+.dlg-body { padding: 20px; display: grid; gap: 16px; }
+.modal { width: 880px; max-height: calc(100dvh - 32px); }
+.modal.small { width: 520px; }
+.pdp { display: grid; gap: 20px; }
+@media (min-width: 760px) { .pdp { grid-template-columns: 1fr 1fr; } }
+.pdp-img { aspect-ratio: 1; border-radius: var(--radius-sm); overflow: hidden; background: var(--cream); }
+.pdp-img img { width: 100%; height: 100%; object-fit: cover; }
+.pdp-info { display: grid; gap: 14px; align-content: start; }
+.pdp-info h3 { font-size: 1.875rem; }
+dialog.drawer { margin: 0 0 0 auto; height: 100dvh; max-height: 100dvh; width: min(440px, 100%); max-width: 100%; border-radius: var(--radius) 0 0 var(--radius); display: none; flex-direction: column; }
+dialog.drawer[open] { display: flex; animation: slide .3s var(--ease); }
+@keyframes slide { from { transform: translateX(100%); } }
+.drawer .dlg-body { overflow-y: auto; flex: 1; align-content: start; }
+.drawer-foot { border-top: 1px solid var(--border); padding: 16px 20px calc(16px + env(safe-area-inset-bottom)); display: grid; gap: 12px; }
+.line { display: grid; grid-template-columns: 64px 1fr auto; gap: 12px; align-items: start; padding-bottom: 14px; border-bottom: 1px dashed var(--border); }
+.line .ph { aspect-ratio: 1; border-radius: 10px; overflow: hidden; background: var(--cream); display: grid; place-items: center; }
+.line .ph img { width: 100%; height: 100%; object-fit: cover; }
+.line h3 { font-family: var(--font-body); font-size: 1rem; font-weight: 700; }
+.line .meta { font-size: .8125rem; color: var(--text-muted); }
+.totals { display: grid; gap: 4px; font-size: .9375rem; }
+.totals div { display: flex; justify-content: space-between; gap: 12px; }
+.totals .grand { font-size: 1.125rem; font-weight: 700; border-top: 1px solid var(--border); padding-top: 8px; }
+.totals .adelanto { color: var(--berry); font-weight: 700; }
+.empty { text-align: center; padding: 32px 12px; border: 2px dashed var(--border); border-radius: var(--radius-sm); color: var(--text-muted); }
+.toast { position: fixed; left: 50%; bottom: 24px; z-index: 100; transform: translate(-50%, 20px); opacity: 0; pointer-events: none; background: var(--text); color: #fff; padding: 14px 20px; border-radius: 999px; font-weight: 600; box-shadow: var(--shadow-lg); transition: opacity .25s, transform .25s var(--ease); max-width: calc(100% - 32px); text-align: center; }
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+.img-fallback { width: 100%; height: 100%; display: grid; place-items: center; text-align: center; padding: 12px; background: var(--cream-2); font-family: var(--font-title); color: var(--text-muted); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-cake" viewBox="0 0 24 24"><path d="M4 21h16M5 21v-7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v7"/><path d="M5 16c1.5 1 3 1 4.5 0s3-1 4.5 0 3 1 5 0"/><path d="M12 12V8M12 5.5c.8-.6.8-1.6 0-2.5-.8.9-.8 1.9 0 2.5Z"/></symbol>
+  <symbol id="i-bag" viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="i-truck" viewBox="0 0 24 24"><path d="M3 6h11v10H3zM14 9h4l3 3v4h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7-4.4-9.2-9A5 5 0 0 1 12 6a5 5 0 0 1 9.2 5C19 15.6 12 20 12 20Z"/></symbol>
+  <symbol id="i-wand" viewBox="0 0 24 24"><path d="m4 20 11-11M14 4v2M19 9h2M17.5 5.5l1.5-1.5M18 13l1.5 1.5M9 4l1.5 1.5"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4V5Z"/></symbol>
+  <symbol id="i-card" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/></symbol>
+  <symbol id="i-gift" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="4"/><path d="M5 12v9h14v-9M12 8v13M12 8c-1.5-3-5-3-5-1s3 1 5 1c2 0 5 1 5-1s-3.5-2-5 1"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1 6.2L12 17.3 6.5 20.2l1-6.2L3 9.6l6.2-.9L12 3Z"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 4h11a3 3 0 0 1 3 3v13H7a3 3 0 0 1-3-3V4Z"/><path d="M4 17a3 3 0 0 1 3-3h11"/></symbol>
+  <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="m21 16-5-5-9 9"/></symbol>
+  <symbol id="i-wa" viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.6 14.1c-.2.7-1.4 1.3-2 1.4-.5.1-1.2.1-1.9-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5.1-4.5-.1-.2-1.2-1.6-1.2-3.1s.8-2.2 1-2.5c.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.3.5-.4.5c-.2.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.7-.1l1-1.2c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.5.3.1.2.1.7-.2 1.4Z"/></symbol>
+</svg>
+
+<div class="topbar">Pedidos con 48 horas de anticipación · Delivery en Lima o recojo gratis en Surco</div>
+
+<header class="site">
+  <nav class="nav container" aria-label="Principal">
+    <a href="#inicio" class="logo">
+      <span class="logo-mark"><svg class="i"><use href="#i-cake"/></svg></span>
+      <span><b>Dulce Abril</b><small>pastelería artesanal</small></span>
+    </a>
+    <ul class="menu">
+      <li><a href="#tortas">Tortas</a></li>
+      <li><a href="#disena">Diseña tu torta</a></li>
+      <li><a href="#bocaditos">Bocaditos</a></li>
+      <li><a href="#visitanos">Delivery</a></li>
+      <li><a href="#preguntas">Preguntas</a></li>
+    </ul>
+    <button class="icon-btn" id="btn-pedido" aria-label="Ver mi pedido"><svg class="i"><use href="#i-bag"/></svg><span class="badge-count" id="count" data-n="0">0</span></button>
+  </nav>
+</header>
+
+<main id="inicio">
+  <!-- ===== Portada ===== -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <p class="hand">Hechas con amor en Surco</p>
+        <h1>Tortas que hacen <em>inolvidable</em> cada celebración</h1>
+        <p class="lead">Cumpleaños, bodas, baby showers o un antojo de domingo. Elige una de nuestras tortas o diséñala a tu gusto y recíbela en tu casa.</p>
+        <div class="hero-ctas">
+          <a href="#disena" class="btn"><svg class="i"><use href="#i-wand"/></svg>Diseña tu torta</a>
+          <a href="#tortas" class="btn ghost">Ver catálogo</a>
+        </div>
+        <div class="hero-facts">
+          <div><svg class="i"><use href="#i-clock"/></svg>Pide con 48 h</div>
+          <div><svg class="i"><use href="#i-truck"/></svg>Delivery en Lima</div>
+          <div><svg class="i"><use href="#i-card"/></svg>Yape · Plin</div>
+        </div>
+      </div>
+      <div class="hero-media">
+        <div class="main"><img src="https://images.unsplash.com/photo-1535141192574-5d4897c12636?auto=format&fit=crop&w=1000&q=75" alt="Torta blanca decorada con frutos rojos" fetchpriority="high"></div>
+        <div class="hero-badge"><b>+2 500</b><span>tortas entregadas<br>en Lima</span></div>
+        <div class="hero-sticker">Primera torta<br>-10%</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Catálogo ===== -->
+  <section class="section" id="tortas" style="padding-top:24px">
+    <div class="container">
+      <div class="section-head">
+        <p class="hand">Nuestras favoritas</p>
+        <h2>Elige tu torta</h2>
+        <p class="muted">Todas se preparan el mismo día de la entrega, con ingredientes frescos y sin preservantes.</p>
+      </div>
+      <div class="cats" id="cats" role="group" aria-label="Filtrar por ocasión"></div>
+      <div class="grid" id="grid"></div>
+    </div>
+  </section>
+
+  <!-- ===== Diseña tu torta ===== -->
+  <section class="section builder" id="disena">
+    <div class="container">
+      <div class="section-head">
+        <p class="hand">Hecha a tu medida</p>
+        <h2>Diseña tu torta</h2>
+        <p class="muted">Elige tamaño, sabor, relleno y decoración. Ves cómo queda y el precio al instante.</p>
+      </div>
+      <div class="builder-grid">
+        <div class="preview-card" aria-live="polite">
+          <div class="preview-stage" id="preview"></div>
+          <div class="summary" id="summary"></div>
+          <button class="btn block" id="agregar-custom"><svg class="i"><use href="#i-bag"/></svg>Agregar a mi pedido</button>
+          <p class="help" style="margin:0;text-align:center">El dibujo es referencial. Te enviamos una foto antes de la entrega.</p>
+        </div>
+
+        <form class="steps" id="builder" onsubmit="return false">
+          <fieldset class="step">
+            <legend><span class="n">1</span>Tamaño</legend>
+            <div class="guests">
+              <label for="invitados">¿Cuántos invitados?</label>
+              <input class="input" type="number" id="invitados" min="1" max="200" placeholder="Ej. 25" inputmode="numeric">
+              <span id="invitados-out"></span>
+            </div>
+            <div class="options" id="o-tamano"></div>
+          </fieldset>
+          <fieldset class="step">
+            <legend><span class="n">2</span>Bizcocho</legend>
+            <div class="options" id="o-bizcocho"></div>
+          </fieldset>
+          <fieldset class="step">
+            <legend><span class="n">3</span>Relleno</legend>
+            <div class="options" id="o-relleno"></div>
+          </fieldset>
+          <fieldset class="step">
+            <legend><span class="n">4</span>Cobertura y color</legend>
+            <div class="options" id="o-cobertura"></div>
+            <p class="help" style="margin:14px 0 8px">Color de la cobertura</p>
+            <div class="options" id="o-color"></div>
+          </fieldset>
+          <fieldset class="step">
+            <legend><span class="n">5</span>Decoración</legend>
+            <div class="options" id="o-extras"></div>
+          </fieldset>
+          <fieldset class="step">
+            <legend><span class="n">6</span>Detalles y entrega</legend>
+            <div style="display:grid;gap:14px">
+              <label class="field">Mensaje en la torta <span class="help">Máximo 30 letras</span>
+                <input class="input" id="mensaje" maxlength="30" placeholder="Ej. Feliz cumple, Sofi">
+              </label>
+              <div class="two">
+                <label class="field">Fecha de entrega
+                  <input class="input" type="date" id="fecha" required>
+                  <span class="help" id="fecha-help"></span>
+                </label>
+                <label class="field">Hora
+                  <select class="select" id="hora">
+                    <option>10:00 – 12:00</option><option>12:00 – 14:00</option><option selected>14:00 – 16:00</option><option>16:00 – 18:00</option><option>18:00 – 20:00</option>
+                  </select>
+                </label>
+              </div>
+              <div class="field">Foto de referencia <span class="help">Opcional. Si tienes una idea, súbela y nos la envías por WhatsApp.</span>
+                <label class="upload">
+                  <svg class="i" style="width:32px;height:32px;color:var(--secondary)"><use href="#i-image"/></svg>
+                  <span id="ref-txt">Toca para elegir una imagen</span>
+                  <img id="ref-img" alt="Foto de referencia" hidden>
+                  <input type="file" id="ref" accept="image/*" class="sr-only">
+                </label>
+              </div>
+              <label class="field">Alergias o indicaciones <span class="help">Opcional</span>
+                <textarea class="input" id="notas" placeholder="Ej. Sin nueces, poco dulce…"></textarea>
+              </label>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Bocaditos ===== -->
+  <section class="section" id="bocaditos">
+    <div class="container">
+      <div class="section-head">
+        <p class="hand">Para tu evento</p>
+        <h2>Bocaditos dulces</h2>
+        <p class="muted">Completa tu mesa de postres. Se venden por paquete y puedes combinar sabores.</p>
+      </div>
+      <div class="snacks" id="snacks"></div>
+    </div>
+  </section>
+
+  <!-- ===== Cómo pedir ===== -->
+  <section class="section" style="background:var(--cream)">
+    <div class="container">
+      <div class="section-head">
+        <p class="hand">Así de fácil</p>
+        <h2>¿Cómo hago mi pedido?</h2>
+      </div>
+      <ol class="how" style="padding:0;margin:0">
+        <li><svg class="i"><use href="#i-cake"/></svg><h3>Elige o diseña</h3><p>Escoge una torta del catálogo o arma la tuya paso a paso.</p></li>
+        <li><svg class="i"><use href="#i-chat"/></svg><h3>Envía por WhatsApp</h3><p>Tu pedido llega completo a nuestro WhatsApp. Te respondemos en minutos.</p></li>
+        <li><svg class="i"><use href="#i-card"/></svg><h3>Separa con 50%</h3><p>Paga el adelanto por Yape, Plin o transferencia y reservamos tu fecha.</p></li>
+        <li><svg class="i"><use href="#i-gift"/></svg><h3>¡A celebrar!</h3><p>La recoges en Surco o te la llevamos. Pagas el resto al recibirla.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ===== Galería ===== -->
+  <section class="section" id="galeria">
+    <div class="container">
+      <div class="section-head">
+        <p class="hand">Trabajos realizados</p>
+        <h2>Celebraciones que endulzamos</h2>
+      </div>
+      <div class="gallery" id="gallery"></div>
+    </div>
+  </section>
+
+  <!-- ===== Reseñas ===== -->
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="section-head">
+        <p class="hand">4.9 de 5 en Google</p>
+        <h2>Lo que dicen nuestros clientes</h2>
+      </div>
+      <div class="reviews" id="reviews"></div>
+    </div>
+  </section>
+
+  <!-- ===== Visítanos y delivery ===== -->
+  <section class="section" id="visitanos" style="background:var(--cream)">
+    <div class="container">
+      <div class="section-head">
+        <p class="hand">Te esperamos</p>
+        <h2>Visítanos o pide delivery</h2>
+      </div>
+      <div class="visit-grid">
+        <div class="box">
+          <h3>Nuestro local</h3>
+          <p style="margin:0;display:flex;gap:8px"><svg class="i" style="color:var(--secondary)"><use href="#i-pin"/></svg>Av. Las Gardenias 456, Santiago de Surco, Lima</p>
+          <span class="open-now" id="abierto"><i></i><span></span></span>
+          <ul class="hours">
+            <li><span>Lunes a viernes</span><b>9:00 a. m. – 8:00 p. m.</b></li>
+            <li><span>Sábados</span><b>9:00 a. m. – 9:00 p. m.</b></li>
+            <li><span>Domingos</span><b>10:00 a. m. – 2:00 p. m.</b></li>
+          </ul>
+          <iframe class="map" title="Mapa de ubicación de la pastelería" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps?q=Santiago+de+Surco,+Lima&output=embed"></iframe>
+        </div>
+        <div class="box">
+          <h3>¿Cuánto cuesta el delivery?</h3>
+          <label class="field">Elige tu distrito
+            <select class="select" id="calc-distrito"></select>
+          </label>
+          <div class="ship-out" id="calc-out" aria-live="polite">Elige tu distrito para ver el costo.</div>
+          <p class="muted" style="margin:0">Llevamos las tortas en caja refrigerada para que lleguen perfectas. Las tortas de 3 pisos solo se entregan con delivery especial.</p>
+          <h3 style="font-size:1.25rem">Formas de pago</h3>
+          <div class="pay"><span>Yape</span><span>Plin</span><span>Transferencia BCP</span><span>Interbank</span><span>Efectivo en tienda</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Preguntas frecuentes ===== -->
+  <section class="section" id="preguntas">
+    <div class="container">
+      <div class="section-head">
+        <p class="hand">Resolvemos tus dudas</p>
+        <h2>Preguntas frecuentes</h2>
+      </div>
+      <div class="faq">
+        <details><summary>¿Con cuánta anticipación debo pedir?</summary><p>Con 48 horas para tortas del catálogo y personalizadas. Las tortas de fondant o de 3 pisos necesitan 4 días. Si es para hoy, escríbenos: a veces tenemos tortas listas en vitrina.</p></details>
+        <details><summary>¿Cómo separo mi pedido?</summary><p>Con un adelanto del 50% por Yape, Plin o transferencia. El resto lo pagas al recoger o al recibir la torta.</p></details>
+        <details><summary>¿Puedo cambiar la fecha o cancelar?</summary><p>Puedes cambiar la fecha sin costo hasta 24 horas antes. Si cancelas con más de 48 horas, te devolvemos el adelanto completo.</p></details>
+        <details><summary>¿Cómo conservo la torta?</summary><p>Mantenla refrigerada y sácala 20 minutos antes de servir. Las de chantilly duran 3 días y las de fondant hasta 5 días.</p></details>
+        <details><summary>¿Tienen opciones sin azúcar o sin gluten?</summary><p>Sí, con anticipación de 72 horas. Indícalo en "Alergias o indicaciones" y te confirmamos las opciones por WhatsApp.</p></details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <h4>Dulce Abril · Pastelería artesanal</h4>
+        <p style="margin:0 0 16px;opacity:.9">Av. Las Gardenias 456, Santiago de Surco<br>WhatsApp: 987 654 321 · hola@dulceabril.pe</p>
+        <button class="libro" id="btn-libro"><svg class="i"><use href="#i-book"/></svg><span><b>Libro de Reclamaciones</b><small>Conforme al Código de Protección al Consumidor</small></span></button>
+      </div>
+      <div>
+        <h4>Pedidos</h4>
+        <ul>
+          <li><a href="#tortas">Catálogo de tortas</a></li>
+          <li><a href="#disena">Diseña tu torta</a></li>
+          <li><a href="#bocaditos">Bocaditos</a></li>
+          <li><a href="#visitanos">Delivery y pagos</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Síguenos</h4>
+        <ul>
+          <li><a href="#" onclick="aviso('En la web real, esto abre su Instagram.');return false">Instagram · @dulceabril.pe</a></li>
+          <li><a href="#" onclick="aviso('En la web real, esto abre su Facebook.');return false">Facebook · Dulce Abril</a></li>
+          <li><a href="#" onclick="aviso('En la web real, esto abre su TikTok.');return false">TikTok · @dulceabril</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom"><span>© 2026 Dulce Abril · Negocio ficticio de demostración</span><span>RUC 10000000000</span></div>
+  </div>
+</footer>
+
+<a class="wa-float" id="wa-float" href="#" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp"><svg><use href="#i-wa"/></svg></a>
+
+<!-- Torta del catálogo -->
+<dialog class="modal" id="dlg-torta" aria-labelledby="t-nombre">
+  <div class="dlg-head"><span class="hand" style="margin:0;font-size:1.4rem" id="t-cat"></span><button class="icon-btn" data-close aria-label="Cerrar"><svg class="i"><use href="#i-close"/></svg></button></div>
+  <div class="dlg-body" id="t-body"></div>
+</dialog>
+
+<!-- Pedido -->
+<dialog class="drawer" id="dlg-pedido" aria-labelledby="pedido-titulo">
+  <div class="dlg-head"><h2 id="pedido-titulo">Mi pedido</h2><button class="icon-btn" data-close aria-label="Cerrar"><svg class="i"><use href="#i-close"/></svg></button></div>
+  <div class="dlg-body" id="pedido-items"></div>
+  <div class="drawer-foot" id="pedido-foot">
+    <div class="two">
+      <label class="field">Entrega
+        <select class="select" id="p-distrito"></select>
+      </label>
+      <label class="field">Tu nombre
+        <input class="input" id="p-nombre" placeholder="Para el pedido" autocomplete="given-name">
+      </label>
+    </div>
+    <div class="totals" id="totales"></div>
+    <button class="btn wa block" id="enviar"><svg class="i" style="fill:currentColor;stroke:none"><use href="#i-wa"/></svg>Enviar pedido por WhatsApp</button>
+  </div>
+</dialog>
+
+<!-- Libro de reclamaciones -->
+<dialog class="modal small" id="dlg-libro" aria-labelledby="libro-titulo">
+  <div class="dlg-head"><h2 id="libro-titulo">Libro de Reclamaciones</h2><button class="icon-btn" data-close aria-label="Cerrar"><svg class="i"><use href="#i-close"/></svg></button></div>
+  <form class="dlg-body" id="form-libro">
+    <p class="help" style="margin:0">Demostración: en la web real este formulario guarda el reclamo y envía una copia al correo del cliente, como exige Indecopi.</p>
+    <label class="field">Nombre completo<input class="input" required></label>
+    <label class="field">DNI<input class="input" required inputmode="numeric" pattern="\d{8}" title="8 dígitos"></label>
+    <label class="field">Correo<input class="input" type="email" required></label>
+    <label class="field">Detalle del reclamo<textarea class="input" required></textarea></label>
+    <button class="btn block" type="submit">Enviar</button>
+  </form>
+</dialog>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+/* ===================== Datos (ficticios: cambia nombre, precios y fotos por los del cliente) ===================== */
+const WHATSAPP = '51987654321';
+const U = (id, w = 700) => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=72`;
+
+const TAMANOS = [
+  { id: 's',  nombre: 'Chica',    porciones: 10, pisos: 1, precio: 70 },
+  { id: 'm',  nombre: 'Mediana',  porciones: 20, pisos: 1, precio: 120 },
+  { id: 'l',  nombre: 'Grande',   porciones: 30, pisos: 2, precio: 180 },
+  { id: 'xl', nombre: 'Familiar', porciones: 50, pisos: 2, precio: 260 },
+  { id: 'xx', nombre: 'Evento',   porciones: 80, pisos: 3, precio: 390 },
+];
+const BIZCOCHOS = [
+  { id: 'vainilla', nombre: 'Vainilla', extra: 0, color: '#F6DFA8' },
+  { id: 'chocolate', nombre: 'Chocolate', extra: 0, color: '#5B3220' },
+  { id: 'redvelvet', nombre: 'Red velvet', extra: 15, color: '#9F1D2E' },
+  { id: 'naranja', nombre: 'Naranja', extra: 0, color: '#F3C26B' },
+  { id: 'zanahoria', nombre: 'Zanahoria y nuez', extra: 10, color: '#C98A4B' },
+];
+const RELLENOS = [
+  { id: 'manjar', nombre: 'Manjar blanco', extra: 0, color: '#C68642' },
+  { id: 'fudge', nombre: 'Fudge', extra: 0, color: '#3B1F12' },
+  { id: 'lucuma', nombre: 'Crema de lúcuma', extra: 10, color: '#E0A458' },
+  { id: 'fresa', nombre: 'Fresa con crema', extra: 10, color: '#F08CA0' },
+  { id: 'maracuya', nombre: 'Maracuyá', extra: 10, color: '#F4C430' },
+  { id: 'oreo', nombre: 'Crema de Oreo', extra: 12, color: '#6B6B6B' },
+];
+const COBERTURAS = [
+  { id: 'chantilly', nombre: 'Chantilly', extra: 0, nota: 'Suave y ligera' },
+  { id: 'buttercream', nombre: 'Buttercream', extra: 15, nota: 'Cremosa' },
+  { id: 'ganache', nombre: 'Ganache', extra: 20, nota: 'Chocolate', colorFijo: '#4A2716' },
+  { id: 'fondant', nombre: 'Fondant', extra: 40, nota: 'Lisa, para diseños', dias: 4 },
+];
+const COLORES = [
+  { id: 'blanco', nombre: 'Blanco', hex: '#FFFDF8' },
+  { id: 'rosa', nombre: 'Rosa', hex: '#F9C6D3' },
+  { id: 'celeste', nombre: 'Celeste', hex: '#BFE0F2' },
+  { id: 'lila', nombre: 'Lila', hex: '#D9C6EC' },
+  { id: 'crema', nombre: 'Crema', hex: '#F7E3B5' },
+  { id: 'menta', nombre: 'Menta', hex: '#C8EBD9' },
+];
+const EXTRAS = [
+  { id: 'frutas', nombre: 'Frutos rojos', extra: 20 },
+  { id: 'flores', nombre: 'Flores naturales', extra: 25 },
+  { id: 'drip', nombre: 'Chorreado de chocolate', extra: 15 },
+  { id: 'topper', nombre: 'Topper con nombre', extra: 20 },
+  { id: 'velas', nombre: 'Velas y bengala', extra: 8 },
+  { id: 'fotocake', nombre: 'Foto comestible', extra: 25 },
+];
+
+const TORTAS = [
+  { id: 1,  nombre: 'Chocotorta húmeda', cat: 'Cumpleaños', precio: 95, porciones: 15, img: '1605807646983-377bc5a76493', desc: 'Bizcocho de chocolate bien húmedo, relleno y cubierto de fudge, con chorreado y bombones.', top: true },
+  { id: 2,  nombre: 'Tres leches clásica', cat: 'Clásicas', precio: 75, porciones: 15, img: '1571115177098-24ec42ed204d', desc: 'Bizcocho de vainilla bañado en tres leches, con merengue suizo y canela.', top: true },
+  { id: 3,  nombre: 'Selva negra', cat: 'Clásicas', precio: 99, porciones: 15, img: '1606890737304-57a1ca8a5b62', desc: 'Chocolate, chantilly y cerezas al marrasquino, decorada con virutas de chocolate.' },
+  { id: 4,  nombre: 'Torta de fresas con crema', cat: 'Clásicas', precio: 89, porciones: 15, img: '1565958011703-44f9829ba187', desc: 'Bizcocho de vainilla, crema chantilly y fresas frescas entre capas.' },
+  { id: 5,  nombre: 'Torta de galleta Oreo', cat: 'Cumpleaños', precio: 105, porciones: 15, img: '1557925923-cd4648e211a0', desc: 'Bizcocho de chocolate con crema de galleta y cobertura de ganache.' },
+  { id: 6,  nombre: 'Torta trufada', cat: 'Cumpleaños', precio: 110, porciones: 15, img: '1578985545062-69928b1d9587', desc: 'Chocolate intenso con trufas artesanales y ganache brillante.', top: true },
+  { id: 7,  nombre: 'Torta arcoíris', cat: 'Infantiles', precio: 120, porciones: 20, img: '1464349095431-e9a21285b5f3', desc: 'Seis capas de colores con buttercream de vainilla y chispas. ¡La favorita de los niños!' },
+  { id: 8,  nombre: 'Torta helado de fresa', cat: 'Infantiles', precio: 135, porciones: 20, img: '1621303837174-89787a7d4729', desc: 'Cobertura rosa con chorreado, conos de helado y chispas de colores.' },
+  { id: 9,  nombre: 'Torta unicornio', cat: 'Infantiles', precio: 149, porciones: 20, img: '1562777717-dc6984f65a63', desc: 'Buttercream pastel, cuerno dorado y flores de crema. Ideal para fiestas temáticas.' },
+  { id: 10, nombre: 'Baby shower rosa', cat: 'Baby shower', precio: 159, porciones: 25, img: '1616690710400-a16d146927c5', desc: 'Torta de dos tonos con chorreado blanco, chispas y topper personalizado.' },
+  { id: 11, nombre: 'Naked cake de moras', cat: 'Bodas y XV', precio: 189, porciones: 30, img: '1559620192-032c4bc4674e', desc: 'Estilo rústico con crema de queso, moras y frutos rojos. Perfecta para bodas civiles.' },
+  { id: 12, nombre: 'Torta dorada de flores', cat: 'Bodas y XV', precio: 249, porciones: 40, img: '1627834377411-8da5f4f09de8', desc: 'Cobertura lisa con detalles dorados y flores naturales. Ideal para XV años.', top: true },
+  { id: 13, nombre: 'Cheesecake de arándanos', cat: 'Clásicas', precio: 85, porciones: 12, img: '1533134242443-d4fd215305ad', desc: 'Base de galleta, crema de queso horneada y mermelada casera de arándanos.' },
+  { id: 14, nombre: 'Torta de maracuyá', cat: 'Clásicas', precio: 85, porciones: 15, img: '1542826438-bd32f43d626f', desc: 'Mousse de maracuyá sobre bizcocho de vainilla, con espejo de fruta.' },
+  { id: 15, nombre: 'Mousse de frambuesa', cat: 'Cumpleaños', precio: 115, porciones: 15, img: '1519340333755-56e9c1d04579', desc: 'Mousse de frambuesa y chocolate blanco con glaseado brillante.' },
+  { id: 16, nombre: 'Red velvet', cat: 'Clásicas', precio: 105, porciones: 15, img: '1586788680434-30d324b2d46f', desc: 'Bizcocho rojo aterciopelado con frosting de queso crema. Pídela con relleno de lúcuma para un toque peruano.' },
+];
+const OCASIONES = ['Todas', 'Cumpleaños', 'Clásicas', 'Infantiles', 'Baby shower', 'Bodas y XV'];
+
+const BOCADITOS = [
+  { id: 'b1', nombre: 'Cupcakes decorados', paquete: 'x 12 unidades', precio: 54, img: '1614707267537-b85aaf00c4b7', desc: 'Vainilla o chocolate, con buttercream del color de tu fiesta.' },
+  { id: 'b2', nombre: 'Mini cupcakes', paquete: 'x 50 unidades', precio: 95, img: '1563729784474-d77dbb933a9e', desc: 'Tamaño bocado, ideales para mesas de dulces.' },
+  { id: 'b3', nombre: 'Galletas con chispas', paquete: 'x 24 unidades', precio: 48, img: '1621236378699-8597faf6a176', desc: 'Crujientes por fuera y suaves por dentro.' },
+  { id: 'b4', nombre: 'Galletas de doble chocolate', paquete: 'x 24 unidades', precio: 52, img: '1558961363-fa8fdf82db35', desc: 'Con trozos de chocolate bitter. Perfectas para regalar.' },
+  { id: 'b5', nombre: 'Mini pies de frutos rojos', paquete: 'x 25 unidades', precio: 75, img: '1464305795204-6f5bbfc7fb81', desc: 'Masa sablé, crema pastelera y frutos rojos frescos.' },
+  { id: 'b6', nombre: 'Cupcakes de chocolate', paquete: 'x 12 unidades', precio: 58, img: '1550617931-e17a7b70dce2', desc: 'Chocolate con frosting de fudge y chispas.' },
+];
+
+const GALERIA = [
+  ['1627834377411-8da5f4f09de8', 'XV años de Camila'],
+  ['1621303837174-89787a7d4729', 'Cumple de Mateo'],
+  ['1464349095431-e9a21285b5f3', 'Fiesta arcoíris'],
+  ['1562777717-dc6984f65a63', 'Unicornio de Luana'],
+  ['1559620192-032c4bc4674e', 'Boda civil en Barranco'],
+  ['1616690710400-a16d146927c5', 'Baby shower'],
+];
+
+const RESENAS = [
+  { nombre: 'Andrea P.', distrito: 'Surco', texto: 'Diseñé la torta de cumpleaños de mi hija en la web y salió igualita. La tres leches es la mejor que he probado en Lima.' },
+  { nombre: 'Jorge L.', distrito: 'San Borja', texto: 'Pedí por WhatsApp un jueves y el sábado la tenía en mi casa. Llegó perfecta, en caja refrigerada.' },
+  { nombre: 'Milagros R.', distrito: 'La Molina', texto: 'Hicieron la torta y los bocaditos de mi baby shower. Todos preguntaron dónde los habíamos pedido.' },
+];
+
+const DISTRITOS = [
+  ['Recojo en tienda (Surco)', 0],
+  ['Santiago de Surco', 8], ['San Borja', 10], ['Surquillo', 10], ['Barranco', 10], ['Miraflores', 12], ['La Molina', 12], ['Chorrillos', 12],
+  ['San Isidro', 12], ['Lince', 14], ['Jesús María', 15], ['San Miguel', 16], ['Pueblo Libre', 15], ['Ate', 15], ['Villa María del Triunfo', 15],
+  ['San Juan de Miraflores', 12], ['Los Olivos', 22], ['San Juan de Lurigancho', 22], ['Callao', 22], ['Comas', 25],
+];
+
+/* ===================== Estado ===================== */
+const store = {
+  leer(k, d) { try { const v = localStorage.getItem('dulceabril-' + k); return v ? JSON.parse(v) : d; } catch { return d; } },
+  escribir(k, v) { try { localStorage.setItem('dulceabril-' + k, JSON.stringify(v)); } catch {} },
+};
+let pedido = store.leer('pedido', []);
+let ocasion = 'Todas';
+const diseno = { tamano: 'm', bizcocho: 'vainilla', relleno: 'manjar', cobertura: 'chantilly', color: 'rosa', extras: new Set(['frutas']) };
+
+/* ===================== Utilidades ===================== */
+const $ = (s) => document.querySelector(s);
+const $$ = (s) => [...document.querySelectorAll(s)];
+const soles = (n) => 'S/ ' + (Number.isInteger(n) ? n : n.toFixed(2));
+const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const porId = (lista, id) => lista.find((x) => x.id === id);
+const waLink = (t) => `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(t)}`;
+function img(id, alt, w = 600) {
+  return `<img src="${U(id, w)}" alt="${esc(alt)}" loading="lazy" onerror="this.outerHTML='<div class=&quot;img-fallback&quot;>${esc(alt).replace(/&#39;/g, '')}</div>'">`;
+}
+let tt;
+function aviso(m) { const t = $('#toast'); t.textContent = m; t.classList.add('show'); clearTimeout(tt); tt = setTimeout(() => t.classList.remove('show'), 2600); }
+function abrir(id) { const d = document.getElementById(id); if (!d.open) d.showModal(); }
+function hoyMas(dias) { const d = new Date(); d.setDate(d.getDate() + dias); return d.toISOString().slice(0, 10); }
+function fechaBonita(iso) {
+  if (!iso) return 'sin fecha';
+  const [y, m, d] = iso.split('-').map(Number);
+  return new Date(y, m - 1, d).toLocaleDateString('es-PE', { weekday: 'long', day: 'numeric', month: 'long' });
+}
+const estrellas = () => Array.from({ length: 5 }, () => '<svg><use href="#i-star"/></svg>').join('');
+
+/* ===================== Catálogo ===================== */
+function pintarCatalogo() {
+  $('#cats').innerHTML = OCASIONES.map((o) => `<button class="cat" aria-pressed="${o === ocasion}" data-oc="${o}">${o}</button>`).join('');
+  const lista = TORTAS.filter((t) => ocasion === 'Todas' || t.cat === ocasion);
+  $('#grid').innerHTML = lista.map((t) => `
+    <article class="card">
+      <button class="card-media" data-torta="${t.id}" aria-label="Ver ${esc(t.nombre)}">
+        ${t.top ? '<span class="card-tag hot">Más pedida</span>' : `<span class="card-tag">${t.cat}</span>`}
+        ${img(t.img, t.nombre)}
+      </button>
+      <div class="card-body">
+        <h3>${esc(t.nombre)}</h3>
+        <span class="meta">${t.porciones} porciones · ${t.cat}</span>
+        <div class="card-foot">
+          <span class="price"><small>desde</small> ${soles(t.precio)}</span>
+          <button class="btn small" data-torta="${t.id}">Pedir</button>
+        </div>
+      </div>
+    </article>`).join('');
+}
+$('#cats').addEventListener('click', (e) => { const b = e.target.closest('[data-oc]'); if (b) { ocasion = b.dataset.oc; pintarCatalogo(); } });
+
+/* Modal de torta del catálogo: tamaño, mensaje y fecha */
+const FACTOR = [{ p: 1, k: 1 }, { p: 1.6, k: 1.55 }, { p: 2.4, k: 2.2 }];
+let tSel = {};
+function verTorta(id) {
+  const t = porId(TORTAS, id);
+  tSel = { id, tam: 0, mensaje: '', fecha: hoyMas(2) };
+  $('#t-cat').textContent = t.cat;
+  pintarTorta(); abrir('dlg-torta');
+}
+function precioTorta(t, tam) { return Math.round(t.precio * FACTOR[tam].k); }
+function porcionesTorta(t, tam) { return Math.round(t.porciones * FACTOR[tam].p); }
+function pintarTorta() {
+  const t = porId(TORTAS, tSel.id);
+  $('#t-body').innerHTML = `
+    <div class="pdp">
+      <div class="pdp-img">${img(t.img, t.nombre, 900)}</div>
+      <div class="pdp-info">
+        <h3 id="t-nombre">${esc(t.nombre)}</h3>
+        <p class="muted" style="margin:0">${esc(t.desc)}</p>
+        <div>
+          <p style="margin:0 0 8px;font-weight:700">Tamaño</p>
+          <div class="options">${FACTOR.map((f, i) => `
+            <label class="opt"><input type="radio" name="t-tam" value="${i}" ${i === tSel.tam ? 'checked' : ''}><span>${porcionesTorta(t, i)} porciones<small>${soles(precioTorta(t, i))}</small></span></label>`).join('')}
+          </div>
+        </div>
+        <label class="field">Mensaje en la torta <span class="help">Opcional, máximo 30 letras</span>
+          <input class="input" id="t-mensaje" maxlength="30" value="${esc(tSel.mensaje)}" placeholder="Ej. Feliz día, mamá">
+        </label>
+        <label class="field">Fecha de entrega
+          <input class="input" type="date" id="t-fecha" min="${hoyMas(2)}" value="${tSel.fecha}">
+          <span class="help">Mínimo 48 horas de anticipación</span>
+        </label>
+        <button class="btn block" id="t-agregar"><svg class="i"><use href="#i-bag"/></svg>Agregar · ${soles(precioTorta(t, tSel.tam))}</button>
+      </div>
+    </div>`;
+}
+$('#t-body').addEventListener('change', (e) => {
+  if (e.target.name === 't-tam') { tSel.tam = +e.target.value; tSel.mensaje = $('#t-mensaje').value; tSel.fecha = $('#t-fecha').value; pintarTorta(); }
+});
+$('#t-body').addEventListener('click', (e) => {
+  if (!e.target.closest('#t-agregar')) return;
+  const t = porId(TORTAS, tSel.id); const fecha = $('#t-fecha').value;
+  if (!fecha || fecha < hoyMas(2)) { aviso('Elige una fecha con al menos 48 horas de anticipación'); return; }
+  agregar({
+    tipo: 'torta', nombre: t.nombre, img: t.img, precio: precioTorta(t, tSel.tam), cant: 1,
+    detalle: [`${porcionesTorta(t, tSel.tam)} porciones`, $('#t-mensaje').value.trim() && `Mensaje: "${$('#t-mensaje').value.trim()}"`, `Entrega: ${fechaBonita(fecha)}`].filter(Boolean),
+    fecha,
+  });
+  $('#dlg-torta').close(); abrir('dlg-pedido');
+});
+
+/* ===================== Personalizador ===================== */
+function opciones(cont, lista, campo, render, tipo = 'radio') {
+  $(cont).innerHTML = lista.map((o) => `
+    <label class="opt"><input type="${tipo}" name="${campo}" value="${o.id}" ${tipo === 'radio' ? (diseno[campo] === o.id ? 'checked' : '') : (diseno[campo].has(o.id) ? 'checked' : '')}><span>${render(o)}</span></label>`).join('');
+}
+function montarBuilder() {
+  opciones('#o-tamano', TAMANOS, 'tamano', (t) => `${t.nombre} · ${t.porciones} porc.<small>${t.pisos} piso${t.pisos > 1 ? 's' : ''} · ${soles(t.precio)}</small>`);
+  opciones('#o-bizcocho', BIZCOCHOS, 'bizcocho', (b) => `<span><i class="color-dot" style="background:${b.color}"></i>${b.nombre}</span><small>${b.extra ? '+' + soles(b.extra) : 'Incluido'}</small>`);
+  opciones('#o-relleno', RELLENOS, 'relleno', (r) => `<span><i class="color-dot" style="background:${r.color}"></i>${r.nombre}</span><small>${r.extra ? '+' + soles(r.extra) : 'Incluido'}</small>`);
+  opciones('#o-cobertura', COBERTURAS, 'cobertura', (c) => `${c.nombre}<small>${c.nota} · ${c.extra ? '+' + soles(c.extra) : 'Incluido'}</small>`);
+  opciones('#o-color', COLORES, 'color', (c) => `<span><i class="color-dot" style="background:${c.hex}"></i>${c.nombre}</span>`);
+  opciones('#o-extras', EXTRAS, 'extras', (x) => `${x.nombre}<small>+${soles(x.extra)}</small>`, 'checkbox');
+  actualizarFechaMin();
+}
+function calcularDiseno() {
+  const t = porId(TAMANOS, diseno.tamano), b = porId(BIZCOCHOS, diseno.bizcocho), r = porId(RELLENOS, diseno.relleno), c = porId(COBERTURAS, diseno.cobertura);
+  const extras = EXTRAS.filter((x) => diseno.extras.has(x.id));
+  // Los sabores especiales cuestan más en tortas grandes
+  const mult = t.pisos;
+  const total = t.precio + (b.extra + r.extra) * mult + c.extra * mult + extras.reduce((s, x) => s + x.extra, 0);
+  const dias = Math.max(2, c.dias || 0, t.pisos === 3 ? 4 : 0);
+  return { t, b, r, c, extras, total, dias, color: c.colorFijo || porId(COLORES, diseno.color).hex };
+}
+function actualizarFechaMin() {
+  const { dias } = calcularDiseno();
+  const f = $('#fecha'); f.min = hoyMas(dias);
+  if (!f.value || f.value < f.min) f.value = f.min;
+  $('#fecha-help').textContent = `Desde el ${fechaBonita(f.min)} (${dias === 2 ? '48 horas' : dias + ' días'} de anticipación)`;
+}
+
+/* Dibujo de la torta en SVG */
+function pintarPreview() {
+  const d = calcularDiseno();
+  const W = 340, H = 300, base = 262;
+  const pisos = d.t.pisos;
+  const anchos = [220, 170, 124].slice(0, pisos);
+  const alto = pisos === 1 ? 104 : pisos === 2 ? 80 : 64;
+  let y = base, svg = '';
+  // plato
+  svg += `<ellipse cx="${W / 2}" cy="${base + 6}" rx="150" ry="16" fill="#E8D5B5"/><ellipse cx="${W / 2}" cy="${base + 2}" rx="140" ry="12" fill="#FFFDF8" stroke="#E8D5B5"/>`;
+  const tops = [];
+  anchos.forEach((w, i) => {
+    const x = (W - w) / 2, top = y - alto;
+    // cuerpo del piso con un corte que muestra bizcocho y relleno
+    svg += `<rect x="${x}" y="${top}" width="${w}" height="${alto}" rx="10" fill="${d.color}" stroke="rgba(69,26,3,.12)"/>`;
+    const cx = x + w - 46;
+    const capas = 3, hCapa = (alto - 16) / capas;
+    for (let k = 0; k < capas; k++) {
+      svg += `<rect x="${cx}" y="${top + 8 + k * hCapa}" width="34" height="${hCapa * 0.72}" fill="${d.b.color}"/>`;
+      if (k < capas - 1) svg += `<rect x="${cx}" y="${top + 8 + k * hCapa + hCapa * 0.72}" width="34" height="${hCapa * 0.28}" fill="${d.r.color}"/>`;
+    }
+    svg += `<ellipse cx="${W / 2}" cy="${top}" rx="${w / 2}" ry="10" fill="${d.color}" stroke="rgba(69,26,3,.12)"/>`;
+    // borde de crema
+    if (d.c.id !== 'fondant') for (let bx = x + 10; bx < x + w - 6; bx += 16) svg += `<circle cx="${bx}" cy="${y - 4}" r="6" fill="${d.color}" stroke="rgba(69,26,3,.15)"/>`;
+    // chorreado
+    if (d.extras.some((e) => e.id === 'drip')) {
+      let p = `M${x} ${top + 4}`;
+      for (let dx = 0; dx <= w; dx += 14) p += ` L${x + dx} ${top + 4 + ((dx / 14) % 2 ? 12 + (dx % 3) * 6 : 6)}`;
+      svg += `<path d="${p} L${x + w} ${top} L${x} ${top} Z" fill="#4A2716"/>`;
+      svg += `<ellipse cx="${W / 2}" cy="${top}" rx="${w / 2}" ry="10" fill="#4A2716"/>`;
+    }
+    tops.push({ x, w, top });
+    y = top;
+  });
+  const cima = tops[tops.length - 1];
+  // frutos rojos
+  if (d.extras.some((e) => e.id === 'frutas')) {
+    [-0.32, -0.12, 0.08, 0.28].forEach((f, i) => { svg += `<circle cx="${W / 2 + f * cima.w}" cy="${cima.top - 4 + (i % 2) * 3}" r="7" fill="${i % 2 ? '#3B2A6B' : '#C8102E'}"/>`; });
+  }
+  // flores
+  if (d.extras.some((e) => e.id === 'flores')) {
+    const fx = tops[0].x + 16, fy = tops[0].top + 18;
+    [[0, 0, '#F8A5C2'], [16, 10, '#FFFFFF'], [4, 22, '#F4D35E']].forEach(([dx, dy, c]) => {
+      for (let a = 0; a < 5; a++) svg += `<circle cx="${fx + dx + Math.cos(a * 1.256) * 6}" cy="${fy + dy + Math.sin(a * 1.256) * 6}" r="5" fill="${c}" stroke="rgba(0,0,0,.08)"/>`;
+      svg += `<circle cx="${fx + dx}" cy="${fy + dy}" r="3" fill="#E0A458"/>`;
+    });
+  }
+  // velas
+  if (d.extras.some((e) => e.id === 'velas')) {
+    [-24, 0, 24].forEach((dx, i) => {
+      svg += `<rect x="${W / 2 + dx - 3}" y="${cima.top - 34}" width="6" height="28" rx="2" fill="${['#7CC6FE', '#F9C6D3', '#F4D35E'][i]}"/>`;
+      svg += `<path d="M${W / 2 + dx} ${cima.top - 46} q5 7 0 11 q-5 -4 0 -11Z" fill="#F59E0B"/>`;
+    });
+  }
+  // topper
+  if (d.extras.some((e) => e.id === 'topper')) {
+    svg += `<line x1="${W / 2 - 30}" y1="${cima.top - 6}" x2="${W / 2 - 30}" y2="${cima.top - 52}" stroke="#B45309" stroke-width="2"/><line x1="${W / 2 + 30}" y1="${cima.top - 6}" x2="${W / 2 + 30}" y2="${cima.top - 52}" stroke="#B45309" stroke-width="2"/>`;
+    svg += `<text x="${W / 2}" y="${cima.top - 52}" text-anchor="middle" font-family="Caveat, cursive" font-size="26" font-weight="700" fill="#B45309">${esc(($('#mensaje').value.split(/[ ,]/).pop() || 'Feliz día').slice(0, 10))}</text>`;
+  }
+  // foto comestible
+  if (d.extras.some((e) => e.id === 'fotocake')) {
+    svg += `<ellipse cx="${W / 2}" cy="${cima.top}" rx="${Math.min(34, cima.w / 4)}" ry="6" fill="#BFE0F2" stroke="#fff" stroke-width="2"/>`;
+  }
+  // mensaje sobre el plato
+  const msg = $('#mensaje').value.trim();
+  if (msg) svg += `<text x="${W / 2}" y="${base + 30}" text-anchor="middle" font-family="Caveat, cursive" font-size="22" font-weight="700" fill="#BE185D">${esc(msg)}</text>`;
+
+  $('#preview').innerHTML = `<svg viewBox="0 0 ${W} ${H + 20}" role="img" aria-label="Vista previa: torta de ${d.t.pisos} piso(s), cobertura ${d.c.nombre.toLowerCase()}">${svg}</svg>`;
+  $('#summary').innerHTML = `
+    <div><span>${d.t.nombre} · ${d.t.porciones} porciones</span><span>${soles(d.t.precio)}</span></div>
+    <div><span>Bizcocho de ${d.b.nombre.toLowerCase()}</span><span>${d.b.extra ? '+' + soles(d.b.extra * d.t.pisos) : '—'}</span></div>
+    <div><span>Relleno de ${d.r.nombre.toLowerCase()}</span><span>${d.r.extra ? '+' + soles(d.r.extra * d.t.pisos) : '—'}</span></div>
+    <div><span>${d.c.nombre}${d.c.colorFijo ? '' : ' ' + porId(COLORES, diseno.color).nombre.toLowerCase()}</span><span>${d.c.extra ? '+' + soles(d.c.extra * d.t.pisos) : '—'}</span></div>
+    ${d.extras.map((x) => `<div><span>${x.nombre}</span><span>+${soles(x.extra)}</span></div>`).join('')}
+    <div class="total"><span>Total</span><span>${soles(d.total)}</span></div>`;
+}
+$('#builder').addEventListener('change', (e) => {
+  const { name, value, checked } = e.target;
+  if (name === 'extras') checked ? diseno.extras.add(value) : diseno.extras.delete(value);
+  else if (name in diseno) diseno[name] = value;
+  if (name === 'tamano' || name === 'cobertura') actualizarFechaMin();
+  $('#o-color').closest('.step').querySelector('#o-color').style.opacity = diseno.cobertura === 'ganache' ? .4 : 1;
+  pintarPreview();
+});
+$('#mensaje').addEventListener('input', pintarPreview);
+$('#invitados').addEventListener('input', (e) => {
+  const n = +e.target.value;
+  if (!n) { $('#invitados-out').textContent = ''; return; }
+  const t = TAMANOS.find((x) => x.porciones >= n) || TAMANOS[TAMANOS.length - 1];
+  diseno.tamano = t.id;
+  $$('#o-tamano input').forEach((i) => (i.checked = i.value === t.id));
+  $('#invitados-out').innerHTML = n > 80 ? `Te recomendamos <b>${t.nombre}</b> + bocaditos` : `Te recomendamos la <b>${t.nombre}</b> (${t.porciones} porciones)`;
+  actualizarFechaMin(); pintarPreview();
+});
+$('#ref').addEventListener('change', (e) => {
+  const f = e.target.files[0]; if (!f) return;
+  const url = URL.createObjectURL(f);
+  $('#ref-img').src = url; $('#ref-img').hidden = false; $('#ref-txt').textContent = f.name + ' · recuerda enviárnosla por WhatsApp';
+});
+$('#agregar-custom').addEventListener('click', () => {
+  const fecha = $('#fecha').value;
+  if (!fecha || fecha < $('#fecha').min) { aviso('Revisa la fecha de entrega'); $('#fecha').focus(); return; }
+  const d = calcularDiseno(); const msg = $('#mensaje').value.trim(); const notas = $('#notas').value.trim();
+  agregar({
+    tipo: 'diseno', nombre: `Torta personalizada (${d.t.porciones} porc.)`, img: null, precio: d.total, cant: 1, fecha,
+    detalle: [
+      `${d.t.pisos} piso(s) · bizcocho de ${d.b.nombre.toLowerCase()} · relleno de ${d.r.nombre.toLowerCase()}`,
+      `Cobertura: ${d.c.nombre.toLowerCase()}${d.c.colorFijo ? '' : ' color ' + porId(COLORES, diseno.color).nombre.toLowerCase()}`,
+      d.extras.length && `Decoración: ${d.extras.map((x) => x.nombre.toLowerCase()).join(', ')}`,
+      msg && `Mensaje: "${msg}"`,
+      notas && `Indicaciones: ${notas}`,
+      $('#ref').files[0] && 'Tengo una foto de referencia (la envío aquí)',
+      `Entrega: ${fechaBonita(fecha)}, ${$('#hora').value}`,
+    ].filter(Boolean),
+  });
+  abrir('dlg-pedido');
+});
+
+/* ===================== Bocaditos ===================== */
+function pintarBocaditos() {
+  $('#snacks').innerHTML = BOCADITOS.map((b) => `
+    <article class="snack">
+      <div class="ph">${img(b.img, b.nombre, 300)}</div>
+      <div><h3>${b.nombre}</h3><p>${b.desc}</p><p><b style="color:var(--primary)">${soles(b.precio)}</b> · ${b.paquete}</p></div>
+      <button class="btn small" data-boc="${b.id}" aria-label="Agregar ${b.nombre}">Agregar</button>
+    </article>`).join('');
+}
+$('#snacks').addEventListener('click', (e) => {
+  const b = e.target.closest('[data-boc]'); if (!b) return;
+  const x = porId(BOCADITOS, b.dataset.boc);
+  agregar({ tipo: 'bocadito', key: x.id, nombre: x.nombre, img: x.img, precio: x.precio, cant: 1, detalle: [x.paquete] });
+});
+
+/* ===================== Pedido ===================== */
+function agregar(item) {
+  const existe = item.key && pedido.find((p) => p.key === item.key);
+  existe ? existe.cant++ : pedido.push(item);
+  guardar(); aviso(`${item.nombre} agregado a tu pedido`);
+}
+function guardar() { store.escribir('pedido', pedido); pintarPedido(); }
+function totales() {
+  const subtotal = pedido.reduce((s, p) => s + p.precio * p.cant, 0);
+  const d = DISTRITOS[+$('#p-distrito').value || 0];
+  const envio = pedido.length ? d[1] : 0;
+  const total = subtotal + envio;
+  return { subtotal, envio, distrito: d[0], total, adelanto: Math.ceil(total / 2) };
+}
+function pintarPedido() {
+  const n = pedido.reduce((s, p) => s + p.cant, 0);
+  $('#count').textContent = n; $('#count').dataset.n = n;
+  $('#pedido-foot').hidden = !pedido.length;
+  $('#pedido-items').innerHTML = pedido.length ? pedido.map((p, i) => `
+    <div class="line">
+      <div class="ph">${p.img ? img(p.img, p.nombre, 160) : '<svg class="i" style="width:32px;height:32px;color:var(--primary)"><use href="#i-wand"/></svg>'}</div>
+      <div><h3>${esc(p.nombre)}${p.cant > 1 ? ` × ${p.cant}` : ''}</h3>${p.detalle.map((d) => `<div class="meta">${esc(d)}</div>`).join('')}<div style="font-weight:700;margin-top:4px">${soles(p.precio * p.cant)}</div></div>
+      <button class="icon-btn" data-quitar="${i}" aria-label="Quitar ${esc(p.nombre)}"><svg class="i"><use href="#i-trash"/></svg></button>
+    </div>`).join('')
+    : '<div class="empty"><p style="margin:0 0 12px">Tu pedido está vacío.</p><a class="btn small" href="#tortas" data-close>Ver tortas</a></div>';
+  const t = totales();
+  $('#totales').innerHTML = `
+    <div><span>Subtotal</span><span>${soles(t.subtotal)}</span></div>
+    <div><span>Entrega · ${esc(t.distrito)}</span><span>${t.envio ? soles(t.envio) : 'Gratis'}</span></div>
+    <div class="grand"><span>Total</span><span>${soles(t.total)}</span></div>
+    <div class="adelanto"><span>Adelanto para separar (50%)</span><span>${soles(t.adelanto)}</span></div>`;
+}
+$('#pedido-items').addEventListener('click', (e) => {
+  const b = e.target.closest('[data-quitar]'); if (b) { pedido.splice(+b.dataset.quitar, 1); guardar(); }
+});
+$('#p-distrito').addEventListener('change', pintarPedido);
+$('#enviar').addEventListener('click', () => {
+  const t = totales(); const nombre = $('#p-nombre').value.trim();
+  const lineas = pedido.flatMap((p) => [`• ${p.nombre}${p.cant > 1 ? ` × ${p.cant}` : ''} – ${soles(p.precio * p.cant)}`, ...p.detalle.map((d) => `   ${d}`)]);
+  const msg = [
+    `¡Hola Dulce Abril! ${nombre ? `Soy ${nombre} y quiero` : 'Quiero'} hacer este pedido:`, '', ...lineas, '',
+    `Entrega: ${t.distrito}${t.envio ? ` (${soles(t.envio)})` : ''}`,
+    `*Total: ${soles(t.total)}*`,
+    `Adelanto (50%): ${soles(t.adelanto)}`, '',
+    '¿Me confirman la fecha y me envían los datos para pagar por Yape? Gracias.',
+  ].join('\n');
+  window.open(waLink(msg), '_blank', 'noopener');
+});
+
+/* ===================== Galería, reseñas, horario, delivery ===================== */
+function pintarExtras() {
+  $('#gallery').innerHTML = GALERIA.map(([id, cap], i) => `<figure>${img(id, cap, i === 0 ? 900 : 500)}<figcaption>${cap}</figcaption></figure>`).join('');
+  $('#reviews').innerHTML = RESENAS.map((r) => `
+    <article class="review"><div class="stars" aria-label="5 de 5 estrellas">${estrellas()}</div><p>“${esc(r.texto)}”</p>
+      <footer><span class="avatar">${r.nombre[0]}</span><span><b>${r.nombre}</b><br><span class="muted">${r.distrito}</span></span></footer></article>`).join('');
+  const opts = DISTRITOS.map((d, i) => `<option value="${i}">${d[0]} — ${d[1] ? soles(d[1]) : 'Gratis'}</option>`).join('');
+  $('#p-distrito').innerHTML = opts;
+  $('#calc-distrito').innerHTML = '<option value="">Selecciona…</option>' + opts;
+  $('#calc-distrito').addEventListener('change', (e) => {
+    const d = DISTRITOS[+e.target.value];
+    $('#calc-out').innerHTML = e.target.value === '' ? 'Elige tu distrito para ver el costo.'
+      : d[1] ? `Delivery a <b>${d[0]}</b>: <b>${soles(d[1])}</b> · en el horario que elijas` : '<b>Recojo gratis</b> en nuestro local de Surco';
+    $('#p-distrito').value = e.target.value; pintarPedido();
+  });
+  // ¿Abierto ahora? (hora de Lima)
+  const ahora = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Lima' }));
+  const dia = ahora.getDay(), h = ahora.getHours() + ahora.getMinutes() / 60;
+  const [ab, ci] = dia === 0 ? [10, 14] : dia === 6 ? [9, 21] : [9, 20];
+  const abierto = h >= ab && h < ci;
+  $('#abierto').classList.toggle('closed', !abierto);
+  $('#abierto span').textContent = abierto ? `Abierto ahora · cierra a las ${ci > 12 ? ci - 12 : ci}:00 ${ci >= 12 ? 'p. m.' : 'a. m.'}` : 'Cerrado ahora · puedes dejar tu pedido por WhatsApp';
+}
+
+/* ===================== Eventos globales ===================== */
+document.addEventListener('click', (e) => {
+  const t = e.target.closest('[data-torta], [data-close]');
+  if (!t) return;
+  if (t.dataset.torta) verTorta(+t.dataset.torta);
+  else t.closest('dialog')?.close();
+});
+$$('dialog').forEach((d) => d.addEventListener('click', (e) => { if (e.target === d) d.close(); }));
+$('#btn-pedido').addEventListener('click', () => abrir('dlg-pedido'));
+$('#btn-libro').addEventListener('click', () => abrir('dlg-libro'));
+$('#form-libro').addEventListener('submit', (e) => { e.preventDefault(); e.target.reset(); $('#dlg-libro').close(); aviso('Reclamo registrado con el código LR-2026-0017 (demo)'); });
+$('#wa-float').href = waLink('¡Hola Dulce Abril! Quisiera información para pedir una torta.');
+
+/* ===================== Inicio ===================== */
+pintarCatalogo();
+montarBuilder();
+pintarPreview();
+pintarBocaditos();
+pintarExtras();
+pintarPedido();
+</script>
+</body>
+</html>

@@ -1,0 +1,754 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Repuestos El Motor · Autopartes en Av. Grau, Lima</title>
+  <meta name="description" content="Repuestos para tu auto en Av. Grau, Lima. Revisa nuestro stock en línea y consulta por WhatsApp. Pagos con Yape, Plin y efectivo.">
+  <meta name="theme-color" content="#0f1b2d">
+  <style>
+/* Repuestos El Motor — maqueta */
+:root {
+  --azul: #0f1b2d;
+  --azul-2: #1a2b45;
+  --naranja: #ff7a1a;
+  --naranja-osc: #e0610a;
+  --wa: #1fa855;
+  --wa-osc: #178a45;
+  --texto: #1d2633;
+  --suave: #5b6676;
+  --borde: #e2e6ec;
+  --fondo: #f4f6f9;
+  --blanco: #fff;
+  --rojo: #d6363f;
+  --radio: 14px;
+  --sombra: 0 1px 2px rgba(15, 27, 45, .06), 0 4px 16px rgba(15, 27, 45, .06);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: var(--texto);
+  background: var(--fondo);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+img, svg { display: block; }
+a { color: inherit; }
+h1, h2, h3 { line-height: 1.15; margin: 0; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.contenedor { width: 100%; max-width: 1160px; margin: 0 auto; padding: 0 16px; }
+
+.aviso-demo {
+  background: #fff4c2; color: #6b5300; text-align: center;
+  font-size: 12px; padding: 6px 16px; font-weight: 600;
+}
+
+/* ---------- Botones ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 48px; padding: 12px 20px; border-radius: 999px;
+  font-weight: 700; font-size: 16px; text-decoration: none; border: 2px solid transparent;
+  cursor: pointer; transition: background .15s, transform .1s; font-family: inherit;
+}
+.btn:active { transform: scale(.98); }
+.btn--wa { background: var(--wa); color: #fff; }
+.btn--wa:hover { background: var(--wa-osc); }
+.btn--borde { border-color: rgba(255,255,255,.5); color: #fff; }
+.btn--borde:hover { background: rgba(255,255,255,.1); }
+.btn--borde-oscuro { border-color: var(--azul); color: var(--azul); }
+.btn--borde-oscuro:hover { background: var(--azul); color: #fff; }
+.btn--oscuro { background: var(--azul); color: #fff; }
+.btn--chico { min-height: 40px; padding: 8px 14px; font-size: 14px; }
+.btn--grande { min-height: 54px; padding: 14px 26px; font-size: 17px; }
+.btn--bloque { width: 100%; font-size: 15px; padding: 12px 14px; border-radius: 12px; }
+.ico-wa { width: 20px; height: 20px; fill: currentColor; flex: none; }
+.enlace { background: none; border: 0; color: var(--naranja-osc); font-weight: 700; cursor: pointer; padding: 8px 0; font: inherit; font-weight: 700; }
+
+/* ---------- Cabecera ---------- */
+.cabecera { position: sticky; top: 0; z-index: 20; background: var(--azul); color: #fff; box-shadow: 0 2px 10px rgba(0,0,0,.2); }
+.cabecera__fila { display: flex; align-items: center; justify-content: space-between; gap: 12px; height: 62px; }
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #fff; }
+.logo__icono { width: 36px; height: 36px; border-radius: 10px; background: var(--naranja); display: grid; place-items: center; }
+.logo__icono svg { width: 24px; height: 24px; fill: var(--azul); }
+.logo__texto { font-size: 18px; letter-spacing: -.01em; }
+.logo__texto strong { color: var(--naranja); }
+.menu { display: none; gap: 24px; }
+.menu a { text-decoration: none; font-weight: 600; opacity: .85; }
+.menu a:hover { opacity: 1; color: var(--naranja); }
+
+/* ---------- Hero ---------- */
+.hero {
+  background:
+    radial-gradient(circle at 85% 20%, rgba(255,122,26,.25), transparent 45%),
+    linear-gradient(160deg, var(--azul) 0%, var(--azul-2) 100%);
+  color: #fff; padding: 40px 0 48px; overflow: hidden;
+}
+.hero__grid { display: grid; gap: 32px; align-items: center; }
+.hero__etiqueta {
+  display: inline-block; margin: 0 0 14px; padding: 6px 12px; border-radius: 999px;
+  background: rgba(255,122,26,.15); color: var(--naranja); font-weight: 700; font-size: 13px;
+}
+.hero h1 { font-size: clamp(30px, 7.5vw, 52px); letter-spacing: -.02em; font-weight: 800; }
+.hero h1 span { color: var(--naranja); }
+.hero__sub { font-size: 17px; color: #c7d0dd; margin: 16px 0 24px; max-width: 34em; }
+.hero__botones { display: flex; flex-direction: column; gap: 12px; }
+.hero__datos { list-style: none; padding: 0; margin: 28px 0 0; display: grid; gap: 8px; color: #c7d0dd; font-size: 15px; }
+.hero__datos strong { color: #fff; }
+.hero__datos li::before { content: "✓"; color: var(--naranja); font-weight: 800; margin-right: 8px; }
+
+.hero__tarjeta { display: none; }
+.chat {
+  background: #e9e3da; border-radius: 22px; padding: 0 0 18px; color: var(--texto);
+  box-shadow: 0 20px 50px rgba(0,0,0,.35); max-width: 360px; margin-left: auto; overflow: hidden;
+  transform: rotate(2deg);
+}
+.chat__cabeza { display: flex; align-items: center; gap: 10px; background: #0f5e45; color: #fff; padding: 14px 16px; margin-bottom: 14px; }
+.chat__cabeza small { display: block; opacity: .8; font-size: 12px; }
+.chat__avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--naranja); color: var(--azul); display: grid; place-items: center; font-weight: 800; font-size: 13px; }
+.chat__burbuja { background: #fff; margin: 8px 14px; padding: 10px 12px; border-radius: 4px 12px 12px 12px; font-size: 14px; max-width: 82%; box-shadow: 0 1px 1px rgba(0,0,0,.08); }
+.chat__burbuja--yo { background: #d6f5c7; margin-left: auto; border-radius: 12px 4px 12px 12px; }
+
+/* ---------- Secciones ---------- */
+section { padding: 48px 0; }
+.seccion__cabeza { text-align: center; margin-bottom: 24px; }
+.seccion__cabeza h2 { font-size: clamp(26px, 6vw, 36px); letter-spacing: -.02em; font-weight: 800; }
+.seccion__cabeza p { color: var(--suave); margin: 8px auto 0; max-width: 36em; }
+.seccion__cabeza--izq { text-align: left; }
+.seccion__cabeza--izq p { margin-left: 0; }
+
+/* ---------- Filtros ---------- */
+.filtros {
+  background: var(--blanco); border-radius: var(--radio); box-shadow: var(--sombra);
+  padding: 14px; display: grid; gap: 12px;
+}
+.buscador { position: relative; display: block; }
+.buscador svg { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; fill: var(--suave); }
+.buscador input {
+  width: 100%; height: 50px; border: 2px solid var(--borde); border-radius: 12px;
+  padding: 0 14px 0 44px; font-size: 16px; font-family: inherit; color: var(--texto); background: var(--fondo);
+}
+.buscador input:focus, .filtros select:focus { outline: none; border-color: var(--naranja); background: #fff; }
+.filtros__selects { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.filtros__selects label span { display: block; font-size: 12px; font-weight: 700; color: var(--suave); text-transform: uppercase; letter-spacing: .04em; margin-bottom: 4px; }
+.filtros select {
+  width: 100%; height: 46px; border: 2px solid var(--borde); border-radius: 10px; padding: 0 32px 0 12px;
+  font-size: 16px; font-family: inherit; color: var(--texto); background: var(--fondo);
+  appearance: none; -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%235b6676'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 8px center; background-size: 20px;
+}
+.filtros select:disabled { opacity: .5; }
+.filtros__pie { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 14px; }
+.check { display: flex; align-items: center; gap: 8px; font-weight: 600; cursor: pointer; }
+.check input { width: 20px; height: 20px; accent-color: var(--naranja); }
+.contador { color: var(--suave); font-size: 14px; }
+
+.chips {
+  display: flex; gap: 8px; overflow-x: auto; padding: 16px 16px 4px; margin: 0 -16px;
+  scrollbar-width: none; -webkit-overflow-scrolling: touch;
+}
+.chips::-webkit-scrollbar { display: none; }
+.chip {
+  flex: none; display: inline-flex; align-items: center; gap: 6px; height: 38px; padding: 0 14px;
+  border-radius: 999px; border: 1.5px solid var(--borde); background: #fff; color: var(--texto);
+  font: inherit; font-size: 14px; font-weight: 600; cursor: pointer;
+}
+.chip svg { width: 16px; height: 16px; fill: currentColor; }
+.chip--activo { background: var(--azul); color: #fff; border-color: var(--azul); }
+
+/* ---------- Productos ---------- */
+.productos { list-style: none; padding: 0; margin: 16px 0 0; display: grid; grid-template-columns: 1fr; gap: 14px; }
+.producto {
+  background: #fff; border-radius: var(--radio); box-shadow: var(--sombra); padding: 16px;
+  display: flex; flex-direction: column; gap: 4px; border: 1px solid transparent;
+}
+.producto:hover { border-color: var(--borde); }
+.producto__top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+.producto__ico { width: 46px; height: 46px; border-radius: 12px; display: grid; place-items: center; background: #fff1e6; color: var(--naranja-osc); }
+.producto__ico svg { width: 26px; height: 26px; fill: currentColor; }
+.producto__ico--filtros { background: #e8f1ff; color: #2563c9; }
+.producto__ico--suspension { background: #eee9ff; color: #6a4bd1; }
+.producto__ico--motor { background: #e9edf2; color: var(--azul); }
+.producto__ico--electrico { background: #fff6d6; color: #b78400; }
+.producto__ico--iluminacion { background: #e3f7f1; color: #128466; }
+.estado-stock { font-size: 13px; font-weight: 800; padding: 5px 10px; border-radius: 999px; }
+.estado-stock--si { background: #dff5e7; color: #157a3e; }
+.estado-stock--si::before { content: "● "; }
+.estado-stock--no { background: #fde4e5; color: var(--rojo); }
+.producto__cat { margin: 0; font-size: 12px; font-weight: 700; color: var(--suave); text-transform: uppercase; letter-spacing: .04em; }
+.producto__nombre { font-size: 18px; font-weight: 700; }
+.producto__auto { margin: 0; color: var(--suave); font-size: 15px; }
+.producto__pie { display: flex; align-items: baseline; justify-content: space-between; margin: 10px 0 12px; }
+.producto__precio { margin: 0; font-size: 24px; font-weight: 800; color: var(--azul); letter-spacing: -.01em; }
+.producto__unid { margin: 0; font-size: 13px; color: var(--suave); font-weight: 600; }
+.producto .btn { margin-top: auto; }
+.producto--agotado .producto__precio { color: var(--suave); }
+.producto--agotado .producto__ico { filter: grayscale(1); opacity: .6; }
+.producto--agotado .btn--wa { background: #fff; color: var(--wa-osc); border-color: var(--wa); }
+
+.vacio { text-align: center; background: #fff; border-radius: var(--radio); padding: 28px 16px; margin-top: 16px; box-shadow: var(--sombra); }
+.vacio p { margin: 0 0 16px; }
+
+/* ---------- Visítanos ---------- */
+.visitanos { background: #fff; }
+.visitanos__grid { display: grid; gap: 28px; }
+.visitanos .seccion__cabeza small { color: #98a2b0; }
+.horario { background: var(--fondo); border-radius: var(--radio); padding: 18px; margin-bottom: 18px; }
+.horario h3 { font-size: 17px; margin-bottom: 10px; }
+.horario table { width: 100%; border-collapse: collapse; font-size: 15px; }
+.horario th, .horario td { padding: 8px 0; border-bottom: 1px solid var(--borde); text-align: left; }
+.horario th { font-weight: 600; }
+.horario td { text-align: right; color: var(--suave); }
+.estado { margin: 12px 0 0; font-weight: 700; font-size: 14px; }
+.estado--abierto { color: #157a3e; }
+.estado--cerrado { color: var(--rojo); }
+.botones-fila { display: flex; gap: 10px; flex-wrap: wrap; }
+.botones-fila .btn { flex: 1 1 160px; }
+.mapa iframe { width: 100%; height: 320px; border: 0; border-radius: var(--radio); background: var(--fondo); box-shadow: var(--sombra); }
+.mapa__nota { font-size: 12px; color: var(--suave); margin: 8px 0 0; }
+
+/* ---------- Pagos ---------- */
+.pagos__lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.pago { background: #fff; border-radius: var(--radio); box-shadow: var(--sombra); padding: 18px; display: flex; gap: 16px; align-items: center; }
+.pago p { margin: 0; color: var(--suave); }
+.pago__logo { flex: none; width: 64px; height: 64px; border-radius: 16px; display: grid; place-items: center; font-weight: 800; font-size: 18px; color: #fff; }
+.pago--yape .pago__logo { background: #6c2c91; }
+.pago--plin .pago__logo { background: #12b5c9; }
+.pago--efectivo .pago__logo { background: #2e8b57; font-size: 22px; }
+
+/* ---------- CTA ---------- */
+.cta { padding-top: 8px; }
+.cta__caja {
+  background: linear-gradient(135deg, var(--naranja) 0%, #ff9a3d 100%);
+  border-radius: 20px; padding: 32px 20px; text-align: center; color: var(--azul);
+  max-width: calc(1160px - 32px); width: calc(100% - 32px);
+}
+.cta__caja h2 { font-size: clamp(24px, 5.5vw, 32px); font-weight: 800; letter-spacing: -.02em; }
+.cta__caja p { margin: 10px auto 22px; max-width: 32em; font-weight: 500; }
+
+/* ---------- Pie ---------- */
+.pie { background: var(--azul); color: #c7d0dd; padding: 40px 0 96px; font-size: 14px; }
+.pie__grid { display: grid; gap: 28px; }
+.pie h3 { color: #fff; font-size: 15px; margin-bottom: 10px; }
+.pie ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+.pie a { text-decoration: none; }
+.pie a:hover { color: var(--naranja); }
+.logo--pie { margin: 0 0 10px; }
+.reclamaciones {
+  display: flex; gap: 12px; align-items: center; background: #fff; color: var(--azul) !important;
+  padding: 14px 16px; border-radius: 12px; max-width: 340px;
+}
+.reclamaciones svg { width: 36px; height: 36px; fill: var(--naranja-osc); flex: none; }
+.reclamaciones strong { display: block; font-size: 16px; }
+.reclamaciones small { display: block; color: var(--suave); font-size: 12px; line-height: 1.3; }
+.pie__legal { border-top: 1px solid rgba(255,255,255,.12); margin-top: 28px; padding-top: 18px; font-size: 12px; color: #8d98a8; }
+
+/* ---------- WhatsApp flotante ---------- */
+.wa-flotante {
+  position: fixed; right: 16px; bottom: 16px; z-index: 30; width: 60px; height: 60px; border-radius: 50%;
+  background: var(--wa); display: grid; place-items: center; box-shadow: 0 6px 20px rgba(0,0,0,.25);
+}
+.wa-flotante svg { width: 32px; height: 32px; fill: #fff; }
+.wa-flotante::after {
+  content: ""; position: absolute; inset: 0; border-radius: 50%; border: 2px solid var(--wa);
+  animation: pulso 2.2s infinite;
+}
+@keyframes pulso { 0% { transform: scale(1); opacity: .8; } 100% { transform: scale(1.5); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .wa-flotante::after { animation: none; } html { scroll-behavior: auto; } }
+
+/* ---------- Diálogo ---------- */
+.dialogo { border: 0; border-radius: 18px; padding: 24px; max-width: min(440px, calc(100% - 32px)); box-shadow: 0 20px 60px rgba(0,0,0,.3); }
+.dialogo::backdrop { background: rgba(15,27,45,.6); }
+.dialogo h2 { margin-bottom: 12px; }
+.dialogo__nota { background: #fff4c2; padding: 10px 12px; border-radius: 10px; font-size: 14px; }
+
+/* ---------- Pantallas grandes ---------- */
+@media (min-width: 560px) {
+  .hero__botones { flex-direction: row; flex-wrap: wrap; }
+  .productos { grid-template-columns: repeat(2, 1fr); }
+  .pagos__lista { grid-template-columns: repeat(3, 1fr); }
+  .pago { flex-direction: column; text-align: center; }
+}
+@media (max-width: 380px) {
+  .btn--chico span { display: none; }
+  .btn--chico { padding: 8px 10px; }
+}
+@media (min-width: 860px) {
+  .menu { display: flex; }
+  .hero { padding: 72px 0 80px; }
+  .hero__grid { grid-template-columns: 1.25fr 1fr; }
+  .hero__tarjeta { display: block; }
+  .filtros { grid-template-columns: 1fr; padding: 18px; }
+  .filtros__selects { grid-template-columns: repeat(4, 1fr); }
+  .productos { grid-template-columns: repeat(3, 1fr); }
+  .visitanos__grid { grid-template-columns: 1fr 1.2fr; align-items: start; }
+  .mapa iframe { height: 440px; }
+  .pie__grid { grid-template-columns: 1.4fr 1fr 1.2fr; }
+  .pie { padding-bottom: 40px; }
+  section { padding: 72px 0; }
+}
+@media (min-width: 1100px) {
+  .productos { grid-template-columns: repeat(4, 1fr); }
+}
+</style>
+</head>
+<body>
+
+  <div class="aviso-demo">Maqueta de demostración · Tienda, productos y números ficticios</div>
+
+  <header class="cabecera">
+    <div class="contenedor cabecera__fila">
+      <a href="#inicio" class="logo" aria-label="Repuestos El Motor, inicio">
+        <span class="logo__icono" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm8.9 2.6-1.8-.3a7.4 7.4 0 0 0-.8-1.9l1.1-1.5a.8.8 0 0 0-.1-1l-1.2-1.2a.8.8 0 0 0-1-.1l-1.5 1.1c-.6-.4-1.2-.6-1.9-.8l-.3-1.8a.8.8 0 0 0-.8-.7h-1.7a.8.8 0 0 0-.8.7l-.3 1.8c-.7.2-1.3.4-1.9.8L6.1 4.6a.8.8 0 0 0-1 .1L3.9 5.9a.8.8 0 0 0-.1 1l1.1 1.5c-.4.6-.6 1.2-.8 1.9l-1.8.3a.8.8 0 0 0-.7.8v1.7c0 .4.3.7.7.8l1.8.3c.2.7.4 1.3.8 1.9l-1.1 1.5a.8.8 0 0 0 .1 1l1.2 1.2c.3.3.7.3 1 .1l1.5-1.1c.6.4 1.2.6 1.9.8l.3 1.8c.1.4.4.7.8.7h1.7c.4 0 .7-.3.8-.7l.3-1.8c.7-.2 1.3-.4 1.9-.8l1.5 1.1c.3.2.7.2 1-.1l1.2-1.2c.3-.3.3-.7.1-1l-1.1-1.5c.4-.6.6-1.2.8-1.9l1.8-.3c.4-.1.7-.4.7-.8v-1.7a.8.8 0 0 0-.7-.8Z"/></svg>
+        </span>
+        <span class="logo__texto">Repuestos <strong>El Motor</strong></span>
+      </a>
+      <nav class="menu" aria-label="Secciones">
+        <a href="#inventario">Inventario</a>
+        <a href="#visitanos">Visítanos</a>
+        <a href="#pagos">Pagos</a>
+      </nav>
+      <a class="btn btn--wa btn--chico js-wa" data-msg="Hola, Repuestos El Motor. Quisiera hacer una consulta." href="#" target="_blank" rel="noopener">
+        <svg class="ico-wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>
+        <span>Escríbenos</span>
+      </a>
+    </div>
+  </header>
+
+  <main id="inicio">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="contenedor hero__grid">
+        <div class="hero__texto">
+          <p class="hero__etiqueta">Av. Grau · Cercado de Lima</p>
+          <h1>¿Buscas un repuesto? <span>Revisa si lo tenemos</span> antes de venir.</h1>
+          <p class="hero__sub">Frenos, filtros, suspensión, motor y más. Mira nuestro stock aquí y confirma por WhatsApp en minutos. Te lo separamos.</p>
+          <div class="hero__botones">
+            <a class="btn btn--wa btn--grande js-wa" data-msg="Hola, Repuestos El Motor. Estoy buscando un repuesto para mi auto. ¿Me pueden ayudar?" href="#" target="_blank" rel="noopener">
+              <svg class="ico-wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>
+              Consultar por WhatsApp
+            </a>
+            <a class="btn btn--borde btn--grande" href="#inventario">Ver inventario</a>
+          </div>
+          <ul class="hero__datos">
+            <li><strong>+15 años</strong> en Av. Grau</li>
+            <li><strong>Lun a Sáb</strong> 8:00 a. m. – 7:00 p. m.</li>
+            <li><strong>Yape · Plin</strong> · efectivo</li>
+          </ul>
+        </div>
+        <div class="hero__tarjeta" aria-hidden="true">
+          <div class="chat">
+            <div class="chat__cabeza">
+              <span class="chat__avatar">EM</span>
+              <div><strong>Repuestos El Motor</strong><small>en línea</small></div>
+            </div>
+            <div class="chat__burbuja chat__burbuja--yo">Hola, ¿tienen pastillas de freno para Kazumi Sora 2016?</div>
+            <div class="chat__burbuja">¡Hola! Sí, tenemos 4 juegos. S/ 89 el juego delantero. ¿Te lo separamos? 👍</div>
+            <div class="chat__burbuja chat__burbuja--yo">Sí, paso hoy en la tarde. Pago con Yape.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INVENTARIO -->
+    <section class="inventario" id="inventario">
+      <div class="contenedor">
+        <div class="seccion__cabeza">
+          <h2>Nuestro inventario</h2>
+          <p>Filtra por tu auto. Si no ves tu repuesto, pregúntanos igual: lo conseguimos.</p>
+        </div>
+
+        <div class="filtros" role="search">
+          <label class="buscador">
+            <span class="sr">Buscar repuesto</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.5 3a7.5 7.5 0 0 1 6 12l4.3 4.3-1.5 1.5-4.3-4.3A7.5 7.5 0 1 1 10.5 3Zm0 2a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11Z"/></svg>
+            <input id="q" type="search" placeholder="Buscar: pastillas, filtro, faro…" autocomplete="off">
+          </label>
+          <div class="filtros__selects">
+            <label><span>Marca</span>
+              <select id="f-marca"><option value="">Todas</option></select>
+            </label>
+            <label><span>Modelo</span>
+              <select id="f-modelo" disabled><option value="">Todos</option></select>
+            </label>
+            <label><span>Año</span>
+              <select id="f-anio"><option value="">Todos</option></select>
+            </label>
+            <label><span>Categoría</span>
+              <select id="f-cat"><option value="">Todas</option></select>
+            </label>
+          </div>
+          <div class="filtros__pie">
+            <label class="check"><input type="checkbox" id="f-stock"> Solo en stock</label>
+            <span id="contador" class="contador" aria-live="polite"></span>
+            <button type="button" id="limpiar" class="enlace">Limpiar filtros</button>
+          </div>
+        </div>
+
+        <div id="chips" class="chips" aria-label="Categorías"></div>
+
+        <ul id="lista" class="productos"></ul>
+
+        <div id="vacio" class="vacio" hidden>
+          <p><strong>No encontramos ese repuesto en la lista.</strong><br>Pero puede que lo tengamos o lo consigamos. Escríbenos:</p>
+          <a id="vacio-wa" class="btn btn--wa" href="#" target="_blank" rel="noopener">
+            <svg class="ico-wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>
+            Preguntar por WhatsApp
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- VISÍTANOS -->
+    <section class="visitanos" id="visitanos">
+      <div class="contenedor visitanos__grid">
+        <div>
+          <div class="seccion__cabeza seccion__cabeza--izq">
+            <h2>Visítanos</h2>
+            <p>Av. Grau 1234, Cercado de Lima <small>(dirección ficticia)</small></p>
+          </div>
+          <div class="horario">
+            <h3>Horario de atención</h3>
+            <table>
+              <tr><th>Lunes a viernes</th><td>8:00 a. m. – 7:00 p. m.</td></tr>
+              <tr><th>Sábado</th><td>8:00 a. m. – 5:00 p. m.</td></tr>
+              <tr><th>Domingo y feriados</th><td>9:00 a. m. – 1:00 p. m.</td></tr>
+            </table>
+            <p id="estado-hoy" class="estado"></p>
+          </div>
+          <div class="botones-fila">
+            <a class="btn btn--wa js-wa" data-msg="Hola, Repuestos El Motor. ¿Me pueden enviar su ubicación?" href="#" target="_blank" rel="noopener">
+              <svg class="ico-wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>
+              Pedir ubicación
+            </a>
+            <a class="btn btn--borde-oscuro" href="tel:+51999000111">Llamar</a>
+          </div>
+        </div>
+        <div class="mapa">
+          <iframe title="Mapa de la zona de Av. Grau, Lima"
+            src="https://www.openstreetmap.org/export/embed.html?bbox=-77.0420%2C-12.0640%2C-77.0240%2C-12.0520&amp;layer=mapnik&amp;marker=-12.0580%2C-77.0330"
+            loading="lazy"></iframe>
+          <p class="mapa__nota">Mapa referencial de la zona. Necesita conexión a internet.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAGOS -->
+    <section class="pagos" id="pagos">
+      <div class="contenedor">
+        <div class="seccion__cabeza">
+          <h2>Formas de pago</h2>
+          <p>Paga como te sea más fácil.</p>
+        </div>
+        <ul class="pagos__lista">
+          <li class="pago pago--yape">
+            <span class="pago__logo">Yape</span>
+            <p>Yapea al número de la tienda y envíanos la captura por WhatsApp.</p>
+          </li>
+          <li class="pago pago--plin">
+            <span class="pago__logo">Plin</span>
+            <p>Desde la app de tu banco, al mismo número.</p>
+          </li>
+          <li class="pago pago--efectivo">
+            <span class="pago__logo">S/</span>
+            <p>Efectivo en tienda. Te damos boleta o factura.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="cta">
+      <div class="contenedor cta__caja">
+        <h2>¿No sabes qué pieza necesitas?</h2>
+        <p>Mándanos una foto de la pieza o el modelo y año de tu auto. Te decimos si la tenemos y cuánto cuesta.</p>
+        <a class="btn btn--wa btn--grande js-wa" data-msg="Hola, Repuestos El Motor. Les envío la foto de la pieza que necesito:" href="#" target="_blank" rel="noopener">
+          <svg class="ico-wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>
+          Enviar foto por WhatsApp
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <div class="contenedor pie__grid">
+      <div>
+        <p class="logo logo--pie"><span class="logo__texto">Repuestos <strong>El Motor</strong></span></p>
+        <p>Repuestos El Motor E.I.R.L. (ficticia)<br>RUC 20000000000 · Av. Grau 1234, Cercado de Lima</p>
+        <p>WhatsApp y teléfono: 999 000 111 (ficticio)</p>
+      </div>
+      <div>
+        <h3>Secciones</h3>
+        <ul>
+          <li><a href="#inventario">Inventario</a></li>
+          <li><a href="#visitanos">Horario y ubicación</a></li>
+          <li><a href="#pagos">Formas de pago</a></li>
+        </ul>
+      </div>
+      <div>
+        <a class="reclamaciones" href="#" id="btn-reclamos">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 2h11l4 4v16H5V2Zm10 1.5V7h3.5L15 3.5ZM8 10v1.5h9V10H8Zm0 3.5V15h9v-1.5H8Zm0 3.5v1.5h6V17H8Z"/></svg>
+          <span><strong>Libro de Reclamaciones</strong><small>Conforme al Código de Protección y Defensa del Consumidor</small></span>
+        </a>
+      </div>
+    </div>
+    <p class="pie__legal contenedor">© <span id="anio-actual"></span> Repuestos El Motor · Maqueta de demostración: todos los datos son ficticios.</p>
+  </footer>
+
+  <!-- Botón flotante -->
+  <a class="wa-flotante js-wa" data-msg="Hola, Repuestos El Motor. Quisiera hacer una consulta." href="#" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>
+  </a>
+
+  <!-- Libro de reclamaciones (demo) -->
+  <dialog id="dlg-reclamos" class="dialogo">
+    <form method="dialog">
+      <h2>Libro de Reclamaciones</h2>
+      <p>En la página real del cliente, aquí va el formulario virtual del Libro de Reclamaciones (reclamo o queja), con su número correlativo y envío de copia al correo del consumidor.</p>
+      <p class="dialogo__nota">Esta es una maqueta de demostración: no se registra ningún reclamo.</p>
+      <button class="btn btn--oscuro" value="cerrar">Entendido</button>
+    </form>
+  </dialog>
+
+  <!-- Ícono de WhatsApp reutilizable -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="wa" viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3c-.2.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3 1.8.8 2.5.8 3.4.7.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3Z"/></symbol>
+  </svg>
+
+  <script>
+// Inventario de demostración. Marcas de auto, modelos y productos 100 % ficticios.
+// Para un cliente real: reemplazar esta lista (o generarla desde su Excel).
+// stock = unidades disponibles (0 = agotado). desde/hasta = años compatibles.
+
+var TIENDA = {
+  nombre: "Repuestos El Motor",
+  whatsapp: "51999000111" // número ficticio, formato internacional sin "+"
+};
+
+var PRODUCTOS = [
+  { cod: "FR-101", nombre: "Pastillas de freno delanteras", cat: "Frenos", marca: "Kazumi", modelo: "Sora", desde: 2014, hasta: 2020, precio: 89, stock: 4 },
+  { cod: "FR-102", nombre: "Disco de freno delantero (par)", cat: "Frenos", marca: "Kazumi", modelo: "Sora", desde: 2014, hasta: 2020, precio: 260, stock: 2 },
+  { cod: "FR-103", nombre: "Zapatas de freno posteriores", cat: "Frenos", marca: "Andes Motor", modelo: "Cóndor", desde: 2010, hasta: 2018, precio: 75, stock: 6 },
+  { cod: "FR-104", nombre: "Pastillas de freno delanteras", cat: "Frenos", marca: "Volkar", modelo: "Urbano", desde: 2016, hasta: 2023, precio: 95, stock: 0 },
+  { cod: "FR-105", nombre: "Líquido de frenos DOT 4 (500 ml)", cat: "Frenos", marca: "Universal", modelo: "Todos", desde: 2005, hasta: 2025, precio: 22, stock: 18 },
+
+  { cod: "FI-201", nombre: "Filtro de aceite", cat: "Filtros", marca: "Kazumi", modelo: "Kaze", desde: 2012, hasta: 2022, precio: 18, stock: 25 },
+  { cod: "FI-202", nombre: "Filtro de aire de motor", cat: "Filtros", marca: "Kazumi", modelo: "Sora", desde: 2014, hasta: 2020, precio: 35, stock: 9 },
+  { cod: "FI-203", nombre: "Filtro de cabina (aire acondicionado)", cat: "Filtros", marca: "Hanryu", modelo: "Mira", desde: 2015, hasta: 2022, precio: 32, stock: 7 },
+  { cod: "FI-204", nombre: "Filtro de combustible", cat: "Filtros", marca: "Andes Motor", modelo: "Puma", desde: 2011, hasta: 2019, precio: 45, stock: 0 },
+  { cod: "FI-205", nombre: "Filtro de aceite", cat: "Filtros", marca: "Volkar", modelo: "Trek", desde: 2017, hasta: 2024, precio: 24, stock: 12 },
+
+  { cod: "SU-301", nombre: "Amortiguador delantero", cat: "Suspensión", marca: "Kazumi", modelo: "Kaze", desde: 2012, hasta: 2022, precio: 210, stock: 3 },
+  { cod: "SU-302", nombre: "Amortiguador posterior (par)", cat: "Suspensión", marca: "Hanryu", modelo: "Nova", desde: 2018, hasta: 2024, precio: 340, stock: 1 },
+  { cod: "SU-303", nombre: "Terminal de dirección", cat: "Suspensión", marca: "Andes Motor", modelo: "Cóndor", desde: 2010, hasta: 2018, precio: 58, stock: 8 },
+  { cod: "SU-304", nombre: "Rótula de suspensión", cat: "Suspensión", marca: "Volkar", modelo: "Urbano", desde: 2016, hasta: 2023, precio: 65, stock: 0 },
+  { cod: "SU-305", nombre: "Kit de bocinas de barra estabilizadora", cat: "Suspensión", marca: "Hanryu", modelo: "Mira", desde: 2015, hasta: 2022, precio: 40, stock: 10 },
+
+  { cod: "MO-401", nombre: "Bujías de iridio (juego de 4)", cat: "Motor", marca: "Kazumi", modelo: "Sora", desde: 2014, hasta: 2020, precio: 120, stock: 5 },
+  { cod: "MO-402", nombre: "Faja de distribución con tensor", cat: "Motor", marca: "Andes Motor", modelo: "Puma", desde: 2011, hasta: 2019, precio: 285, stock: 2 },
+  { cod: "MO-403", nombre: "Bomba de agua", cat: "Motor", marca: "Hanryu", modelo: "Nova", desde: 2018, hasta: 2024, precio: 230, stock: 0 },
+  { cod: "MO-404", nombre: "Empaquetadura de culata", cat: "Motor", marca: "Volkar", modelo: "Trek", desde: 2017, hasta: 2024, precio: 150, stock: 3 },
+  { cod: "MO-405", nombre: "Aceite de motor 10W-30 (galón)", cat: "Motor", marca: "Universal", modelo: "Todos", desde: 2005, hasta: 2025, precio: 98, stock: 20 },
+  { cod: "MO-406", nombre: "Termostato con empaque", cat: "Motor", marca: "Kazumi", modelo: "Kaze", desde: 2012, hasta: 2022, precio: 68, stock: 4 },
+
+  { cod: "EL-501", nombre: "Batería 12V 13 placas", cat: "Eléctrico", marca: "Universal", modelo: "Todos", desde: 2005, hasta: 2025, precio: 380, stock: 6 },
+  { cod: "EL-502", nombre: "Alternador reconstruido", cat: "Eléctrico", marca: "Andes Motor", modelo: "Cóndor", desde: 2010, hasta: 2018, precio: 520, stock: 1 },
+  { cod: "EL-503", nombre: "Motor de arranque", cat: "Eléctrico", marca: "Hanryu", modelo: "Mira", desde: 2015, hasta: 2022, precio: 460, stock: 0 },
+  { cod: "EL-504", nombre: "Sensor de oxígeno", cat: "Eléctrico", marca: "Volkar", modelo: "Urbano", desde: 2016, hasta: 2023, precio: 175, stock: 2 },
+
+  { cod: "IL-601", nombre: "Faro delantero izquierdo", cat: "Iluminación", marca: "Kazumi", modelo: "Sora", desde: 2014, hasta: 2020, precio: 290, stock: 2 },
+  { cod: "IL-602", nombre: "Faro posterior derecho", cat: "Iluminación", marca: "Hanryu", modelo: "Nova", desde: 2018, hasta: 2024, precio: 245, stock: 1 },
+  { cod: "IL-603", nombre: "Focos LED H4 (par)", cat: "Iluminación", marca: "Universal", modelo: "Todos", desde: 2005, hasta: 2025, precio: 85, stock: 14 },
+  { cod: "IL-604", nombre: "Neblinero delantero", cat: "Iluminación", marca: "Andes Motor", modelo: "Puma", desde: 2011, hasta: 2019, precio: 110, stock: 0 },
+  { cod: "IL-605", nombre: "Luces direccionales laterales (par)", cat: "Iluminación", marca: "Volkar", modelo: "Trek", desde: 2017, hasta: 2024, precio: 155, stock: 3 }
+];
+
+(function () {
+  "use strict";
+
+  var $ = function (sel) { return document.querySelector(sel); };
+
+  // ---------- WhatsApp ----------
+  function enlaceWA(mensaje) {
+    return "https://wa.me/" + TIENDA.whatsapp + "?text=" + encodeURIComponent(mensaje);
+  }
+
+  document.querySelectorAll(".js-wa").forEach(function (a) {
+    a.href = enlaceWA(a.getAttribute("data-msg"));
+  });
+
+  // ---------- Íconos por categoría ----------
+  var ICONOS = {
+    "Frenos": '<circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3"/><path d="M12 3a9 9 0 0 1 9 9h-3a6 6 0 0 0-6-6V3Z"/>',
+    "Filtros": '<path d="M4 4h16l-6 8v6l-4 2v-8L4 4Z"/>',
+    "Suspensión": '<path d="M11 2h2v4h-2zM11 18h2v4h-2z"/><path d="M7 6h10v2H7zM7 16h10v2H7z"/><path d="M8 9l8 1.5v1.5L8 10.5zM8 12l8 1.5V15L8 13.5z"/>',
+    "Motor": '<path d="M4 9h2V7h4V5h4v2h3l2 2h1v6h-1l-2 2H8l-2-2H4V9Zm-2 2h1v3H2z"/>',
+    "Eléctrico": '<path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/>',
+    "Iluminación": '<path d="M9 5a7 7 0 0 0 0 14h4V5H9Zm6 2h6v2h-6zM15 11h6v2h-6zM15 15h6v2h-6z"/>'
+  };
+
+  // ---------- Estado de filtros ----------
+  var el = {
+    q: $("#q"), marca: $("#f-marca"), modelo: $("#f-modelo"), anio: $("#f-anio"),
+    cat: $("#f-cat"), stock: $("#f-stock"), lista: $("#lista"), vacio: $("#vacio"),
+    contador: $("#contador"), chips: $("#chips")
+  };
+
+  function unicos(arr) { return arr.filter(function (v, i) { return arr.indexOf(v) === i; }).sort(); }
+  function opcion(valor, texto) { var o = document.createElement("option"); o.value = valor; o.textContent = texto || valor; return o; }
+
+  var marcas = unicos(PRODUCTOS.map(function (p) { return p.marca; }).filter(function (m) { return m !== "Universal"; }));
+  var categorias = unicos(PRODUCTOS.map(function (p) { return p.cat; }));
+  marcas.forEach(function (m) { el.marca.appendChild(opcion(m)); });
+  categorias.forEach(function (c) { el.cat.appendChild(opcion(c)); });
+  for (var y = 2025; y >= 2005; y--) el.anio.appendChild(opcion(String(y)));
+
+  function llenarModelos() {
+    var m = el.marca.value;
+    el.modelo.innerHTML = "";
+    el.modelo.appendChild(opcion("", "Todos"));
+    if (!m) { el.modelo.disabled = true; return; }
+    unicos(PRODUCTOS.filter(function (p) { return p.marca === m; }).map(function (p) { return p.modelo; }))
+      .forEach(function (mod) { el.modelo.appendChild(opcion(mod)); });
+    el.modelo.disabled = false;
+  }
+
+  // Chips de categoría (atajo rápido en celular)
+  function pintarChips() {
+    el.chips.innerHTML = "";
+    ["Todas"].concat(categorias).forEach(function (c) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "chip";
+      var valor = c === "Todas" ? "" : c;
+      if (el.cat.value === valor) b.classList.add("chip--activo");
+      b.innerHTML = (valor ? '<svg viewBox="0 0 24 24" aria-hidden="true">' + ICONOS[c] + "</svg>" : "") + c;
+      b.addEventListener("click", function () { el.cat.value = valor; actualizar(); });
+      el.chips.appendChild(b);
+    });
+  }
+
+  function normalizar(t) {
+    return t.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
+  }
+
+  function filtrar() {
+    var q = normalizar(el.q.value.trim());
+    var palabras = q ? q.split(/\s+/) : [];
+    var marca = el.marca.value, modelo = el.modelo.value, anio = parseInt(el.anio.value, 10);
+    var cat = el.cat.value, soloStock = el.stock.checked;
+
+    return PRODUCTOS.filter(function (p) {
+      var universal = p.marca === "Universal";
+      if (marca && !universal && p.marca !== marca) return false;
+      if (modelo && !universal && p.modelo !== modelo) return false;
+      if (anio && (anio < p.desde || anio > p.hasta)) return false;
+      if (cat && p.cat !== cat) return false;
+      if (soloStock && p.stock === 0) return false;
+      if (palabras.length) {
+        var texto = normalizar([p.nombre, p.cat, p.marca, p.modelo, p.cod].join(" "));
+        for (var i = 0; i < palabras.length; i++) if (texto.indexOf(palabras[i]) === -1) return false;
+      }
+      return true;
+    }).sort(function (a, b) { return (b.stock > 0) - (a.stock > 0); });
+  }
+
+  function soles(n) { return "S/ " + n.toFixed(2); }
+
+  function auto(p) {
+    return p.marca === "Universal" ? "Para todo vehículo" : p.marca + " " + p.modelo + " " + p.desde + "–" + p.hasta;
+  }
+
+  function mensaje(p) {
+    var anioSel = el.anio.value;
+    var paraQue = p.marca === "Universal" ? "" : " para " + p.marca + " " + p.modelo + (anioSel ? " " + anioSel : "");
+    return "Hola, Repuestos El Motor. ¿Tienen " + p.nombre.toLowerCase() + paraQue +
+      "? (Código " + p.cod + ", " + soles(p.precio) + "). Lo vi en su página web.";
+  }
+
+  function tarjeta(p) {
+    var hay = p.stock > 0;
+    var li = document.createElement("li");
+    li.className = "producto" + (hay ? "" : " producto--agotado");
+    li.innerHTML =
+      '<div class="producto__top">' +
+        '<span class="producto__ico producto__ico--' + p.cat.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase() + '">' +
+          '<svg viewBox="0 0 24 24" aria-hidden="true">' + ICONOS[p.cat] + "</svg></span>" +
+        '<span class="estado-stock ' + (hay ? "estado-stock--si" : "estado-stock--no") + '">' +
+          (hay ? "En stock" : "Agotado") + "</span>" +
+      "</div>" +
+      '<p class="producto__cat">' + p.cat + " · " + p.cod + "</p>" +
+      '<h3 class="producto__nombre"></h3>' +
+      '<p class="producto__auto"></p>' +
+      '<div class="producto__pie">' +
+        '<p class="producto__precio">' + soles(p.precio) + "</p>" +
+        (hay ? '<p class="producto__unid">' + (p.stock <= 2 ? "¡Últimas " + p.stock + "!" : p.stock + " disponibles") + "</p>" : '<p class="producto__unid">Lo pedimos</p>') +
+      "</div>" +
+      '<a class="btn btn--wa btn--bloque" target="_blank" rel="noopener">' +
+        '<svg class="ico-wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>' +
+        (hay ? "¿Lo tienes? Consultar por WhatsApp" : "Preguntar cuándo llega") +
+      "</a>";
+    li.querySelector(".producto__nombre").textContent = p.nombre;
+    li.querySelector(".producto__auto").textContent = auto(p);
+    li.querySelector("a").href = enlaceWA(hay ? mensaje(p) :
+      "Hola, Repuestos El Motor. Vi que " + p.nombre.toLowerCase() + " (código " + p.cod + ") está agotado. ¿Cuándo les llega?");
+    return li;
+  }
+
+  function actualizar() {
+    var res = filtrar();
+    el.lista.innerHTML = "";
+    var frag = document.createDocumentFragment();
+    res.forEach(function (p) { frag.appendChild(tarjeta(p)); });
+    el.lista.appendChild(frag);
+
+    var enStock = res.filter(function (p) { return p.stock > 0; }).length;
+    el.contador.textContent = res.length + (res.length === 1 ? " producto" : " productos") + " · " + enStock + " en stock";
+    el.vacio.hidden = res.length > 0;
+    if (!res.length) {
+      var partes = [el.q.value.trim(), el.marca.value, el.modelo.value, el.anio.value].filter(Boolean).join(" ");
+      $("#vacio-wa").href = enlaceWA("Hola, Repuestos El Motor. Estoy buscando: " + (partes || "un repuesto") + ". ¿Lo tienen?");
+    }
+    pintarChips();
+  }
+
+  el.marca.addEventListener("change", function () { llenarModelos(); actualizar(); });
+  [el.modelo, el.anio, el.cat, el.stock].forEach(function (x) { x.addEventListener("change", actualizar); });
+  el.q.addEventListener("input", actualizar);
+  $("#limpiar").addEventListener("click", function () {
+    el.q.value = ""; el.marca.value = ""; el.anio.value = ""; el.cat.value = ""; el.stock.checked = false;
+    llenarModelos(); actualizar();
+  });
+
+  llenarModelos();
+  actualizar();
+
+  // ---------- Abierto / cerrado hoy ----------
+  (function () {
+    var ahora = new Date();
+    var dia = ahora.getDay(); // 0 domingo
+    var h = ahora.getHours() + ahora.getMinutes() / 60;
+    var rango = dia === 0 ? [9, 13] : dia === 6 ? [8, 17] : [8, 19];
+    var abierto = h >= rango[0] && h < rango[1];
+    var e = $("#estado-hoy");
+    e.textContent = abierto ? "● Abierto ahora" : "● Cerrado ahora · escríbenos y te respondemos al abrir";
+    e.className = "estado " + (abierto ? "estado--abierto" : "estado--cerrado");
+  })();
+
+  // ---------- Libro de reclamaciones (demo) ----------
+  var dlg = $("#dlg-reclamos");
+  $("#btn-reclamos").addEventListener("click", function (ev) {
+    ev.preventDefault();
+    if (dlg.showModal) dlg.showModal(); else alert("Aquí va el formulario del Libro de Reclamaciones.");
+  });
+
+  $("#anio-actual").textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
