@@ -71,7 +71,7 @@
     h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; }
     a { text-decoration: none; color: inherit; }
 
-    /* Barra Superior */
+    /* Barra Superior (Intacta en Desktop) */
     header {
       position: sticky;
       top: 0;
@@ -163,14 +163,14 @@
     .hero {
       max-width: 1050px;
       margin: 0 auto;
-      padding: 7rem 2rem 4rem;
+      padding: 6.5rem 2rem 4rem;
       text-align: center;
     }
     .hero-badge {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      padding: 0.4rem 1.2rem;
+      padding: 0.45rem 1.25rem;
       background: rgba(0, 240, 255, 0.08);
       border: 1px solid var(--accent);
       border-radius: 100px;
@@ -192,9 +192,9 @@
       -webkit-text-fill-color: transparent;
     }
     .hero p {
-      font-size: clamp(1.05rem, 2vw, 1.25rem);
+      font-size: clamp(1.05rem, 2vw, 1.22rem);
       color: var(--text-muted);
-      max-width: 820px;
+      max-width: 840px;
       margin: 0 auto 2.8rem;
     }
     .hero-actions {
@@ -236,17 +236,17 @@
       transform: translateY(-3px);
     }
 
-    /* Motores & Pipeline 3D */
+    /* Motores & Pipeline (4 Columnas Simétricas + Íconos SVG) */
     .tech-stack-section {
-      max-width: 1100px;
+      max-width: 1200px;
       margin: 1rem auto 4rem;
       padding: 0 2rem;
     }
     .tech-stack-box {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
-      border-radius: 16px;
-      padding: 2.2rem;
+      border-radius: 20px;
+      padding: 2.5rem;
       backdrop-filter: blur(12px);
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
     }
@@ -257,52 +257,78 @@
       color: var(--accent);
       letter-spacing: 2px;
       text-transform: uppercase;
-      margin-bottom: 1.5rem;
+      margin-bottom: 2rem;
     }
     .engines-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(4, 1fr);
       gap: 1.5rem;
     }
     .engine-card {
       background: rgba(255, 255, 255, 0.02);
       border: 1px solid rgba(255, 255, 255, 0.07);
-      border-radius: 12px;
-      padding: 1.5rem;
+      border-radius: 14px;
+      padding: 1.6rem;
       transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
     }
     .engine-card:hover {
       border-color: var(--accent);
-      transform: translateY(-4px);
-      box-shadow: 0 10px 25px rgba(0, 240, 255, 0.1);
+      transform: translateY(-5px);
+      box-shadow: 0 12px 28px rgba(0, 240, 255, 0.12);
+      background: rgba(0, 240, 255, 0.03);
     }
-    .engine-header {
+    .engine-top {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 0.8rem;
+      margin-bottom: 1.1rem;
       gap: 0.5rem;
     }
-    .engine-name {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: #fff;
+    .engine-icon-box {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: rgba(0, 240, 255, 0.08);
+      border: 1px solid rgba(0, 240, 255, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.12);
+      flex-shrink: 0;
+      transition: transform 0.25s ease, background 0.25s ease;
+    }
+    .engine-card:hover .engine-icon-box {
+      transform: scale(1.08);
+      background: rgba(0, 240, 255, 0.18);
     }
     .engine-tag {
       font-family: var(--code-font);
-      font-size: 0.72rem;
-      padding: 0.2rem 0.55rem;
-      border-radius: 4px;
+      font-size: 0.7rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
       background: rgba(0, 240, 255, 0.1);
+      border: 1px solid rgba(0, 240, 255, 0.2);
       color: var(--accent);
       white-space: nowrap;
+    }
+    .engine-name {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.65rem;
+      line-height: 1.25;
     }
     .engine-desc {
       font-size: 0.9rem;
       color: var(--text-muted);
+      line-height: 1.55;
     }
 
-    /* Portafolio Cards & Tabs */
+    /* Secciones Generales */
     .section-wrap {
       max-width: 1200px;
       margin: 0 auto;
@@ -330,19 +356,30 @@
     .portfolio-tabs {
       display: flex;
       justify-content: center;
-      gap: 1rem;
+      gap: 0.9rem;
       flex-wrap: wrap;
       margin-bottom: 3.5rem;
+      position: sticky;
+      top: 76px;
+      z-index: 40;
+      padding: 0.75rem 1rem;
+      background: rgba(5, 7, 12, 0.82);
+      backdrop-filter: blur(16px);
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      max-width: fit-content;
+      margin-left: auto;
+      margin-right: auto;
     }
     .tab-btn {
-      background: rgba(12, 16, 26, 0.85);
+      background: rgba(12, 16, 26, 0.9);
       border: 1px solid var(--card-border);
       color: var(--text-muted);
       font-family: var(--code-font);
-      font-size: 0.88rem;
+      font-size: 0.85rem;
       font-weight: 600;
-      padding: 0.8rem 1.5rem;
-      border-radius: 10px;
+      padding: 0.7rem 1.35rem;
+      border-radius: 9px;
       cursor: pointer;
       transition: all 0.25s ease;
       display: inline-flex;
@@ -355,16 +392,17 @@
       transform: translateY(-2px);
     }
     .tab-btn.active {
-      background: rgba(0, 240, 255, 0.12);
+      background: rgba(0, 240, 255, 0.14);
       border-color: var(--accent);
       color: var(--accent);
-      box-shadow: 0 0 22px rgba(0, 240, 255, 0.22);
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.22);
     }
 
+    /* Lista de Portafolio */
     .portfolio-list {
       display: flex;
       flex-direction: column;
-      gap: 4rem;
+      gap: 3.5rem;
     }
     .portfolio-item {
       background: var(--card-bg);
@@ -375,7 +413,7 @@
       grid-template-columns: 1.15fr 1fr;
       backdrop-filter: blur(14px);
       box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
-      transition: border-color 0.3s ease, box-shadow 0.3s ease, opacity 0.35s ease, transform 0.35s ease;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
       position: relative;
     }
     .portfolio-item.hidden-card {
@@ -385,12 +423,14 @@
       border-color: var(--card-border-active);
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65), 0 0 30px rgba(0, 240, 255, 0.18);
     }
+
+    /* Contenedor de Video (Videojuegos) */
     .video-container {
       position: relative;
       background: #000;
       width: 100%;
       height: 100%;
-      min-height: 310px;
+      min-height: 340px;
     }
     .video-container iframe {
       position: absolute;
@@ -401,37 +441,37 @@
       border: none;
     }
 
-    /* Mockup Visual de Software (.demo-preview) */
+    /* Visor de Miniatura en Tiempo Real (.demo-preview) para Software */
     .demo-preview {
       position: relative;
       width: 100%;
       height: 100%;
-      min-height: 320px;
-      background: radial-gradient(circle at 20% 20%, rgba(0, 240, 255, 0.12), rgba(8, 12, 22, 0.98) 70%);
-      border-right: 1px solid rgba(255, 255, 255, 0.06);
-      padding: 1.5rem;
+      min-height: 340px;
+      background: radial-gradient(circle at 20% 20%, rgba(0, 240, 255, 0.12), rgba(5, 8, 16, 0.98) 75%);
+      border-right: 1px solid rgba(255, 255, 255, 0.07);
+      padding: 1.25rem;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      overflow: hidden;
     }
     .demo-window {
-      background: rgba(5, 8, 15, 0.9);
-      border: 1px solid rgba(0, 240, 255, 0.22);
+      background: #070a12;
+      border: 1px solid rgba(0, 240, 255, 0.25);
       border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+      box-shadow: 0 14px 35px rgba(0, 0, 0, 0.65);
       display: flex;
       flex-direction: column;
-      height: 100%;
+      flex: 1;
+      position: relative;
     }
     .demo-topbar {
-      background: rgba(255, 255, 255, 0.04);
-      padding: 0.6rem 1rem;
+      background: rgba(15, 23, 42, 0.95);
+      padding: 0.55rem 0.9rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      z-index: 3;
     }
     .demo-dots {
       display: flex;
@@ -448,104 +488,106 @@
     .demo-dots span:nth-child(3) { background: #10b981; }
     .demo-url {
       font-family: var(--code-font);
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       color: var(--text-muted);
-      background: rgba(0, 0, 0, 0.45);
-      padding: 0.2rem 0.7rem;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 0.18rem 0.65rem;
       border-radius: 4px;
       border: 1px solid rgba(255, 255, 255, 0.06);
-    }
-    .demo-body {
-      padding: 1.25rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      flex: 1;
-      gap: 1rem;
-    }
-    .demo-header-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 0.75rem;
-    }
-    .demo-title-badge {
-      font-family: var(--code-font);
-      font-size: 0.75rem;
-      color: var(--accent);
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
+      max-width: 72%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
     .demo-live-pill {
       font-family: var(--code-font);
-      font-size: 0.68rem;
-      padding: 0.15rem 0.55rem;
+      font-size: 0.65rem;
+      padding: 0.12rem 0.5rem;
       border-radius: 50px;
       background: rgba(16, 185, 129, 0.15);
       border: 1px solid rgba(16, 185, 129, 0.4);
       color: #34d399;
     }
-    .demo-kpi-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0.65rem;
+
+    /* Viewport que renderiza el archivo .html real como miniatura */
+    .demo-viewport {
+      position: relative;
+      flex: 1;
+      width: 100%;
+      min-height: 245px;
+      overflow: hidden;
+      background: #0a0f1d;
     }
-    .demo-kpi {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.07);
-      border-radius: 8px;
-      padding: 0.65rem;
-    }
-    .demo-kpi-label {
-      font-size: 0.7rem;
-      color: var(--text-muted);
-      display: block;
-    }
-    .demo-kpi-val {
-      font-family: var(--code-font);
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: #fff;
-      margin-top: 0.15rem;
-      display: block;
-    }
-    .demo-bars {
-      display: flex;
-      flex-direction: column;
-      gap: 0.45rem;
-    }
-    .demo-bar-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-family: var(--code-font);
-      font-size: 0.72rem;
-      color: #cbd5e1;
-      background: rgba(255, 255, 255, 0.02);
-      padding: 0.4rem 0.65rem;
-      border-radius: 6px;
-      border-left: 3px solid var(--accent);
-    }
-    .demo-preview-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-top: 0.5rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
-      font-family: var(--code-font);
-      font-size: 0.72rem;
-      color: var(--text-muted);
-    }
-    .demo-quick-link {
-      color: var(--accent);
-      font-weight: 600;
-      transition: opacity 0.2s;
-    }
-    .demo-quick-link:hover {
-      text-decoration: underline;
+    .demo-iframe-scaler {
+      width: 238%;
+      height: 238%;
+      transform: scale(0.42);
+      transform-origin: 0 0;
+      border: none;
+      pointer-events: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 2;
+      background: #0f172a;
     }
 
+    /* Overlay interactivo al hacer hover sobre la miniatura */
+    .demo-hover-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(5, 7, 12, 0.15) 0%, rgba(5, 7, 12, 0.88) 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 1.25rem;
+      opacity: 0;
+      transition: opacity 0.28s ease;
+      z-index: 4;
+    }
+    .demo-window:hover .demo-hover-overlay {
+      opacity: 1;
+    }
+    .demo-overlay-btn {
+      background: rgba(0, 240, 255, 0.95);
+      color: #05070c;
+      font-family: var(--code-font);
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.45);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      transform: translateY(6px);
+      transition: transform 0.25s ease;
+    }
+    .demo-window:hover .demo-overlay-btn {
+      transform: translateY(0);
+    }
+
+    /* Barra inferior de KPIs rápidos debajo del visor */
+    .demo-footer-kpis {
+      background: rgba(10, 14, 24, 0.95);
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+      padding: 0.55rem 0.9rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--code-font);
+      font-size: 0.7rem;
+      color: #cbd5e1;
+      z-index: 3;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .demo-footer-kpis span strong {
+      color: var(--accent);
+    }
+
+    /* Contenido Derecho de cada Proyecto */
     .project-content {
       padding: 2.5rem;
       display: flex;
@@ -569,12 +611,17 @@
     }
     .status-badge {
       font-family: var(--code-font);
-      font-size: 0.75rem;
-      padding: 0.3rem 0.75rem;
+      font-size: 0.74rem;
+      padding: 0.28rem 0.75rem;
       border-radius: 50px;
       background: rgba(0, 240, 255, 0.1);
       border: 1px solid rgba(0, 240, 255, 0.25);
       color: var(--accent);
+    }
+    .status-badge.game-badge {
+      background: rgba(138, 43, 226, 0.15);
+      border-color: rgba(168, 85, 247, 0.4);
+      color: #d8b4fe;
     }
     .status-badge.award {
       background: rgba(234, 179, 8, 0.15);
@@ -582,8 +629,8 @@
       color: #facc15;
     }
     .project-content h3 {
-      font-size: 1.65rem;
-      margin-bottom: 1rem;
+      font-size: 1.6rem;
+      margin-bottom: 0.9rem;
       color: #fff;
       line-height: 1.25;
     }
@@ -597,12 +644,12 @@
       display: flex;
       flex-wrap: wrap;
       gap: 0.5rem;
-      margin-bottom: 2rem;
+      margin-bottom: 1.8rem;
     }
     .p-tag {
       font-family: var(--code-font);
-      font-size: 0.75rem;
-      background: rgba(255, 255, 255, 0.05);
+      font-size: 0.74rem;
+      background: rgba(255, 255, 255, 0.04);
       border: 1px solid rgba(255, 255, 255, 0.08);
       padding: 0.3rem 0.7rem;
       border-radius: 6px;
@@ -652,18 +699,20 @@
       transform: translateY(-2px);
     }
 
-    /* Servicios */
+    /* Servicios (4 Columnas Simétricas) */
     .services-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.8rem;
     }
     .service-card {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
-      border-radius: 14px;
-      padding: 2.2rem;
+      border-radius: 16px;
+      padding: 2rem;
       transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
     }
     .service-card:hover {
       border-color: var(--accent);
@@ -671,49 +720,77 @@
       box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
     }
     .service-icon {
-      font-size: 2.2rem;
-      margin-bottom: 1.2rem;
+      font-size: 2.1rem;
+      margin-bottom: 1.1rem;
       display: inline-block;
       transition: transform 0.2s;
     }
-    .service-card:hover .service-icon { transform: scale(1.15); }
+    .service-card:hover .service-icon { transform: scale(1.12); }
     .service-card h3 {
-      font-size: 1.3rem;
-      margin-bottom: 0.8rem;
+      font-size: 1.22rem;
+      margin-bottom: 0.75rem;
+      line-height: 1.3;
+      color: #fff;
     }
     .service-card p {
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       color: var(--text-muted);
+      line-height: 1.55;
     }
 
-    /* Equipo */
+    /* Equipo (4 Columnas Mejoradas) */
     .team-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 2rem;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.8rem;
     }
     .team-card {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
-      border-radius: 14px;
-      padding: 2rem;
+      border-radius: 16px;
+      padding: 2rem 1.5rem;
       text-align: center;
       transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     .team-card:hover {
       border-color: var(--accent);
       transform: translateY(-6px);
       box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
     }
+    .team-avatar {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(0, 240, 255, 0.18), rgba(138, 43, 226, 0.25));
+      border: 1px solid rgba(0, 240, 255, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: #fff;
+      margin-bottom: 1rem;
+      box-shadow: 0 0 18px rgba(0, 240, 255, 0.15);
+    }
     .team-card h3 {
       font-size: 1.2rem;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.35rem;
       color: #fff;
     }
-    .team-card p {
-      font-size: 0.9rem;
+    .team-role {
+      font-size: 0.82rem;
       color: var(--accent);
       font-family: var(--code-font);
+      margin-bottom: 0.75rem;
+    }
+    .team-specialty {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.45;
     }
 
     /* Contacto */
@@ -790,13 +867,59 @@
       justify-content: center;
     }
 
+    /* Barra de navegación rápida solo en Móvil */
+    .mobile-quick-nav {
+      display: none;
+      justify-content: center;
+      gap: 0.6rem;
+      padding: 0.6rem 1rem;
+      background: rgba(8, 12, 22, 0.95);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+    .mobile-quick-nav a {
+      font-family: var(--code-font);
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      padding: 0.35rem 0.75rem;
+      border-radius: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .mobile-quick-nav a:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    /* Responsividad */
+    @media (max-width: 1080px) {
+      .engines-grid,
+      .services-grid,
+      .team-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
     @media (max-width: 900px) {
       .portfolio-item { grid-template-columns: 1fr; }
       .video-container { height: 260px; min-height: auto; }
-      .demo-preview { border-right: none; border-bottom: 1px solid rgba(255, 255, 255, 0.06); min-height: auto; }
+      .demo-preview { border-right: none; border-bottom: 1px solid rgba(255, 255, 255, 0.07); min-height: 290px; }
       .nav-links { display: none; }
-      .hero { padding-top: 4.5rem; }
+      .mobile-quick-nav { display: flex; }
+      .portfolio-tabs { position: static; }
+      .hero { padding-top: 4rem; }
       #cursor-glow { display: none; }
+    }
+
+    @media (max-width: 600px) {
+      .engines-grid,
+      .services-grid,
+      .team-grid {
+        grid-template-columns: 1fr;
+      }
+      .project-content {
+        padding: 1.75rem;
+      }
     }
   </style>
 </head>
@@ -807,7 +930,7 @@
   <div id="cursor-glow"></div>
   <div class="glow-orb-static"></div>
 
-  <!-- Barra de Navegación (Intacta con los 5 enlaces + 2 botones sociales) -->
+  <!-- Barra de Navegación (Exactamente 5 enlaces + 2 botones sociales) -->
   <header>
     <div class="nav-container">
       <a href="#" class="logo">
@@ -833,6 +956,14 @@
         </div>
       </nav>
     </div>
+    <!-- Acceso rápido visible únicamente en pantallas móviles -->
+    <div class="mobile-quick-nav">
+      <a href="#tecnologias">Pipeline</a>
+      <a href="#proyectos">Portafolio (14)</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#equipo">Equipo</a>
+      <a href="#contacto">Contacto</a>
+    </div>
   </header>
 
   <main>
@@ -852,55 +983,93 @@
       </div>
     </section>
 
-    <!-- MOTORES Y TECH STACK (Exactamente 4 tarjetas) -->
+    <!-- MOTORES Y TECH STACK (Exactamente 4 tarjetas alineadas con íconos SVG) -->
     <section id="tecnologias" class="tech-stack-section">
       <div class="tech-stack-box">
         <div class="tech-stack-title">// Motores y Pipeline de Producción</div>
         <div class="engines-grid">
+
+          <!-- Tarjeta 1 -->
           <div class="engine-card">
-            <div class="engine-header">
-              <span class="engine-name">Full-Stack Web & Cloud</span>
+            <div class="engine-top">
+              <div class="engine-icon-box" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                  <line x1="8" y1="21" x2="16" y2="21"></line>
+                  <line x1="12" y1="17" x2="12" y2="21"></line>
+                  <polyline points="8 9 10 11 8 13"></polyline>
+                  <line x1="12" y1="13" x2="16" y2="13"></line>
+                </svg>
+              </div>
               <span class="engine-tag">Sistemas & B2B</span>
             </div>
+            <h3 class="engine-name">Full-Stack Web & Cloud</h3>
             <p class="engine-desc">
               Desarrollo de aplicaciones web progresivas, paneles administrativos, cotizadores con SVG en vivo, dashboards con métricas y catálogos integrados a WhatsApp.
             </p>
           </div>
 
+          <!-- Tarjeta 2 -->
           <div class="engine-card">
-            <div class="engine-header">
-              <span class="engine-name">Unity Engine</span>
+            <div class="engine-top">
+              <div class="engine-icon-box" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                  <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                  <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                </svg>
+              </div>
               <span class="engine-tag">Motor 3D & Simulación</span>
             </div>
+            <h3 class="engine-name">Unity Engine</h3>
             <p class="engine-desc">
               Desarrollo integral en C# enfocado en arquitectura escalable, shaders personalizados en URP, simulación de físicas y despliegue multiplataforma para PC y móviles.
             </p>
           </div>
 
+          <!-- Tarjeta 3 -->
           <div class="engine-card">
-            <div class="engine-header">
-              <span class="engine-name">Roblox Studio</span>
+            <div class="engine-top">
+              <div class="engine-icon-box" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="6" y1="12" x2="10" y2="12"></line>
+                  <line x1="8" y1="10" x2="8" y2="14"></line>
+                  <line x1="15" y1="13" x2="15.01" y2="13"></line>
+                  <line x1="18" y1="11" x2="18.01" y2="11"></line>
+                  <rect x="2" y="6" width="20" height="12" rx="4"></rect>
+                </svg>
+              </div>
               <span class="engine-tag">Multiplayer & LiveOps</span>
             </div>
+            <h3 class="engine-name">Roblox Studio</h3>
             <p class="engine-desc">
               Creación de experiencias multijugador mediante scripting avanzado en Luau, replicación de red de baja latencia y optimización para millones de dispositivos simultáneos.
             </p>
           </div>
           
+          <!-- Tarjeta 4 -->
           <div class="engine-card">
-            <div class="engine-header">
-              <span class="engine-name">Blender, 3ds Max & IA</span>
+            <div class="engine-top">
+              <div class="engine-icon-box" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                  <polyline points="2 17 12 22 22 17"></polyline>
+                  <polyline points="2 12 12 17 22 12"></polyline>
+                </svg>
+              </div>
               <span class="engine-tag">Arte 3D & Sistemas IA</span>
             </div>
+            <h3 class="engine-name">Blender, 3ds Max & IA</h3>
             <p class="engine-desc">
               Pipeline completo de modelado 3D optimizado, rigging y animación en tiempo real, potenciado con integración de IA y automatización inteligente.
             </p>
           </div>
+
         </div>
       </div>
     </section>
 
-    <!-- PORTAFOLIO (14 Proyectos con Pestañas) -->
+    <!-- PORTAFOLIO (14 Proyectos con Pestañas + Previews en Tiempo Real) -->
     <section id="proyectos" class="section-wrap">
       <div class="section-header">
         <span class="sub-badge">// Producción y Proyectos Reales</span>
@@ -928,41 +1097,19 @@
             <div class="demo-window">
               <div class="demo-topbar">
                 <div class="demo-dots"><span></span><span></span><span></span></div>
-                <span class="demo-url">app://geotecnia-supervision.min / utm-19s</span>
+                <span class="demo-url">demo-geotecnia.html · Sondaje & UTM 19S</span>
+                <span class="demo-live-pill">● LIVE PREVIEW</span>
               </div>
-              <div class="demo-body">
-                <div class="demo-header-row">
-                  <span class="demo-title-badge">⛏️ SONDAJE DDH-24 · GUARDIA DÍA/NOCHE</span>
-                  <span class="demo-live-pill">● GPS UTM 19S ACTIVO</span>
-                </div>
-                <div class="demo-kpi-grid">
-                  <div class="demo-kpi">
-                    <span class="demo-kpi-label">Avance Perforación</span>
-                    <span class="demo-kpi-val">148.50 m</span>
-                  </div>
-                  <div class="demo-kpi">
-                    <span class="demo-kpi-label">Recuperación RQD</span>
-                    <span class="demo-kpi-val">96.4%</span>
-                  </div>
-                  <div class="demo-kpi">
-                    <span class="demo-kpi-label">Curva S Semanal</span>
-                    <span class="demo-kpi-val">+4.2% Meta</span>
-                  </div>
-                </div>
-                <div class="demo-bars">
-                  <div class="demo-bar-row">
-                    <span>📸 Evidencia Fotográfica Georreferenciada</span>
-                    <span style="color: var(--accent);">Verificada</span>
-                  </div>
-                  <div class="demo-bar-row">
-                    <span>📄 Cierre Nocturno Automático & Empalme</span>
-                    <span style="color: #34d399;">PDF Oficial Listo</span>
-                  </div>
-                </div>
-                <div class="demo-preview-footer">
-                  <span>Sin hojas de Excel manuales</span>
-                  <a href="demo-geotecnia.html" target="_blank" rel="noopener" class="demo-quick-link">Abrir Interfaz →</a>
-                </div>
+              <div class="demo-viewport">
+                <iframe class="demo-iframe-scaler" src="demo-geotecnia.html" title="Vista previa Sistema Geotécnico" loading="lazy" tabindex="-1"></iframe>
+                <a href="demo-geotecnia.html" target="_blank" rel="noopener" class="demo-hover-overlay">
+                  <span class="demo-overlay-btn">🔍 Interactuar en Pantalla Completa →</span>
+                </a>
+              </div>
+              <div class="demo-footer-kpis">
+                <span>GPS: <strong>UTM 19S</strong></span>
+                <span>Métrica: <strong>Curva S en Vivo</strong></span>
+                <span>Salida: <strong>Flash Report PDF</strong></span>
               </div>
             </div>
           </div>
@@ -997,41 +1144,19 @@
             <div class="demo-window">
               <div class="demo-topbar">
                 <div class="demo-dots"><span></span><span></span><span></span></div>
-                <span class="demo-url">app://flota-control360.sys / rent-a-car</span>
+                <span class="demo-url">demo-flota.html · Telemetría & Checklist 360°</span>
+                <span class="demo-live-pill">● LIVE PREVIEW</span>
               </div>
-              <div class="demo-body">
-                <div class="demo-header-row">
-                  <span class="demo-title-badge">🚛 TELEMETRÍA & CHECKLIST 360°</span>
-                  <span class="demo-live-pill">● PIN CHOFER / ADMIN</span>
-                </div>
-                <div class="demo-kpi-grid">
-                  <div class="demo-kpi">
-                    <span class="demo-kpi-label">Alerta Aceite</span>
-                    <span class="demo-kpi-val">Cada 5,000 km</span>
-                  </div>
-                  <div class="demo-kpi">
-                    <span class="demo-kpi-label">SOAT / GPS</span>
-                    <span class="demo-kpi-val">100% Vigente</span>
-                  </div>
-                  <div class="demo-kpi">
-                    <span class="demo-kpi-label">Ratio Riesgo</span>
-                    <span class="demo-kpi-val">Bajo (Score A)</span>
-                  </div>
-                </div>
-                <div class="demo-bars">
-                  <div class="demo-bar-row">
-                    <span>🔒 Bloqueo de Unidades en Uso + Firma Legal</span>
-                    <span style="color: var(--accent);">Protegido</span>
-                  </div>
-                  <div class="demo-bar-row">
-                    <span>🆘 Botón SOS de Emergencia y Cierre de Turno</span>
-                    <span style="color: #34d399;">Operativo</span>
-                  </div>
-                </div>
-                <div class="demo-preview-footer">
-                  <span>Inspección 360° con evidencia fotográfica</span>
-                  <a href="demo-flota.html" target="_blank" rel="noopener" class="demo-quick-link">Abrir Interfaz →</a>
-                </div>
+              <div class="demo-viewport">
+                <iframe class="demo-iframe-scaler" src="demo-flota.html" title="Vista previa Control de Flota" loading="lazy" tabindex="-1"></iframe>
+                <a href="demo-flota.html" target="_blank" rel="noopener" class="demo-hover-overlay">
+                  <span class="demo-overlay-btn">🔍 Interactuar en Pantalla Completa →</span>
+                </a>
+              </div>
+              <div class="demo-footer-kpis">
+                <span>Alerta: <strong>Aceite 5,000 km</strong></span>
+                <span>Seguridad: <strong>PIN + Firma Legal</strong></span>
+                <span>SOS: <strong>Cierre de Turno</strong></span>
               </div>
             </div>
           </div>
@@ -1066,41 +1191,19 @@
             <div class="demo-window">
               <div class="demo-topbar">
                 <div class="demo-dots"><span></span><span></span><span></span></div>
-                <span class="demo-url">app://rms-carrocerias.ind / cotizador-tracking</span>
+                <span class="demo-url">demo-carrocerias.html · Cotizador & Tracking</span>
+                <span class="demo-live-pill">● LIVE PREVIEW</span>
               </div>
-              <div class="demo-body">
-                <div class="demo-header-row">
-                  <span class="demo-title-badge">🛠️ COTIZADOR INDUSTRIAL & PORTAL PLACA</span>
-                  <span class="demo-live-pill">● TRACKING EN VIVO</span>
-                </div>
-                <div class="demo-kpi-grid">
-                  <div class="demo-kpi">
-                    <span class="demo-kpi-label">Margen Ajustable</span>
-                    <span class="demo-kpi-val">10% – 50%</span>
-                  </div>
-                  <div class="demo-kpi">
-                    <span class="demo-kpi-label">Plantillas Base</span>
-                    <span class="demo-kpi-val">Fab / Mant / Rep</span>
-                  </div>
-                  <div class="demo-kpi">
-                    <span class="demo-kpi-label">Rastreo Cliente</span>
-                    <span class="demo-kpi-val">Por Placa</span>
-                  </div>
-                </div>
-                <div class="demo-bars">
-                  <div class="demo-bar-row">
-                    <span>📐 Costeo automático de materiales y mano de obra</span>
-                    <span style="color: var(--accent);">Instantáneo</span>
-                  </div>
-                  <div class="demo-bar-row">
-                    <span>🚚 Estado de Furgón en Taller (Soldadura / Pintura)</span>
-                    <span style="color: #34d399;">Etapa 4/5</span>
-                  </div>
-                </div>
-                <div class="demo-preview-footer">
-                  <span>Cotización industrial lista para enviar</span>
-                  <a href="demo-carrocerias.html" target="_blank" rel="noopener" class="demo-quick-link">Abrir Interfaz →</a>
-                </div>
+              <div class="demo-viewport">
+                <iframe class="demo-iframe-scaler" src="demo-carrocerias.html" title="Vista previa Cotizador de Carrocerías" loading="lazy" tabindex="-1"></iframe>
+                <a href="demo-carrocerias.html" target="_blank" rel="noopener" class="demo-hover-overlay">
+                  <span class="demo-overlay-btn">🔍 Interactuar en Pantalla Completa →</span>
+                </a>
+              </div>
+              <div class="demo-footer-kpis">
+                <span>Margen: <strong>10% a 50%</strong></span>
+                <span>Plantillas: <strong>Fab / Mant / Rep</strong></span>
+                <span>Cliente: <strong>Tracking por Placa</strong></span>
               </div>
             </div>
           </div>
@@ -1135,41 +1238,19 @@
             <div class="demo-window">
               <div class="demo-topbar">
                 <div class="demo-dots"><span></span><span></span><span></span></div>
-                <span class="demo-url">app://vijicsa-almacen.movil / anti-mermas</span>
+                <span class="demo-url">demo-almacen.html · Almacén Anti-Mermas</span>
+                <span class="demo-live-pill">● LIVE PREVIEW</span>
               </div>
-              <div class="demo-body">
-                <div class="demo-header-row">
-                  <span class="demo-title-badge">📱 ALMACÉN MÓVIL & VALIDACIÓN EPP</span>
-                  <span class="demo-live-pill">● PASE QR VERIFICADO</span>
-                </div>
-                <div class="demo-kpi-grid">
-                  <div class="demo-kpi">
-                    <span class="demo-kpi-label">Filtro Anti-Error</span>
-                    <span class="demo-kpi-val">Discos Corte</span>
-                  </div>
-                  <div class="demo-kpi">
-                    <span class="demo-kpi-label">Control EPP</span>
-                    <span class="demo-kpi-val">QR Obligatorio</span>
-                  </div>
-                  <div class="demo-kpi">
-                    <span class="demo-kpi-label">Capacitación</span>
-                    <span class="demo-kpi-val">Flash Quiz</span>
-                  </div>
-                </div>
-                <div class="demo-bars">
-                  <div class="demo-bar-row">
-                    <span>🛡️ Bloqueo automático de consumibles incompatibles</span>
-                    <span style="color: var(--accent);">Activo</span>
-                  </div>
-                  <div class="demo-bar-row">
-                    <span>🔧 Reporte de daños de herramientas y micro-learning</span>
-                    <span style="color: #34d399;">Gamificado</span>
-                  </div>
-                </div>
-                <div class="demo-preview-footer">
-                  <span>Prevención de mermas en planta y obra</span>
-                  <a href="demo-almacen.html" target="_blank" rel="noopener" class="demo-quick-link">Abrir Interfaz →</a>
-                </div>
+              <div class="demo-viewport">
+                <iframe class="demo-iframe-scaler" src="demo-almacen.html" title="Vista previa Almacén Inteligente" loading="lazy" tabindex="-1"></iframe>
+                <a href="demo-almacen.html" target="_blank" rel="noopener" class="demo-hover-overlay">
+                  <span class="demo-overlay-btn">🔍 Interactuar en Pantalla Completa →</span>
+                </a>
+              </div>
+              <div class="demo-footer-kpis">
+                <span>Seguridad: <strong>Pase QR + EPP</strong></span>
+                <span>Control: <strong>Bloqueo de Discos</strong></span>
+                <span>Módulo: <strong>Quiz Gamificado</strong></span>
               </div>
             </div>
           </div>
@@ -1204,41 +1285,19 @@
             <div class="demo-window">
               <div class="demo-topbar">
                 <div class="demo-dots"><span></span><span></span><span></span></div>
-                <span class="demo-url">https://goimsa-autopartes.netlify.app</span>
+                <span class="demo-url">goimsa-autopartes.netlify.app · OEM & Motor</span>
+                <span class="demo-live-pill">● LIVE CLOUD</span>
               </div>
-              <div class="demo-body">
-                <div class="demo-header-row">
-                  <span class="demo-title-badge">⚙️ BUSCADOR TÉCNICO OEM & MOTOR</span>
-                  <span class="demo-live-pill">● DESPLIEGUE CLOUD</span>
-                </div>
-                <div class="demo-kpi-grid">
-                  <div class="demo-kpi">
-                    <span class="demo-kpi-label">Filtro Motor</span>
-                    <span class="demo-kpi-val">2GD-FTV / G4NA</span>
-                  </div>
-                  <div class="demo-kpi">
-                    <span class="demo-kpi-label">Cruce Exacto</span>
-                    <span class="demo-kpi-val">Código OEM</span>
-                  </div>
-                  <div class="demo-kpi">
-                    <span class="demo-kpi-label">Logística</span>
-                    <span class="demo-kpi-val">Despachos B2B</span>
-                  </div>
-                </div>
-                <div class="demo-bars">
-                  <div class="demo-bar-row">
-                    <span>🔍 Soporte para Swaps de Motor y Equivalencias</span>
-                    <span style="color: var(--accent);">Indexado</span>
-                  </div>
-                  <div class="demo-bar-row">
-                    <span>📦 Módulo interno de preparación y guía de despacho</span>
-                    <span style="color: #34d399;">Integrado</span>
-                  </div>
-                </div>
-                <div class="demo-preview-footer">
-                  <span>Catálogo técnico para importadoras</span>
-                  <a href="https://goimsa-autopartes.netlify.app/" target="_blank" rel="noopener" class="demo-quick-link">Abrir Interfaz →</a>
-                </div>
+              <div class="demo-viewport">
+                <iframe class="demo-iframe-scaler" src="https://goimsa-autopartes.netlify.app/" title="Vista previa Catálogo GOIMSA" loading="lazy" tabindex="-1"></iframe>
+                <a href="https://goimsa-autopartes.netlify.app/" target="_blank" rel="noopener" class="demo-hover-overlay">
+                  <span class="demo-overlay-btn">🔍 Interactuar en Pantalla Completa →</span>
+                </a>
+              </div>
+              <div class="demo-footer-kpis">
+                <span>Motores: <strong>2GD-FTV / G4NA</strong></span>
+                <span>Búsqueda: <strong>Código OEM</strong></span>
+                <span>Interno: <strong>Despachos B2B</strong></span>
               </div>
             </div>
           </div>
@@ -1273,41 +1332,19 @@
             <div class="demo-window">
               <div class="demo-topbar">
                 <div class="demo-dots"><span></span><span></span><span></span></div>
-                <span class="demo-url">app://lienzo-moda.store / admin-live</span>
+                <span class="demo-url">demo-tienda.html · E-Commerce + Panel Dueño</span>
+                <span class="demo-live-pill">● LIVE PREVIEW</span>
               </div>
-              <div class="demo-body">
-                <div class="demo-header-row">
-                  <span class="demo-title-badge">🛍️ E-COMMERCE MODA + ADMIN MÓVIL</span>
-                  <span class="demo-live-pill">● PRECIOS MAYORISTAS</span>
-                </div>
-                <div class="demo-kpi-grid">
-                  <div class="demo-kpi">
-                    <span class="demo-kpi-label">Fit Finder</span>
-                    <span class="demo-kpi-val">Talla Exacta</span>
-                  </div>
-                  <div class="demo-kpi">
-                    <span class="demo-kpi-label">Outfit Builder</span>
-                    <span class="demo-kpi-val">Interactivo</span>
-                  </div>
-                  <div class="demo-kpi">
-                    <span class="demo-kpi-label">Panel Dueño</span>
-                    <span class="demo-kpi-val">Stock en Vivo</span>
-                  </div>
-                </div>
-                <div class="demo-bars">
-                  <div class="demo-bar-row">
-                    <span>🏷️ Descuento automático por volumen y cuenta regresiva</span>
-                    <span style="color: var(--accent);">Dinámico</span>
-                  </div>
-                  <div class="demo-bar-row">
-                    <span>🚚 Calculadora de envíos por distrito + Edición móvil</span>
-                    <span style="color: #34d399;">Tiempo Real</span>
-                  </div>
-                </div>
-                <div class="demo-preview-footer">
-                  <span>Tienda + Backoffice integrado</span>
-                  <a href="demo-tienda.html" target="_blank" rel="noopener" class="demo-quick-link">Abrir Interfaz →</a>
-                </div>
+              <div class="demo-viewport">
+                <iframe class="demo-iframe-scaler" src="demo-tienda.html" title="Vista previa Tienda LIENZO" loading="lazy" tabindex="-1"></iframe>
+                <a href="demo-tienda.html" target="_blank" rel="noopener" class="demo-hover-overlay">
+                  <span class="demo-overlay-btn">🔍 Interactuar en Pantalla Completa →</span>
+                </a>
+              </div>
+              <div class="demo-footer-kpis">
+                <span>Módulo: <strong>Armador de Outfits</strong></span>
+                <span>Precios: <strong>Mayorista Auto</strong></span>
+                <span>Admin: <strong>Edición en Vivo</strong></span>
               </div>
             </div>
           </div>
@@ -1342,41 +1379,19 @@
             <div class="demo-window">
               <div class="demo-topbar">
                 <div class="demo-dots"><span></span><span></span><span></span></div>
-                <span class="demo-url">app://dulce-abril.cake / svg-designer</span>
+                <span class="demo-url">demo-pasteleria.html · Diseñador Tortas SVG</span>
+                <span class="demo-live-pill">● LIVE PREVIEW</span>
               </div>
-              <div class="demo-body">
-                <div class="demo-header-row">
-                  <span class="demo-title-badge">🎂 PERSONALIZADOR DE TORTAS SVG</span>
-                  <span class="demo-live-pill">● RENDER VECTORIAL</span>
-                </div>
-                <div class="demo-kpi-grid">
-                  <div class="demo-kpi">
-                    <span class="demo-kpi-label">Pisos / Altura</span>
-                    <span class="demo-kpi-val">1 a 3 Pisos</span>
-                  </div>
-                  <div class="demo-kpi">
-                    <span class="demo-kpi-label">Cotización</span>
-                    <span class="demo-kpi-val">En Tiempo Real</span>
-                  </div>
-                  <div class="demo-kpi">
-                    <span class="demo-kpi-label">Fecha Entrega</span>
-                    <span class="demo-kpi-val">Cálculo Auto</span>
-                  </div>
-                </div>
-                <div class="demo-bars">
-                  <div class="demo-bar-row">
-                    <span>🎨 Dibujo SVG dinámico de bizcocho, relleno y cobertura</span>
-                    <span style="color: var(--accent);">Interactivo</span>
-                  </div>
-                  <div class="demo-bar-row">
-                    <span>📅 Bloqueo inteligente de fechas según complejidad</span>
-                    <span style="color: #34d399;">Validado</span>
-                  </div>
-                </div>
-                <div class="demo-preview-footer">
-                  <span>Catálogo por ocasiones + Customizer</span>
-                  <a href="demo-pasteleria.html" target="_blank" rel="noopener" class="demo-quick-link">Abrir Interfaz →</a>
-                </div>
+              <div class="demo-viewport">
+                <iframe class="demo-iframe-scaler" src="demo-pasteleria.html" title="Vista previa Pastelería Dulce Abril" loading="lazy" tabindex="-1"></iframe>
+                <a href="demo-pasteleria.html" target="_blank" rel="noopener" class="demo-hover-overlay">
+                  <span class="demo-overlay-btn">🔍 Interactuar en Pantalla Completa →</span>
+                </a>
+              </div>
+              <div class="demo-footer-kpis">
+                <span>Motor: <strong>Render SVG en Vivo</strong></span>
+                <span>Cálculo: <strong>Pisos y Bizcocho</strong></span>
+                <span>Agenda: <strong>Fecha Mínima Auto</strong></span>
               </div>
             </div>
           </div>
@@ -1411,41 +1426,19 @@
             <div class="demo-window">
               <div class="demo-topbar">
                 <div class="demo-dots"><span></span><span></span><span></span></div>
-                <span class="demo-url">app://huellitas-petshop.pe / grabador-svg</span>
+                <span class="demo-url">demo-mascotas.html · Grabador Placas SVG</span>
+                <span class="demo-live-pill">● LIVE PREVIEW</span>
               </div>
-              <div class="demo-body">
-                <div class="demo-header-row">
-                  <span class="demo-title-badge">🐾 GRABADOR DE PLACAS SVG EN VIVO</span>
-                  <span class="demo-live-pill">● PREVIEW INSTANTÁNEO</span>
-                </div>
-                <div class="demo-kpi-grid">
-                  <div class="demo-kpi">
-                    <span class="demo-kpi-label">Geometría SVG</span>
-                    <span class="demo-kpi-val">Hueso / Círculo</span>
-                  </div>
-                  <div class="demo-kpi">
-                    <span class="demo-kpi-label">Guía de Tallas</span>
-                    <span class="demo-kpi-val">Por Peso (kg)</span>
-                  </div>
-                  <div class="demo-kpi">
-                    <span class="demo-kpi-label">Grabado Láser</span>
-                    <span class="demo-kpi-val">Nombre + Tel</span>
-                  </div>
-                </div>
-                <div class="demo-bars">
-                  <div class="demo-bar-row">
-                    <span>🐕 Filtro rápido por especie (Perros / Gatos) y buscador</span>
-                    <span style="color: var(--accent);">Fluido</span>
-                  </div>
-                  <div class="demo-bar-row">
-                    <span>🏷️ Renderizado vectorial con color, forma y tipografía</span>
-                    <span style="color: #34d399;">100% Custom</span>
-                  </div>
-                </div>
-                <div class="demo-preview-footer">
-                  <span>Experiencia de compra personalizada</span>
-                  <a href="demo-mascotas.html" target="_blank" rel="noopener" class="demo-quick-link">Abrir Interfaz →</a>
-                </div>
+              <div class="demo-viewport">
+                <iframe class="demo-iframe-scaler" src="demo-mascotas.html" title="Vista previa Pet Shop Huellitas" loading="lazy" tabindex="-1"></iframe>
+                <a href="demo-mascotas.html" target="_blank" rel="noopener" class="demo-hover-overlay">
+                  <span class="demo-overlay-btn">🔍 Interactuar en Pantalla Completa →</span>
+                </a>
+              </div>
+              <div class="demo-footer-kpis">
+                <span>Custom: <strong>Placa SVG en Vivo</strong></span>
+                <span>Asistente: <strong>Talla según Peso</strong></span>
+                <span>Filtro: <strong>Por Especie</strong></span>
               </div>
             </div>
           </div>
@@ -1480,41 +1473,19 @@
             <div class="demo-window">
               <div class="demo-topbar">
                 <div class="demo-dots"><span></span><span></span><span></span></div>
-                <span class="demo-url">app://aurea-void.luxury / gift-box-builder</span>
+                <span class="demo-url">demo-joyeria.html · AUREA VOID Luxury Box</span>
+                <span class="demo-live-pill">● LIVE PREVIEW</span>
               </div>
-              <div class="demo-body">
-                <div class="demo-header-row">
-                  <span class="demo-title-badge">✨ LUXURY JEWELRY & GIFT BUILDER</span>
-                  <span class="demo-live-pill">● PACK 3x -15% AUTO</span>
-                </div>
-                <div class="demo-kpi-grid">
-                  <div class="demo-kpi">
-                    <span class="demo-kpi-label">Aleaciones</span>
-                    <span class="demo-kpi-val">Oro 18k / Plata</span>
-                  </div>
-                  <div class="demo-kpi">
-                    <span class="demo-kpi-label">Caja Regalo</span>
-                    <span class="demo-kpi-val">3 Joyas (-15%)</span>
-                  </div>
-                  <div class="demo-kpi">
-                    <span class="demo-kpi-label">Tema Visual</span>
-                    <span class="demo-kpi-val">Oscuro / Claro</span>
-                  </div>
-                </div>
-                <div class="demo-bars">
-                  <div class="demo-bar-row">
-                    <span>💎 Selector interactivo de materiales y acabado fino</span>
-                    <span style="color: var(--accent);">Alta Gama</span>
-                  </div>
-                  <div class="demo-bar-row">
-                    <span>🎁 Armador de Box con descuento aplicado al instante</span>
-                    <span style="color: #34d399;">-15% Activo</span>
-                  </div>
-                </div>
-                <div class="demo-preview-footer">
-                  <span>Diseño editorial de lujo con modo dual</span>
-                  <a href="demo-joyeria.html" target="_blank" rel="noopener" class="demo-quick-link">Abrir Interfaz →</a>
-                </div>
+              <div class="demo-viewport">
+                <iframe class="demo-iframe-scaler" src="demo-joyeria.html" title="Vista previa Joyería AUREA VOID" loading="lazy" tabindex="-1"></iframe>
+                <a href="demo-joyeria.html" target="_blank" rel="noopener" class="demo-hover-overlay">
+                  <span class="demo-overlay-btn">🔍 Interactuar en Pantalla Completa →</span>
+                </a>
+              </div>
+              <div class="demo-footer-kpis">
+                <span>Bundle: <strong>3 Joyas (-15% Auto)</strong></span>
+                <span>Material: <strong>Oro 18k / Plata</strong></span>
+                <span>Interfaz: <strong>Oscuro / Claro</strong></span>
               </div>
             </div>
           </div>
@@ -1549,41 +1520,19 @@
             <div class="demo-window">
               <div class="demo-topbar">
                 <div class="demo-dots"><span></span><span></span><span></span></div>
-                <span class="demo-url">app://el-motor-kardex.pos / jefe-trabajador</span>
+                <span class="demo-url">demo-repuestos.html · POS Mostrador & Kardex</span>
+                <span class="demo-live-pill">● LIVE PREVIEW</span>
               </div>
-              <div class="demo-body">
-                <div class="demo-header-row">
-                  <span class="demo-title-badge">🔧 POS MOSTRADOR, KARDEX & UTILIDADES</span>
-                  <span class="demo-live-pill">● PERFIL JEFE / VENDEDOR</span>
-                </div>
-                <div class="demo-kpi-grid">
-                  <div class="demo-kpi">
-                    <span class="demo-kpi-label">Importación</span>
-                    <span class="demo-kpi-val">Excel / CSV</span>
-                  </div>
-                  <div class="demo-kpi">
-                    <span class="demo-kpi-label">Compatibilidad</span>
-                    <span class="demo-kpi-val">Año y Modelo</span>
-                  </div>
-                  <div class="demo-kpi">
-                    <span class="demo-kpi-label">Rentabilidad</span>
-                    <span class="demo-kpi-val">Costo vs Margen</span>
-                  </div>
-                </div>
-                <div class="demo-bars">
-                  <div class="demo-bar-row">
-                    <span>📊 Vista Jefe: Ganancias netas y ventas por trabajador</span>
-                    <span style="color: var(--accent);">Confidencial</span>
-                  </div>
-                  <div class="demo-bar-row">
-                    <span>🛒 Vista Mostrador: Ventas rápidas y alerta de stock crítico</span>
-                    <span style="color: #34d399;">Tiempo Real</span>
-                  </div>
-                </div>
-                <div class="demo-preview-footer">
-                  <span>Gestión integral de inventario y mostrador</span>
-                  <a href="demo-repuestos.html" target="_blank" rel="noopener" class="demo-quick-link">Abrir Interfaz →</a>
-                </div>
+              <div class="demo-viewport">
+                <iframe class="demo-iframe-scaler" src="demo-repuestos.html" title="Vista previa Sistema de Inventario y Kardex" loading="lazy" tabindex="-1"></iframe>
+                <a href="demo-repuestos.html" target="_blank" rel="noopener" class="demo-hover-overlay">
+                  <span class="demo-overlay-btn">🔍 Interactuar en Pantalla Completa →</span>
+                </a>
+              </div>
+              <div class="demo-footer-kpis">
+                <span>Perfiles: <strong>Jefe / Trabajador</strong></span>
+                <span>Datos: <strong>Importación CSV/Excel</strong></span>
+                <span>Filtro: <strong>Año y Modelo</strong></span>
               </div>
             </div>
           </div>
@@ -1626,7 +1575,7 @@
             <div>
               <div class="project-meta">
                 <span class="project-category">Roblox / Multiplayer Racing</span>
-                <span class="status-badge">MVP / Jugable</span>
+                <span class="status-badge game-badge">MVP / Jugable</span>
               </div>
               <h3>Llama Rush</h3>
               <p>
@@ -1661,7 +1610,7 @@
             <div>
               <div class="project-meta">
                 <span class="project-category">Unity 3D / Serious Game</span>
-                <span class="status-badge">Demo Técnica</span>
+                <span class="status-badge game-badge">Demo Técnica</span>
               </div>
               <h3>Interactive Emergency</h3>
               <p>
@@ -1734,7 +1683,7 @@
             <div>
               <div class="project-meta">
                 <span class="project-category">Unity 3D / Escape & Crisis Thriller</span>
-                <span class="status-badge">Proyecto Terminado</span>
+                <span class="status-badge game-badge">Proyecto Terminado</span>
               </div>
               <h3>How to React</h3>
               <p>
@@ -1758,7 +1707,7 @@
       </div>
     </section>
 
-    <!-- SERVICIOS (Exactamente 4 tarjetas) -->
+    <!-- SERVICIOS (Exactamente 4 tarjetas en 4 columnas) -->
     <section id="servicios" class="section-wrap">
       <div class="section-header">
         <span class="sub-badge">// Propuesta de Valor</span>
@@ -1792,7 +1741,7 @@
       </div>
     </section>
 
-    <!-- EQUIPO -->
+    <!-- EQUIPO (4 Tarjetas enriquecidas con Avatar y Especialidad) -->
     <section id="equipo" class="section-wrap">
       <div class="section-header">
         <span class="sub-badge">// Fundadores</span>
@@ -1800,20 +1749,28 @@
       </div>
       <div class="team-grid">
         <div class="team-card">
+          <div class="team-avatar">MS</div>
           <h3>Marlo Sulca</h3>
-          <p>Co-Founder & Project Manager</p>
+          <p class="team-role">Co-Founder & Project Manager</p>
+          <span class="team-specialty">Gestión de Proyectos B2B, Arquitectura Comercial & Operaciones</span>
         </div>
         <div class="team-card">
+          <div class="team-avatar">AC</div>
           <h3>Ariel Carrollo</h3>
-          <p>Co-Founder & Lead Developer</p>
+          <p class="team-role">Co-Founder & Lead Developer</p>
+          <span class="team-specialty">Ingeniería de Software Full-Stack, Unity C# & Sistemas en Tiempo Real</span>
         </div>
         <div class="team-card">
+          <div class="team-avatar">SC</div>
           <h3>Said Carrollo</h3>
-          <p>Co-Founder & Lead Modeler</p>
+          <p class="team-role">Co-Founder & Lead Modeler</p>
+          <span class="team-specialty">Pipeline de Arte Técnico 3D, Optimización & Entornos Inmersivos</span>
         </div>
         <div class="team-card">
+          <div class="team-avatar">MV</div>
           <h3>Miguel Vega</h3>
-          <p>Co-Founder & Lead Designer</p>
+          <p class="team-role">Co-Founder & Lead Designer</p>
+          <span class="team-specialty">Diseño de Sistemas Interactivos, Experiencia de Usuario (UI/UX) & Game Design</span>
         </div>
       </div>
     </section>
@@ -1878,8 +1835,8 @@
           const y = e.clientY - rect.top;
           const centerX = rect.width / 2;
           const centerY = rect.height / 2;
-          const rotateX = ((y - centerY) / centerY) * -3.5;
-          const rotateY = ((x - centerX) / centerX) * 3.5;
+          const rotateX = ((y - centerY) / centerY) * -3.2;
+          const rotateY = ((x - centerX) / centerX) * 3.2;
 
           card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
         });
