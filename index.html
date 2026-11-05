@@ -3,6 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    // La portada debe abrir arriba, no en la posición de una visita anterior.
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  </script>
   <title>SPARC Interactive | Software B2B, Web Apps, Simulación 3D & Game Dev</title>
   <meta name="description" content="Estudio tecnológico especializado en desarrollo de software a medida, aplicaciones web empresariales, simuladores 3D interactivos y videojuegos en Unity, Roblox y Blender.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,7 +28,18 @@
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header-h) + 12px); }
+    :root { --header-h: 70px; }
+    [hidden] { display: none !important; }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+    .sr-only, .skip-link:not(:focus) {
+      position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden;
+      clip-path: inset(50%); white-space: nowrap;
+    }
+    .skip-link:focus {
+      position: fixed; top: 0.5rem; left: 0.5rem; z-index: 110;
+      padding: 0.6rem 1rem; border-radius: 6px; background: var(--accent); color: var(--bg);
+    }
     body {
       background-color: var(--bg);
       color: var(--text);
@@ -86,7 +101,8 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1.2rem 2rem;
+      min-height: var(--header-h);
+      padding: 0.7rem 2rem;
     }
     .logo {
       font-size: 1.35rem;
@@ -150,7 +166,7 @@
     }
     .linkedin-link-btn {
       background: rgba(10, 102, 194, 0.1);
-      color: #0a66c2;
+      color: #9ccfff;
     }
     .linkedin-link-btn:hover {
       background: #0a66c2;
@@ -163,7 +179,7 @@
     .hero {
       max-width: 1050px;
       margin: 0 auto;
-      padding: 6.5rem 2rem 4rem;
+      padding: clamp(3.5rem, 6.5vw, 6rem) 2rem clamp(3rem, 5vw, 4.5rem);
       text-align: center;
     }
     .hero-badge {
@@ -172,30 +188,36 @@
       gap: 0.5rem;
       padding: 0.45rem 1.25rem;
       background: rgba(0, 240, 255, 0.08);
-      border: 1px solid var(--accent);
+      border: 1px solid rgba(0, 240, 255, 0.30);
       border-radius: 100px;
       font-size: 0.85rem;
       color: var(--accent);
       font-family: var(--code-font);
-      margin-bottom: 2rem;
-      box-shadow: 0 0 20px rgba(0, 240, 255, 0.15);
+      margin-bottom: 1.35rem;
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+      font-size: 0.74rem;
     }
     .hero h1 {
-      font-size: clamp(2.4rem, 5.5vw, 4.2rem);
-      line-height: 1.15;
+      font-size: clamp(2.45rem, 5.5vw, 4.55rem);
+      line-height: 1.07;
+      text-wrap: balance;
+      letter-spacing: -0.045em;
       font-weight: 700;
       margin-bottom: 1.5rem;
     }
     .gradient-text {
-      background: linear-gradient(135deg, #ffffff 30%, var(--accent) 80%, var(--purple) 100%);
+      background: linear-gradient(110deg, #efffff 0%, #6eeef3 43%, #a7a1ff 100%);
+      background-clip: text;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
     .hero p {
       font-size: clamp(1.05rem, 2vw, 1.22rem);
       color: var(--text-muted);
-      max-width: 840px;
-      margin: 0 auto 2.8rem;
+      max-width: 65ch;
+      margin: 0 auto 1.9rem;
+      text-wrap: pretty;
     }
     .hero-actions {
       display: flex;
@@ -210,7 +232,7 @@
       padding: 0.95rem 2.2rem;
       border-radius: 8px;
       font-size: 0.95rem;
-      box-shadow: 0 0 25px var(--accent-glow);
+      box-shadow: 0 3px 18px rgba(0, 240, 255, 0.15);
       transition: all 0.25s ease;
       display: inline-flex;
       align-items: center;
@@ -239,25 +261,32 @@
     /* Motores & Pipeline (4 Columnas Simétricas + Íconos SVG) */
     .tech-stack-section {
       max-width: 1200px;
-      margin: 1rem auto 4rem;
+      margin: 0 auto 1rem;
       padding: 0 2rem;
     }
     .tech-stack-box {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: 20px;
-      padding: 2.5rem;
+      padding: clamp(1rem, 2.5vw, 2rem);
       backdrop-filter: blur(12px);
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
     }
     .tech-stack-title {
-      text-align: center;
+      display: flex;
+      align-items: center;
+      gap: 1.1rem;
+      text-align: left;
       font-family: var(--code-font);
       font-size: 0.85rem;
       color: var(--accent);
       letter-spacing: 2px;
       text-transform: uppercase;
-      margin-bottom: 2rem;
+      margin-bottom: 1.35rem;
+    }
+    .tech-stack-title::after {
+      content: ""; flex: 1; height: 1px;
+      background: linear-gradient(90deg, var(--card-border-active), transparent);
     }
     .engines-grid {
       display: grid;
@@ -332,7 +361,7 @@
     .section-wrap {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 5rem 2rem;
+      padding: clamp(3rem, 5.5vw, 4.75rem) 2rem;
     }
     .section-header {
       text-align: center;
@@ -348,61 +377,50 @@
       margin-bottom: 0.6rem;
     }
     .section-header h2 {
-      font-size: 2.6rem;
+      font-size: clamp(1.85rem, 4vw, 2.6rem);
+      line-height: 1.15;
+      letter-spacing: -0.03em;
       color: #fff;
     }
 
-    /* Barra de Pestañas del Portafolio */
-    .portfolio-tabs {
-      display: flex;
-      justify-content: center;
-      gap: 0.9rem;
-      flex-wrap: wrap;
-      margin-bottom: 3.5rem;
-      position: sticky;
-      top: 76px;
-      z-index: 40;
-      padding: 0.75rem 1rem;
-      background: rgba(5, 7, 12, 0.82);
-      backdrop-filter: blur(16px);
-      border-radius: 14px;
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      max-width: fit-content;
-      margin-left: auto;
-      margin-right: auto;
+    /* Filtros e índice del portafolio */
+    .portfolio-tools {
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      position: sticky; top: calc(var(--header-h) + 6px); z-index: 40;
+      padding: 0.55rem; margin-bottom: 1.25rem;
+      border: 1px solid var(--card-border); border-radius: 12px;
+      background: rgba(9, 15, 24, 0.96); backdrop-filter: blur(14px);
+    }
+    .portfolio-tabs, .project-jump { display: flex; align-items: center; gap: 0.35rem; min-width: 0; }
+    .tab-btn, .project-jump button, .project-jump select {
+      font: 600 0.88rem/1.25 'Inter', sans-serif; border-radius: 7px;
+      color: var(--text-muted); border: 1px solid transparent; min-height: 42px;
     }
     .tab-btn {
-      background: rgba(12, 16, 26, 0.9);
-      border: 1px solid var(--card-border);
-      color: var(--text-muted);
-      font-family: var(--code-font);
-      font-size: 0.85rem;
-      font-weight: 600;
-      padding: 0.7rem 1.35rem;
-      border-radius: 9px;
-      cursor: pointer;
-      transition: all 0.25s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
+      display: inline-flex; justify-content: center; align-items: center; gap: 0.45rem;
+      background: transparent; padding: 0.5rem 0.8rem; cursor: pointer;
     }
-    .tab-btn:hover {
-      border-color: var(--accent);
-      color: #fff;
-      transform: translateY(-2px);
-    }
+    .tab-btn:hover, .project-jump button:hover { color: white; background: #14202c; }
     .tab-btn.active {
-      background: rgba(0, 240, 255, 0.14);
-      border-color: var(--accent);
-      color: var(--accent);
-      box-shadow: 0 0 20px rgba(0, 240, 255, 0.22);
+      background: rgba(0, 240, 255, 0.09); border-color: rgba(0, 240, 255, 0.35); color: var(--accent);
     }
+    .count {
+      font: 500 0.74rem var(--code-font); border-radius: 4px;
+      padding: 0.05rem 0.3rem; background: rgba(255, 255, 255, 0.07);
+    }
+    .project-jump select, .project-jump button {
+      color-scheme: dark; background: #0e1521; border-color: #32404e; color: var(--text);
+      padding: 0.45rem 0.65rem; cursor: pointer;
+    }
+    .project-jump select { width: 12rem; min-width: 0; font-weight: 400; }
+    .project-jump button { white-space: nowrap; }
+    .portfolio-item { scroll-margin-top: 78px; }
 
     /* Lista de Portafolio */
     .portfolio-list {
       display: flex;
       flex-direction: column;
-      gap: 3.5rem;
+      gap: 1.5rem;
     }
     .portfolio-item {
       background: var(--card-bg);
@@ -410,18 +428,15 @@
       border-radius: 20px;
       overflow: hidden;
       display: grid;
-      grid-template-columns: 1.15fr 1fr;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
       backdrop-filter: blur(14px);
       box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
       transition: border-color 0.3s ease, box-shadow 0.3s ease;
       position: relative;
     }
-    .portfolio-item.hidden-card {
-      display: none !important;
-    }
     .portfolio-item:hover {
       border-color: var(--card-border-active);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65), 0 0 30px rgba(0, 240, 255, 0.18);
+      box-shadow: 0 12px 34px rgba(0, 0, 0, 0.4);
     }
 
     /* Contenedor de Video (Videojuegos) */
@@ -487,19 +502,19 @@
     .demo-dots span:nth-child(2) { background: #f59e0b; }
     .demo-dots span:nth-child(3) { background: #10b981; }
     .demo-url {
+      flex: 1; min-width: 0;
       font-family: var(--code-font);
       font-size: 0.7rem;
       color: var(--text-muted);
-      background: rgba(0, 0, 0, 0.5);
-      padding: 0.18rem 0.65rem;
+      padding: 0.12rem 0.5rem;
       border-radius: 4px;
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      max-width: 72%;
+      margin-right: auto;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
     }
     .demo-live-pill {
+      flex-shrink: 0; white-space: nowrap;
       font-family: var(--code-font);
       font-size: 0.65rem;
       padding: 0.12rem 0.5rem;
@@ -536,7 +551,7 @@
     .demo-hover-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(5, 7, 12, 0.15) 0%, rgba(5, 7, 12, 0.88) 100%);
+      background: linear-gradient(180deg, transparent 55%, rgba(5, 7, 12, 0.68));
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -546,7 +561,7 @@
       transition: opacity 0.28s ease;
       z-index: 4;
     }
-    .demo-window:hover .demo-hover-overlay {
+    .demo-window:hover .demo-hover-overlay, .demo-hover-overlay:focus-visible {
       opacity: 1;
     }
     .demo-overlay-btn {
@@ -564,7 +579,8 @@
       transform: translateY(6px);
       transition: transform 0.25s ease;
     }
-    .demo-window:hover .demo-overlay-btn {
+    .demo-hover-overlay:focus-visible { outline-offset: -4px; }
+    .demo-window:hover .demo-overlay-btn, .demo-hover-overlay:focus-visible .demo-overlay-btn {
       transform: translateY(0);
     }
 
@@ -589,7 +605,8 @@
 
     /* Contenido Derecho de cada Proyecto */
     .project-content {
-      padding: 2.5rem;
+      padding: clamp(1.4rem, 2.8vw, 2.15rem);
+      min-width: 0;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -629,8 +646,10 @@
       color: #facc15;
     }
     .project-content h3 {
-      font-size: 1.6rem;
-      margin-bottom: 0.9rem;
+      font-size: clamp(1.35rem, 2.15vw, 1.65rem);
+      text-wrap: balance;
+      letter-spacing: -0.025em;
+      margin-bottom: 0.8rem;
       color: #fff;
       line-height: 1.25;
     }
@@ -644,7 +663,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 0.5rem;
-      margin-bottom: 1.8rem;
+      margin-bottom: 1.35rem;
     }
     .p-tag {
       font-family: var(--code-font);
@@ -720,12 +739,12 @@
       box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
     }
     .service-icon {
-      font-size: 2.1rem;
-      margin-bottom: 1.1rem;
-      display: inline-block;
+      width: 43px; height: 43px; border: 1px solid var(--card-border);
+      border-radius: 10px; display: grid; place-items: center; color: var(--accent);
+      background: rgba(0, 240, 255, 0.05); margin-bottom: 1.1rem;
       transition: transform 0.2s;
     }
-    .service-card:hover .service-icon { transform: scale(1.12); }
+
     .service-card h3 {
       font-size: 1.22rem;
       margin-bottom: 0.75rem;
@@ -867,66 +886,86 @@
       justify-content: center;
     }
 
-    /* Barra de navegación rápida solo en Móvil */
-    .mobile-quick-nav {
-      display: none;
-      justify-content: center;
-      gap: 0.6rem;
-      padding: 0.6rem 1rem;
-      background: rgba(8, 12, 22, 0.95);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-      overflow-x: auto;
-      white-space: nowrap;
+    /* Navegación y tamaños adaptables */
+    .mobile-quick-nav { display: none; }
+    .email-text, .footer-links a { overflow-wrap: anywhere; }
+    .engine-top {
+      display: grid; grid-template-columns: 44px minmax(0, 1fr); min-height: 44px;
     }
-    .mobile-quick-nav a {
-      font-family: var(--code-font);
-      font-size: 0.76rem;
-      color: var(--text-muted);
-      padding: 0.35rem 0.75rem;
-      border-radius: 6px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-    }
-    .mobile-quick-nav a:hover {
-      color: var(--accent);
-      border-color: var(--accent);
-    }
+    .engine-tag { justify-self: end; white-space: normal; line-height: 1.35; text-align: center; }
+    .project-actions a { min-height: 44px; }
+    .footer-links a:hover { text-decoration: underline; }
 
-    /* Responsividad */
-    @media (max-width: 1080px) {
-      .engines-grid,
-      .services-grid,
-      .team-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
+    @media (max-width: 1100px) {
+      .nav-links { gap: 1.05rem; }
+      .engines-grid, .services-grid, .team-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
-
-    @media (max-width: 900px) {
-      .portfolio-item { grid-template-columns: 1fr; }
-      .video-container { height: 260px; min-height: auto; }
-      .demo-preview { border-right: none; border-bottom: 1px solid rgba(255, 255, 255, 0.07); min-height: 290px; }
+    @media (max-width: 950px) {
+      :root { --header-h: 91px; }
+      .nav-container { min-height: 48px; justify-content: center; padding: 0.5rem 1rem; }
       .nav-links { display: none; }
-      .mobile-quick-nav { display: flex; }
-      .portfolio-tabs { position: static; }
-      .hero { padding-top: 4rem; }
+      .mobile-quick-nav {
+        display: flex; justify-content: center; gap: clamp(0px, 2vw, 1.5rem);
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      .mobile-quick-nav a {
+        display: flex; align-items: center; min-height: 42px; padding: 0.25rem 0.35rem;
+        color: #bfcbda; font: 500 clamp(0.72rem, 1.8vw, 0.88rem)/1.2 'Inter', sans-serif;
+      }
+      .mobile-quick-nav a:hover { color: var(--accent); }
+      .portfolio-tools { position: static; }
+      .portfolio-item { scroll-margin-top: 0; }
       #cursor-glow { display: none; }
     }
-
+    @media (max-width: 800px) {
+      .portfolio-item { grid-template-columns: minmax(0, 1fr); }
+      .video-container { min-height: 0; height: auto; aspect-ratio: 16/9; }
+      .demo-preview { border-right: 0; border-bottom: 1px solid var(--card-border); height: auto; min-height: 0; }
+      .demo-viewport { flex: none; min-height: 0; aspect-ratio: 16/9; }
+      .demo-window { flex: auto; }
+      .portfolio-tools { flex-wrap: wrap; }
+      .project-jump { flex: 1; }
+      .project-jump select { flex: 1; }
+      .hero h1 { font-size: clamp(2.45rem, 6.6vw, 3.75rem); }
+    }
     @media (max-width: 600px) {
-      .engines-grid,
-      .services-grid,
-      .team-grid {
-        grid-template-columns: 1fr;
-      }
-      .project-content {
-        padding: 1.75rem;
-      }
+      .hero, .tech-stack-section, .section-wrap { padding-left: 1rem; padding-right: 1rem; }
+      .hero { padding-top: 2.8rem; padding-bottom: 2.8rem; }
+      .hero-actions { gap: 0.65rem; }
+      .hero-actions a { justify-content: center; padding: 0.85rem 1.15rem; }
+      .engines-grid, .services-grid, .team-grid { grid-template-columns: minmax(0, 1fr); gap: 0.8rem; }
+      .engine-card, .service-card, .team-card, .project-content { padding: 1.25rem; }
+      .section-header { margin-bottom: 1.35rem; }
+      .portfolio-tools { gap: 0.65rem; padding: 0.55rem; }
+      .portfolio-tabs { width: 100%; }
+      .tab-btn { flex: 1 1 auto; padding: 0.5rem 0.25rem; font-size: 0.8rem; }
+      .project-jump { flex-basis: 100%; }
+      .demo-preview { padding: 0.7rem; }
+      .demo-footer-kpis { justify-content: flex-start; column-gap: 0.8rem; }
+      .project-meta { justify-content: flex-start; }
+      .contact-container { padding: 2rem 1rem; }
+      .email-box { width: 100%; padding: 0.8rem; margin: 1.35rem 0; gap: 0.6rem; }
+      .email-text { font-size: clamp(0.85rem, 3.6vw, 1.05rem); }
+      footer { padding: 2rem 1rem; }
+      .footer-links { gap: 0.6rem; }
+    }
+    @media (max-width: 380px) {
+      .mobile-quick-nav { gap: 0; }
+      .hero-actions { flex-direction: column; }
+      .tab-btn { flex-wrap: wrap; column-gap: 0.25rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      #cursor-glow, #bg-canvas { display: none; }
     }
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
 
   <!-- Fondo animado interactivo & Glow reactivo al cursor -->
-  <canvas id="bg-canvas"></canvas>
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
   <div id="cursor-glow"></div>
   <div class="glow-orb-static"></div>
 
@@ -937,8 +976,8 @@
         <div class="logo-pulse"></div>
         SPARC <span>INTERACTIVE</span>
       </a>
-      <nav class="nav-links">
-        <a href="#tecnologias">Pipeline</a>
+      <nav class="nav-links" aria-label="Navegación principal">
+        <a href="#tecnologias">Tecnologías</a>
         <a href="#proyectos">Portafolio</a>
         <a href="#servicios">Servicios</a>
         <a href="#equipo">Equipo</a>
@@ -957,36 +996,36 @@
       </nav>
     </div>
     <!-- Acceso rápido visible únicamente en pantallas móviles -->
-    <div class="mobile-quick-nav">
-      <a href="#tecnologias">Pipeline</a>
-      <a href="#proyectos">Portafolio (14)</a>
+    <nav class="mobile-quick-nav" aria-label="Navegación principal">
+      <a href="#tecnologias">Tecnologías</a>
+      <a href="#proyectos">Portafolio</a>
       <a href="#servicios">Servicios</a>
       <a href="#equipo">Equipo</a>
       <a href="#contacto">Contacto</a>
-    </div>
+    </nav>
   </header>
 
-  <main>
+  <main id="contenido" tabindex="-1">
     <!-- HERO -->
     <section class="hero">
-      <div class="hero-badge">Estudio Tecnológico · Software a Medida, Web Apps, Simulación 3D & Videojuegos</div>
+      <div class="hero-badge">Estudio tecnológico</div>
       <h1>
-        Ingeniería de software interactivo, <br>
-        <span class="gradient-text">sistemas web, simulación 3D y videojuegos</span>
+        Software a medida, <br>
+        <span class="gradient-text">simulación 3D y videojuegos</span>
       </h1>
       <p>
-        Diseñamos y programamos aplicaciones web empresariales, sistemas ERP/inventario, catálogos interactivos con personalizadores en tiempo real y automatización de reportes, así como simuladores interactivos de capacitación y videojuegos multijugador de alto rendimiento.
+        Desarrollamos sistemas web para gestionar inventarios, ventas y reportes. También creamos simuladores de capacitación y videojuegos multijugador.
       </p>
       <div class="hero-actions">
-        <a href="#contacto" class="btn-glow">Cotizar un Proyecto →</a>
-        <a href="#proyectos" class="btn-secondary">Explorar Portafolio</a>
+        <a href="#contacto" class="btn-glow">Cotizar un proyecto <span aria-hidden="true">→</span></a>
+        <a href="#proyectos" class="btn-secondary">Explorar el portafolio</a>
       </div>
     </section>
 
     <!-- MOTORES Y TECH STACK (Exactamente 4 tarjetas alineadas con íconos SVG) -->
     <section id="tecnologias" class="tech-stack-section">
       <div class="tech-stack-box">
-        <div class="tech-stack-title">// Motores y Pipeline de Producción</div>
+        <h2 class="tech-stack-title">Tecnologías de desarrollo</h2>
         <div class="engines-grid">
 
           <!-- Tarjeta 1 -->
@@ -1069,41 +1108,42 @@
       </div>
     </section>
 
-    <!-- PORTAFOLIO (14 Proyectos con Pestañas + Previews en Tiempo Real) -->
+    <!-- PORTAFOLIO -->
     <section id="proyectos" class="section-wrap">
       <div class="section-header">
-        <span class="sub-badge">// Producción y Proyectos Reales</span>
-        <h2>Portafolio Destacado</h2>
+        <h2>Portafolio destacado</h2>
       </div>
 
-      <!-- Barra de Pestañas -->
-      <div class="portfolio-tabs" role="tablist" aria-label="Filtrar portafolio por línea de negocio">
-        <button class="tab-btn active" data-filter="all" role="tab" aria-selected="true">
-          Todos los Proyectos (14)
-        </button>
-        <button class="tab-btn" data-filter="software" role="tab" aria-selected="false">
-          💼 Software Empresarial & Web Apps (10)
-        </button>
-        <button class="tab-btn" data-filter="games" role="tab" aria-selected="false">
-          🎮 Videojuegos & Simulación 3D (4)
-        </button>
+      <div class="portfolio-tools" hidden>
+        <div class="portfolio-tabs" role="group" aria-label="Filtrar proyectos">
+          <button type="button" class="tab-btn active" data-filter="all" aria-pressed="true" aria-controls="portfolio-list">Todos <span class="count">16</span></button>
+          <button type="button" class="tab-btn" data-filter="software" aria-pressed="false" aria-controls="portfolio-list">Software y web <span class="count">12</span></button>
+          <button type="button" class="tab-btn" data-filter="games" aria-pressed="false" aria-controls="portfolio-list">Videojuegos y 3D <span class="count">4</span></button>
+        </div>
+        <form class="project-jump" aria-label="Ir a un proyecto">
+          <label for="project-select" class="sr-only">Elegir proyecto</label>
+          <select id="project-select" required>
+            <option value="">Elegir proyecto…</option>
+          </select>
+          <button type="submit" aria-label="Ir al proyecto elegido">Ir <span aria-hidden="true">↓</span></button>
+        </form>
       </div>
 
       <div class="portfolio-list" id="portfolio-list">
 
         <!-- ================= SOFTWARE 1: GEOTECNIA ================= -->
-        <article class="portfolio-item tilt-card" data-category="software">
+        <article class="portfolio-item" id="demo-geotecnia" data-name="Supervisión geotécnica" data-category="software">
           <div class="demo-preview">
             <div class="demo-window">
               <div class="demo-topbar">
-                <div class="demo-dots"><span></span><span></span><span></span></div>
-                <span class="demo-url">demo-geotecnia.html · Sondaje & UTM 19S</span>
-                <span class="demo-live-pill">● LIVE PREVIEW</span>
+                <div class="demo-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+                <span class="demo-url">Sondaje & UTM 19S</span>
+                <span class="demo-live-pill">Vista previa</span>
               </div>
               <div class="demo-viewport">
-                <iframe class="demo-iframe-scaler" src="demo-geotecnia.html" title="Vista previa Sistema Geotécnico" loading="lazy" tabindex="-1"></iframe>
-                <a href="demo-geotecnia.html" target="_blank" rel="noopener" class="demo-hover-overlay">
-                  <span class="demo-overlay-btn">🔍 Interactuar en Pantalla Completa →</span>
+                <iframe class="demo-iframe-scaler" src="demo-geotecnia.html" title="Vista previa Sistema Geotécnico" loading="lazy" tabindex="-1" inert aria-hidden="true"></iframe>
+                <a href="demo-geotecnia.html" target="_blank" rel="noopener" class="demo-hover-overlay" aria-label="Abrir Supervisión geotécnica en una pestaña nueva">
+                  <span class="demo-overlay-btn">Abrir maqueta ↗</span>
                 </a>
               </div>
               <div class="demo-footer-kpis">
@@ -1117,9 +1157,9 @@
             <div>
               <div class="project-meta">
                 <span class="project-category">Web App B2B / Operaciones Mineras</span>
-                <span class="status-badge">Maqueta Interactiva</span>
+                <span class="status-badge">Maqueta interactiva</span>
               </div>
-              <h3>Sistema de Supervisión Geotécnica & Reporte Diario (Minería)</h3>
+              <h3 tabindex="-1">Sistema de Supervisión Geotécnica & Reporte Diario (Minería)</h3>
               <p>
                 Plataforma para supervisores de perforación diamantina. Automatiza Flash Reports, fotos con GPS/UTM 19S, cierre nocturno sin Excel, Curva S en tiempo real y empalme de guardia con reporte oficial imprimible.
               </p>
@@ -1131,26 +1171,24 @@
               </div>
             </div>
             <div class="project-actions">
-              <a href="demo-geotecnia.html" target="_blank" rel="noopener" class="btn-action">
-                <span>🚀</span> Probar Demo Interactiva
-              </a>
+              <a href="demo-geotecnia.html" target="_blank" rel="noopener" class="btn-action" aria-label="Abrir Supervisión geotécnica en una pestaña nueva">Abrir maqueta <span aria-hidden="true">↗</span></a>
             </div>
           </div>
         </article>
 
         <!-- ================= SOFTWARE 2: FLOTA RENT A CAR ================= -->
-        <article class="portfolio-item tilt-card" data-category="software">
+        <article class="portfolio-item" id="demo-flota" data-name="Control de flota" data-category="software">
           <div class="demo-preview">
             <div class="demo-window">
               <div class="demo-topbar">
-                <div class="demo-dots"><span></span><span></span><span></span></div>
-                <span class="demo-url">demo-flota.html · Telemetría & Checklist 360°</span>
-                <span class="demo-live-pill">● LIVE PREVIEW</span>
+                <div class="demo-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+                <span class="demo-url">Telemetría & Checklist 360°</span>
+                <span class="demo-live-pill">Vista previa</span>
               </div>
               <div class="demo-viewport">
-                <iframe class="demo-iframe-scaler" src="demo-flota.html" title="Vista previa Control de Flota" loading="lazy" tabindex="-1"></iframe>
-                <a href="demo-flota.html" target="_blank" rel="noopener" class="demo-hover-overlay">
-                  <span class="demo-overlay-btn">🔍 Interactuar en Pantalla Completa →</span>
+                <iframe class="demo-iframe-scaler" src="demo-flota.html" title="Vista previa Control de Flota" loading="lazy" tabindex="-1" inert aria-hidden="true"></iframe>
+                <a href="demo-flota.html" target="_blank" rel="noopener" class="demo-hover-overlay" aria-label="Abrir Control de flota en una pestaña nueva">
+                  <span class="demo-overlay-btn">Abrir maqueta ↗</span>
                 </a>
               </div>
               <div class="demo-footer-kpis">
@@ -1164,9 +1202,9 @@
             <div>
               <div class="project-meta">
                 <span class="project-category">Sistema de Gestión / Flotas & Logística</span>
-                <span class="status-badge">Maqueta Interactiva</span>
+                <span class="status-badge">Maqueta interactiva</span>
               </div>
-              <h3>Control de Flota, Mantenimiento & Inspección 360° (Rent a Car)</h3>
+              <h3 tabindex="-1">Control de Flota, Mantenimiento & Inspección 360° (Rent a Car)</h3>
               <p>
                 Sistema con PIN para admin y choferes. Monitorea aceite cada 5,000 km, SOAT, GPS, ratio de riesgo por choques, bloqueo de vehículos en uso, checklist 360° con foto y firma legal, botón SOS y cierre de turno.
               </p>
@@ -1178,26 +1216,24 @@
               </div>
             </div>
             <div class="project-actions">
-              <a href="demo-flota.html" target="_blank" rel="noopener" class="btn-action">
-                <span>🚛</span> Probar Demo Interactiva
-              </a>
+              <a href="demo-flota.html" target="_blank" rel="noopener" class="btn-action" aria-label="Abrir Control de flota en una pestaña nueva">Abrir maqueta <span aria-hidden="true">↗</span></a>
             </div>
           </div>
         </article>
 
         <!-- ================= SOFTWARE 3: CARROCERIAS RMS ================= -->
-        <article class="portfolio-item tilt-card" data-category="software">
+        <article class="portfolio-item" id="demo-carrocerias" data-name="Cotizador de carrocerías · RMS" data-category="software">
           <div class="demo-preview">
             <div class="demo-window">
               <div class="demo-topbar">
-                <div class="demo-dots"><span></span><span></span><span></span></div>
-                <span class="demo-url">demo-carrocerias.html · Cotizador & Tracking</span>
-                <span class="demo-live-pill">● LIVE PREVIEW</span>
+                <div class="demo-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+                <span class="demo-url">Cotizador & Tracking</span>
+                <span class="demo-live-pill">Vista previa</span>
               </div>
               <div class="demo-viewport">
-                <iframe class="demo-iframe-scaler" src="demo-carrocerias.html" title="Vista previa Cotizador de Carrocerías" loading="lazy" tabindex="-1"></iframe>
-                <a href="demo-carrocerias.html" target="_blank" rel="noopener" class="demo-hover-overlay">
-                  <span class="demo-overlay-btn">🔍 Interactuar en Pantalla Completa →</span>
+                <iframe class="demo-iframe-scaler" src="demo-carrocerias.html" title="Vista previa Cotizador de Carrocerías" loading="lazy" tabindex="-1" inert aria-hidden="true"></iframe>
+                <a href="demo-carrocerias.html" target="_blank" rel="noopener" class="demo-hover-overlay" aria-label="Abrir Cotizador de carrocerías · RMS en una pestaña nueva">
+                  <span class="demo-overlay-btn">Abrir maqueta ↗</span>
                 </a>
               </div>
               <div class="demo-footer-kpis">
@@ -1211,9 +1247,9 @@
             <div>
               <div class="project-meta">
                 <span class="project-category">ERP Industrial / Metalmecánica & Taller</span>
-                <span class="status-badge">Maqueta Interactiva</span>
+                <span class="status-badge">Maqueta interactiva</span>
               </div>
-              <h3>Cotizador Industrial de Carrocerías & Rastreo de Taller (RMS)</h3>
+              <h3 tabindex="-1">Cotizador Industrial de Carrocerías & Rastreo de Taller (RMS)</h3>
               <p>
                 Cotizador con plantillas pre-cargadas (fabricación, mantenimiento, reparación), costos de mano de obra, margen de ganancia ajustable (10%–50%) y portal para que el cliente rastree su furgón por placa.
               </p>
@@ -1225,26 +1261,24 @@
               </div>
             </div>
             <div class="project-actions">
-              <a href="demo-carrocerias.html" target="_blank" rel="noopener" class="btn-action">
-                <span>🛠️</span> Probar Cotizador y Tracking
-              </a>
+              <a href="demo-carrocerias.html" target="_blank" rel="noopener" class="btn-action" aria-label="Abrir Cotizador de carrocerías · RMS en una pestaña nueva">Abrir maqueta <span aria-hidden="true">↗</span></a>
             </div>
           </div>
         </article>
 
         <!-- ================= SOFTWARE 4: ALMACEN VIJICSA ================= -->
-        <article class="portfolio-item tilt-card" data-category="software">
+        <article class="portfolio-item" id="demo-almacen" data-name="Almacén inteligente · VIJICSA" data-category="software">
           <div class="demo-preview">
             <div class="demo-window">
               <div class="demo-topbar">
-                <div class="demo-dots"><span></span><span></span><span></span></div>
-                <span class="demo-url">demo-almacen.html · Almacén Anti-Mermas</span>
-                <span class="demo-live-pill">● LIVE PREVIEW</span>
+                <div class="demo-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+                <span class="demo-url">Almacén Anti-Mermas</span>
+                <span class="demo-live-pill">Vista previa</span>
               </div>
               <div class="demo-viewport">
-                <iframe class="demo-iframe-scaler" src="demo-almacen.html" title="Vista previa Almacén Inteligente" loading="lazy" tabindex="-1"></iframe>
-                <a href="demo-almacen.html" target="_blank" rel="noopener" class="demo-hover-overlay">
-                  <span class="demo-overlay-btn">🔍 Interactuar en Pantalla Completa →</span>
+                <iframe class="demo-iframe-scaler" src="demo-almacen.html" title="Vista previa Almacén Inteligente" loading="lazy" tabindex="-1" inert aria-hidden="true"></iframe>
+                <a href="demo-almacen.html" target="_blank" rel="noopener" class="demo-hover-overlay" aria-label="Abrir Almacén inteligente · VIJICSA en una pestaña nueva">
+                  <span class="demo-overlay-btn">Abrir maqueta ↗</span>
                 </a>
               </div>
               <div class="demo-footer-kpis">
@@ -1258,9 +1292,9 @@
             <div>
               <div class="project-meta">
                 <span class="project-category">Mobile Web App / Logística & Seguridad</span>
-                <span class="status-badge">Maqueta Interactiva</span>
+                <span class="status-badge">Maqueta interactiva</span>
               </div>
-              <h3>Módulo Móvil de Almacén Inteligente & Prevención de Mermas (VIJICSA)</h3>
+              <h3 tabindex="-1">Módulo Móvil de Almacén Inteligente & Prevención de Mermas (VIJICSA)</h3>
               <p>
                 App móvil para operarios con catálogo anti-errores (bloqueo de discos de corte), validación de EPP para pases QR, reporte de daños de herramientas y entrenamiento flash gamificado.
               </p>
@@ -1272,26 +1306,96 @@
               </div>
             </div>
             <div class="project-actions">
-              <a href="demo-almacen.html" target="_blank" rel="noopener" class="btn-action">
-                <span>📱</span> Probar App en Vivo
-              </a>
+              <a href="demo-almacen.html" target="_blank" rel="noopener" class="btn-action" aria-label="Abrir Almacén inteligente · VIJICSA en una pestaña nueva">Abrir maqueta <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="portfolio-item" id="demo-racksalmacenindustrial" data-name="Racks y estanterías · NEXORACK" data-category="software">
+          <div class="demo-preview">
+            <div class="demo-window">
+              <div class="demo-topbar">
+                <div class="demo-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+                <span class="demo-url">NEXORACK</span>
+                <span class="demo-live-pill">Vista previa</span>
+              </div>
+              <div class="demo-viewport">
+                <iframe class="demo-iframe-scaler" src="demo-racksalmacenindustrial.html" title="Vista previa de NEXORACK" loading="lazy" tabindex="-1" inert aria-hidden="true"></iframe>
+                <a href="demo-racksalmacenindustrial.html" target="_blank" rel="noopener" class="demo-hover-overlay" aria-label="Abrir Racks y estanterías · NEXORACK en una pestaña nueva">
+                  <span class="demo-overlay-btn">Abrir maqueta ↗</span>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="project-content">
+            <div>
+              <div class="project-meta">
+                <span class="project-category">Catálogo industrial</span>
+                <span class="status-badge">Maqueta interactiva</span>
+              </div>
+              <h3 tabindex="-1">NEXORACK · Racks y estanterías para almacenes</h3>
+              <p>Explora el catálogo de racks y estanterías, compara hasta tres soluciones de almacenamiento y prepara una solicitud con las medidas de tu espacio.</p>
+              <div class="project-tags">
+                <span class="p-tag">Catálogo con filtros</span>
+                <span class="p-tag">Comparador</span>
+                <span class="p-tag">Solicitud de cotización</span>
+              </div>
+            </div>
+            <div class="project-actions">
+              <a href="demo-racksalmacenindustrial.html" target="_blank" rel="noopener" class="btn-action" aria-label="Abrir Racks y estanterías · NEXORACK en una pestaña nueva">Abrir maqueta <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="portfolio-item" id="demo-carpinteriametalica" data-name="Carpintería metálica · FORJATEC" data-category="software">
+          <div class="demo-preview">
+            <div class="demo-window">
+              <div class="demo-topbar">
+                <div class="demo-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+                <span class="demo-url">FORJATEC</span>
+                <span class="demo-live-pill">Vista previa</span>
+              </div>
+              <div class="demo-viewport">
+                <iframe class="demo-iframe-scaler" src="demo-carpinteriametalica.html" title="Vista previa de FORJATEC" loading="lazy" tabindex="-1" inert aria-hidden="true"></iframe>
+                <a href="demo-carpinteriametalica.html" target="_blank" rel="noopener" class="demo-hover-overlay" aria-label="Abrir Carpintería metálica · FORJATEC en una pestaña nueva">
+                  <span class="demo-overlay-btn">Abrir maqueta ↗</span>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="project-content">
+            <div>
+              <div class="project-meta">
+                <span class="project-category">Carpintería metálica</span>
+                <span class="status-badge">Maqueta interactiva</span>
+              </div>
+              <h3 tabindex="-1">FORJATEC · Carpintería metálica a medida</h3>
+              <p>Recorre la galería de portones, rejas y barandas, consulta materiales y acabados, y prepara una solicitud de cotización con las medidas de tu proyecto.</p>
+              <div class="project-tags">
+                <span class="p-tag">Galería de proyectos</span>
+                <span class="p-tag">Materiales y acabados</span>
+                <span class="p-tag">Solicitud de cotización</span>
+              </div>
+            </div>
+            <div class="project-actions">
+              <a href="demo-carpinteriametalica.html" target="_blank" rel="noopener" class="btn-action" aria-label="Abrir Carpintería metálica · FORJATEC en una pestaña nueva">Abrir maqueta <span aria-hidden="true">↗</span></a>
             </div>
           </div>
         </article>
 
         <!-- ================= SOFTWARE 5: GOIMSA AUTOPARTES ================= -->
-        <article class="portfolio-item tilt-card" data-category="software">
+        <article class="portfolio-item" id="goimsa" data-name="Autopartes · GOIMSA" data-category="software">
           <div class="demo-preview">
             <div class="demo-window">
               <div class="demo-topbar">
-                <div class="demo-dots"><span></span><span></span><span></span></div>
-                <span class="demo-url">goimsa-autopartes.netlify.app · OEM & Motor</span>
-                <span class="demo-live-pill">● LIVE CLOUD</span>
+                <div class="demo-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+                <span class="demo-url">OEM & Motor</span>
+                <span class="demo-live-pill">Vista previa</span>
               </div>
               <div class="demo-viewport">
-                <iframe class="demo-iframe-scaler" src="https://goimsa-autopartes.netlify.app/" title="Vista previa Catálogo GOIMSA" loading="lazy" tabindex="-1"></iframe>
-                <a href="https://goimsa-autopartes.netlify.app/" target="_blank" rel="noopener" class="demo-hover-overlay">
-                  <span class="demo-overlay-btn">🔍 Interactuar en Pantalla Completa →</span>
+                <iframe class="demo-iframe-scaler" src="https://goimsa-autopartes.netlify.app/" title="Vista previa Catálogo GOIMSA" loading="lazy" tabindex="-1" inert aria-hidden="true"></iframe>
+                <a href="https://goimsa-autopartes.netlify.app/" target="_blank" rel="noopener" class="demo-hover-overlay" aria-label="Abrir Autopartes · GOIMSA en una pestaña nueva">
+                  <span class="demo-overlay-btn">Abrir maqueta ↗</span>
                 </a>
               </div>
               <div class="demo-footer-kpis">
@@ -1307,7 +1411,7 @@
                 <span class="project-category">Catálogo B2B / Importadora de Autopartes</span>
                 <span class="status-badge">Producción Cloud</span>
               </div>
-              <h3>Catálogo Técnico de Autopartes por Código OEM y Motor (GOIMSA)</h3>
+              <h3 tabindex="-1">Catálogo Técnico de Autopartes por Código OEM y Motor (GOIMSA)</h3>
               <p>
                 Buscador especializado para importadoras de repuestos por código OEM y motor (soporta swaps como 2GD-FTV o G4NA), equivalencias de marca y módulo interno de despachos.
               </p>
@@ -1319,26 +1423,24 @@
               </div>
             </div>
             <div class="project-actions">
-              <a href="https://goimsa-autopartes.netlify.app/" target="_blank" rel="noopener" class="btn-action">
-                <span>⚙️</span> Probar Catálogo Técnico
-              </a>
+              <a href="https://goimsa-autopartes.netlify.app/" target="_blank" rel="noopener" class="btn-action" aria-label="Abrir Autopartes · GOIMSA en una pestaña nueva">Abrir maqueta <span aria-hidden="true">↗</span></a>
             </div>
           </div>
         </article>
 
         <!-- ================= SOFTWARE 6: TIENDA LIENZO ================= -->
-        <article class="portfolio-item tilt-card" data-category="software">
+        <article class="portfolio-item" id="demo-tienda" data-name="Tienda de moda · LIENZO" data-category="software">
           <div class="demo-preview">
             <div class="demo-window">
               <div class="demo-topbar">
-                <div class="demo-dots"><span></span><span></span><span></span></div>
-                <span class="demo-url">demo-tienda.html · E-Commerce + Panel Dueño</span>
-                <span class="demo-live-pill">● LIVE PREVIEW</span>
+                <div class="demo-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+                <span class="demo-url">E-Commerce + Panel Dueño</span>
+                <span class="demo-live-pill">Vista previa</span>
               </div>
               <div class="demo-viewport">
-                <iframe class="demo-iframe-scaler" src="demo-tienda.html" title="Vista previa Tienda LIENZO" loading="lazy" tabindex="-1"></iframe>
-                <a href="demo-tienda.html" target="_blank" rel="noopener" class="demo-hover-overlay">
-                  <span class="demo-overlay-btn">🔍 Interactuar en Pantalla Completa →</span>
+                <iframe class="demo-iframe-scaler" src="demo-tienda.html" title="Vista previa Tienda LIENZO" loading="lazy" tabindex="-1" inert aria-hidden="true"></iframe>
+                <a href="demo-tienda.html" target="_blank" rel="noopener" class="demo-hover-overlay" aria-label="Abrir Tienda de moda · LIENZO en una pestaña nueva">
+                  <span class="demo-overlay-btn">Abrir maqueta ↗</span>
                 </a>
               </div>
               <div class="demo-footer-kpis">
@@ -1352,9 +1454,9 @@
             <div>
               <div class="project-meta">
                 <span class="project-category">E-Commerce & CMS / Retail Moda</span>
-                <span class="status-badge">Maqueta Interactiva</span>
+                <span class="status-badge">Maqueta interactiva</span>
               </div>
-              <h3>Tienda Virtual de Moda + Panel del Dueño en Vivo (LIENZO)</h3>
+              <h3 tabindex="-1">Tienda Virtual de Moda + Panel del Dueño en Vivo (LIENZO)</h3>
               <p>
                 E-commerce con cuenta regresiva, precios por mayor automáticos, recomendador de tallas, armador de outfits, calculadora de envíos por distrito y panel administrativo para editar precios y stock desde el celular.
               </p>
@@ -1366,26 +1468,24 @@
               </div>
             </div>
             <div class="project-actions">
-              <a href="demo-tienda.html" target="_blank" rel="noopener" class="btn-action">
-                <span>🛍️</span> Probar Tienda + Panel
-              </a>
+              <a href="demo-tienda.html" target="_blank" rel="noopener" class="btn-action" aria-label="Abrir Tienda de moda · LIENZO en una pestaña nueva">Abrir maqueta <span aria-hidden="true">↗</span></a>
             </div>
           </div>
         </article>
 
         <!-- ================= SOFTWARE 7: PASTELERIA DULCE ABRIL ================= -->
-        <article class="portfolio-item tilt-card" data-category="software">
+        <article class="portfolio-item" id="demo-pasteleria" data-name="Pastelería Dulce Abril" data-category="software">
           <div class="demo-preview">
             <div class="demo-window">
               <div class="demo-topbar">
-                <div class="demo-dots"><span></span><span></span><span></span></div>
-                <span class="demo-url">demo-pasteleria.html · Diseñador Tortas SVG</span>
-                <span class="demo-live-pill">● LIVE PREVIEW</span>
+                <div class="demo-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+                <span class="demo-url">Diseñador Tortas SVG</span>
+                <span class="demo-live-pill">Vista previa</span>
               </div>
               <div class="demo-viewport">
-                <iframe class="demo-iframe-scaler" src="demo-pasteleria.html" title="Vista previa Pastelería Dulce Abril" loading="lazy" tabindex="-1"></iframe>
-                <a href="demo-pasteleria.html" target="_blank" rel="noopener" class="demo-hover-overlay">
-                  <span class="demo-overlay-btn">🔍 Interactuar en Pantalla Completa →</span>
+                <iframe class="demo-iframe-scaler" src="demo-pasteleria.html" title="Vista previa Pastelería Dulce Abril" loading="lazy" tabindex="-1" inert aria-hidden="true"></iframe>
+                <a href="demo-pasteleria.html" target="_blank" rel="noopener" class="demo-hover-overlay" aria-label="Abrir Pastelería Dulce Abril en una pestaña nueva">
+                  <span class="demo-overlay-btn">Abrir maqueta ↗</span>
                 </a>
               </div>
               <div class="demo-footer-kpis">
@@ -1399,9 +1499,9 @@
             <div>
               <div class="project-meta">
                 <span class="project-category">Interactive Commerce / Configurador SVG</span>
-                <span class="status-badge">Maqueta Interactiva</span>
+                <span class="status-badge">Maqueta interactiva</span>
               </div>
-              <h3>Pastelería Artesanal con Diseñador de Tortas SVG (Dulce Abril)</h3>
+              <h3 tabindex="-1">Pastelería Artesanal con Diseñador de Tortas SVG (Dulce Abril)</h3>
               <p>
                 Tienda de repostería con catálogo por ocasiones y un personalizador interactivo de tortas en tiempo real que dibuja SVG y calcula precio y fecha mínima según pisos y bizcocho.
               </p>
@@ -1413,26 +1513,24 @@
               </div>
             </div>
             <div class="project-actions">
-              <a href="demo-pasteleria.html" target="_blank" rel="noopener" class="btn-action">
-                <span>🎂</span> Probar Diseñador de Tortas
-              </a>
+              <a href="demo-pasteleria.html" target="_blank" rel="noopener" class="btn-action" aria-label="Abrir Pastelería Dulce Abril en una pestaña nueva">Abrir maqueta <span aria-hidden="true">↗</span></a>
             </div>
           </div>
         </article>
 
         <!-- ================= SOFTWARE 8: MASCOTAS HUELLITAS ================= -->
-        <article class="portfolio-item tilt-card" data-category="software">
+        <article class="portfolio-item" id="demo-mascotas" data-name="Pet Shop Huellitas" data-category="software">
           <div class="demo-preview">
             <div class="demo-window">
               <div class="demo-topbar">
-                <div class="demo-dots"><span></span><span></span><span></span></div>
-                <span class="demo-url">demo-mascotas.html · Grabador Placas SVG</span>
-                <span class="demo-live-pill">● LIVE PREVIEW</span>
+                <div class="demo-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+                <span class="demo-url">Grabador Placas SVG</span>
+                <span class="demo-live-pill">Vista previa</span>
               </div>
               <div class="demo-viewport">
-                <iframe class="demo-iframe-scaler" src="demo-mascotas.html" title="Vista previa Pet Shop Huellitas" loading="lazy" tabindex="-1"></iframe>
-                <a href="demo-mascotas.html" target="_blank" rel="noopener" class="demo-hover-overlay">
-                  <span class="demo-overlay-btn">🔍 Interactuar en Pantalla Completa →</span>
+                <iframe class="demo-iframe-scaler" src="demo-mascotas.html" title="Vista previa Pet Shop Huellitas" loading="lazy" tabindex="-1" inert aria-hidden="true"></iframe>
+                <a href="demo-mascotas.html" target="_blank" rel="noopener" class="demo-hover-overlay" aria-label="Abrir Pet Shop Huellitas en una pestaña nueva">
+                  <span class="demo-overlay-btn">Abrir maqueta ↗</span>
                 </a>
               </div>
               <div class="demo-footer-kpis">
@@ -1446,9 +1544,9 @@
             <div>
               <div class="project-meta">
                 <span class="project-category">Pet Shop E-Commerce / Customizer SVG</span>
-                <span class="status-badge">Maqueta Interactiva</span>
+                <span class="status-badge">Maqueta interactiva</span>
               </div>
-              <h3>Pet Shop con Diseñador Interactivo de Placas (Huellitas)</h3>
+              <h3 tabindex="-1">Pet Shop con Diseñador Interactivo de Placas (Huellitas)</h3>
               <p>
                 Tienda para mascotas con buscador, filtro por especie, guía de tallas por peso y un diseñador interactivo de placas de identificación que renderiza SVG en vivo con nombre, teléfono, forma y color.
               </p>
@@ -1460,26 +1558,24 @@
               </div>
             </div>
             <div class="project-actions">
-              <a href="demo-mascotas.html" target="_blank" rel="noopener" class="btn-action">
-                <span>🐾</span> Probar Diseñador de Placas
-              </a>
+              <a href="demo-mascotas.html" target="_blank" rel="noopener" class="btn-action" aria-label="Abrir Pet Shop Huellitas en una pestaña nueva">Abrir maqueta <span aria-hidden="true">↗</span></a>
             </div>
           </div>
         </article>
 
         <!-- ================= SOFTWARE 9: JOYERIA AUREA VOID ================= -->
-        <article class="portfolio-item tilt-card" data-category="software">
+        <article class="portfolio-item" id="demo-joyeria" data-name="Joyería AUREA VOID" data-category="software">
           <div class="demo-preview">
             <div class="demo-window">
               <div class="demo-topbar">
-                <div class="demo-dots"><span></span><span></span><span></span></div>
-                <span class="demo-url">demo-joyeria.html · AUREA VOID Luxury Box</span>
-                <span class="demo-live-pill">● LIVE PREVIEW</span>
+                <div class="demo-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+                <span class="demo-url">AUREA VOID Luxury Box</span>
+                <span class="demo-live-pill">Vista previa</span>
               </div>
               <div class="demo-viewport">
-                <iframe class="demo-iframe-scaler" src="demo-joyeria.html" title="Vista previa Joyería AUREA VOID" loading="lazy" tabindex="-1"></iframe>
-                <a href="demo-joyeria.html" target="_blank" rel="noopener" class="demo-hover-overlay">
-                  <span class="demo-overlay-btn">🔍 Interactuar en Pantalla Completa →</span>
+                <iframe class="demo-iframe-scaler" src="demo-joyeria.html" title="Vista previa Joyería AUREA VOID" loading="lazy" tabindex="-1" inert aria-hidden="true"></iframe>
+                <a href="demo-joyeria.html" target="_blank" rel="noopener" class="demo-hover-overlay" aria-label="Abrir Joyería AUREA VOID en una pestaña nueva">
+                  <span class="demo-overlay-btn">Abrir maqueta ↗</span>
                 </a>
               </div>
               <div class="demo-footer-kpis">
@@ -1493,9 +1589,9 @@
             <div>
               <div class="project-meta">
                 <span class="project-category">Luxury E-Commerce / Bundle Configurator</span>
-                <span class="status-badge">Maqueta Interactiva</span>
+                <span class="status-badge">Maqueta interactiva</span>
               </div>
-              <h3>Joyería Fina & Armador de Cajas de Regalo con Descuento (AUREA VOID)</h3>
+              <h3 tabindex="-1">Joyería Fina & Armador de Cajas de Regalo con Descuento (AUREA VOID)</h3>
               <p>
                 E-commerce de joyería con modo oscuro/claro, selector de materiales (oro 18k), y un armador interactivo de cajas de regalo donde el cliente elige 3 joyas y obtiene 15% de descuento automático.
               </p>
@@ -1507,26 +1603,24 @@
               </div>
             </div>
             <div class="project-actions">
-              <a href="demo-joyeria.html" target="_blank" rel="noopener" class="btn-action">
-                <span>✨</span> Probar Armador de Regalos
-              </a>
+              <a href="demo-joyeria.html" target="_blank" rel="noopener" class="btn-action" aria-label="Abrir Joyería AUREA VOID en una pestaña nueva">Abrir maqueta <span aria-hidden="true">↗</span></a>
             </div>
           </div>
         </article>
 
         <!-- ================= SOFTWARE 10: REPUESTOS EL MOTOR ================= -->
-        <article class="portfolio-item tilt-card" data-category="software">
+        <article class="portfolio-item" id="demo-repuestos" data-name="Repuestos El Motor" data-category="software">
           <div class="demo-preview">
             <div class="demo-window">
               <div class="demo-topbar">
-                <div class="demo-dots"><span></span><span></span><span></span></div>
-                <span class="demo-url">demo-repuestos.html · POS Mostrador & Kardex</span>
-                <span class="demo-live-pill">● LIVE PREVIEW</span>
+                <div class="demo-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+                <span class="demo-url">POS Mostrador & Kardex</span>
+                <span class="demo-live-pill">Vista previa</span>
               </div>
               <div class="demo-viewport">
-                <iframe class="demo-iframe-scaler" src="demo-repuestos.html" title="Vista previa Sistema de Inventario y Kardex" loading="lazy" tabindex="-1"></iframe>
-                <a href="demo-repuestos.html" target="_blank" rel="noopener" class="demo-hover-overlay">
-                  <span class="demo-overlay-btn">🔍 Interactuar en Pantalla Completa →</span>
+                <iframe class="demo-iframe-scaler" src="demo-repuestos.html" title="Vista previa Sistema de Inventario y Kardex" loading="lazy" tabindex="-1" inert aria-hidden="true"></iframe>
+                <a href="demo-repuestos.html" target="_blank" rel="noopener" class="demo-hover-overlay" aria-label="Abrir Repuestos El Motor en una pestaña nueva">
+                  <span class="demo-overlay-btn">Abrir maqueta ↗</span>
                 </a>
               </div>
               <div class="demo-footer-kpis">
@@ -1540,9 +1634,9 @@
             <div>
               <div class="project-meta">
                 <span class="project-category">Sistema POS & Kardex / Gestión Comercial</span>
-                <span class="status-badge">Maqueta Interactiva</span>
+                <span class="status-badge">Maqueta interactiva</span>
               </div>
-              <h3>Sistema de Inventario, Mostrador y Kardex (Repuestos El Motor)</h3>
+              <h3 tabindex="-1">Sistema de Inventario, Mostrador y Kardex (Repuestos El Motor)</h3>
               <p>
                 Sistema dual con perfiles de Jefe (costos, márgenes, ganancias, reporte por trabajador y carga desde Excel/CSV) y Trabajador (buscador con compatibilidad por año y modelo, ventas y alertas de stock bajo).
               </p>
@@ -1554,17 +1648,15 @@
               </div>
             </div>
             <div class="project-actions">
-              <a href="demo-repuestos.html" target="_blank" rel="noopener" class="btn-action">
-                <span>🔧</span> Probar Sistema de Inventario
-              </a>
+              <a href="demo-repuestos.html" target="_blank" rel="noopener" class="btn-action" aria-label="Abrir Repuestos El Motor en una pestaña nueva">Abrir maqueta <span aria-hidden="true">↗</span></a>
             </div>
           </div>
         </article>
 
         <!-- ================= VIDEOJUEGO 1: LLAMA RUSH ================= -->
-        <article class="portfolio-item tilt-card" data-category="games">
+        <article class="portfolio-item" id="llama-rush" data-name="Llama Rush" data-category="games">
           <div class="video-container">
-            <iframe 
+            <iframe loading="lazy"
               src="https://www.youtube-nocookie.com/embed/EOFsn8dTqjw?rel=0&modestbranding=1" 
               title="Llama Rush Gameplay Demo" 
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
@@ -1577,7 +1669,7 @@
                 <span class="project-category">Roblox / Multiplayer Racing</span>
                 <span class="status-badge game-badge">MVP / Jugable</span>
               </div>
-              <h3>Llama Rush</h3>
+              <h3 tabindex="-1">Llama Rush</h3>
               <p>
                 Competencia multijugador frenética donde los usuarios montan sus propias llamas en circuitos llenos de obstáculos y curvas cerradas. Incorpora un sistema integral de personalización con cosméticos y accesorios equipables, físicas de montura dinámicas, atajos estratégicos y réplica fluida de red cliente-servidor programada en Luau.
               </p>
@@ -1597,9 +1689,9 @@
         </article>
 
         <!-- ================= VIDEOJUEGO 2: INTERACTIVE EMERGENCY ================= -->
-        <article class="portfolio-item tilt-card" data-category="games">
+        <article class="portfolio-item" id="interactive-emergency" data-name="Interactive Emergency" data-category="games">
           <div class="video-container">
-            <iframe 
+            <iframe loading="lazy"
               src="https://www.youtube-nocookie.com/embed/InbaTndpJ24?rel=0&modestbranding=1" 
               title="Interactive Emergency Serious Game" 
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
@@ -1612,7 +1704,7 @@
                 <span class="project-category">Unity 3D / Serious Game</span>
                 <span class="status-badge game-badge">Demo Técnica</span>
               </div>
-              <h3>Interactive Emergency</h3>
+              <h3 tabindex="-1">Interactive Emergency</h3>
               <p>
                 Simulador interactivo orientado a la preparación y entrenamiento ante siniestros y emergencias operativas. Pone a prueba la toma de decisiones bajo presión de tiempo con retroalimentación analítica en tiempo real, compilado de manera nativa para PC de alto rendimiento y dispositivos móviles Android.
               </p>
@@ -1635,9 +1727,9 @@
         </article>
 
         <!-- ================= VIDEOJUEGO 3: BEHIND THE PEEPHOLE ================= -->
-        <article class="portfolio-item tilt-card" data-category="games">
+        <article class="portfolio-item" id="behind-the-peephole" data-name="Behind the Peephole" data-category="games">
           <div class="video-container">
-            <iframe 
+            <iframe loading="lazy"
               src="https://www.youtube-nocookie.com/embed/QRUiqBwYdp8?rel=0&modestbranding=1" 
               title="Behind the Peephole Gameplay Demo" 
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
@@ -1650,9 +1742,9 @@
                 <span class="project-category">Unity / Point & Click Suspenso</span>
                 <span class="status-badge award">★ Ganador GameJam 2025</span>
               </div>
-              <h3>Behind the Peephole</h3>
+              <h3 tabindex="-1">Behind the Peephole</h3>
               <p>
-                Experiencia inmersiva en perspectiva de mirilla galardonada con el 1er lugar en la *International GameJam Canadore & Tecsup 2025* (categoría Trick or Treat). Construye una atmósfera asfixiante apoyada en diseño sonoro diegético y mecánicas de observación deductiva donde cada decisión determina la supervivencia.
+                Experiencia inmersiva en perspectiva de mirilla galardonada con el 1er lugar en la <em>International GameJam Canadore &amp; Tecsup 2025</em> (categoría Trick or Treat). Construye una atmósfera asfixiante apoyada en diseño sonoro diegético y mecánicas de observación deductiva donde cada decisión determina la supervivencia.
               </p>
               <div class="project-tags">
                 <span class="p-tag">Unity Engine</span>
@@ -1670,9 +1762,9 @@
         </article>
 
         <!-- ================= VIDEOJUEGO 4: HOW TO REACT ================= -->
-        <article class="portfolio-item tilt-card" data-category="games">
+        <article class="portfolio-item" id="how-to-react" data-name="How to React" data-category="games">
           <div class="video-container">
-            <iframe 
+            <iframe loading="lazy"
               src="https://www.youtube-nocookie.com/embed/R98yCPJPNRE?rel=0&modestbranding=1" 
               title="How to react Gameplay Demo" 
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
@@ -1685,7 +1777,7 @@
                 <span class="project-category">Unity 3D / Escape & Crisis Thriller</span>
                 <span class="status-badge game-badge">Proyecto Terminado</span>
               </div>
-              <h3>How to React</h3>
+              <h3 tabindex="-1">How to React</h3>
               <p>
                 Thriller en primera persona donde el jugador debe encontrar la ruta de evacuación más óptima para escapar de su departamento en medio de una crisis. Implementa narrativa reactiva con múltiples finales alternativos según el orden de acción y los objetos de supervivencia seleccionados.
               </p>
@@ -1710,31 +1802,30 @@
     <!-- SERVICIOS (Exactamente 4 tarjetas en 4 columnas) -->
     <section id="servicios" class="section-wrap">
       <div class="section-header">
-        <span class="sub-badge">// Propuesta de Valor</span>
-        <h2>Servicios Técnicos Especializados</h2>
+        <h2>Servicios técnicos especializados</h2>
       </div>
 
       <div class="services-grid">
         <div class="service-card">
-          <div class="service-icon">💻</div>
+          <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="13" rx="2"/><path d="M8 21h8m-4-3.5V21M5.5 8h13"/></svg></div>
           <h3>Sistemas Web, ERP & Inventarios B2B</h3>
           <p>Digitalización operativa, control de flotas, kardex, cotizadores con SVG y paneles gerenciales a medida.</p>
         </div>
 
         <div class="service-card">
-          <div class="service-icon">🛍️</div>
+          <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l1 13H4L5 8Z"/><path d="M8.5 9V6a3.5 3.5 0 0 1 7 0v3"/></svg></div>
           <h3>E-Commerce con Personalizadores Interactivos</h3>
           <p>Tiendas con constructores de productos en tiempo real, calculadoras de precios y pedidos directos a WhatsApp.</p>
         </div>
 
         <div class="service-card">
-          <div class="service-icon">👓</div>
+          <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m3 7 2-2h14l2 2 1 9-2 2h-4l-3-3h-2l-3 3H4l-2-2 1-9Z"/><path d="M6 10h3m6 0h3"/></svg></div>
           <h3>Simuladores & Serious Games</h3>
           <p>Soluciones interactivas 3D y capacitación gamificada para prevención de riesgos y entrenamiento operativo.</p>
         </div>
 
         <div class="service-card">
-          <div class="service-icon">🎮</div>
+          <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10c2.7 0 4 4 4.5 8.4.4 3.6-2.2 4.7-4.3 2.4L15 15h-6l-2.2 2.8c-2.1 2.3-4.7 1.2-4.3-2.4C3 11 4.3 7 7 7Z"/><path d="M7.5 9.5v4m-2-2h4m6-.5h.1m2.4 2h.1"/></svg></div>
           <h3>Videojuegos & Arte 3D (Unity / Roblox)</h3>
           <p>Producción integral de videojuegos, sistemas multijugador en red y modelado 3D en Blender y 3ds Max.</p>
         </div>
@@ -1744,8 +1835,8 @@
     <!-- EQUIPO (4 Tarjetas enriquecidas con Avatar y Especialidad) -->
     <section id="equipo" class="section-wrap">
       <div class="section-header">
-        <span class="sub-badge">// Fundadores</span>
-        <h2>Sobre Nosotros</h2>
+        <span class="sub-badge">Fundadores</span>
+        <h2>Sobre nosotros</h2>
       </div>
       <div class="team-grid">
         <div class="team-card">
@@ -1778,20 +1869,20 @@
     <!-- CONTACTO -->
     <section id="contacto" class="section-wrap">
       <div class="contact-container">
-        <span class="sub-badge">// Venta de Servicios & Cotizaciones</span>
-        <h2 style="font-size: 2.3rem; margin-top: 0.5rem; color: #fff;">Inicia un Proyecto con Nosotros</h2>
+        <span class="sub-badge">Cotizaciones</span>
+        <h2 style="font-size: 2.3rem; margin-top: 0.5rem; color: #fff;">Conversemos sobre tu proyecto</h2>
         <p style="color: var(--text-muted); margin-top: 1rem; max-width: 600px; margin-left: auto; margin-right: auto;">
           Brindamos desarrollo de software empresarial, aplicaciones web interactivas, simulación 3D y videojuegos a medida. Escríbenos directamente a nuestro buzón oficial para coordinar una cotización formal.
         </p>
 
         <div class="email-box">
           <span class="email-text" id="email-text">contacto@sparc-interactive.com</span>
-          <button class="copy-btn" id="copy-btn" onclick="copyEmail()">Copiar Correo</button>
+          <button class="copy-btn" id="copy-btn" aria-live="polite" onclick="copyEmail()">Copiar correo</button>
         </div>
 
         <div>
           <a href="mailto:contacto@sparc-interactive.com" class="btn-glow" style="display: inline-block;">
-            Abrir Bandeja de Correo ✉️
+            Escribir por correo <span aria-hidden="true">↗</span>
           </a>
         </div>
       </div>
@@ -1802,7 +1893,7 @@
   <footer>
     <div class="footer-content">
       <p>© 2026 SPARC INTERACTIVE S.A.C.S. Todos los derechos reservados.</p>
-      <div style="font-family: var(--code-font); font-size: 0.8rem; color: #64748b; margin-bottom: 0.5rem;">
+      <div style="font-family: var(--code-font); font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem;">
         RUC: 20615871606 | Empresa Formal Constituida | Edición de Programas Informáticos y Software
       </div>
       <div class="footer-links">
@@ -1818,75 +1909,93 @@
 
   <!-- SCRIPTS REACTIVOS -->
   <script>
-    // 1. Resplandor dinámico que sigue al cursor
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     const cursorGlow = document.getElementById('cursor-glow');
-    window.addEventListener('mousemove', (e) => {
-      cursorGlow.style.left = e.clientX + 'px';
-      cursorGlow.style.top = e.clientY + 'px';
-    });
-
-    // 2. Efecto de inclinación 3D (Tilt) reactivo al puntero en PC
-    const tiltCards = document.querySelectorAll('.tilt-card');
-    if (window.innerWidth > 900) {
-      tiltCards.forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-          const rect = card.getBoundingClientRect();
-          const x = e.clientX - rect.left;
-          const y = e.clientY - rect.top;
-          const centerX = rect.width / 2;
-          const centerY = rect.height / 2;
-          const rotateX = ((y - centerY) / centerY) * -3.2;
-          const rotateY = ((x - centerX) / centerX) * 3.2;
-
-          card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
-        });
-
-        card.addEventListener('mouseleave', () => {
-          card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
-        });
+    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      window.addEventListener('pointermove', event => {
+        if (reducedMotion.matches || window.innerWidth <= 950) return;
+        cursorGlow.style.left = event.clientX + 'px';
+        cursorGlow.style.top = event.clientY + 'px';
       });
     }
 
-    // 3. Sistema de Pestañas del Portafolio + Deep-Linking (#software / #videojuegos)
-    const tabButtons = document.querySelectorAll('.tab-btn');
-    const portfolioItems = document.querySelectorAll('.portfolio-item');
+    const portfolio = document.getElementById('proyectos');
+    const tools = portfolio.querySelector('.portfolio-tools');
+    const filters = [...tools.querySelectorAll('[data-filter]')];
+    const projects = [...portfolio.querySelectorAll('.portfolio-item')];
+    const projectSelect = document.getElementById('project-select');
 
-    function filterPortfolio(filterValue) {
-      tabButtons.forEach(btn => {
-        const isActive = btn.getAttribute('data-filter') === filterValue;
-        btn.classList.toggle('active', isActive);
-        btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+    function filterPortfolio(category) {
+      filters.forEach(button => {
+        const active = button.dataset.filter === category;
+        button.classList.toggle('active', active);
+        button.setAttribute('aria-pressed', String(active));
       });
-
-      portfolioItems.forEach(item => {
-        const itemCategory = item.getAttribute('data-category');
-        if (filterValue === 'all' || itemCategory === filterValue) {
-          item.classList.remove('hidden-card');
-        } else {
-          item.classList.add('hidden-card');
+      projectSelect.length = 1;
+      projects.forEach(project => {
+        project.hidden = category !== 'all' && project.dataset.category !== category;
+        if (!project.hidden) {
+          projectSelect.add(new Option(project.dataset.name, project.id));
         }
       });
+      projectSelect.value = '';
     }
 
-    tabButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const selectedFilter = btn.getAttribute('data-filter');
-        filterPortfolio(selectedFilter);
+    filters.forEach(button => {
+      button.querySelector('.count').textContent = projects.filter(project =>
+        button.dataset.filter === 'all' || project.dataset.category === button.dataset.filter
+      ).length;
+      button.addEventListener('click', () => {
+        const wasPinned = portfolio.getBoundingClientRect().top < document.querySelector('header').offsetHeight;
+        filterPortfolio(button.dataset.filter);
+        if (wasPinned) portfolio.scrollIntoView({ block: 'start' });
       });
     });
+    tools.querySelector('form').addEventListener('submit', event => {
+      event.preventDefault();
+      const project = document.getElementById(projectSelect.value);
+      if (!project || project.hidden) return;
+      project.querySelector('h3').focus({ preventScroll: true });
+      project.scrollIntoView({ block: 'start' });
+    });
 
-    function checkHashFilter() {
-      const hash = window.location.hash.toLowerCase();
-      if (hash === '#software') {
-        filterPortfolio('software');
-        document.getElementById('proyectos').scrollIntoView({ behavior: 'smooth' });
-      } else if (hash === '#videojuegos' || hash === '#games') {
-        filterPortfolio('games');
-        document.getElementById('proyectos').scrollIntoView({ behavior: 'smooth' });
+    function checkHashFilter(shouldScroll = false) {
+      const hash = window.location.hash.slice(1).toLowerCase();
+      if (hash === 'software' || hash === 'videojuegos' || hash === 'games') {
+        filterPortfolio(hash === 'software' ? 'software' : 'games');
+        if (shouldScroll) portfolio.scrollIntoView({ block: 'start' });
+      } else if (hash === 'proyectos') {
+        filterPortfolio('all');
+      } else {
+        const linkedProject = projects.find(project => project.id === hash);
+        if (linkedProject && linkedProject.hidden) {
+          filterPortfolio(linkedProject.dataset.category);
+          if (shouldScroll) linkedProject.scrollIntoView({ block: 'start' });
+        }
       }
     }
-    window.addEventListener('hashchange', checkHashFilter);
-    window.addEventListener('DOMContentLoaded', checkHashFilter);
+    filterPortfolio('all');
+    tools.hidden = false;
+    window.addEventListener('hashchange', () => checkHashFilter(true));
+    checkHashFilter(false); // Preparar filtros sin mover la vista al iniciar.
+
+    // Iniciar en el encabezado si no se ha pedido un enlace #seccion.
+    // No volver arriba cuando el visitante ya haya empezado a interactuar.
+    let userHasInteracted = false;
+    for (const eventName of ['wheel', 'touchstart', 'pointerdown', 'keydown']) {
+      window.addEventListener(eventName, () => { userHasInteracted = true; },
+        { once: true, passive: true });
+    }
+    function keepInitialTop() {
+      if (window.location.hash || userHasInteracted) return;
+      const root = document.documentElement;
+      const previousBehavior = root.style.scrollBehavior;
+      root.style.scrollBehavior = 'auto';
+      window.scrollTo(0, 0);
+      root.style.scrollBehavior = previousBehavior;
+    }
+    keepInitialTop();
+    window.addEventListener('pageshow', keepInitialTop, { once: true });
 
     // 4. Canvas: Red interactiva cibernética
     const canvas = document.getElementById('bg-canvas');
@@ -1928,6 +2037,7 @@
       particles.push(new Particle());
     }
 
+    let animationFrame;
     function animate() {
       ctx.clearRect(0, 0, width, height);
       for (let i = 0; i < particles.length; i++) {
@@ -1946,9 +2056,15 @@
           }
         }
       }
-      requestAnimationFrame(animate);
+      animationFrame = requestAnimationFrame(animate);
     }
-    animate();
+    function updateAnimation() {
+      cancelAnimationFrame(animationFrame);
+      if (ctx && !reducedMotion.matches && !document.hidden) animate();
+    }
+    reducedMotion.addEventListener('change', updateAnimation);
+    document.addEventListener('visibilitychange', updateAnimation);
+    updateAnimation();
 
     // 5. Copiado de Correo Universal con portapapeles auxiliar
     function copyEmail() {
@@ -1959,7 +2075,7 @@
         btn.innerText = '¡Copiado!';
         btn.classList.add('copied');
         setTimeout(() => {
-          btn.innerText = 'Copiar Correo';
+          btn.innerText = 'Copiar correo';
           btn.classList.remove('copied');
         }, 2500);
       }
@@ -1980,12 +2096,13 @@
         textArea.focus();
         textArea.select();
         try {
-          document.execCommand('copy');
-          setSuccessUI();
+          if (document.execCommand('copy')) setSuccessUI();
+          else prompt('Copia este correo:', email);
         } catch (err) {
           prompt('Copia manualmente este correo:', email);
         }
         document.body.removeChild(textArea);
+        btn.focus();
       }
     }
   </script>
