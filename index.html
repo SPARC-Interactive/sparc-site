@@ -1,0 +1,2206 @@
+<!doctype html>
+<html lang="es" class="is-loading">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SPARC Interactive · Webs y videojuegos para tu marca</title>
+<meta name="description" content="Estudio de Lima que crea páginas web para emprendedores y videojuegos para marcas: advergames, juegos en Roblox, simuladores 3D y sistemas a medida. Cotiza por correo.">
+<meta name="theme-color" content="#0b0b0b">
+<link rel="icon" type="image/png" href="assets/logo-v2/favicon.png">
+<link rel="apple-touch-icon" href="assets/logo-v2/favicon.png">
+<link rel="canonical" href="https://sparc-interactive.com/">
+<!-- Vista previa al compartir el enlace -->
+<meta property="og:url" content="https://sparc-interactive.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SPARC Interactive">
+<meta property="og:title" content="SPARC Interactive · Webs y videojuegos para tu marca">
+<meta property="og:description" content="Páginas web para emprendedores y videojuegos para marcas, en un mismo equipo. Cotiza por correo.">
+<meta property="og:image" content="https://sparc-interactive.com/assets/og-sparc.jpg">
+<meta property="og:image:alt" content="Logo de SPARC Interactive: una llama gamer con audífonos y mando">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="es_PE">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://sparc-interactive.com/assets/og-sparc.jpg">
+<!-- Datos de la empresa para Google -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "SPARC Interactive",
+  "url": "https://sparc-interactive.com/",
+  "logo": "https://sparc-interactive.com/assets/logo-v2/favicon.png",
+  "description": "Estudio de Lima que crea páginas web para emprendedores y videojuegos para marcas.",
+  "email": "contacto@sparc-interactive.com",
+  "address": { "@type": "PostalAddress", "addressLocality": "Lima", "addressCountry": "PE" },
+  "sameAs": ["https://www.linkedin.com/company/sparc-interactive-sacs/"]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="assets/logo-v2/mascota.png">
+<noscript><style>.preloader{display:none!important}</style></noscript>
+<style>
+  :root{
+    --bg:#0b0b0b; --fg:#f5f5f0; --muted:#a3a3a0; --line:#2a2a28;
+    --ghost:rgba(245,245,240,.12);
+    --accent:#3d7bff; --on-accent:#0b0b0b;
+    --font-display:'Chakra Petch',system-ui,sans-serif;
+    --font-body:'Public Sans',system-ui,sans-serif;
+    /* Proporciones de las piezas del logo (ancho / alto) */
+        --hdr-h:72px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-padding-top:var(--hdr-h)}
+  html,body{min-height:100%}
+  body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:16px;line-height:1.5;overflow-x:hidden}
+  html.is-loading body,html.menu-lock body{overflow:hidden}
+  img,video{display:block;max-width:100%;height:auto}
+  .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .skip-link{position:fixed;left:16px;top:-60px;z-index:100;background:var(--accent);color:var(--on-accent);padding:10px 14px;font-weight:600}
+  .skip-link:focus{top:16px}
+  :focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+
+  /* Piezas del logo: PNG blancos con fondo transparente.
+     Son <img> normales para que se vean también al abrir el archivo directo (file://), donde las máscaras CSS se bloquean. */
+  .logo-img{display:block;height:auto}
+
+  /* ---------- Botones ---------- */
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 20px;
+    font-family:var(--font-display);font-weight:700;font-size:16px;text-decoration:none;white-space:nowrap;
+    border:2px solid var(--fg);cursor:pointer;transition:transform .15s,box-shadow .15s,background-color .15s,color .15s}
+  .btn svg{width:20px;height:20px;flex:none}
+  .btn-primary{background:var(--accent);color:var(--on-accent);box-shadow:4px 4px 0 var(--fg)}
+  .btn-primary:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--fg)}
+  .btn-primary:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--fg)}
+  .btn-ghost{background:transparent;color:var(--fg)}
+  .btn-ghost:hover{background:var(--fg);color:var(--bg)}
+
+  /* ---------- Preloader ---------- */
+  .preloader{position:fixed;inset:0;z-index:80;background:var(--bg);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(28px,5vh,44px);padding:24px 16px 96px}
+  .pl-stage{display:flex;flex-direction:column;align-items:center;gap:20px}
+  .pl-llama{position:relative;width:clamp(180px,34vw,260px)}
+  .pl-llama img{width:100%}
+  .pl-ghost{opacity:.12}
+  .pl-fill{position:absolute;inset:0;clip-path:inset(100% 0 0 0)}
+  .pl-scan{position:absolute;left:-10%;right:-10%;top:100%;height:3px;margin-top:-1px;background:var(--accent);opacity:0}
+  .pl-wm{width:clamp(170px,34vw,260px);display:grid;gap:clamp(8px,1.4vw,12px)}
+  .pl-wm img{width:100%;clip-path:inset(0 100% 0 0)}
+  .pl-hud{width:min(400px,100%);display:grid;gap:12px}
+  .pl-row{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--font-display);font-weight:600;font-size:13px;letter-spacing:.2em;color:var(--muted)}
+  .pl-pct{color:var(--fg);font-size:15px;font-variant-numeric:tabular-nums;letter-spacing:.06em}
+  .pl-bar{display:grid;grid-template-columns:repeat(20,1fr);gap:3px;height:12px;padding:3px;border:2px solid var(--fg)}
+  .pl-bar span.on{background:var(--fg)}
+  .pl-tip{display:flex;gap:10px;align-items:flex-start;min-height:3em;color:var(--muted);font-size:15px}
+  .tag{flex:none;font-family:var(--font-display);font-weight:700;font-size:11px;letter-spacing:.14em;color:var(--on-accent);background:var(--accent);padding:2px 7px;margin-top:2px}
+  .pl-skip{position:absolute;right:20px;bottom:20px;min-height:44px;padding:0 16px;display:inline-flex;align-items:center;gap:8px;
+    font-family:var(--font-display);font-weight:700;font-size:13px;letter-spacing:.14em;color:var(--fg);background:transparent;border:2px solid var(--fg);cursor:pointer}
+  .pl-skip:hover{background:var(--fg);color:var(--bg)}
+  .pl-skip svg{width:16px;height:16px}
+  .shutter{position:fixed;inset:0;z-index:90;display:grid;grid-template-columns:repeat(6,1fr);pointer-events:none}
+  .shutter span{background:var(--accent);transform:scaleY(0);transform-origin:50% 100%}
+
+  /* ---------- Header ---------- */
+  .site-header{position:fixed;top:0;left:0;right:0;z-index:40;border-bottom:2px solid transparent;
+    transition:transform .3s ease,background-color .2s,border-color .2s}
+  .site-header.is-solid{background:var(--bg);border-bottom-color:var(--fg)}
+  .site-header.is-hidden{transform:translateY(-100%)}
+  .hdr-inner{max-width:1280px;height:var(--hdr-h);margin:0 auto;padding:0 clamp(16px,4vw,40px);display:flex;align-items:center;gap:clamp(12px,2vw,24px)}
+  .brand{display:flex;align-items:center;gap:12px;margin-right:auto;color:var(--fg);text-decoration:none;min-height:44px}
+  .brand .logo-llama{width:auto;height:52px}
+  .brand .logo-txt{display:grid;gap:5px;width:150px}
+  .brand .logo-txt img{width:100%}
+  .nav ul{display:flex;list-style:none}
+  .nav a{position:relative;display:inline-flex;align-items:center;min-height:44px;padding:0 16px;
+    font-family:var(--font-display);font-weight:600;font-size:15px;letter-spacing:.04em;color:var(--fg);text-decoration:none}
+  .nav a::before{content:'▸';position:absolute;left:2px;color:var(--accent);opacity:0;transform:translateX(-4px);transition:opacity .15s,transform .15s}
+  .nav a:hover::before,.nav a:focus-visible::before{opacity:1;transform:none}
+  .nav a::after{content:'';position:absolute;left:16px;right:16px;bottom:6px;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .2s steps(4)}
+  .nav a[aria-current="true"]::after{transform:scaleX(1)}
+  /* Íconos de redes: separados del menú por una línea, como en la referencia */
+  .redes{display:flex;align-items:center;list-style:none}
+  .redes a{width:40px;height:44px;display:grid;place-items:center;color:var(--fg);transition:color .15s,transform .15s steps(2)}
+  .redes a:hover{color:var(--accent);transform:translateY(-2px)}
+  .redes svg{width:20px;height:20px}
+  .redes--hdr{height:28px;padding-left:clamp(6px,1vw,14px);border-left:2px solid var(--line)}
+  .redes--menu{margin-top:-8px}
+  .redes--menu a{width:48px;height:48px;border:2px solid var(--line);margin-right:8px}
+  .pie .redes--pie{display:flex;margin-left:-10px}
+  .pie .redes--pie li{min-height:0}
+  @media (max-width:1100px){ .redes--hdr .r-extra{display:none} }
+  @media (max-width:960px){ .redes--hdr{border-left:0;padding-left:0} .redes--hdr .r-mail{width:44px} }
+  .menu-btn{display:none;width:44px;height:44px;flex-direction:column;justify-content:center;gap:6px;padding:0 10px;background:transparent;border:2px solid var(--fg);cursor:pointer}
+  .menu-btn span{display:block;height:2px;background:var(--fg);transition:transform .2s,opacity .2s}
+  .menu-btn[aria-expanded="true"] span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+  .menu-btn[aria-expanded="true"] span:nth-child(2){opacity:0}
+  .menu-btn[aria-expanded="true"] span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+  .xp{position:absolute;left:0;right:0;bottom:-2px;height:3px;pointer-events:none}
+  .xp span{display:block;height:100%;background:var(--accent);transform:scaleX(0);transform-origin:left}
+
+  /* Menú móvil: "menú de pausa" */
+  .menu{position:fixed;inset:0;z-index:39;background:var(--bg);padding:calc(var(--hdr-h) + 28px) 24px 32px;display:flex;flex-direction:column;gap:28px;overflow:auto}
+  .menu[hidden]{display:none}
+  .menu-kicker{font-family:var(--font-display);font-weight:700;font-size:12px;letter-spacing:.3em;color:var(--muted)}
+  .menu-list{list-style:none;display:grid;gap:4px}
+  .menu-list a{display:flex;align-items:center;gap:14px;min-height:56px;font-family:var(--font-display);font-weight:700;font-size:clamp(28px,8vw,40px);color:var(--fg);text-decoration:none}
+  .menu-list .cur{width:1ch;color:var(--accent);opacity:0}
+  .menu-list a:hover .cur,.menu-list a:focus-visible .cur{opacity:1}
+  .menu-list .num{font-size:14px;letter-spacing:.1em;color:var(--muted)}
+  .menu-cta{align-self:flex-start}
+
+  /* ---------- Hero ---------- */
+  /* Calabozo de ladrillos geométricos + antorcha que sigue al mouse */
+  .hero{--x:50%;--y:45%;--r:420px;position:relative;min-height:100vh;min-height:100svh;display:grid;place-items:center;overflow:hidden;isolation:isolate;
+    padding:calc(var(--hdr-h) + 24px) clamp(16px,4vw,40px) 104px;background:#050505}
+  .hero-pared{position:absolute;inset:0;width:100%;height:100%;z-index:-2;display:block}
+  /* Fuera de la luz todo queda en penumbra */
+  .hero-luz{position:absolute;inset:0;z-index:-1;pointer-events:none;
+    background:radial-gradient(circle var(--r) at var(--x) var(--y),rgba(5,5,5,0) 0%,rgba(5,5,5,.25) 30%,rgba(5,5,5,.72) 62%,rgba(5,5,5,.95) 100%)}
+  .hero-luz::after{content:'';position:absolute;inset:0;background:radial-gradient(circle calc(var(--r) * .55) at var(--x) var(--y),rgba(61,123,255,.08),transparent 70%)}
+  /* Fundido hacia la siguiente sección */
+  .hero::after{content:'';position:absolute;left:0;right:0;bottom:0;height:120px;z-index:-1;pointer-events:none;background:linear-gradient(transparent,var(--bg))}
+  .esp{animation:brillo 2.6s steps(4) infinite alternate}
+  @keyframes brillo{from{opacity:.35}to{opacity:1}}
+  .hero-copy{max-width:1100px;text-align:center;display:grid;justify-items:center;gap:22px;text-shadow:0 2px 18px rgba(0,0,0,.85)}
+  .eyebrow{display:inline-block;font-family:var(--font-display);font-weight:700;font-size:13px;letter-spacing:.2em;background:var(--fg);color:var(--bg);padding:4px 10px;text-shadow:none}
+  .hero-title{font-family:var(--font-display);font-weight:700;line-height:1.02;letter-spacing:-.01em}
+  .h-l1{display:block;font-size:clamp(28px,3.4vw,46px);font-weight:600;letter-spacing:.02em;color:var(--muted)}
+  .h-l2{display:block;min-height:1.1em;font-size:clamp(36px,5.6vw,80px)}
+  /* Cursor de texto: es el borde derecho de la palabra, así nunca queda solo en otra línea.
+     Parpadea en las pausas y queda fijo mientras se escribe. */
+  .tw{padding-right:.06em;border-right:max(3px,.06em) solid var(--accent);animation:cursor 1s steps(1) infinite}
+  .h-l2.escribiendo .tw{animation:none}
+  @keyframes cursor{50%{border-right-color:transparent}}
+  .hero-sub{color:#d6d6d0;font-size:clamp(16px,1.4vw,19px);max-width:52ch}
+  .hero-ctas{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;margin-top:6px}
+  .hero-ctas .btn{min-height:52px;text-shadow:none}
+  .hero-ctas .btn-ghost{background:rgba(11,11,11,.6)}
+  .hero-ctas .btn-ghost:hover{background:var(--fg)}
+  .hero-bajar{position:absolute;left:50%;bottom:24px;transform:translateX(-50%);display:grid;justify-items:center;gap:6px;min-height:44px;
+    font-family:var(--font-display);font-weight:700;font-size:12px;letter-spacing:.24em;color:var(--fg);text-decoration:none;text-shadow:0 2px 12px #000}
+  .hero-bajar:hover{color:var(--accent)}
+  .hero-bajar i{font-style:normal;color:var(--accent);animation:salto 1.2s steps(3) infinite}
+  @keyframes salto{50%{transform:translateY(6px)}}
+
+  /* Barra de "ventana de juego" (la usa la ficha del portafolio) */
+  .reel-bar{display:flex;align-items:center;gap:12px;height:46px;padding:0 4px 0 14px;border-bottom:2px solid var(--fg);
+    font-family:var(--font-display);font-weight:700;font-size:13px;letter-spacing:.08em}
+  .reel-dots{display:flex;gap:6px;flex:none}
+  .reel-dots i{width:10px;height:10px;border:2px solid var(--fg)}
+  .reel-dots i:first-child{background:var(--accent);border-color:var(--accent)}
+  .reel-title{flex:1;min-width:0;overflow:hidden;white-space:nowrap}
+  .reel-pause{width:44px;height:38px;display:grid;place-items:center;background:transparent;border:2px solid transparent;color:var(--fg);cursor:pointer}
+  .reel-pause:hover{border-color:var(--fg)}
+  .reel-pause svg{width:18px;height:18px}
+  .reel-pause .i-play{display:none}
+  .reel-pause[aria-pressed="true"] .i-play{display:block}
+  .reel-pause[aria-pressed="true"] .i-pause{display:none}
+  .reel-type{font-family:var(--font-display);font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+
+  /* ---------- Servicios ---------- */
+  .sec{max-width:1280px;margin:0 auto;padding:88px clamp(16px,4vw,40px) 80px}
+  .sec-head{display:grid;gap:12px;margin-bottom:48px;max-width:720px}
+  .sec-kicker{font-family:var(--font-display);font-weight:700;font-size:13px;letter-spacing:.22em;color:var(--accent)}
+  .sec-title{font-family:var(--font-display);font-weight:700;font-size:clamp(32px,4.4vw,56px);line-height:1.06;text-wrap:balance}
+  .sec-sub{color:var(--muted);font-size:clamp(16px,1.3vw,18px);max-width:52ch}
+
+  .svc-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}
+  .svc{position:relative;display:flex;flex-direction:column;gap:18px;padding:24px;border:2px solid var(--fg);background:var(--bg);color:var(--fg);
+    transition:transform .15s,box-shadow .15s}
+  .svc:hover{transform:translate(-3px,-3px);box-shadow:8px 8px 0 var(--shadow,var(--accent))}
+  .svc-head{display:flex;align-items:center;gap:14px}
+  .svc-icon{width:48px;height:48px;flex:none;display:grid;place-items:center;border:2px solid var(--c)}
+  .svc-icon svg{width:26px;height:26px;color:var(--c)}
+  .svc-num{font-family:var(--font-display);font-weight:700;font-size:13px;letter-spacing:.18em;color:var(--muted)}
+  .svc h3{position:relative;font-family:var(--font-display);font-weight:700;font-size:clamp(22px,2.2vw,28px);line-height:1.1}
+  .svc h3::before{content:'▸';position:absolute;left:-20px;color:var(--c);opacity:0;transition:opacity .15s}
+  .svc:hover h3::before{opacity:1}
+  .svc-lead{font-size:17px;line-height:1.45}
+  .svc-thumb{border:2px solid var(--fg);aspect-ratio:16/7;overflow:hidden;background:#000}
+  .svc-thumb img{width:100%;height:100%;object-fit:cover;object-position:left top}
+  .svc-list{list-style:none;display:grid;gap:10px}
+  .svc-list li{display:flex;gap:10px;align-items:flex-start;color:var(--fg)}
+  .chk{flex:none;width:20px;height:20px;margin-top:2px;display:grid;place-items:center;background:var(--c)}
+  .chk svg{width:14px;height:14px;color:#0b0b0b}
+  .svc-chip{display:inline-flex;align-items:center;gap:8px;align-self:flex-start;padding:4px 10px;border:2px solid var(--c);
+    font-family:var(--font-display);font-weight:700;font-size:12px;letter-spacing:.12em;color:var(--fg)}
+  .svc-chip svg{width:16px;height:16px;color:var(--c)}
+  .glosario{border:2px dashed var(--c);padding:12px 14px;display:grid;gap:4px}
+  .glosario dt{font-family:var(--font-display);font-weight:700;font-size:12px;letter-spacing:.14em;color:var(--c)}
+  .glosario dd{font-size:15px;color:var(--fg)}
+  .svc-foot{margin-top:auto;padding-top:6px;display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px}
+  .svc-foot .btn{min-height:44px;font-size:15px}
+  .svc-ej{display:inline-flex;align-items:center;min-height:44px;font-family:var(--font-display);font-weight:700;font-size:15px;color:var(--fg);text-decoration:none}
+  .svc-ej:hover{color:var(--c)}
+  .svc--sm .svc-lead{font-size:17px}
+
+  .tech{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:40px;padding-top:24px;border-top:2px solid var(--line)}
+  .tech-label{font-family:var(--font-display);font-weight:700;font-size:12px;letter-spacing:.2em;color:var(--muted);margin-right:8px}
+  .tech li{list-style:none;padding:4px 10px;border:1px solid var(--line);font-family:var(--font-display);font-weight:600;font-size:14px;color:var(--muted)}
+  .tech ul{display:flex;flex-wrap:wrap;gap:8px}
+
+  /* La llama pensativa acompaña a la pregunta del título */
+  .sec{position:relative}
+  .sec-top{display:flex;flex-wrap:wrap;align-items:flex-end;gap:16px 20px;margin-bottom:14px}
+  .sec-line{color:var(--muted);font-size:clamp(16px,1.4vw,19px);max-width:60ch;margin-bottom:28px}
+  .sec-llama{width:clamp(64px,7vw,104px);flex:none;pointer-events:none}
+  /* Título gigante con contorno que se "llena" por bloques, como la llama del preloader */
+  .sec-big{--fill:0%;position:relative;font-family:var(--font-display);font-weight:700;font-size:clamp(48px,9.5vw,132px);line-height:.85;
+    letter-spacing:-.01em;text-transform:uppercase;color:transparent;-webkit-text-stroke:2px var(--fg)}
+  .sec-big::after{content:attr(data-text);position:absolute;inset:0;color:var(--fg);-webkit-text-stroke:0;clip-path:inset(var(--fill) 0 0 0)}
+  .deck-ctrl{margin-left:auto;display:flex;align-items:center;gap:8px}
+  .deck-dots{display:flex}
+  .deck-dot{width:28px;height:44px;display:grid;place-items:center;padding:0;background:none;border:0;cursor:pointer}
+  .deck-dot::before{content:'';width:14px;height:14px;border:2px solid var(--fg)}
+  .deck-dot[aria-pressed="true"]::before{background:var(--fg)}
+
+  /* Estilos de la sección para comparar (panel del prototipo) */
+  .band{position:relative}
+
+  /* ---------- Calabozo: la pared del inicio sigue por toda la página ---------- */
+  /* La pared va detrás de todas las secciones; encima, una penumbra con un hueco de luz (la antorcha) */
+  main{position:relative;isolation:isolate}
+  .calabozo{position:absolute;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
+  .calabozo svg{display:block;width:100%;height:100%}
+  .penumbra{--tx:50vw;--ty:40vh;--tr:360px;position:fixed;inset:0;z-index:-1;pointer-events:none;
+    background:radial-gradient(circle var(--tr) at var(--tx) var(--ty),rgba(5,5,5,.3) 0%,rgba(5,5,5,.5) 35%,rgba(5,5,5,.84) 75%,rgba(5,5,5,.9) 100%)}
+  .penumbra::after{content:'';position:absolute;inset:0;background:radial-gradient(circle calc(var(--tr) * .5) at var(--tx) var(--ty),rgba(61,123,255,.06),transparent 70%)}
+  /* Entre sala y sala, una hilera de ladrillos iluminada, como el marco de una puerta */
+  .band::before,.cierre::before{content:'';position:absolute;left:0;right:0;top:0;height:64px;pointer-events:none;
+    background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='36'%3E%3Crect width='72' height='36' fill='%23070707'/%3E%3Crect x='2' y='2' width='68' height='32' fill='%232c2c2c'/%3E%3Crect x='2' y='2' width='68' height='4' fill='%23444'/%3E%3Crect x='2' y='2' width='4' height='32' fill='%233a3a3a'/%3E%3Crect x='2' y='30' width='68' height='4' fill='%23161616'/%3E%3Crect x='66' y='2' width='4' height='32' fill='%23191919'/%3E%3C/svg%3E") 0 0/72px 36px repeat-x,
+      linear-gradient(rgba(0,0,0,.75),transparent) 0 36px/100% 28px no-repeat}
+  .cierre::before{z-index:0}
+  .cierre-in{position:relative;z-index:1}
+  /* Textos que van directo sobre la pared: una sombra suave para que se lean bien */
+  .band .sec-top,.band .sec-line,.band .sec-head,.band .tech,.nivel{text-shadow:0 1px 10px rgba(0,0,0,.9)}
+  /* Claro: rompe el "todo negro" alternando secciones claras y oscuras */
+  .band[data-estilo="claro"]{--bg:#f2f0ea;--fg:#0b0b0b;--muted:#4b4a45;--line:#d3d0c6;
+    background-color:var(--bg);color:var(--fg);
+    background-image:radial-gradient(rgba(11,11,11,.14) 1px,transparent 1.6px);background-size:22px 22px}
+  .band[data-estilo="claro"] .svc{--bg:#fff}
+  .band[data-estilo="claro"] .sec-kicker{color:var(--fg)}
+  .band[data-estilo="claro"] .sec-llama{filter:brightness(0)}
+  /* Cartas oscuras (no encandilan): el color de cada servicio (--c) va solo en su identidad:
+     franja superior, borde, ícono, checks, etiqueta y lomo. El botón "Cotizar" queda azul en todas. */
+  .svc{--c:var(--accent)}
+  .svc--juegos{--c:#3d7bff}
+  .svc--webs{--c:#f5f5f0}
+  .svc--sim{--c:#a9c2ff}
+  .svc--sis{--c:#8f9bb3}
+  .deck .svc{--bg:#151515;--fg:#f5f5f0;--muted:#b3b3ae;--line:#333331;border-color:var(--c);border-top-width:10px}
+
+  /* ---------- Mazo de cartas de servicios ---------- */
+  .deck{--o:64px;position:relative}
+  /* Todas las cartas en la misma celda: el alto lo marca la carta más alta */
+  .deck-stage{display:grid;padding-right:calc(var(--o) * 3);touch-action:pan-y}
+  .deck .svc{grid-area:1 / 1;gap:14px;padding:24px calc(var(--o) + 24px) 24px 24px;will-change:transform;transition:none}
+  .deck .svc-lead{font-size:17px}
+  .deck .svc-list{gap:8px}
+  .deck .svc-list li{font-size:16px;color:#e4e4df}
+  .deck .glosario dd{font-size:15px}
+  .deck .svc:hover{box-shadow:none}
+  .deck .svc.is-front{box-shadow:8px 8px 0 color-mix(in srgb,var(--c) 40%,#0b0b0b)}
+  .deck .svc:not(.is-front) h3::before{display:none}
+  .svc-body{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.9fr);column-gap:32px;row-gap:14px;align-content:start}
+  .svc-body > *{grid-column:1}
+  .svc-body > .svc-thumb{grid-column:2;grid-row:1 / span 12;align-self:stretch;aspect-ratio:auto;min-height:240px}
+  /* Pestaña (lomo) de cada carta: número y nombre */
+  .svc-spine{position:absolute;top:0;right:0;bottom:0;width:var(--o);display:flex;flex-direction:column;align-items:center;gap:14px;padding:18px 0;
+    background:var(--bg);color:var(--c);border:0;border-left:2px solid var(--c);cursor:pointer;font-family:var(--font-display);font-weight:700}
+  .svc-spine{padding-top:22px}
+  .svc-spine .t{writing-mode:vertical-rl;font-size:14px;letter-spacing:.26em}
+  .deck .svc:not(.is-front) .svc-spine:hover{background:#202020}
+  /* Solo la pestaña de la carta del frente se "enciende" con su color */
+  .deck .svc.is-front .svc-spine{cursor:default;background:var(--c);color:#0b0b0b}
+  .svc-spine:focus-visible{outline-offset:-6px}
+  .deck-nav{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:28px}
+  .deck-btn{width:48px;height:48px;display:grid;place-items:center;border:2px solid var(--fg);background:transparent;color:var(--fg);cursor:pointer;transition:background-color .15s,color .15s}
+  .deck-btn:hover{background:var(--fg);color:var(--bg)}
+  .deck-btn svg{width:22px;height:22px}
+  .deck-count{min-width:5ch;text-align:center;font-family:var(--font-display);font-weight:700;letter-spacing:.1em}
+  .deck-hint{color:var(--muted);font-size:14px;margin-left:8px}
+  .deck-tabs{display:none}
+
+  @media (max-width:860px){
+    .svc-body{grid-template-columns:1fr}
+    .svc-body > .svc-thumb{grid-column:1;grid-row:auto;aspect-ratio:16 / 9;min-height:0}
+  }
+  /* Celular: sin lomos al costado; pestañas arriba como carpetas */
+  @media (max-width:760px){
+    .deck-stage{padding-right:0}
+    .deck .svc{padding:22px}
+    .svc-spine{display:none}
+    .deck-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+    /* Cada pestaña toma el color de su carta (lo asigna el JS) */
+    .deck-tab{min-height:48px;display:flex;align-items:center;gap:10px;padding:0 12px;border:2px solid var(--tab-c,#f5f5f0);
+      background:#151515;color:var(--tab-c,#f5f5f0);cursor:pointer;
+      font-family:var(--font-display);font-weight:700;font-size:13px;letter-spacing:.14em}
+    .deck-dots{display:none}
+    .deck-ctrl{margin-left:0}
+    .deck-tab[aria-pressed="true"]{background:var(--tab-c,#f5f5f0);color:#0b0b0b;outline:3px solid var(--fg);outline-offset:2px}
+    .deck-hint{display:none}
+  }
+  @media (max-width:640px){
+    .sec-llama{display:none}
+  }
+  html.reducido .svc{transition:none}
+
+  /* ---------- Portafolio: "Selecciona tu partida" ---------- */
+  @keyframes parpadeo{50%{opacity:0}}
+  .port-modos{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:24px}
+  .port-modos-k{font-family:var(--font-display);font-weight:700;font-size:12px;letter-spacing:.24em;color:var(--muted);margin-right:6px}
+  .modo{min-height:44px;padding:0 14px;display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--fg);border:2px solid var(--fg);
+    font-family:var(--font-display);font-weight:700;font-size:13px;letter-spacing:.14em;cursor:pointer;transition:background-color .15s,color .15s}
+  .modo .n{font-size:11px;opacity:.6}
+  .modo:hover{background:var(--ghost)}
+  .modo[aria-pressed="true"]{background:var(--fg);color:var(--bg)}
+  /* Barra de récord, como la pantalla de puntaje */
+  .port-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:2px solid var(--fg);margin-bottom:32px}
+  .port-stat{display:flex;align-items:center;gap:14px;padding:14px 18px;border-left:2px solid var(--fg)}
+  .port-stat:first-child{border-left:0}
+  .port-stat b{font-family:var(--font-display);font-weight:700;font-size:clamp(30px,3.2vw,44px);line-height:1;color:var(--accent);font-variant-numeric:tabular-nums}
+  .port-stat span{font-family:var(--font-display);font-weight:700;font-size:12px;letter-spacing:.18em;line-height:1.4;color:var(--muted)}
+  .port-stat span em{font-style:normal;color:var(--fg)}
+  /* Cada proyecto es un "cartucho": etiqueta de color por categoría, pantalla y ranuras abajo */
+  .port-grid{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
+  .cart{--c:#3d7bff;--c-fg:#0b0b0b}
+  .cart--webs{--c:#f5f5f0}
+  .cart--sim{--c:#cddcff}
+  .cart--sis{--c:#8f9bb3}
+  .cart-btn{width:100%;height:100%;display:flex;flex-direction:column;text-align:left;padding:0;font:inherit;color:var(--fg);background:#141414;
+    border:2px solid var(--fg);cursor:pointer;transition:transform .15s,box-shadow .15s}
+  .cart-btn:hover{transform:translate(-4px,-4px);box-shadow:8px 8px 0 var(--c)}
+  .cart-btn:active{transform:translate(1px,1px);box-shadow:2px 2px 0 var(--c)}
+  .cart-label{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:34px;padding:0 12px;background:var(--c);color:var(--c-fg);
+    border-bottom:2px solid var(--fg);font-family:var(--font-display);font-weight:700;font-size:12px;letter-spacing:.16em}
+  .cart-label svg{width:18px;height:18px;flex:none}
+  .cart-media{position:relative;aspect-ratio:16 / 10;overflow:hidden;background:#000;border-bottom:2px solid var(--fg)}
+  .cart-media img,.cart-media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .cart-press{position:absolute;left:12px;bottom:12px;padding:5px 10px;background:var(--bg);border:2px solid var(--fg);
+    font-family:var(--font-display);font-weight:700;font-size:12px;letter-spacing:.16em;opacity:0}
+  .cart-btn:hover .cart-press,.cart-btn:focus-visible .cart-press{opacity:1;animation:parpadeo 1s steps(1) .4s infinite}
+  .cart-info{display:grid;gap:6px;padding:14px 14px 16px}
+  .cart-name{font-family:var(--font-display);font-weight:700;font-size:18px;letter-spacing:.04em;overflow-wrap:anywhere}
+  .cart-desc{color:var(--muted);font-size:15px;line-height:1.45}
+  .cart-grip{margin-top:auto;height:14px;border-top:2px solid var(--line);background:repeating-linear-gradient(90deg,var(--line) 0 2px,transparent 2px 10px)}
+  /* Espacio vacío para el siguiente proyecto: ocupa lo que sobra de la fila */
+  .cart--p2{grid-column:span var(--span,1)}
+  .port-mas{display:flex;justify-content:center;margin-top:32px}
+  .port-mas .btn{min-height:52px;background:#0b0b0b;letter-spacing:.12em}
+  .port-mas .btn:hover{background:var(--fg)}
+  .port-mas .btn[hidden]{display:none}
+  .p2{height:100%;min-height:200px;display:flex;flex-wrap:wrap;align-items:center;gap:20px 28px;padding:24px;color:var(--fg);text-decoration:none;
+    border:2px dashed var(--accent);background:repeating-linear-gradient(-45deg,transparent 0 14px,rgba(61,123,255,.07) 14px 28px);transition:background-color .15s}
+  .p2:hover{background-color:rgba(61,123,255,.12)}
+  .p2 img{width:clamp(96px,10vw,140px);flex:none}
+  .p2-txt{flex:1 1 240px;display:grid;gap:8px;justify-items:start}
+  .p2-k{font-family:var(--font-display);font-weight:700;font-size:12px;letter-spacing:.24em;color:var(--accent)}
+  .p2-k .blink{animation:parpadeo 1.2s steps(1) infinite}
+  .p2 h3{font-family:var(--font-display);font-weight:700;font-size:clamp(26px,2.8vw,36px);line-height:1.05}
+  .p2 p{color:var(--muted);max-width:46ch}
+  .p2 .btn{margin-top:6px;min-height:44px;font-size:15px}
+  .p2:hover .btn{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--fg)}
+
+  /* Ficha del proyecto (ventana de juego) */
+  .ficha{width:min(1100px,calc(100% - 32px));max-width:none;max-height:none;margin:auto;padding:0;border:0;background:transparent;color:var(--fg);overflow:visible}
+  .ficha::backdrop{background:rgba(5,5,5,.86)}
+  .ficha-win{display:flex;flex-direction:column;max-height:calc(100vh - 40px);max-height:calc(100dvh - 40px);background:var(--bg);border:2px solid var(--fg);box-shadow:10px 10px 0 var(--accent)}
+  .ficha .reel-bar{flex:none}
+  .ficha-count{flex:none;font-family:var(--font-display);font-size:12px;letter-spacing:.14em;color:var(--muted)}
+  .ficha-close svg{width:20px;height:20px}
+  .ficha-body{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);min-height:0;overflow:auto;overscroll-behavior:contain}
+  .ficha-media{position:sticky;top:0;align-self:start;display:grid;gap:22px;padding:20px 20px 24px;border-right:2px solid var(--fg);background-color:#111;
+    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:32px 32px}
+  .marco{border:2px solid var(--fg);background:#000;box-shadow:6px 6px 0 var(--c,var(--accent))}
+  .marco img,.marco video{width:100%;aspect-ratio:16 / 10;object-fit:cover}
+  /* El video de la ficha se ve completo, con su propia proporción */
+  .marco video{aspect-ratio:auto;height:auto}
+  .marco-bar{display:flex;align-items:center;gap:6px;height:30px;padding:0 10px;background:var(--bg);border-bottom:2px solid var(--fg)}
+  .marco-bar i{width:9px;height:9px;border:2px solid var(--fg)}
+  .marco-bar span{margin-left:8px;font-family:var(--font-display);font-weight:700;font-size:11px;letter-spacing:.16em;color:var(--muted)}
+  .ficha-info{padding:24px;display:grid;gap:18px;align-content:start}
+  /* Agrandar: el video ocupa toda la ficha (no la pantalla completa) y se ocultan los textos */
+  .ficha-pant{position:relative}
+  .ficha-zoom{position:absolute;right:10px;bottom:10px;z-index:2;display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 12px;
+    font-family:var(--font-display);font-weight:700;font-size:12px;letter-spacing:.12em;color:var(--fg);background:rgba(11,11,11,.85);
+    border:2px solid var(--fg);cursor:pointer;transition:background-color .15s,color .15s}
+  .ficha-zoom:hover{background:var(--fg);color:var(--bg)}
+  .ficha-zoom svg{width:16px;height:16px}
+  .ficha-zoom .i-min,.ficha.is-zoom .ficha-zoom .i-max{display:none}
+  .ficha.is-zoom .ficha-zoom .i-min{display:block}
+  .ficha.is-zoom .ficha-body{grid-template-columns:1fr;overflow:hidden}
+  .ficha.is-zoom .ficha-media{position:static;border:0;padding:16px}
+  .ficha.is-zoom :is(.ficha-info,.ficha-ctas){display:none}
+  .ficha.is-zoom .marco :is(img,video){width:100%;height:calc(100dvh - 40px - 46px - 50px - 32px - 40px);aspect-ratio:auto;object-fit:contain;background:#000}
+  .ficha.is-zoom .marco:has(.marco-bar) :is(img,video){height:calc(100dvh - 40px - 46px - 50px - 32px - 40px - 32px)}
+  .ficha-info h3{font-family:var(--font-display);font-weight:700;font-size:clamp(28px,3vw,42px);line-height:1;margin-top:-8px}
+  .logro{display:flex;align-items:center;gap:14px;padding:12px 14px;background:var(--accent);color:var(--on-accent);box-shadow:4px 4px 0 var(--fg)}
+  .logro[hidden]{display:none}
+  .logro-ico{width:44px;height:44px;flex:none;display:grid;place-items:center;background:var(--on-accent);color:var(--accent)}
+  .logro-ico svg{width:26px;height:26px}
+  .logro small{display:block;font-family:var(--font-display);font-weight:700;font-size:11px;letter-spacing:.22em}
+  .logro b{display:block;font-family:var(--font-display);font-weight:700;font-size:16px;line-height:1.25}
+  .ficha-stats{display:grid;grid-template-columns:auto 1fr;border:2px solid var(--line)}
+  .ficha-stats dt,.ficha-stats dd{padding:8px 12px;border-top:2px solid var(--line)}
+  .ficha-stats dt:first-of-type,.ficha-stats dt:first-of-type + dd{border-top:0}
+  .ficha-stats dt{display:flex;align-items:center;font-family:var(--font-display);font-weight:700;font-size:11px;letter-spacing:.16em;color:var(--muted)}
+  .ficha .reel-title{text-overflow:ellipsis}
+  .ficha-stats dd{font-size:15px}
+  .ficha-stats .pc{color:var(--muted);font-style:italic}
+  .rqr{display:grid;gap:14px}
+  .rqr h4{font-family:var(--font-display);font-weight:700;font-size:12px;letter-spacing:.2em;color:var(--accent);margin-bottom:2px}
+  .rqr p{font-size:15px;line-height:1.5}
+  .ficha-ctas{display:flex;flex-wrap:wrap;gap:12px}
+  .ficha-ctas .btn{min-height:44px;font-size:15px}
+  .ficha-ctas .btn[hidden]{display:none}
+  .ficha-foot{flex:none;display:flex;justify-content:space-between;padding:2px 4px;border-top:2px solid var(--fg)}
+  .ficha-nav{min-height:44px;padding:0 14px;background:transparent;border:0;color:var(--fg);cursor:pointer;
+    font-family:var(--font-display);font-weight:700;font-size:13px;letter-spacing:.14em}
+  .ficha-nav:hover{color:var(--accent)}
+  .ficha-nav[hidden]{visibility:hidden;display:block}
+
+  @media (max-width:1000px){ .port-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px} }
+  @media (max-width:860px){
+    .ficha-body{grid-template-columns:1fr}
+    .ficha-media{position:static;border-right:0;border-bottom:2px solid var(--fg);padding:14px 14px 18px}
+    .ficha-info{padding:20px 16px}
+  }
+  @media (max-width:640px){ .ficha-zoom{display:none} }
+  @media (max-width:640px){
+    .port-modos{display:grid;grid-template-columns:1fr 1fr}
+    .port-modos .modo[data-filtro="todos"]{grid-column:1 / -1}
+    .port-modos-k{display:none}
+    .modo{justify-content:center}
+    .port-grid{grid-template-columns:1fr}
+    .port-stats{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .port-stat{flex-direction:column;align-items:flex-start;gap:6px;padding:12px}
+    .port-stat span{font-size:10px;letter-spacing:.14em}
+    .port-stat span em{display:none}
+    .ficha{width:calc(100% - 16px)}
+    .ficha-win{max-height:calc(100dvh - 16px);box-shadow:none}
+  }
+  html.reducido :is(.cart-btn,.p2){transition:none}
+  html.reducido .p2-k .blink{animation:none}
+
+  .blink{animation:parpadeo 1.2s steps(1) infinite}
+
+  /* ---------- Proceso: niveles conectados que se desbloquean ---------- */
+  .niveles{--g:28px;--nodo:52px;list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--g)}
+  .nivel{display:flex;flex-direction:column;align-items:flex-start;gap:10px}
+  .niv-top{align-self:stretch;display:flex;align-items:center;margin-bottom:8px}
+  .niv-nodo{width:var(--nodo);height:var(--nodo);flex:none;display:grid;place-items:center;border:2px solid var(--fg);
+    background:var(--accent);color:var(--on-accent);box-shadow:4px 4px 0 var(--fg);font-family:var(--font-display);font-weight:700;font-size:24px}
+  .niv-lock{display:none;width:22px;height:22px}
+  /* Conector hasta el nodo del siguiente nivel: línea punteada que se llena de azul */
+  .niv-con{position:relative;flex:1;height:4px;margin-right:calc(var(--g) * -1);
+    background:repeating-linear-gradient(90deg,var(--muted) 0 6px,transparent 6px 12px)}
+  .niv-con i{--p:1;position:absolute;inset:0;background:var(--accent);transform:scaleX(var(--p));transform-origin:left}
+  .nivel:last-child .niv-con{visibility:hidden}
+  /* Bloqueado (estado inicial de la animación) */
+  .nivel.is-locked .niv-nodo{background:var(--bg);color:var(--muted);border-color:var(--muted);box-shadow:none}
+  .nivel.is-locked .niv-n{display:none}
+  .nivel.is-locked .niv-lock{display:block}
+  .niv-k{font-family:var(--font-display);font-weight:700;font-size:12px;letter-spacing:.24em;color:var(--accent)}
+  .nivel h3{font-family:var(--font-display);font-weight:700;font-size:clamp(22px,2vw,26px);line-height:1.1}
+  .niv-p{color:var(--muted);font-size:16px}
+  .niv-tag{margin-top:4px;padding:3px 9px;border:2px solid var(--accent);font-family:var(--font-display);font-weight:700;font-size:11px;letter-spacing:.14em}
+  .proc-pie{display:flex;flex-wrap:wrap;align-items:center;gap:12px 24px;margin-top:48px;padding-top:28px;border-top:2px solid var(--line)}
+
+  /* ---------- Nosotros ---------- */
+  .nos-k{font-family:var(--font-display);font-weight:700;font-size:12px;letter-spacing:.24em;color:var(--accent)}
+  .nos-k--eq{margin-bottom:16px}
+  /* Tarjetas de "personaje" */
+  .pj-grid{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}
+  .pj{position:relative;display:flex;flex-direction:column;border:2px solid var(--fg);background:#141414;outline-offset:4px;
+    transition:transform .15s steps(2),box-shadow .15s steps(2),filter .2s steps(3)}
+  /* "Elige tu personaje": a la tarjeta elegida le cae un cono de luz desde arriba y las demás se apagan a medias */
+  .pj::before{content:'';position:absolute;z-index:2;left:-14px;right:-14px;top:-56px;bottom:0;pointer-events:none;opacity:0;
+    clip-path:polygon(40% 0,60% 0,100% 100%,0 100%);mix-blend-mode:screen;
+    background:linear-gradient(rgba(255,246,222,.42),rgba(255,246,222,.12) 45%,rgba(255,246,222,.03) 85%,transparent);
+    transition:opacity .2s steps(3)}
+  /* El foco del reflector, arriba del cono */
+  .pj::after{content:'';position:absolute;z-index:2;left:calc(50% - 22px);top:-60px;width:44px;height:6px;background:#fff6de;pointer-events:none;opacity:0;
+    box-shadow:0 0 18px 4px rgba(255,246,222,.55);transition:opacity .2s steps(3)}
+  .pj.is-foco::before,.pj.is-foco::after{opacity:1}
+  .pj.is-foco{transform:translate(-3px,-3px);box-shadow:6px 6px 0 var(--accent)}
+  .pj-grid.hay-foco .pj:not(.is-foco){filter:brightness(.5) saturate(.45)}
+  .pj-ready{position:absolute;z-index:3;top:10px;right:10px;padding:3px 8px;background:#0b0b0b;color:var(--fg);border:2px solid var(--fg);
+    font-family:var(--font-display);font-weight:700;font-size:11px;letter-spacing:.2em;visibility:hidden}
+  .pj.is-foco .pj-ready{visibility:visible}
+  /* Sin foto: iniciales en un bloque de color (los mismos de las cartas de Servicios) */
+  .pj{--pj-bg:#3d7bff;--pj-fg:#0b0b0b}
+  .pj:nth-child(4n+2){--pj-bg:#f5f5f0}
+  .pj:nth-child(4n+3){--pj-bg:#cddcff}
+  .pj:nth-child(4n+4){--pj-bg:#1c1c1c;--pj-fg:#3d7bff}
+  .pj-foto{position:relative;aspect-ratio:16 / 10;display:grid;place-items:center;border-bottom:2px solid var(--fg);overflow:hidden;background:var(--pj-bg);
+    background-image:linear-gradient(rgba(11,11,11,.1) 1px,transparent 1px),linear-gradient(90deg,rgba(11,11,11,.1) 1px,transparent 1px);background-size:24px 24px}
+  .pj-foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .pj-ini{font-family:var(--font-display);font-weight:700;font-size:clamp(48px,5vw,72px);line-height:1;letter-spacing:.04em;color:var(--pj-fg)}
+  .pj-info{display:grid;gap:4px;align-content:start;padding:14px 14px 18px}
+  .pj-p{font-family:var(--font-display);font-weight:700;font-size:11px;letter-spacing:.2em;color:var(--accent)}
+  .pj-nom{font-family:var(--font-display);font-weight:700;font-size:20px;line-height:1.2}
+  .pj-rol{font-family:var(--font-display);font-weight:600;font-size:14px;color:var(--fg)}
+  .pj-esp{margin-top:6px;color:var(--muted);font-size:15px;line-height:1.45}
+
+  /* ---------- Preguntas frecuentes ---------- */
+  .faq-grid{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:32px;align-items:start}
+  .faq{border:2px solid var(--fg);background:var(--bg)}
+  .faq + .faq{margin-top:-2px}
+  .faq summary{min-height:60px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 18px;cursor:pointer;list-style:none;
+    font-family:var(--font-display);font-weight:700;font-size:clamp(16px,1.4vw,18px)}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary:hover{color:var(--accent)}
+  .faq summary:focus-visible{outline-offset:-5px}
+  .faq-ico{position:relative;width:28px;height:28px;flex:none;border:2px solid currentColor}
+  .faq-ico::before,.faq-ico::after{content:'';position:absolute;left:50%;top:50%;width:12px;height:2px;margin:-1px 0 0 -6px;background:currentColor}
+  .faq-ico::after{transform:rotate(90deg);transition:transform .2s steps(3)}
+  .faq[open]{background:#161616;position:relative;z-index:1;border-color:var(--accent)}
+  .faq[open] summary{color:var(--accent)}
+  .faq[open] .faq-ico{background:var(--accent);border-color:var(--accent)}
+  .faq[open] .faq-ico::before,.faq[open] .faq-ico::after{background:var(--on-accent)}
+  .faq[open] .faq-ico::after{transform:rotate(0)}
+  .faq-a{padding:0 18px 18px;color:var(--fg);max-width:62ch}
+  .faq-ayuda{position:sticky;top:calc(var(--hdr-h) + 24px);display:grid;gap:12px;justify-items:start;padding:24px;border:2px dashed var(--accent);background:var(--bg)}
+  .faq-ayuda img{width:104px}
+  .faq-ayuda p:not(.nos-k){color:var(--muted)}
+  .faq-ayuda .btn{margin-top:6px;min-height:44px;font-size:15px}
+
+  /* ---------- Cierre ---------- */
+  /* La última sala del calabozo: misma pared y antorcha que las demás secciones */
+  .cierre{position:relative}
+  .cierre-in{max-width:1280px;margin:0 auto;padding:clamp(64px,9vw,112px) clamp(16px,4vw,40px);display:flex;flex-wrap:wrap;align-items:center;gap:32px clamp(32px,5vw,64px);
+    text-shadow:0 1px 10px rgba(0,0,0,.9)}
+  .cierre-llama{width:clamp(170px,20vw,260px);flex:none}
+  .cierre-txt{flex:1 1 420px;display:grid;gap:14px;justify-items:start}
+  .cierre-k{font-family:var(--font-display);font-weight:700;font-size:13px;letter-spacing:.24em;color:var(--accent)}
+  .cierre-t{font-family:var(--font-display);font-weight:700;font-size:clamp(40px,6.4vw,88px);line-height:.95;text-wrap:balance}
+  .cierre-sub{font-size:clamp(17px,1.5vw,20px);max-width:48ch;color:#d6d6d0}
+  .cierre-ctas{display:flex;flex-wrap:wrap;align-items:center;gap:12px 24px;margin-top:10px}
+  .cierre-ctas .btn{min-height:56px;padding:0 24px;font-size:17px;text-shadow:none}
+  .cierre-num{font-family:var(--font-display);font-weight:700;font-size:18px;letter-spacing:.06em;overflow-wrap:anywhere}
+  .cierre-alt{font-size:15px;color:var(--muted)}
+  .cierre-alt a{display:inline-flex;align-items:center;min-height:44px;color:var(--fg);font-weight:600;text-underline-offset:3px}
+  .cierre-alt a:hover{color:var(--accent)}
+  .pie li a{overflow-wrap:anywhere}
+
+  /* ---------- Pie de página ---------- */
+  /* El pie queda fuera del calabozo: fondo propio y por encima de la penumbra, siempre bien visible */
+  .pie{position:relative;z-index:1;background:var(--bg);border-top:2px solid var(--fg)}
+  .pie-in{max-width:1280px;margin:0 auto;padding:48px clamp(16px,4vw,40px) 32px;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:32px}
+  .pie-marca{display:grid;gap:12px;align-content:start}
+  .pie-marca .brand{margin-right:0;justify-self:start}
+  .pie-marca p{color:var(--muted);max-width:32ch}
+  .pie-k{font-family:var(--font-display);font-weight:700;font-size:12px;letter-spacing:.24em;color:var(--muted);margin-bottom:10px}
+  .pie ul{list-style:none;display:grid;gap:2px}
+  .pie li{min-height:32px;display:flex;align-items:center;color:var(--muted)}
+  .pie li a{color:var(--fg);text-decoration:none}
+  .pie li a:hover{color:var(--accent)}
+  .pie-base{max-width:1280px;margin:0 auto;padding:16px clamp(16px,4vw,40px) 24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;
+    border-top:2px solid var(--line);color:var(--muted);font-size:14px}
+  .pie-base a{display:inline-flex;align-items:center;min-height:44px;margin:-12px 0;color:var(--fg);text-decoration:none;font-family:var(--font-display);font-weight:700}
+  .pie-base a:hover{color:var(--accent)}
+
+
+  @media (max-width:1100px){ .pj-grid{grid-template-columns:repeat(2,minmax(0,1fr))} }
+  @media (max-width:960px){
+    .niveles{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:40px}
+    .nivel:nth-child(2) .niv-con{visibility:hidden}
+    .faq-grid{grid-template-columns:1fr}
+    .faq-ayuda{position:static}
+    .pie-in{grid-template-columns:1fr 1fr}
+    .pie-marca{grid-column:1 / -1}
+  }
+  /* Celular: niveles en columna, con el conector vertical */
+  @media (max-width:640px){
+    .niveles{grid-template-columns:1fr;row-gap:var(--g)}
+    .nivel{display:grid;grid-template-columns:var(--nodo) 1fr;column-gap:18px;row-gap:8px;align-items:start}
+    .nivel > :not(.niv-top){grid-column:2}
+    .nivel > .niv-tag{justify-self:start}
+    .niv-top{grid-column:1;grid-row:1 / span 4;flex-direction:column;align-self:stretch;margin:0}
+    .niv-con{width:4px;height:auto;margin:0 0 calc(var(--g) * -1);background:repeating-linear-gradient(180deg,var(--muted) 0 6px,transparent 6px 12px)}
+    .niv-con i{transform:scaleY(var(--p));transform-origin:top}
+    .nivel:nth-child(2) .niv-con{visibility:visible}
+    .pj-grid{grid-template-columns:1fr;gap:16px}
+    .pj{display:grid;grid-template-columns:96px 1fr}
+    .pj-foto{aspect-ratio:auto;border-bottom:0;border-right:2px solid var(--fg)}
+    .pj-ini{font-size:32px}
+    .pj::before{top:-30px;left:-8px;right:-8px}
+    .pj::after{top:-34px}
+    .pj-ready{top:auto;bottom:8px;right:8px}
+    .pie-in{grid-template-columns:1fr}
+  }
+  html.reducido .pj{transition:none}
+  html.reducido .faq-ico::after{transition:none}
+  html.reducido .blink{animation:none}
+
+  /* Panel del prototipo (no va en la web final) */
+
+  @media (max-width:960px){
+    :root{--hdr-h:64px}
+    .nav{display:none}
+    .menu-btn{display:flex}
+    .brand .logo-llama{height:44px}
+    .brand .logo-txt{width:124px;gap:4px}
+  }
+  @media (max-width:640px){
+    .h-l2{min-height:2.1em}
+    .eyebrow{font-size:11px;letter-spacing:.12em}
+    .hero{padding-bottom:72px}
+    .hero-bajar{display:none}
+  }
+  @media (max-width:560px){
+    .hero-ctas .btn{flex:1 1 100%}
+    .pl-skip{right:16px;bottom:16px}
+  }
+  html.reducido :is(.site-header,.btn,.menu-btn span){transition:none}
+  html.reducido .nav a::before,html.reducido .nav a::after{transition:none}
+  html.reducido :is(.tw,.esp,.hero-bajar i){animation:none}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#inicio">Saltar al contenido</a>
+
+<!-- ================= PRELOADER ================= -->
+<div class="preloader" id="preloader" aria-label="Pantalla de carga de SPARC Interactive">
+  <p class="sr-only" role="status" id="plStatus"></p>
+  <div class="pl-stage" aria-hidden="true">
+    <div class="pl-llama" id="plLlama">
+      <img class="logo-img pl-ghost" src="assets/logo-v2/mascota.png" alt="" width="640" height="672">
+      <img class="logo-img pl-fill" id="plFill" src="assets/logo-v2/mascota.png" alt="" width="640" height="672">
+      <span class="pl-scan" id="plScan"></span>
+    </div>
+    <div class="pl-wm">
+      <img class="logo-img" id="plSparc" src="assets/logo/sparc.png" alt="" width="720" height="104">
+      <img class="logo-img" id="plInter" src="assets/logo/interactive.png" alt="" width="720" height="46">
+    </div>
+  </div>
+  <div class="pl-hud">
+    <div class="pl-row" aria-hidden="true"><span>CARGANDO</span><span class="pl-pct" id="plPct">0%</span></div>
+    <div class="pl-bar" id="plBar" role="progressbar" aria-label="Progreso de carga" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+    <p class="pl-tip"><span class="tag">TIP</span><span id="plTip"></span></p>
+  </div>
+  <button class="pl-skip" id="plSkip" type="button" aria-label="Saltar la intro">SALTAR
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" aria-hidden="true"><path d="M5 4l10 8-10 8V4z"/><path d="M19 5v14"/></svg>
+  </button>
+</div>
+<div class="shutter" id="shutter" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+
+<!-- ================= HEADER ================= -->
+<header class="site-header" id="header">
+  <div class="hdr-inner">
+    <a class="brand" href="#inicio" aria-label="SPARC Interactive, ir al inicio">
+      <img class="logo-img logo-llama" src="assets/logo-v2/busto.png" alt="" width="360" height="311">
+      <span class="logo-txt"><img class="logo-img" src="assets/logo/sparc.png" alt="" width="720" height="104"><img class="logo-img" src="assets/logo/interactive.png" alt="" width="720" height="46"></span>
+    </a>
+    <nav class="nav" aria-label="Principal">
+      <ul>
+        <li><a href="#servicios" data-spy="servicios">Servicios</a></li>
+        <li><a href="#portafolio" data-spy="portafolio">Portafolio</a></li>
+        <li><a href="#proceso" data-spy="proceso">Proceso</a></li>
+        <li><a href="#nosotros" data-spy="nosotros">Nosotros</a></li>
+      </ul>
+    </nav>
+    <!-- Redes: LinkedIn se esconde en pantallas chicas (está en el menú); el correo queda siempre visible -->
+    <ul class="redes redes--hdr">
+      <li class="r-extra"><a href="https://www.linkedin.com/company/sparc-interactive-sacs/" target="_blank" rel="noopener" aria-label="LinkedIn de SPARC Interactive">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+      </a></li>
+      <li><a class="r-mail" href="mailto:contacto@sparc-interactive.com" aria-label="Escribir un correo a SPARC Interactive">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><rect x="2" y="4" width="20" height="16"/><path d="M2 6l10 7 10-7"/></svg>
+      </a></li>
+    </ul>
+    <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="menu" aria-label="Abrir menú"><span></span><span></span><span></span></button>
+  </div>
+  <div class="xp" aria-hidden="true"><span id="xpFill"></span></div>
+</header>
+
+<div class="menu" id="menu" hidden>
+  <p class="menu-kicker">— MENÚ —</p>
+  <ol class="menu-list">
+    <li><a href="#servicios"><span class="cur" aria-hidden="true">▸</span><span class="num" aria-hidden="true">01</span>Servicios</a></li>
+    <li><a href="#portafolio"><span class="cur" aria-hidden="true">▸</span><span class="num" aria-hidden="true">02</span>Portafolio</a></li>
+    <li><a href="#proceso"><span class="cur" aria-hidden="true">▸</span><span class="num" aria-hidden="true">03</span>Proceso</a></li>
+    <li><a href="#nosotros"><span class="cur" aria-hidden="true">▸</span><span class="num" aria-hidden="true">04</span>Nosotros</a></li>
+  </ol>
+  <a class="btn btn-primary menu-cta" href="mailto:contacto@sparc-interactive.com" data-mail>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square" aria-hidden="true"><rect x="2" y="4" width="20" height="16"/><path d="M2 6l10 7 10-7"/></svg>
+    Escribir un correo
+  </a>
+  <ul class="redes redes--menu">
+    <li><a href="https://www.linkedin.com/company/sparc-interactive-sacs/" target="_blank" rel="noopener" aria-label="LinkedIn de SPARC Interactive">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+    </a></li>
+    <li><a href="mailto:contacto@sparc-interactive.com" aria-label="Escribir un correo a SPARC Interactive">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><rect x="2" y="4" width="20" height="16"/><path d="M2 6l10 7 10-7"/></svg>
+    </a></li>
+  </ul>
+</div>
+
+<!-- ================= CONTENIDO ================= -->
+<main id="main">
+  <div class="calabozo" aria-hidden="true"><svg id="muro"></svg></div>
+  <div class="penumbra" aria-hidden="true"></div>
+  <section class="hero" id="inicio" aria-labelledby="heroTitle">
+    <!-- Pared de ladrillos (la dibuja el JS) y la luz de la antorcha -->
+    <svg class="hero-pared" id="heroPared" aria-hidden="true"></svg>
+    <div class="hero-luz" aria-hidden="true"></div>
+
+    <div class="hero-copy">
+      <p class="eyebrow">WEBS · VIDEOJUEGOS · SIMULADORES 3D</p>
+      <h1 class="hero-title" id="heroTitle">
+        <span class="h-l1">Creamos</span>
+        <span class="h-l2" aria-hidden="true"><span class="tw" id="heroTw">webs que venden</span></span>
+        <span class="sr-only">webs que venden, advergames para tu marca, juegos en Roblox, simuladores 3D y sistemas para tu negocio</span>
+      </h1>
+      <p class="hero-sub">Somos un estudio de Lima que crea webs y videojuegos para tu marca, todo en un mismo equipo.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="#portafolio">Ver portafolio ▸</a>
+      </div>
+    </div>
+    <a class="hero-bajar" href="#servicios"><span>BAJA PARA EMPEZAR</span><i aria-hidden="true">▼</i></a>
+  </section>
+
+  <section class="band" id="servicios" data-estilo="bloques" aria-labelledby="svcTitle">
+  <div class="sec">
+    <!-- Título grande + llama + controles en una sola fila, para ver las flechas y el nombre a la vez -->
+    <div class="sec-top">
+      <h2 class="sec-big" id="svcTitle" data-text="Servicios">Servicios</h2>
+      <img class="sec-llama" src="assets/logo-v2/mascota.png" alt="" width="640" height="672">
+      <div class="deck-ctrl" role="group" aria-label="Cambiar de servicio">
+        <button class="deck-btn" id="deckPrev" type="button" aria-label="Servicio anterior">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+        </button>
+        <div class="deck-dots" id="deckDots"></div>
+        <button class="deck-btn" id="deckNext" type="button" aria-label="Servicio siguiente">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+    <p class="sec-line">Webs, juegos, simuladores y sistemas hechos a medida para tu negocio.</p>
+
+    <!-- Mazo de cartas: una al frente y las demás detrás mostrando su pestaña. Cambia solo al tocar. -->
+    <div class="deck" id="deck" role="region" aria-roledescription="mazo de cartas" aria-label="Servicios">
+    <div class="deck-tabs" id="deckTabs" role="group" aria-label="Elegir servicio"></div>
+    <div class="deck-stage">
+      <!-- Juegos / advergames: va primero porque es el diferencial -->
+      <article class="svc svc--juegos" data-corto="JUEGOS">
+        <div class="svc-head">
+          <span class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 11h4M8 9v4M15 12h.01M18 10h.01"/><path d="M17.32 5H6.68a4 4 0 0 0-3.98 3.59C2.6 9.42 2 14.46 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.41-1.41A2 2 0 0 1 9.83 16h4.34a2 2 0 0 1 1.41.59L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.55-.6-6.58-.69-7.26A4 4 0 0 0 17.32 5z"/></svg></span>
+        </div>
+        <h3>Juegos para tu marca</h3>
+        <p class="svc-lead">Un juego con tu producto como protagonista: la gente juega, lo comparte y te recuerda.</p>
+        <div class="svc-thumb"><img src="assets/proyectos/llama-rush.webp" alt="Juego Llama Rush en Roblox" loading="lazy" decoding="async"></div>
+        <dl class="glosario">
+          <dt>¿QUÉ ES UN ADVERGAME?</dt>
+          <dd>Un videojuego que promociona tu marca: publicidad que la gente quiere jugar.</dd>
+        </dl>
+        <ul class="svc-list">
+          <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></span>Minijuegos para tu web o para celular, y juegos en Roblox.</li>
+          <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></span>Con premios y cupones para atraer y premiar a tus clientes.</li>
+          <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></span>Para eventos y ferias: tu stand se llena de gente.</li>
+        </ul>
+        <span class="svc-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.8l-5.4 2.7 1.2-6-4.5-4.2 6.1-.7z"/></svg>IDEAL PARA FERIAS Y CAMPAÑAS</span>
+        <div class="svc-foot">
+          <a class="btn btn-primary" href="mailto:contacto@sparc-interactive.com" data-mail data-mail-asunto="Quiero cotizar un juego para mi marca">Cotizar mi juego</a>
+          <!-- data-proyecto: cuando exista el portafolio, este enlace abrirá ese proyecto -->
+          <a class="svc-ej" href="#portafolio" data-proyecto="llama-rush">Ver ejemplo ▸</a>
+        </div>
+      </article>
+
+      <!-- Webs -->
+      <article class="svc svc--webs" data-corto="WEBS">
+        <div class="svc-head">
+          <span class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><rect x="3" y="4" width="18" height="16"/><path d="M3 9h18M7 6.5h.01M10 6.5h.01"/></svg></span>
+        </div>
+        <h3>Páginas web para vender</h3>
+        <p class="svc-lead">Tu negocio abierto las 24 horas, con los pedidos llegando directo a tu WhatsApp.</p>
+        <div class="svc-thumb"><img src="assets/proyectos/huellitas.webp" alt="Página web de Huellitas, tienda para mascotas" loading="lazy" decoding="async"></div>
+        <ul class="svc-list">
+          <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></span>Catálogo o tienda online que se ve perfecta en el celular.</li>
+          <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></span>Extras interactivos que enamoran: armadores de regalos, diseñadores de productos y más.</li>
+          <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></span>Dominio, hosting y mantenimiento incluidos: tú solo vendes.</li>
+        </ul>
+        <span class="svc-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>LISTA EN 1 A 2 SEMANAS</span>
+        <div class="svc-foot">
+          <a class="btn btn-primary" href="mailto:contacto@sparc-interactive.com" data-mail data-mail-asunto="Quiero cotizar una página web">Cotizar mi web</a>
+          <a class="svc-ej" href="#portafolio" data-proyecto="huellitas">Ver ejemplo ▸</a>
+        </div>
+      </article>
+
+      <!-- Simuladores -->
+      <article class="svc svc--sm svc--sim" data-corto="SIMULADORES">
+        <div class="svc-head">
+          <span class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="M12 8v4M12 16h.01"/></svg></span>
+        </div>
+        <h3>Simuladores de capacitación</h3>
+        <p class="svc-lead">Entrena a tu equipo con práctica real, sin riesgos ni gastos de simulacros.</p>
+        <div class="svc-thumb"><img src="assets/proyectos/interactive-emergency.webp" alt="Simulador Interactive Emergency" loading="lazy" decoding="async"></div>
+        <ul class="svc-list">
+          <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></span>Emergencias, seguridad y procesos de trabajo.</li>
+          <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></span>Decisiones bajo presión con resultados al instante.</li>
+          <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></span>Escenarios 3D inmersivos hechos a tu medida.</li>
+        </ul>
+        <span class="svc-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square" aria-hidden="true"><rect x="2" y="4" width="14" height="11"/><path d="M6 19h6M9 15v4"/><rect x="17" y="9" width="5" height="11"/></svg>FUNCIONA EN PC Y ANDROID</span>
+        <div class="svc-foot">
+          <a class="btn btn-primary" href="mailto:contacto@sparc-interactive.com" data-mail data-mail-asunto="Quiero cotizar un simulador de capacitación">Cotizar simulador</a>
+          <a class="svc-ej" href="#portafolio" data-proyecto="interactive-emergency">Ver ejemplo ▸</a>
+        </div>
+      </article>
+
+      <!-- Sistemas -->
+      <article class="svc svc--sm svc--sis" data-corto="SISTEMAS">
+        <div class="svc-head">
+          <span class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"/><path d="M12 22V12M3.3 7l7.7 4.73a2 2 0 0 0 2 0L20.7 7M7.5 4.27l9 5.15"/></svg></span>
+        </div>
+        <h3>Sistemas para ordenar tu negocio</h3>
+        <p class="svc-lead">Tu inventario y tus ventas bajo control, en un solo lugar. Ideal si vendes por redes sociales.</p>
+        <div class="svc-thumb"><img src="assets/proyectos/sistema-repuestos.webp" alt="Sistema de inventario para una tienda de repuestos" loading="lazy" decoding="async"></div>
+        <ul class="svc-list">
+          <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></span>Inventario y stock siempre al día.</li>
+          <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></span>Cotizaciones y pedidos sin hojas de cálculo.</li>
+          <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></span>Reportes de ventas fáciles de leer.</li>
+        </ul>
+        <span class="svc-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square" aria-hidden="true"><rect x="6" y="2" width="12" height="20"/><path d="M11 18h2"/></svg>FÁCIL DE USAR DESDE EL CELULAR</span>
+        <div class="svc-foot">
+          <a class="btn btn-primary" href="mailto:contacto@sparc-interactive.com" data-mail data-mail-asunto="Quiero cotizar un sistema para mi negocio">Cotizar sistema</a>
+          <a class="svc-ej" href="#portafolio" data-proyecto="sistema-repuestos">Ver ejemplo ▸</a>
+        </div>
+      </article>
+    </div>
+    <span class="sr-only" id="deckSr" aria-live="polite"></span>
+    </div>
+  </div>
+  </section>
+  <section class="band" id="portafolio" aria-labelledby="portTitle">
+  <div class="sec">
+    <div class="sec-top">
+      <h2 class="sec-big" id="portTitle" data-text="Portafolio">Portafolio</h2>
+    </div>
+    <p class="sec-line">Proyectos creados por nuestro equipo. Toca uno para ver su ficha completa.</p>
+
+    <div class="port-stats">
+      <p class="port-stat"><b data-n="11">11</b><span>PROYECTOS</span></p>
+      <p class="port-stat"><b data-n="1">01</b><span>PREMIO<br>INTERNACIONAL</span></p>
+      <p class="port-stat"><b data-n="4">04</b><span>PLATAFORMAS<br><em>PC · ANDROID · ROBLOX · WEB</em></span></p>
+    </div>
+
+    <!-- Filtros como "modos de juego"; los números los pone el JS según los proyectos -->
+    <div class="port-modos" id="portModos" role="group" aria-label="Filtrar proyectos">
+      <span class="port-modos-k" aria-hidden="true">MODO</span>
+      <button class="modo" type="button" data-filtro="todos" aria-pressed="true">TODOS <span class="n"></span></button>
+      <button class="modo" type="button" data-filtro="juegos" aria-pressed="false">JUEGOS <span class="n"></span></button>
+      <button class="modo" type="button" data-filtro="sim" aria-pressed="false">SIMULADORES <span class="n"></span></button>
+      <button class="modo" type="button" data-filtro="webs" aria-pressed="false">WEBS <span class="n"></span></button>
+      <button class="modo" type="button" data-filtro="sis" aria-pressed="false">SISTEMAS <span class="n"></span></button>
+    </div>
+
+    <!-- Las tarjetas de proyecto las crea el JS desde PROYECTOS, antes de esta última -->
+    <ul class="port-grid" id="portGrid">
+      <li class="cart cart--p2" id="portP2">
+        <a class="p2" href="mailto:contacto@sparc-interactive.com" data-mail data-mail-asunto="Quiero que mi marca sea su próximo proyecto">
+          <img src="assets/logo-v2/busto.png" alt="" width="360" height="311">
+          <div class="p2-txt">
+            <span class="p2-k">PLAYER 2 · <span class="blink">PRESS START</span></span>
+            <h3>Tu marca aquí</h3>
+            <p>El próximo proyecto puede ser el tuyo. Cuéntanos tu idea y te decimos cómo hacerla realidad.</p>
+            <span class="btn btn-primary">Empezar mi proyecto ▸</span>
+          </div>
+        </a>
+      </li>
+    </ul>
+    <div class="port-mas">
+      <button class="btn btn-ghost" id="portMas" type="button" aria-controls="portGrid">VER MÁS PROYECTOS (<span id="portMasN"></span>) ▾</button>
+    </div>
+    <span class="sr-only" id="portSr" aria-live="polite"></span>
+  </div>
+  </section>
+  <!-- ================= PROCESO: 4 niveles que se desbloquean ================= -->
+  <section class="band" id="proceso" data-estilo="bloques" aria-labelledby="procTitle">
+  <div class="sec">
+    <div class="sec-top"><h2 class="sec-big" id="procTitle" data-text="Proceso">Proceso</h2></div>
+    <p class="sec-line">Cuatro niveles, de tu idea a tu proyecto funcionando. Tú das el primer paso; del resto nos encargamos nosotros.</p>
+    <ol class="niveles" id="niveles">
+      <li class="nivel">
+        <div class="niv-top" aria-hidden="true"><span class="niv-nodo"><span class="niv-n">1</span><svg class="niv-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"><rect x="4" y="11" width="16" height="10"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span><span class="niv-con"><i></i></span></div>
+        <p class="niv-k">NIVEL 1</p>
+        <h3>Nos escribes</h3>
+        <p class="niv-p">Cuéntanos tu idea por correo, aunque todavía no la tengas clara. Sin formularios.</p>
+        <span class="niv-tag">SIN COMPROMISO</span>
+      </li>
+      <li class="nivel">
+        <div class="niv-top" aria-hidden="true"><span class="niv-nodo"><span class="niv-n">2</span><svg class="niv-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"><rect x="4" y="11" width="16" height="10"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span><span class="niv-con"><i></i></span></div>
+        <p class="niv-k">NIVEL 2</p>
+        <h3>Llamada y cotización</h3>
+        <p class="niv-p">Una llamada corta para entender tu negocio. Ahí te damos el precio y el plazo exacto.</p>
+        <span class="niv-tag">PRECIO ANTES DE EMPEZAR</span>
+      </li>
+      <li class="nivel">
+        <div class="niv-top" aria-hidden="true"><span class="niv-nodo"><span class="niv-n">3</span><svg class="niv-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"><rect x="4" y="11" width="16" height="10"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span><span class="niv-con"><i></i></span></div>
+        <p class="niv-k">NIVEL 3</p>
+        <h3>Diseño y desarrollo</h3>
+        <p class="niv-p">Creamos tu web o tu juego y te mostramos avances para que opines antes de la entrega.</p>
+        <span class="niv-tag">WEBS EN 1 A 2 SEMANAS</span>
+      </li>
+      <li class="nivel">
+        <div class="niv-top" aria-hidden="true"><span class="niv-nodo"><span class="niv-n">4</span><svg class="niv-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"><rect x="4" y="11" width="16" height="10"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span><span class="niv-con"><i></i></span></div>
+        <p class="niv-k">NIVEL 4</p>
+        <h3>Entrega y soporte</h3>
+        <p class="niv-p">Lo publicamos y lo dejamos funcionando. En las webs, el dominio, el hosting y el mantenimiento ya están incluidos.</p>
+        <span class="niv-tag">TE ACOMPAÑAMOS</span>
+      </li>
+    </ol>
+    <div class="proc-pie">
+      <a class="btn btn-primary" href="mailto:contacto@sparc-interactive.com" data-mail data-mail-asunto="Quiero empezar mi proyecto">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square" aria-hidden="true"><rect x="2" y="4" width="20" height="16"/><path d="M2 6l10 7 10-7"/></svg>
+        Empezar el nivel 1
+      </a>
+      <a class="svc-ej" href="#preguntas">¿Dudas? Mira las preguntas frecuentes ▸</a>
+    </div>
+  </div>
+  </section>
+
+  <!-- ================= NOSOTROS ================= -->
+  <section class="band" id="nosotros" aria-labelledby="nosTitle">
+  <div class="sec">
+    <div class="sec-top"><h2 class="sec-big" id="nosTitle" data-text="Nosotros">Nosotros</h2></div>
+    <p class="sec-line">Cuatro cofundadores en Lima que hacen webs y videojuegos en un mismo equipo.</p>
+    <p class="nos-k nos-k--eq">EL EQUIPO</p>
+    <!-- Tarjetas de "personaje": las crea el JS desde EQUIPO -->
+    <ul class="pj-grid" id="pjGrid"></ul>
+    <div class="tech">
+      <span class="tech-label">TRABAJAMOS CON</span>
+      <ul aria-label="Herramientas que usamos">
+        <li>Unity</li><li>Roblox Studio</li><li>Blender</li><li>3ds Max</li>
+      </ul>
+    </div>
+  </div>
+  </section>
+
+  <!-- ================= PREGUNTAS FRECUENTES ================= -->
+  <section class="band" id="preguntas" data-estilo="bloques" aria-labelledby="faqTitle">
+  <div class="sec">
+    <div class="sec-top"><h2 class="sec-big" id="faqTitle" data-text="Preguntas">Preguntas</h2></div>
+    <p class="sec-line">Lo que más nos preguntan antes de empezar.</p>
+    <div class="faq-grid">
+      <div class="faq-lista">
+        <!-- name="faq": solo una abierta a la vez -->
+        <details class="faq" name="faq">
+          <summary><span>¿Cuánto cuesta una web o un juego?</span><i class="faq-ico" aria-hidden="true"></i></summary>
+          <div class="faq-a"><p>Depende de lo que necesites: no es lo mismo un catálogo que una tienda con funciones especiales, ni un minijuego que un juego en Roblox. Por eso lo cotizamos en una llamada corta, sin compromiso, y te damos el precio antes de empezar.</p></div>
+        </details>
+        <details class="faq" name="faq">
+          <summary><span>¿Cuánto demora?</span><i class="faq-ico" aria-hidden="true"></i></summary>
+          <div class="faq-a"><p>Una página web está lista en 1 a 2 semanas. Los juegos y simuladores dependen de su tamaño; el plazo exacto te lo damos al cotizar.</p></div>
+        </details>
+        <details class="faq" name="faq">
+          <summary><span>¿Qué incluye la página web?</span><i class="faq-ico" aria-hidden="true"></i></summary>
+          <div class="faq-a"><p>Diseño a medida, versión para celular, botón de WhatsApp, dominio, hosting y mantenimiento. Tú solo te encargas de vender.</p></div>
+        </details>
+        <details class="faq" name="faq">
+          <summary><span>¿Qué es un advergame?</span><i class="faq-ico" aria-hidden="true"></i></summary>
+          <div class="faq-a"><p>Un videojuego hecho para promocionar tu marca. En lugar de un anuncio que la gente salta, es publicidad que la gente quiere jugar y compartir. Funciona muy bien en ferias, campañas y redes sociales.</p></div>
+        </details>
+        <details class="faq" name="faq">
+          <summary><span>¿Necesito tener logo, fotos o textos?</span><i class="faq-ico" aria-hidden="true"></i></summary>
+          <div class="faq-a"><p>Si los tienes, los usamos. Si no, te orientamos sobre qué hace falta y cómo conseguirlo.</p></div>
+        </details>
+        <details class="faq" name="faq">
+          <summary><span>¿Puedo pedir cambios?</span><i class="faq-ico" aria-hidden="true"></i></summary>
+          <div class="faq-a"><p>Sí. Durante el desarrollo te mostramos avances para que opines y ajustemos lo que haga falta antes de la entrega.</p></div>
+        </details>
+        <details class="faq" name="faq">
+          <summary><span>¿En qué plataformas funcionan los juegos?</span><i class="faq-ico" aria-hidden="true"></i></summary>
+          <div class="faq-a"><p>Hacemos juegos para web, celulares Android, PC y Roblox. Elegimos la plataforma según dónde está tu público.</p></div>
+        </details>
+        <details class="faq" name="faq">
+          <summary><span>¿Solo trabajan en Lima?</span><i class="faq-ico" aria-hidden="true"></i></summary>
+          <div class="faq-a"><p>Estamos en Lima, pero todo se coordina por correo y videollamada, así que podemos atenderte desde cualquier ciudad.</p></div>
+        </details>
+      </div>
+      <aside class="faq-ayuda">
+        <img src="assets/logo-v2/busto.png" alt="" width="360" height="311">
+        <p class="nos-k">¿NO ENCUENTRAS TU RESPUESTA?</p>
+        <p>Escríbenos y te respondemos directamente.</p>
+        <a class="btn btn-primary" href="mailto:contacto@sparc-interactive.com" data-mail data-mail-asunto="Tengo una pregunta sobre sus servicios">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square" aria-hidden="true"><rect x="2" y="4" width="20" height="16"/><path d="M2 6l10 7 10-7"/></svg>
+          Pregúntanos
+        </a>
+      </aside>
+    </div>
+  </div>
+  </section>
+
+  <!-- ================= CIERRE ================= -->
+  <section class="cierre" id="contacto" aria-labelledby="cierreTitle">
+    <div class="cierre-in">
+      <img class="cierre-llama" src="assets/logo-v2/mascota.png" alt="" width="640" height="672">
+      <div class="cierre-txt">
+        <p class="cierre-k">PLAYER 2 · <span class="blink">PRESS START</span></p>
+        <h2 class="cierre-t" id="cierreTitle">¿Empezamos tu proyecto?</h2>
+        <p class="cierre-sub">Escríbenos un correo con tu idea y agendamos una llamada para cotizarla.</p>
+        <div class="cierre-ctas">
+          <!-- El correo se abre con asunto y una guía corta para que el cliente cuente lo necesario -->
+          <a class="btn btn-primary" href="mailto:contacto@sparc-interactive.com" data-mail>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square" aria-hidden="true"><rect x="2" y="4" width="20" height="16"/><path d="M2 6l10 7 10-7"/></svg>
+            Escribir un correo
+          </a>
+          <span class="cierre-num">contacto@sparc-interactive.com</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="pie">
+  <div class="pie-in">
+    <div class="pie-marca">
+      <a class="brand" href="#inicio" aria-label="SPARC Interactive, volver al inicio">
+        <img class="logo-img logo-llama" src="assets/logo-v2/busto.png" alt="" width="360" height="311">
+        <span class="logo-txt"><img class="logo-img" src="assets/logo/sparc.png" alt="" width="720" height="104"><img class="logo-img" src="assets/logo/interactive.png" alt="" width="720" height="46"></span>
+      </a>
+      <p>Webs y videojuegos para emprendedores y marcas.</p>
+      <ul class="redes redes--pie">
+        <li><a href="https://www.linkedin.com/company/sparc-interactive-sacs/" target="_blank" rel="noopener" aria-label="LinkedIn de SPARC Interactive">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </a></li>
+        <li><a href="mailto:contacto@sparc-interactive.com" aria-label="Escribir un correo a SPARC Interactive">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><rect x="2" y="4" width="20" height="16"/><path d="M2 6l10 7 10-7"/></svg>
+        </a></li>
+      </ul>
+    </div>
+    <nav aria-label="Secciones">
+      <p class="pie-k">SECCIONES</p>
+      <ul>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#portafolio">Portafolio</a></li>
+        <li><a href="#proceso">Proceso</a></li>
+        <li><a href="#nosotros">Nosotros</a></li>
+        <li><a href="#preguntas">Preguntas frecuentes</a></li>
+      </ul>
+    </nav>
+    <div>
+      <p class="pie-k">CONTACTO</p>
+      <ul>
+        <li><a href="mailto:contacto@sparc-interactive.com">contacto@sparc-interactive.com</a></li>
+        <li>Lima, Perú</li>
+        <li>Atención por correo y videollamada</li>
+      </ul>
+    </div>
+  </div>
+  <div class="pie-base">
+    <span>© 2026 SPARC Interactive</span>
+    <a href="#inicio">Volver arriba ▲</a>
+  </div>
+</footer>
+
+
+<!-- ================= FICHA DE PROYECTO ================= -->
+<dialog class="ficha" id="ficha" aria-labelledby="fichaNombre">
+  <div class="ficha-win" id="fichaWin">
+    <div class="reel-bar">
+      <span class="reel-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span class="reel-title" id="fichaTitulo" aria-hidden="true"></span>
+      <span class="ficha-count" id="fichaCount"></span>
+      <button class="reel-pause ficha-close" id="fichaClose" type="button" aria-label="Cerrar ficha">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="ficha-body" id="fichaBody">
+      <!-- Pantalla + botones: quedan fijos mientras se lee la info, para que "Quiero algo así" siempre esté a la vista -->
+      <div class="ficha-media" id="fichaMedia">
+        <div class="ficha-pant">
+          <div id="fichaPantalla"></div>
+          <button class="ficha-zoom" id="fichaZoom" type="button" aria-pressed="false" aria-label="Agrandar el video">
+            <svg class="i-max" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square" aria-hidden="true"><path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7"/></svg>
+            <svg class="i-min" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square" aria-hidden="true"><path d="M20 10h-6V4M4 14h6v6M14 10l7-7M10 14l-7 7"/></svg>
+            <span id="fichaZoomTxt">AGRANDAR</span>
+          </button>
+        </div>
+        <div class="ficha-ctas">
+          <a class="btn btn-primary" id="fichaMail" href="mailto:contacto@sparc-interactive.com">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square" aria-hidden="true"><rect x="2" y="4" width="20" height="16"/><path d="M2 6l10 7 10-7"/></svg>
+            Quiero algo así
+          </a>
+          <a class="btn btn-ghost" id="fichaJugar" target="_blank" rel="noopener" hidden>Jugar ahora ▸</a>
+        </div>
+      </div>
+      <div class="ficha-info" id="fichaInfo">
+        <p class="reel-type" id="fichaTipo"></p>
+        <h3 id="fichaNombre"></h3>
+        <div class="logro" id="fichaLogro" hidden>
+          <span class="logro-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg></span>
+          <span><small>LOGRO DESBLOQUEADO</small><b id="fichaLogroTxt"></b></span>
+        </div>
+        <dl class="ficha-stats" id="fichaStats"></dl>
+        <div class="rqr" id="fichaRqr"></div>
+      </div>
+    </div>
+    <div class="ficha-foot">
+      <button class="ficha-nav" id="fichaPrev" type="button">◂ ANTERIOR</button>
+      <button class="ficha-nav" id="fichaNext" type="button">SIGUIENTE ▸</button>
+    </div>
+  </div>
+</dialog>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script><script>
+(() => {
+  const $  = (s, c = document) => c.querySelector(s);
+  const $$ = (s, c = document) => [...c.querySelectorAll(s)];
+  const reduceMQ = matchMedia('(prefers-reduced-motion: reduce)');
+  // 'sistema' respeta "reducir movimiento" (así irá en la web final); 'completo' lo fuerza para revisar el prototipo
+  const estado = { mov: 'completo' };
+  const reducir = () => estado.mov === 'sistema' && reduceMQ.matches;
+  // El CSS usa la clase .reducido (y no la media query) para seguir el mismo modo que el JS
+  const marcarModo = () => document.documentElement.classList.toggle('reducido', reducir());
+  marcarModo();
+  reduceMQ.addEventListener('change', marcarModo);
+
+  // Botones de correo: se abre con asunto y una guía corta para que el cliente cuente lo necesario
+  const MAIL = 'contacto@sparc-interactive.com', MAIL_ASUNTO = 'Quiero cotizar un proyecto',
+    MAIL_CUERPO = 'Hola SPARC:\n\nMi negocio: \nMe interesa (web, juego, simulador o sistema): \nMi idea: \n\nGracias.';
+  const mailLink = (asunto = MAIL_ASUNTO, cuerpo = MAIL_CUERPO) => `mailto:${MAIL}?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpo)}`;
+  // Cada botón puede traer su propio asunto (data-mail-asunto)
+  $$('[data-mail]').forEach(a => { a.href = mailLink(a.dataset.mailAsunto); });
+
+  const TIPS = [
+    'La mayoría de tus clientes te visitará desde el celular. Tu web tiene que verse perfecta ahí.',
+    'Un botón de WhatsApp a la vista convierte visitas en conversaciones.',
+    'Un minijuego con tu marca hace que la gente te recuerde (y lo comparta).',
+    'Una web rápida da más confianza que una lenta.',
+    'Tu catálogo online atiende por ti las 24 horas.',
+    'Los juegos cortos son publicidad que la gente quiere ver.'
+  ];
+
+  const header = $('#header'), main = $('#main');
+
+  /* =================== PARED DE LADRILLOS (inicio y resto del calabozo) =================== */
+  // Azar con semilla: la pared sale igual cada vez que se dibuja
+  function azar(semilla) {
+    let a = semilla >>> 0;
+    return () => { a = (a + 0x6D2B79F5) >>> 0; let t = a; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+  }
+
+  // Pared de bloques planos con bisel, como un nivel subterráneo de juego clásico.
+  // La base es un patrón (pocas figuras) y encima van algunos bloques azules "especiales" (uno por cada `cadaN` ladrillos).
+  function muroSVG(id, w, h, semilla, cadaN) {
+    const W = 72, H = 36, M = 4, COLS = 6, FILAS = 6, r = azar(semilla);
+    const tonos = ['#1f1f1f', '#232323', '#272727', '#202020'];
+    const tonoDe = [];
+    for (let f = 0; f < FILAS; f++) { tonoDe[f] = []; for (let c = 0; c < COLS; c++) tonoDe[f][c] = tonos[Math.floor(r() * tonos.length)]; }
+    const ladrillo = (x, y, t) => {
+      const a = x + M / 2, b = y + M / 2, w2 = W - M, h2 = H - M;
+      return `<rect x="${a}" y="${b}" width="${w2}" height="${h2}" fill="${t}"/>` +
+        `<rect x="${a}" y="${b}" width="${w2}" height="4" fill="#363636"/>` +
+        `<rect x="${a}" y="${b}" width="4" height="${h2}" fill="#2f2f2f"/>` +
+        `<rect x="${a}" y="${b + h2 - 4}" width="${w2}" height="4" fill="#121212"/>` +
+        `<rect x="${a + w2 - 4}" y="${b}" width="4" height="${h2}" fill="#151515"/>`;
+    };
+    let tile = '';
+    for (let f = 0; f < FILAS; f++) {
+      const off = f % 2 ? -W / 2 : 0;
+      for (let c = 0; c <= COLS; c++) tile += ladrillo(c * W + off, f * H, tonoDe[f][c % COLS]);
+    }
+    let especiales = '';
+    const totalF = Math.ceil(h / H), totalC = Math.ceil(w / W) + 1, n = Math.max(5, Math.round(totalF * totalC / cadaN));
+    for (let i = 0; i < n; i++) {
+      const f = Math.floor(r() * totalF), c = Math.floor(r() * totalC);
+      const x = c * W + (f % 2 ? -W / 2 : 0) + M / 2, y = f * H + M / 2;
+      especiales += `<g class="esp" style="animation-delay:${(r() * 2.6).toFixed(2)}s">` +
+        `<rect x="${x}" y="${y}" width="${W - M}" height="${H - M}" fill="#3d7bff" fill-opacity=".16"/>` +
+        `<rect x="${x + 1}" y="${y + 1}" width="${W - M - 2}" height="${H - M - 2}" fill="none" stroke="#3d7bff" stroke-width="2"/>` +
+        `<rect x="${x + 6}" y="${y + 6}" width="10" height="4" fill="#3d7bff"/></g>`;
+    }
+    return `<defs><pattern id="${id}" width="${COLS * W}" height="${FILAS * H}" patternUnits="userSpaceOnUse">${tile}</pattern></defs>` +
+      `<rect width="100%" height="100%" fill="#060606"/><rect width="100%" height="100%" fill="url(#${id})"/>${especiales}`;
+  }
+
+  /* =================== HERO: pared de ladrillos con antorcha =================== */
+  const heroFx = (() => {
+    const hero = $('#inicio'), pared = $('#heroPared'), tw = $('#heroTw'), titulo = $('#heroTitle');
+    const PALABRAS = ['webs que venden', 'advergames para tu marca', 'juegos en Roblox', 'simuladores 3D', 'sistemas para tu negocio'];
+    let iniciado = false, tEscribir = null, parpadeo = null;
+
+    function dibujarPared() {
+      const w = hero.clientWidth, h = hero.clientHeight;
+      pared.setAttribute('viewBox', `0 0 ${w} ${h}`);
+      pared.innerHTML = muroSVG('pLad', w, h, 3, 50);
+    }
+
+    // Antorcha: sigue al mouse con suavidad y parpadea como fuego. Sin mouse (celular) se queda detrás del título.
+    const radioBase = () => Math.max(260, Math.min(innerWidth * 0.36, 460));
+    const luz = { x: 0, y: 0, r: radioBase() };
+    const pintarLuz = () => {
+      hero.style.setProperty('--x', `${luz.x.toFixed(1)}px`);
+      hero.style.setProperty('--y', `${luz.y.toFixed(1)}px`);
+      hero.style.setProperty('--r', `${luz.r.toFixed(1)}px`);
+    };
+    function centroTitulo() {
+      const t = titulo.getBoundingClientRect(), b = hero.getBoundingClientRect();
+      return { x: t.left + t.width / 2 - b.left, y: t.top + t.height / 2 - b.top };
+    }
+    function centrarLuz() { const c = centroTitulo(); luz.x = c.x; luz.y = c.y; luz.r = radioBase(); pintarLuz(); }
+    const qx = gsap.quickTo(luz, 'x', { duration: 0.45, ease: 'power3.out', onUpdate: pintarLuz });
+    const qy = gsap.quickTo(luz, 'y', { duration: 0.45, ease: 'power3.out', onUpdate: pintarLuz });
+    hero.addEventListener('pointermove', e => {
+      if (e.pointerType !== 'mouse' || reducir()) return;
+      const b = hero.getBoundingClientRect();
+      qx(e.clientX - b.left); qy(e.clientY - b.top);
+    });
+    hero.addEventListener('pointerleave', () => { const c = centroTitulo(); qx(c.x); qy(c.y); });
+    function parpadear() {
+      parpadeo = gsap.to(luz, { r: radioBase() * (0.93 + Math.random() * 0.12), duration: 0.12 + Math.random() * 0.22, ease: 'steps(2)', onUpdate: pintarLuz, onComplete: parpadear });
+    }
+    // Fuera de pantalla, la antorcha deja de parpadear
+    new IntersectionObserver(([e]) => { if (parpadeo) e.isIntersecting ? parpadeo.resume() : parpadeo.pause(); }).observe(hero);
+
+    // Palabra que se escribe sola
+    function escribir() {
+      let p = 0, c = 0, borrando = false;
+      const linea = tw.parentElement;
+      (function paso() {
+        const pal = PALABRAS[p];
+        linea.classList.add('escribiendo');
+        if (!borrando) {
+          tw.textContent = pal.slice(0, ++c);
+          if (c === pal.length) { borrando = true; linea.classList.remove('escribiendo'); tEscribir = setTimeout(paso, 1900); return; }
+          tEscribir = setTimeout(paso, 55);
+          return;
+        }
+        tw.textContent = pal.slice(0, --c);
+        if (c === 0) { borrando = false; p = (p + 1) % PALABRAS.length; linea.classList.remove('escribiendo'); tEscribir = setTimeout(paso, 400); return; }
+        tEscribir = setTimeout(paso, 26);
+      })();
+    }
+
+    function arrancar() {
+      clearTimeout(tEscribir);
+      if (parpadeo) { parpadeo.kill(); parpadeo = null; }
+      centrarLuz();
+      if (reducir()) { tw.textContent = 'webs y videojuegos para tu marca'; return; }
+      tw.textContent = '';
+      escribir();
+      parpadear();
+    }
+
+    let tRes;
+    addEventListener('resize', () => { clearTimeout(tRes); tRes = setTimeout(() => { dibujarPared(); centrarLuz(); }, 150); });
+    dibujarPared();
+    centrarLuz();
+    return {
+      iniciar() { if (iniciado) return; iniciado = true; arrancar(); },
+      reiniciarModo() { if (iniciado) arrancar(); }
+    };
+  })();
+
+  /* =================== CALABOZO: la pared sigue por toda la página =================== */
+  // La misma pared del inicio, en penumbra. Con mouse, la antorcha va con el cursor por todas las secciones;
+  // en el celular la luz queda fija en la parte alta de la pantalla, sobre lo que se está leyendo.
+  const calabozo = (() => {
+    const muro = $('#muro'), penumbra = $('.penumbra'), hero = $('#inicio');
+    const conMouse = matchMedia('(hover: hover) and (pointer: fine)');
+    let ancho = 0, alto = 0, tDib, parpadeo = null, enHero = true;
+
+    function dibujar() {
+      const caja = muro.parentElement, w = caja.clientWidth, h = caja.clientHeight;
+      if (w === ancho && Math.abs(h - alto) < 36) return;
+      ancho = w; alto = h;
+      muro.setAttribute('viewBox', `0 0 ${w} ${h}`);
+      muro.innerHTML = muroSVG('pMuro', w, h, 7, 90);
+    }
+    new ResizeObserver(() => { clearTimeout(tDib); tDib = setTimeout(dibujar, 150); }).observe(main);
+
+    const radioBase = () => conMouse.matches ? Math.max(240, Math.min(innerWidth * 0.28, 400)) : Math.max(280, innerWidth * 0.8);
+    const luz = { x: innerWidth / 2, y: innerHeight * 0.4, r: radioBase() };
+    const pintar = () => {
+      penumbra.style.setProperty('--tx', `${luz.x.toFixed(1)}px`);
+      penumbra.style.setProperty('--ty', `${luz.y.toFixed(1)}px`);
+      penumbra.style.setProperty('--tr', `${luz.r.toFixed(1)}px`);
+    };
+    const qx = gsap.quickTo(luz, 'x', { duration: 0.45, ease: 'power3.out', onUpdate: pintar });
+    const qy = gsap.quickTo(luz, 'y', { duration: 0.45, ease: 'power3.out', onUpdate: pintar });
+    addEventListener('pointermove', e => {
+      if (e.pointerType !== 'mouse' || reducir()) return;
+      qx(e.clientX); qy(e.clientY);
+    }, { passive: true });
+    function fija() { luz.x = innerWidth / 2; luz.y = innerHeight * 0.4; luz.r = radioBase(); pintar(); }
+
+    // Parpadeo del fuego: solo cuando el inicio no está en pantalla (el inicio tiene su propia antorcha)
+    function parpadear() {
+      parpadeo = gsap.to(luz, { r: radioBase() * (0.93 + Math.random() * 0.12), duration: 0.12 + Math.random() * 0.22, ease: 'steps(2)', onUpdate: pintar, onComplete: parpadear });
+    }
+    function actualizarFuego() {
+      if (reducir()) { if (parpadeo) { parpadeo.kill(); parpadeo = null; } return; }
+      if (!parpadeo) parpadear();
+      enHero ? parpadeo.pause() : parpadeo.resume();
+    }
+    new IntersectionObserver(([e]) => { enHero = e.isIntersecting; actualizarFuego(); }).observe(hero);
+
+    let tRes;
+    addEventListener('resize', () => { clearTimeout(tRes); tRes = setTimeout(() => { if (!conMouse.matches || reducir()) fija(); }, 150); });
+    dibujar();
+    fija();
+    return { reiniciarModo() { fija(); actualizarFuego(); } };
+  })();
+
+  /* =================== HEADER =================== */
+  const xpFill = $('#xpFill');
+  let ultimoY = scrollY, pendiente = false, menuAbierto = false;
+  function alHacerScroll() {
+    pendiente = false;
+    const y = scrollY;
+    header.classList.toggle('is-solid', y > 8 || menuAbierto);
+    if (!menuAbierto) {
+      if (y > ultimoY + 4 && y > 160) header.classList.add('is-hidden');
+      else if (y < ultimoY - 4) header.classList.remove('is-hidden');
+    }
+    ultimoY = y;
+    // Barra de XP: progreso de lectura de la página
+    const max = document.documentElement.scrollHeight - innerHeight;
+    xpFill.style.transform = `scaleX(${max > 0 ? Math.min(1, y / max) : 0})`;  }
+  addEventListener('scroll', () => { if (!pendiente) { pendiente = true; requestAnimationFrame(alHacerScroll); } }, { passive: true });
+  header.addEventListener('focusin', () => header.classList.remove('is-hidden'));
+
+  // Marca en el menú la sección que se está viendo
+  const spyLinks = $$('[data-spy]');
+  const spy = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) spyLinks.forEach(a => a.setAttribute('aria-current', String(a.dataset.spy === e.target.id)));
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  ['inicio', 'servicios', 'portafolio', 'proceso', 'nosotros', 'preguntas', 'contacto'].forEach(id => spy.observe(document.getElementById(id)));
+
+  // Menú móvil
+  const menuBtn = $('#menuBtn'), menu = $('#menu');
+  function enfocables() { return [menuBtn, ...$$('a', menu)]; }
+  function abrirMenu() {
+    menuAbierto = true;
+    menu.hidden = false;
+    menuBtn.setAttribute('aria-expanded', 'true');
+    menuBtn.setAttribute('aria-label', 'Cerrar menú');
+    header.classList.remove('is-hidden');
+    header.classList.add('is-solid');
+    document.documentElement.classList.add('menu-lock');
+    main.inert = true;
+    if (!reducir()) gsap.fromTo($$('.menu-kicker, .menu-list li, .menu-cta, .redes--menu', menu), { autoAlpha: 0, x: -16 }, { autoAlpha: 1, x: 0, duration: 0.28, stagger: 0.05, ease: 'steps(4)' });
+    $('a', menu).focus();
+  }
+  function cerrarMenu(devolverFoco) {
+    if (!menuAbierto) return;
+    menuAbierto = false;
+    menu.hidden = true;
+    menuBtn.setAttribute('aria-expanded', 'false');
+    menuBtn.setAttribute('aria-label', 'Abrir menú');
+    document.documentElement.classList.remove('menu-lock');
+    main.inert = false;
+    alHacerScroll();
+    if (devolverFoco) menuBtn.focus();
+  }
+  menuBtn.addEventListener('click', () => menuAbierto ? cerrarMenu(true) : abrirMenu());
+  $$('a', menu).forEach(a => a.addEventListener('click', () => cerrarMenu(false)));
+  document.addEventListener('keydown', e => {
+    if (!menuAbierto) return;
+    if (e.key === 'Escape') cerrarMenu(true);
+    if (e.key === 'Tab') {
+      const f = enfocables(), primero = f[0], ultimo = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === primero) { e.preventDefault(); ultimo.focus(); }
+      else if (!e.shiftKey && document.activeElement === ultimo) { e.preventDefault(); primero.focus(); }
+    }
+  });
+  matchMedia('(min-width: 961px)').addEventListener('change', e => { if (e.matches) cerrarMenu(false); });
+
+  // Enlaces internos (#seccion): bajan con un scroll suave en vez de saltar.
+  // La duración crece con la distancia; si la persona mueve la rueda, el scroll se detiene y le deja el control.
+  gsap.registerPlugin(ScrollToPlugin);
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a[href^="#"]');
+    if (!a || a.hasAttribute('data-proyecto') || e.defaultPrevented) return;
+    const destino = a.hash.length > 1 && document.getElementById(a.hash.slice(1));
+    if (!destino) return;
+    e.preventDefault();
+    const y = destino.getBoundingClientRect().top + scrollY;
+    // Al bajar el header se esconde, así que la sección puede llegar hasta arriba; al subir, deja espacio para el header
+    const offset = y > scrollY ? 0 : header.offsetHeight;
+    const listo = () => { if (!destino.hasAttribute('tabindex')) destino.setAttribute('tabindex', '-1'); destino.focus({ preventScroll: true }); };
+    gsap.killTweensOf(window);
+    if (reducir()) { scrollTo(0, y - offset); listo(); return; }
+    const dist = Math.abs(y - offset - scrollY);
+    gsap.to(window, {
+      scrollTo: { y: destino, offsetY: offset, autoKill: true },
+      duration: gsap.utils.clamp(0.7, 1.4, 0.5 + dist / 2400),
+      ease: 'power3.inOut',
+      onComplete: listo
+    });
+  });
+
+  /* =================== ENTRADA DEL HERO =================== */
+  const heroEls = {
+    pared: $('#heroPared'), luz: $('.hero-luz'), eyebrow: $('#inicio .eyebrow'), l1: $('#inicio .h-l1'), l2: $('#inicio .h-l2'),
+    sub: $('.hero-sub'), ctas: $$('.hero-ctas .btn'), bajar: $('.hero-bajar')
+  };
+  function ocultarHero() {
+    gsap.set(header, { yPercent: -100 });
+    gsap.set([heroEls.pared, heroEls.eyebrow, heroEls.l1, heroEls.l2, heroEls.sub, ...heroEls.ctas, heroEls.bajar], { autoAlpha: 0 });
+  }
+  function entradaHero() {
+    const todos = [header, heroEls.pared, heroEls.eyebrow, heroEls.l1, heroEls.l2, heroEls.sub, ...heroEls.ctas, heroEls.bajar];
+    if (reducir()) {
+      gsap.set(todos, { clearProps: 'transform,opacity,visibility' });
+      heroFx.iniciar();
+      return gsap.timeline();
+    }
+    // La pared aparece por pasos, como cuando se "enciende" un nivel; luego el texto y la palabra empieza a escribirse
+    return gsap.timeline({ onComplete: () => gsap.set(todos, { clearProps: 'transform' }) })
+      .fromTo(header, { yPercent: -100 }, { yPercent: 0, duration: 0.3, ease: 'steps(4)' }, 0)
+      .fromTo(heroEls.pared, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.5, ease: 'steps(5)' }, 0)
+      .fromTo(heroEls.eyebrow, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.2, ease: 'steps(3)' }, 0.15)
+      .fromTo(heroEls.l1, { autoAlpha: 0, y: 16 }, { autoAlpha: 1, y: 0, duration: 0.35, ease: 'power3.out' }, 0.25)
+      .set(heroEls.l2, { autoAlpha: 1 }, 0.45)
+      .call(() => heroFx.iniciar(), null, 0.45)
+      .fromTo(heroEls.sub, { autoAlpha: 0, y: 12 }, { autoAlpha: 1, y: 0, duration: 0.4, ease: 'power2.out' }, 0.5)
+      .fromTo(heroEls.ctas, { autoAlpha: 0, y: 12 }, { autoAlpha: 1, y: 0, duration: 0.35, stagger: 0.08, ease: 'power2.out' }, 0.6)
+      .fromTo(heroEls.bajar, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.3, ease: 'steps(3)' }, 0.9);
+  }
+
+  /* =================== PRELOADER =================== */
+  // soloPrimeraVisita: quien vuelve a la página en la misma visita no ve la intro otra vez
+  const CONFIG = { minMs: 900, maxMs: 2500, pasos: 16, soloPrimeraVisita: true, clave: 'sparc-intro-vista' };
+  const preloader = $('#preloader'), plPct = $('#plPct'), plBar = $('#plBar'), plTip = $('#plTip'), plStatus = $('#plStatus');
+  const plFill = $('#plFill'), plScan = $('#plScan'), plLlama = $('#plLlama'), plSparc = $('#plSparc'), plInter = $('#plInter');
+  const shutterCols = $$('#shutter span');
+  const SEG = 20, segs = [];
+  for (let i = 0; i < SEG; i++) { const s = document.createElement('span'); plBar.append(s); segs.push(s); }
+  let run = null, ultimoPct = -1, ultimoPaso = -1, tipIdx = 0;
+
+  function pintar(p) {
+    const pct = Math.round(p * 100);
+    if (pct !== ultimoPct) {
+      ultimoPct = pct;
+      plPct.textContent = pct + '%';
+      plBar.setAttribute('aria-valuenow', pct);
+      const on = Math.round(p * SEG);
+      segs.forEach((s, i) => s.classList.toggle('on', i < on));
+    }
+    const paso = Math.floor(p * CONFIG.pasos);
+    if (paso !== ultimoPaso) {
+      ultimoPaso = paso;
+      const vacio = (1 - paso / CONFIG.pasos) * 100;
+      plFill.style.clipPath = `inset(${vacio}% 0 0 0)`;
+      plScan.style.top = `${vacio}%`;
+      plScan.style.opacity = paso > 0 && paso < CONFIG.pasos ? 1 : 0;
+    }
+  }
+  function ponerTip(i, animar) {
+    tipIdx = i;
+    gsap.killTweensOf(plTip);
+    if (!animar) { plTip.textContent = TIPS[i]; gsap.set(plTip, { autoAlpha: 1 }); return; }
+    gsap.timeline()
+      .to(plTip, { autoAlpha: 0, duration: 0.12, ease: 'steps(2)' })
+      .call(() => { plTip.textContent = TIPS[i]; })
+      .to(plTip, { autoAlpha: 1, duration: 0.16, ease: 'steps(3)' });
+  }
+
+  function limpiar() {
+    if (!run) return;
+    run.timers.forEach(clearTimeout);
+    gsap.ticker.remove(run.tick);
+    run.tls.forEach(t => t.kill());
+    run = null;
+  }
+
+  function iniciarCarga() {
+    limpiar();
+    const reduce = reducir();
+    preloader.hidden = false;
+    gsap.set(preloader, { autoAlpha: 1 });
+    gsap.set(shutterCols, { scaleY: 0, transformOrigin: '50% 100%' });
+    gsap.set(plLlama, { y: 0 });
+    gsap.set([plSparc, plInter], { clipPath: 'inset(0 100% 0 0)' });
+    ocultarHero();
+    main.inert = true;
+    document.documentElement.classList.add('is-loading');
+    ultimoPct = ultimoPaso = -1;
+    pintar(0);
+    ponerTip(Math.floor(Math.random() * TIPS.length), false);
+
+    const r = { timers: [], tls: [], tick: null, t0: performance.now(), real: 0, mostrado: 0, hecho: false, reduce };
+    run = r;
+    plStatus.textContent = 'Cargando SPARC Interactive';
+
+    // Progreso real: logo, fuentes e imagen del primer proyecto, más window.load
+    const tareas = [
+      document.fonts ? document.fonts.ready : Promise.resolve(),
+      ...['assets/logo-v2/mascota.png', 'assets/logo/sparc.png', 'assets/logo/interactive.png'].map(src => {
+        const im = new Image(); im.src = src; return im.decode().catch(() => {});
+      }),
+      document.readyState === 'complete' ? Promise.resolve() : new Promise(res => addEventListener('load', res, { once: true }))
+    ];
+    let listas = 0;
+    tareas.forEach(t => t.then(() => { listas++; r.real = listas / tareas.length; }));
+
+    let tipCambiado = false;
+    r.tick = () => {
+      const t = performance.now() - r.t0;
+      const objetivo = Math.min(r.real, t / CONFIG.minMs);
+      r.mostrado += (objetivo - r.mostrado) * 0.2;
+      if (objetivo - r.mostrado < 0.004) r.mostrado = objetivo;
+      if (t >= CONFIG.maxMs) { r.mostrado = 1; r.tope = true; }
+      pintar(r.mostrado);
+      if (reduce) { plFill.style.clipPath = 'inset(0 0 0 0)'; plScan.style.opacity = 0; }
+      if (!tipCambiado && r.mostrado > 0.55) {
+        tipCambiado = true;
+        ponerTip((tipIdx + 1 + Math.floor(Math.random() * (TIPS.length - 1))) % TIPS.length, !reduce);
+      }
+      if (r.mostrado >= 1) terminarCarga(false);
+    };
+    gsap.ticker.add(r.tick);
+  }
+
+  function salidaLogo() {
+    return gsap.timeline()
+      .to(plLlama, { y: -14, duration: 0.12, ease: 'steps(3)' })
+      .to(plLlama, { y: 0, duration: 0.14, ease: 'steps(3)' })
+      .to(plSparc, { clipPath: 'inset(0 0% 0 0)', duration: 0.3, ease: 'steps(5)' }, 0.08)
+      .to(plInter, { clipPath: 'inset(0 0% 0 0)', duration: 0.3, ease: 'steps(11)' }, 0.28)
+      .to({}, { duration: 0.2 });
+  }
+
+  function terminarCarga(saltado) {
+    const r = run;
+    if (!r) return;
+    if (r.hecho) { if (saltado) r.tls[r.tls.length - 1].progress(1); return; }
+    r.hecho = true;
+    gsap.ticker.remove(r.tick);
+    pintar(1);
+    plStatus.textContent = 'Página lista';
+    const tl = gsap.timeline({ onComplete: () => finalizarCarga() });
+    r.tls.push(tl);
+    if (saltado || r.reduce) {
+      tl.to(preloader, { autoAlpha: 0, duration: saltado ? 0.2 : 0.3 })
+        .add(entradaHero());
+    } else {
+      tl.add(salidaLogo())
+        .to(shutterCols, { scaleY: 1, duration: 0.22, stagger: 0.035, ease: 'power3.in' })
+        .set(preloader, { autoAlpha: 0 })
+        .set(shutterCols, { transformOrigin: '50% 0%' })
+        .to(shutterCols, { scaleY: 0, duration: 0.3, stagger: 0.035, ease: 'power3.out' })
+        .add(entradaHero(), '-=0.3');
+      if (r.tope) tl.timeScale(1.8);
+    }
+  }
+  function finalizarCarga() {
+    preloader.hidden = true;
+    main.inert = false;
+    document.documentElement.classList.remove('is-loading');
+    try { sessionStorage.setItem(CONFIG.clave, '1'); } catch (e) {}
+  }
+  $('#plSkip').addEventListener('click', () => terminarCarga(true));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && run && !preloader.hidden) terminarCarga(true); });
+
+  /* =================== SERVICIOS: aparición al hacer scroll =================== */
+  gsap.registerPlugin(ScrollTrigger);
+  if (!reducir()) {
+    // "SERVICIOS" se llena de abajo hacia arriba por bloques y luego aparece la llama
+    const tituloSvc = $('#svcTitle');
+    gsap.set(tituloSvc, { '--fill': '100%' });
+    gsap.timeline({ scrollTrigger: { trigger: tituloSvc, start: 'top 85%', toggleActions: 'play none none none' } })
+      .to(tituloSvc, { '--fill': '0%', duration: 0.7, ease: 'steps(8)' })
+      .from('#servicios .sec-llama', { autoAlpha: 0, y: 24, duration: 0.3, ease: 'steps(4)' }, '-=0.15')
+      .from('#servicios .sec-line', { autoAlpha: 0, y: 12, duration: 0.4, ease: 'power2.out' }, '<');
+    gsap.from('#nosotros .tech li', {
+      autoAlpha: 0, duration: 0.2, stagger: 0.05, ease: 'steps(2)',
+      scrollTrigger: { trigger: '#nosotros .tech', start: 'top 90%', toggleActions: 'play none none none' }
+    });
+  }
+
+  /* =================== SERVICIOS: mazo de cartas =================== */
+  (() => {
+    const root = $('#deck'), stage = $('.deck-stage', root), tabsBox = $('#deckTabs');
+    const dotsBox = $('#deckDots'), srEl = $('#deckSr');
+    const cards = $$('.svc', stage);
+    const mqMovil = matchMedia('(max-width: 760px)');
+    let orden = cards.map((_, i) => i); // orden[0] es la carta que está al frente
+
+    // Envuelve el contenido de cada carta y le agrega su lomo (pestaña) con número y nombre
+    cards.forEach((card, i) => {
+      const body = document.createElement('div');
+      body.className = 'svc-body';
+      while (card.firstChild) body.append(card.firstChild);
+      card.append(body);
+      card.id = `servicio-${i + 1}`;
+      const nombre = $('h3', body).textContent;
+
+      const lomo = document.createElement('button');
+      lomo.type = 'button';
+      lomo.className = 'svc-spine';
+      lomo.innerHTML = `<span class="t">${card.dataset.corto}</span>`;
+      lomo.setAttribute('aria-label', `Ver servicio: ${nombre}`);
+      lomo.addEventListener('click', () => ir(i));
+      card.append(lomo);
+
+      const tab = document.createElement('button');
+      tab.type = 'button';
+      tab.className = 'deck-tab';
+      tab.textContent = card.dataset.corto;
+      tab.style.setProperty('--tab-c', getComputedStyle(card).getPropertyValue('--c').trim());
+      tab.setAttribute('aria-controls', card.id);
+      tab.setAttribute('aria-label', `Ver servicio: ${nombre}`);
+      tab.addEventListener('click', () => ir(i));
+      tabsBox.append(tab);
+
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = 'deck-dot';
+      dot.setAttribute('aria-label', `Ver servicio: ${nombre}`);
+      dot.addEventListener('click', () => ir(i));
+      dotsBox.append(dot);
+    });
+    const tabs = [...$$('.deck-tab', tabsBox), ...$$('.deck-dot', dotsBox)];
+
+    const desfase = () => mqMovil.matches ? 0 : parseFloat(getComputedStyle(root).getPropertyValue('--o')) || 64;
+
+    // Estado (qué carta está al frente): se actualiza al instante, sin esperar a la animación
+    function marcarEstado() {
+      orden.forEach((k, d) => {
+        const card = cards[k], frente = d === 0;
+        card.classList.toggle('is-front', frente);
+        $('.svc-body', card).inert = !frente;
+        $('.svc-spine', card).setAttribute('aria-current', String(frente));
+      });
+      const f = orden[0];
+      srEl.textContent = `Mostrando: ${$('h3', cards[f]).textContent}`;
+      tabs.forEach((t, i) => t.setAttribute('aria-pressed', String(i % cards.length === f)));
+    }
+
+    // Coloca cada carta según su posición en el mazo (0 = frente)
+    function colocar(animar) {
+      const o = desfase(), movil = mqMovil.matches;
+      orden.forEach((k, d) => {
+        const card = cards[k], frente = d === 0;
+        card.style.zIndex = String(cards.length - d);
+        const v = movil
+          ? { x: 0, marginTop: 0, marginBottom: 0, autoAlpha: frente ? 1 : 0 }
+          : { x: d * o, marginTop: d * 14, marginBottom: d * 14, autoAlpha: 1 };
+        animar ? gsap.to(card, { ...v, duration: 0.45, ease: 'power3.out', overwrite: 'auto' }) : gsap.set(card, v);
+      });
+      marcarEstado();
+    }
+
+    function marcarChecks(card) {
+      if (reducir()) return;
+      gsap.fromTo($$('.chk', card), { scale: 0 }, { scale: 1, duration: 0.2, stagger: 0.06, ease: 'steps(3)', delay: 0.2 });
+    }
+
+    function ir(i) {
+      if (orden[0] === i) return;
+      const sale = cards[orden[0]];
+      while (orden[0] !== i) orden.push(orden.shift()); // gira el mazo en bucle
+      const entra = cards[i];
+      marcarEstado();
+      if (reducir()) { colocar(false); return; }
+      if (mqMovil.matches) {
+        colocar(false);
+        gsap.fromTo(entra, { x: 40, autoAlpha: 0 }, { x: 0, autoAlpha: 1, duration: 0.3, ease: 'power3.out' });
+      } else {
+        // La carta del frente sale hacia la izquierda y vuelve al fondo del mazo
+        gsap.timeline()
+          .to(sale, { x: -70, rotation: -4, duration: 0.18, ease: 'power2.in' })
+          .call(() => colocar(true))
+          .to(sale, { rotation: 0, duration: 0.35, ease: 'power3.out' }, '<');
+      }
+      marcarChecks(entra);
+    }
+    const siguiente = () => ir(orden[1]);
+    const anterior = () => ir(orden[orden.length - 1]);
+
+    $('#deckNext').addEventListener('click', siguiente);
+    $('#deckPrev').addEventListener('click', anterior);
+    root.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight') { e.preventDefault(); siguiente(); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); anterior(); }
+    });
+    // Deslizar con el dedo
+    let x0 = null;
+    stage.addEventListener('pointerdown', e => { if (e.pointerType !== 'mouse') x0 = e.clientX; });
+    stage.addEventListener('pointerup', e => {
+      if (x0 === null) return;
+      const dx = e.clientX - x0;
+      x0 = null;
+      if (Math.abs(dx) > 50) dx < 0 ? siguiente() : anterior();
+    });
+    stage.addEventListener('pointercancel', () => { x0 = null; });
+    mqMovil.addEventListener('change', () => colocar(false));
+
+    colocar(false);
+    // Al llegar a la sección, el mazo se abre por pasos para mostrar que hay más cartas
+    if (!reducir()) {
+      // Sin "once": si se autodestruye mientras ScrollTrigger recalcula (p. ej. al recargar ya bajado), GSAP 3.12 falla
+      let abierto = false;
+      ScrollTrigger.create({
+        trigger: root, start: 'top 75%',
+        onEnter: () => {
+          if (abierto) return;
+          abierto = true;
+          if (!mqMovil.matches) gsap.from(orden.slice(1).map(k => cards[k]), { x: 0, marginTop: 0, marginBottom: 0, duration: 0.5, stagger: 0.12, ease: 'steps(5)', delay: 0.2 });
+          marcarChecks(cards[orden[0]]);
+        }
+      });
+    }
+  })();
+
+  /* =================== PORTAFOLIO =================== */
+  // Ficha de cada proyecto. Reto, "lo que hicimos" y "lo destacado" son textos provisionales hasta que el equipo los confirme.
+  // null = dato por confirmar. Cada proyecto usa assets/proyectos/<id>.webp de portada y clips/<id>.mp4 de video.
+  // Opcionales: jugar: enlace público, logro, pos/fit para encuadrar la imagen.
+  const IMG = id => `assets/proyectos/${id}.webp`, CLIP = id => [`assets/proyectos/clips/${id}.mp4`];
+  const PROYECTOS = [
+    { id: 'llama-rush', nombre: 'Llama Rush', titulo: 'LLAMA_RUSH.exe', cat: 'juegos', plat: 'ROBLOX', tipo: 'Juego · Roblox',
+      corto: 'Carreras multijugador montando llamas, con personalización y atajos.',
+      stats: [['PLATAFORMA', 'Roblox'], ['MOTOR', 'Roblox Studio'], ['GÉNERO', 'Carreras multijugador']],
+      reto: 'Crear un juego de carreras para jugar con amigos que dé ganas de volver a entrar.',
+      hicimos: 'Diseñamos las pistas, las llamas en 3D y su personalización, y lo publicamos en Roblox.',
+      destacado: 'Partidas multijugador, llamas personalizables y atajos escondidos en cada pista.' },
+    { id: 'interactive-emergency', nombre: 'Interactive Emergency', titulo: 'INTERACTIVE_EMERGENCY.exe', cat: 'sim', plat: 'PC Y ANDROID', tipo: 'Simulador · PC y Android',
+      corto: 'Entrenamiento ante emergencias: decide bajo presión y mira tus resultados.',
+      stats: [['PLATAFORMA', 'PC y Android'], ['MOTOR', 'Unity'], ['USO', 'Capacitación en emergencias']],
+      reto: 'Entrenar a las personas para actuar en una emergencia sin el riesgo ni el costo de un simulacro real.',
+      hicimos: 'Un simulador 3D donde tomas decisiones bajo presión, como pasaría en la vida real.',
+      destacado: 'Resultados al instante al terminar cada escenario, en PC y en celulares Android.' },
+    { id: 'aurea-void', nombre: 'Aurea Void', titulo: 'AUREA_VOID.web', cat: 'webs', plat: 'TIENDA ONLINE', tipo: 'Web · Tienda online', web: true,
+      corto: 'Joyería online con armador de cajas de regalo y descuento automático.', pos: 'left top',
+      stats: [['NEGOCIO', 'Joyería'], ['SE VE EN', 'Celular y PC'], ['FUNCIÓN ESTRELLA', 'Armador de cajas de regalo']],
+      reto: 'Que comprar joyas por internet se sienta tan especial como hacerlo en la tienda.',
+      hicimos: 'Una tienda online donde el cliente elige sus piezas y arma su propia caja de regalo.',
+      destacado: 'Al armar la caja, el 15% de descuento se aplica solo, sin códigos.' },
+    { id: 'behind-the-peephole', nombre: 'Behind the Peephole', titulo: 'BEHIND_THE_PEEPHOLE.exe', cat: 'juegos', plat: 'TERROR', tipo: 'Juego · Terror',
+      corto: 'Mira por la mirilla, deduce quién llama a tu puerta y sobrevive.',
+      logro: '1er lugar · International GameJam Canadore & Tecsup 2025',
+      stats: [['PLATAFORMA', null], ['MOTOR', null], ['GÉNERO', 'Terror y deducción'], ['ORIGEN', 'Game jam, con integrantes de nuestro equipo'], ['TEMA', 'Trick or Treat']],
+      reto: 'Crear un juego completo en el tiempo de una game jam, con el tema "Trick or Treat".',
+      hicimos: 'Un juego de terror donde miras por la mirilla y decides a quién abrirle la puerta.',
+      destacado: 'Mucha tensión con muy pocos elementos: una puerta, una mirilla y tus decisiones.' },
+    { id: 'sistema-repuestos', nombre: 'Inventario de Repuestos', titulo: 'INVENTARIO_REPUESTOS.sys', cat: 'sis', plat: 'REPUESTOS', tipo: 'Sistema · Tienda de repuestos', web: true,
+      corto: 'Inventario con stock en vivo, filtros por auto y consulta directa por WhatsApp.', pos: 'center top',
+      stats: [['NEGOCIO', 'Tienda de repuestos'], ['SE VE EN', 'Celular y PC'], ['FUNCIÓN ESTRELLA', 'Stock en vivo']],
+      reto: 'Dejar de responder uno por uno si hay o no un repuesto.',
+      hicimos: 'Un inventario con kardex, stock por producto y filtros por marca, modelo y año.',
+      destacado: 'El cliente ve qué hay en stock y consulta por WhatsApp con el repuesto ya elegido.' },
+    { id: 'palillo-veloz', nombre: 'Palillo Veloz', titulo: 'PALILLO_VELOZ.exe', cat: 'juegos', plat: 'ROBLOX', tipo: 'Juego · Roblox',
+      corto: 'Arma palillos de fondue lo más rápido posible y gánales a los demás jugadores.',
+      stats: [['PLATAFORMA', 'Roblox'], ['MOTOR', 'Roblox Studio'], ['GÉNERO', 'Competencia multijugador']],
+      reto: 'Un juego de partidas cortas y divertidas para competir con amigos.',
+      hicimos: 'Una cocina en 3D donde armas palillos con los ingredientes que pide cada ronda, contra otros jugadores.',
+      destacado: 'Poderes especiales, ranking en vivo y monedas para volver a jugar.' },
+    { id: 'huellitas', nombre: 'Huellitas', titulo: 'HUELLITAS.web', cat: 'webs', plat: 'PET SHOP', tipo: 'Web · Pet shop', web: true,
+      corto: 'Tienda para mascotas con diseñador de placas que se dibuja en vivo.', pos: 'left top',
+      stats: [['NEGOCIO', 'Tienda para mascotas'], ['SE VE EN', 'Celular y PC'], ['FUNCIÓN ESTRELLA', 'Diseñador de placas en vivo']],
+      reto: 'Destacar frente a otras tiendas de mascotas que venden lo mismo.',
+      hicimos: 'Una tienda con diseñador de placas: escribes el nombre de tu mascota y ves la placa dibujarse al instante.',
+      destacado: 'El cliente diseña su producto solo, sin tener que explicarlo por chat.' },
+    { id: 'how-to-react', nombre: 'How to React', titulo: 'HOW_TO_REACT.exe', cat: 'sim', plat: 'PC', tipo: 'Serious game · PC',
+      corto: 'Thriller de evacuación en primera persona con varios finales.',
+      stats: [['TIPO', 'Serious game (simulador)'], ['PLATAFORMA', 'PC'], ['MOTOR', 'Unity'], ['USO', 'Aprender a reaccionar en una evacuación']],
+      reto: 'Que aprender a reaccionar en una evacuación se sienta como un juego y no como una clase.',
+      hicimos: 'Un thriller en primera persona donde cada decisión cambia lo que pasa después.',
+      destacado: 'Varios finales según cómo reacciones: dan ganas de jugarlo otra vez.' },
+    { id: 'dulce-abril', nombre: 'Dulce Abril', titulo: 'DULCE_ABRIL.web', cat: 'webs', plat: 'PASTELERÍA', tipo: 'Web · Pastelería', web: true,
+      corto: 'Pastelería online donde el cliente diseña su torta y ve el precio al instante.', pos: 'center top',
+      stats: [['NEGOCIO', 'Pastelería'], ['SE VE EN', 'Celular y PC'], ['FUNCIÓN ESTRELLA', 'Diseñador de tortas']],
+      reto: 'Que los pedidos de tortas personalizadas no se pierdan en largas conversaciones por chat.',
+      hicimos: 'Una web donde eliges tamaño, bizcocho, relleno y decoración, y ves cómo queda tu torta.',
+      destacado: 'El precio se calcula solo mientras el cliente arma su torta.' },
+    { id: 'supervision-geotecnia', nombre: 'Supervisión Geotécnica', titulo: 'SUPERVISION.sys', cat: 'sis', plat: 'MINERÍA', tipo: 'Sistema · Supervisión de perforación', web: true,
+      corto: 'Dashboard de avance de perforación con curva S y proyección de término.', pos: 'left top',
+      stats: [['NEGOCIO', 'Proyectos geotécnicos'], ['SE VE EN', 'PC y celular'], ['FUNCIÓN ESTRELLA', 'Curva S con proyección']],
+      reto: 'Reportar el avance de cada perforación sin armar reportes a mano al final de cada turno.',
+      hicimos: 'Un sistema para registrar los turnos de día y noche, y un dashboard para el cliente.',
+      destacado: 'Muestra al instante el avance, el tiempo muerto y la fecha de término proyectada.' },
+    { id: 'lienzo-moda', nombre: 'Lienzo', titulo: 'LIENZO.web', cat: 'webs', plat: 'TIENDA DE ROPA', tipo: 'Web · Tienda de ropa', web: true,
+      corto: 'Tienda de ropa con precios por unidad y por mayor en un solo clic.', pos: 'center top',
+      stats: [['NEGOCIO', 'Tienda de ropa'], ['SE VE EN', 'Celular y PC'], ['FUNCIÓN ESTRELLA', 'Precios por mayor']],
+      reto: 'Vender a clientes finales y a mayoristas desde la misma tienda.',
+      hicimos: 'Un catálogo con filtros por categoría, corte, talla y color.',
+      destacado: 'Un interruptor cambia todos los precios a "por docena" para los mayoristas.' }
+  ].map(p => ({ img: IMG(p.id), clip: CLIP(p.id), ...p }));
+  const CAT = { juegos: 'JUEGO', sim: 'SIMULADOR', webs: 'WEB', sis: 'SISTEMA' };
+  const TROFEO = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>';
+  const dos = n => String(n).padStart(2, '0');
+  function crearVideo(fuentes, poster) {
+    const v = document.createElement('video');
+    v.muted = true; v.loop = true; v.playsInline = true; v.preload = 'auto';
+    if (poster) v.poster = poster;
+    v.setAttribute('aria-hidden', 'true');
+    fuentes.forEach(src => {
+      const so = document.createElement('source');
+      so.src = src; so.type = src.endsWith('.webm') ? 'video/webm' : 'video/mp4';
+      v.append(so);
+    });
+    return v;
+  }
+
+  const portafolio = (() => {
+    const grid = $('#portGrid'), p2 = $('#portP2'), srEl = $('#portSr'), modos = $$('#portModos .modo');
+    let filtro = 'todos';
+
+    // Tarjetas ("cartuchos")
+    const cards = PROYECTOS.map(p => {
+      const li = document.createElement('li');
+      li.className = `cart cart--${p.cat}`;
+      li.innerHTML = `<button class="cart-btn" type="button" aria-haspopup="dialog">
+          <span class="cart-label"><span>${CAT[p.cat]} · ${p.plat}</span>${p.logro ? TROFEO : ''}</span>
+          <span class="cart-media"><img src="${p.img}" alt="" loading="lazy" decoding="async"><span class="cart-press" aria-hidden="true">VER FICHA ▸</span></span>
+          <span class="cart-info"><span class="cart-name">${p.titulo}</span><span class="cart-desc">${p.corto}</span></span>
+          <span class="cart-grip" aria-hidden="true"></span>
+        </button>`;
+      const btn = li.firstElementChild, media = $('.cart-media', li), img = $('img', media);
+      btn.setAttribute('aria-label', `${p.nombre}. ${p.corto}${p.logro ? ' Con logro: ' + p.logro + '.' : ''} Ver ficha.`);
+      if (p.pos) img.style.objectPosition = p.pos;
+      if (p.fit) img.style.objectFit = p.fit;
+      // Con clip: se reproduce al pasar el mouse (en celular se ve en la ficha)
+      if (p.clip) {
+        let v = null;
+        btn.addEventListener('pointerenter', e => {
+          if (e.pointerType !== 'mouse' || reducir()) return;
+          if (!v) {
+            v = crearVideo(p.clip);
+            if (p.pos) v.style.objectPosition = p.pos;
+            media.insertBefore(v, $('.cart-press', media));
+          }
+          v.currentTime = 0;
+          v.play().catch(() => {});
+          gsap.fromTo(v, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.2, ease: 'steps(3)' });
+        });
+        btn.addEventListener('pointerleave', () => { if (v) { v.pause(); gsap.set(v, { autoAlpha: 0 }); } });
+      }
+      btn.addEventListener('click', () => ficha.abrir(p.id, btn));
+      grid.insertBefore(li, p2);
+      return { p, li, btn };
+    });
+
+    modos.forEach(b => {
+      const f = b.dataset.filtro;
+      $('.n', b).textContent = dos(f === 'todos' ? cards.length : cards.filter(c => c.p.cat === f).length);
+      b.addEventListener('click', () => filtrar(f));
+    });
+
+    // En "Todos" se muestran primero los mejores; el resto aparece con "Ver más proyectos"
+    const LIMITE = 6, masBtn = $('#portMas'), masN = $('#portMasN');
+    let expandido = false;
+    const enFiltro = () => cards.filter(c => filtro === 'todos' || c.p.cat === filtro);
+    const visibles = () => cards.filter(c => c.li.style.display !== 'none');
+    // "Tu marca aquí" completa la última fila
+    function ajustarP2() {
+      // Se mide con span 1: si no, sus columnas sobrantes cuentan como columnas de la grilla
+      p2.style.setProperty('--span', 1);
+      const cols = getComputedStyle(grid).gridTemplateColumns.split(' ').length;
+      const resto = visibles().length % cols;
+      p2.style.setProperty('--span', resto ? cols - resto : cols);
+    }
+    function aplicar() {
+      const dentro = enFiltro(), limitar = filtro === 'todos' && !expandido;
+      cards.forEach(c => { const i = dentro.indexOf(c); c.li.style.display = i < 0 || (limitar && i >= LIMITE) ? 'none' : ''; });
+      const ocultos = dentro.length - visibles().length;
+      masBtn.hidden = ocultos <= 0;
+      masN.textContent = ocultos;
+      // "Tu marca aquí" cierra la lista: mientras falten proyectos por ver, se guarda para el final
+      p2.style.display = ocultos > 0 ? 'none' : '';
+      ajustarP2();
+      const n = visibles().length;
+      srEl.textContent = `${n} ${n === 1 ? 'proyecto' : 'proyectos'}`;
+    }
+
+    // Cambio de filtro liviano: las tarjetas se apagan, se cambia la grilla una sola vez y las nuevas entran por pasos.
+    // (Solo se anima opacidad y posición; mover y redimensionar toda la grilla era lo que se sentía lento.)
+    const todas = [...cards.map(c => c.li), p2];
+    function filtrar(f) {
+      if (f === filtro) return;
+      filtro = f;
+      modos.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.filtro === f)));
+      gsap.killTweensOf(todas);
+      if (reducir()) { aplicar(); gsap.set(todas, { clearProps: 'opacity,visibility,transform' }); return; }
+      gsap.to([...visibles().map(c => c.li), p2], {
+        autoAlpha: 0, duration: 0.12, ease: 'steps(2)',
+        onComplete: () => {
+          aplicar();
+          gsap.fromTo([...visibles().map(c => c.li), p2], { autoAlpha: 0, y: 16 },
+            { autoAlpha: 1, y: 0, duration: 0.28, stagger: 0.05, ease: 'steps(4)', clearProps: 'transform' });
+        }
+      });
+    }
+
+    // Ver más: aparecen los proyectos restantes y el foco pasa al primero nuevo
+    masBtn.addEventListener('click', () => {
+      const antes = visibles();
+      expandido = true;
+      aplicar();
+      const nuevos = visibles().filter(c => !antes.includes(c));
+      if (nuevos[0]) nuevos[0].btn.focus({ preventScroll: true });
+      if (!reducir()) gsap.fromTo(nuevos.map(c => c.li), { autoAlpha: 0, y: 16 },
+        { autoAlpha: 1, y: 0, duration: 0.28, stagger: 0.05, ease: 'steps(4)', clearProps: 'transform' });
+    });
+
+    aplicar();
+    ['(max-width: 640px)', '(max-width: 1000px)'].forEach(q => matchMedia(q).addEventListener('change', ajustarP2));
+    return { cards, visibles, enFiltro };
+  })();
+
+  /* Ficha del proyecto: ventana de juego con stats, logro y botón "Quiero algo así" */
+  const ficha = (() => {
+    const dlg = $('#ficha'), win = $('#fichaWin'), body = $('#fichaBody'), mediaEl = $('#fichaPantalla'), info = $('#fichaInfo');
+    const tituloEl = $('#fichaTitulo'), countEl = $('#fichaCount'), tipoEl = $('#fichaTipo'), nombreEl = $('#fichaNombre');
+    const logroEl = $('#fichaLogro'), logroTxt = $('#fichaLogroTxt'), statsEl = $('#fichaStats'), rqrEl = $('#fichaRqr');
+    const mailEl = $('#fichaMail'), jugarEl = $('#fichaJugar'), prevBtn = $('#fichaPrev'), nextBtn = $('#fichaNext');
+    let lista = PROYECTOS, pos = 0, desde = null, cerrando = false;
+    const zoomBtn = $('#fichaZoom'), zoomTxt = $('#fichaZoomTxt');
+
+    // Agrandar: el video toma todo el espacio de la ficha; se mantiene al pasar de proyecto
+    function zoom(on) {
+      dlg.classList.toggle('is-zoom', on);
+      zoomBtn.setAttribute('aria-pressed', on);
+      zoomTxt.textContent = on ? 'REDUCIR' : 'AGRANDAR';
+      zoomBtn.setAttribute('aria-label', on ? 'Reducir y volver a la información' : 'Agrandar el video');
+      body.scrollTop = 0;
+    }
+    zoomBtn.addEventListener('click', () => zoom(!dlg.classList.contains('is-zoom')));
+    mediaEl.addEventListener('dblclick', () => zoom(!dlg.classList.contains('is-zoom')));
+
+    function escribir(texto) {
+      gsap.killTweensOf(tituloEl);
+      if (reducir()) { tituloEl.textContent = texto; return; }
+      const o = { n: 0 };
+      gsap.to(o, {
+        n: texto.length, duration: Math.min(0.5, texto.length * 0.025), ease: `steps(${texto.length})`,
+        onUpdate: () => { tituloEl.textContent = texto.slice(0, Math.round(o.n)) + (o.n < texto.length ? '_' : ''); }
+      });
+    }
+
+    function pintar(p) {
+      escribir(p.titulo);
+      countEl.textContent = `${dos(pos + 1)} / ${dos(lista.length)}`;
+      tipoEl.textContent = p.tipo;
+      nombreEl.textContent = p.nombre;
+
+      // Pantalla: las webs van en un marco de navegador (son maquetas: se muestran, no se enlazan)
+      const marco = document.createElement('div');
+      marco.className = 'marco';
+      marco.style.setProperty('--c', getComputedStyle(portafolio.cards.find(c => c.p.id === p.id).li).getPropertyValue('--c'));
+      if (p.web) marco.innerHTML = `<div class="marco-bar" aria-hidden="true"><i></i><i></i><i></i><span>${p.nombre.toUpperCase()}</span></div>`;
+      if (p.clip && !reducir()) { const v = crearVideo(p.clip, p.img); v.autoplay = true; marco.append(v); }
+      else {
+        const im = document.createElement('img');
+        im.src = p.img; im.alt = `${p.nombre}: ${p.corto}`;
+        if (p.pos) im.style.objectPosition = p.pos;
+        if (p.fit) im.style.objectFit = p.fit;
+        marco.append(im);
+      }
+      mediaEl.replaceChildren(marco);
+
+      logroEl.hidden = !p.logro;
+      if (p.logro) logroTxt.textContent = p.logro;
+      statsEl.innerHTML = p.stats.map(([k, v]) => `<dt>${k}</dt><dd>${v ?? '<span class="pc">Por confirmar</span>'}</dd>`).join('');
+      rqrEl.innerHTML = [['EL RETO', p.reto], ['LO QUE HICIMOS', p.hicimos], ['LO DESTACADO', p.destacado]]
+        .map(([h, t]) => `<div><h4>${h}</h4><p>${t}</p></div>`).join('');
+      mailEl.href = mailLink(`Quiero algo como ${p.nombre}`,
+        `Hola SPARC:\n\nVi ${p.nombre} en su portafolio y quiero algo así para mi negocio.\n\nMi negocio: \nMi idea: \n\nGracias.`);
+      jugarEl.hidden = !p.jugar;
+      if (p.jugar) jugarEl.href = p.jugar;
+      prevBtn.hidden = nextBtn.hidden = lista.length < 2;
+      body.scrollTop = 0;
+    }
+
+    function animarContenido(dir) {
+      if (reducir()) return;
+      gsap.fromTo([mediaEl, info], { autoAlpha: 0, x: dir * 24 }, { autoAlpha: 1, x: 0, duration: 0.25, stagger: 0.05, ease: 'steps(4)', clearProps: 'transform' });
+      gsap.fromTo([...statsEl.children, ...rqrEl.children], { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.15, stagger: 0.03, ease: 'steps(2)', delay: 0.15 });
+      if (!logroEl.hidden) gsap.fromTo(logroEl, { autoAlpha: 0, scale: 0.6 }, { autoAlpha: 1, scale: 1, duration: 0.3, ease: 'steps(4)', delay: 0.3 });
+    }
+
+    function mover(d) {
+      pos = (pos + d + lista.length) % lista.length;
+      pintar(lista[pos]);
+      animarContenido(d);
+    }
+
+    function abrir(id, origen) {
+      // Se navega entre los proyectos del filtro activo; si el proyecto no está ahí, entre todos
+      const vis = portafolio.enFiltro().map(c => c.p);
+      lista = vis.some(p => p.id === id) ? vis : PROYECTOS;
+      pos = Math.max(0, lista.findIndex(p => p.id === id));
+      desde = origen || null;
+      pintar(lista[pos]);
+      if (dlg.open) return;
+      dlg.showModal();
+      document.documentElement.classList.add('menu-lock');
+      if (!reducir()) {
+        gsap.fromTo(win, { clipPath: 'inset(0 0 100% 0)' }, { clipPath: 'inset(0 0 0% 0)', duration: 0.4, ease: 'steps(6)', clearProps: 'clipPath' });
+        animarContenido(0);
+      }
+    }
+
+    function cerrar() {
+      if (!dlg.open || cerrando) return;
+      if (reducir()) { dlg.close(); return; }
+      cerrando = true;
+      gsap.to(win, { clipPath: 'inset(0 0 100% 0)', duration: 0.25, ease: 'steps(4)',
+        onComplete: () => { cerrando = false; gsap.set(win, { clearProps: 'clipPath' }); dlg.close(); } });
+    }
+
+    dlg.addEventListener('close', () => {
+      cerrando = false;
+      zoom(false);
+      $$('video', mediaEl).forEach(v => v.pause());
+      document.documentElement.classList.remove('menu-lock');
+      if (desde && desde.isConnected) desde.focus();
+    });
+    // Esc: si está agrandado, primero reduce
+    dlg.addEventListener('cancel', e => { e.preventDefault(); if (dlg.classList.contains('is-zoom')) zoom(false); else cerrar(); });
+    dlg.addEventListener('click', e => { if (e.target === dlg) cerrar(); }); // clic fuera de la ventana
+    dlg.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight') { e.preventDefault(); mover(1); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); mover(-1); }
+    });
+    $('#fichaClose').addEventListener('click', cerrar);
+    prevBtn.addEventListener('click', () => mover(-1));
+    nextBtn.addEventListener('click', () => mover(1));
+
+    // "Ver ejemplo" de Servicios y "Ver en portafolio" del showreel abren la ficha directamente
+    document.addEventListener('click', e => {
+      const a = e.target.closest('a[data-proyecto]');
+      if (!a || !PROYECTOS.some(p => p.id === a.dataset.proyecto)) return;
+      e.preventDefault();
+      abrir(a.dataset.proyecto, a);
+    });
+    return { abrir };
+  })();
+
+  // Aparición del portafolio al hacer scroll
+  if (!reducir()) {
+    const tituloPort = $('#portTitle');
+    gsap.set(tituloPort, { '--fill': '100%' });
+    gsap.timeline({ scrollTrigger: { trigger: tituloPort, start: 'top 85%', toggleActions: 'play none none none' } })
+      .to(tituloPort, { '--fill': '0%', duration: 0.7, ease: 'steps(8)' })
+      .from('#portafolio .sec-line', { autoAlpha: 0, y: 12, duration: 0.4, ease: 'power2.out' }, '-=0.15')
+      .from('#portModos .modo', { autoAlpha: 0, y: 12, duration: 0.25, stagger: 0.06, ease: 'steps(3)' }, '<0.1');
+    // Contador de la barra de récord, de 00 al valor real por pasos
+    const nums = $$('.port-stat b');
+    nums.forEach(b => { b.textContent = '00'; });
+    let contado = false;
+    ScrollTrigger.create({
+      trigger: '.port-stats', start: 'top 85%',
+      onEnter: () => {
+        if (contado) return;
+        contado = true;
+        nums.forEach((b, i) => {
+          const fin = +b.dataset.n, o = { n: 0 };
+          gsap.to(o, { n: fin, duration: 0.25 + fin * 0.08, ease: `steps(${fin})`, delay: i * 0.12, onUpdate: () => { b.textContent = dos(Math.round(o.n)); } });
+        });
+      }
+    });
+    gsap.from([...portafolio.cards.map(c => c.li), $('#portP2')], {
+      autoAlpha: 0, y: 32, duration: 0.4, stagger: 0.08, ease: 'steps(5)',
+      scrollTrigger: { trigger: '#portGrid', start: 'top 80%', toggleActions: 'play none none none' }
+    });
+  }
+
+  /* =================== PROCESO, NOSOTROS, PREGUNTAS Y CIERRE =================== */
+  // Equipo. Sin foto se muestran sus iniciales; con foto: foto: 'assets/equipo/nombre.webp'
+  const EQUIPO = [
+    { nombre: 'Marlo Sulca', ini: 'MS', rol: 'Cofundador · Jefe de proyectos', esp: 'Gestión de proyectos, área comercial y operaciones.' },
+    { nombre: 'Ariel Carrollo', ini: 'AC', rol: 'Cofundador · Desarrollador principal', esp: 'Desarrollo de software, Unity C# y sistemas en tiempo real.' },
+    { nombre: 'Said Carrollo', ini: 'SC', rol: 'Cofundador · Modelador 3D principal', esp: 'Arte 3D, optimización y entornos inmersivos.' },
+    { nombre: 'Miguel Vega', ini: 'MV', rol: 'Cofundador · Diseñador principal', esp: 'Sistemas interactivos, experiencia de usuario (UX/UI) y diseño de juegos.' }
+  ];
+  $('#pjGrid').innerHTML = EQUIPO.map((m, i) => `<li class="pj" tabindex="0">
+      <span class="pj-ready" aria-hidden="true">READY</span>
+      <span class="pj-foto">${m.foto ? `<img src="${m.foto}" alt="Foto de ${m.nombre}" loading="lazy">` : `<span class="pj-ini" aria-hidden="true">${m.ini}</span>`}</span>
+      <span class="pj-info">
+        <span class="pj-p">JUGADOR ${i + 1}</span>
+        <b class="pj-nom">${m.nombre}</b>
+        <span class="pj-rol">${m.rol}</span>
+        <span class="pj-esp">${m.esp}</span>
+      </span>
+    </li>`).join('');
+
+  // Reflector del equipo: con mouse o teclado se ilumina la tarjeta elegida; en el celular, la que está al centro de la pantalla
+  (() => {
+    const grid = $('#pjGrid'), pjs = $$('.pj', grid);
+    const conMouse = matchMedia('(hover: hover) and (pointer: fine)');
+    function enfocar(pj) {
+      pjs.forEach(p => p.classList.toggle('is-foco', p === pj));
+      grid.classList.toggle('hay-foco', !!pj);
+    }
+    pjs.forEach(pj => {
+      pj.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') enfocar(pj); });
+      pj.addEventListener('focus', () => enfocar(pj));
+      pj.addEventListener('blur', () => { if (!grid.matches(':hover')) enfocar(null); });
+    });
+    grid.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse' && !grid.contains(document.activeElement)) enfocar(null); });
+    // Celular: una franja en el centro de la pantalla elige la tarjeta; al salir del equipo, todas vuelven a encenderse
+    const centro = new IntersectionObserver(entries => {
+      if (conMouse.matches) return;
+      entries.forEach(e => { if (e.isIntersecting) enfocar(e.target); });
+    }, { rootMargin: '-45% 0px -45% 0px' });
+    pjs.forEach(pj => centro.observe(pj));
+    new IntersectionObserver(([e]) => { if (!conMouse.matches && !e.isIntersecting) enfocar(null); }).observe(grid);
+  })();
+
+  // Preguntas: aparición por pasos al abrir
+  $$('.faq').forEach(d => d.addEventListener('toggle', () => {
+    if (d.open && !reducir()) gsap.fromTo($('.faq-a', d), { autoAlpha: 0, y: -6 }, { autoAlpha: 1, y: 0, duration: 0.2, ease: 'steps(3)', clearProps: 'transform' });
+  }));
+
+
+  if (!reducir()) {
+    // Títulos grandes que se llenan por bloques, seguidos de su línea
+    ['#procTitle', '#nosTitle', '#faqTitle'].forEach(sel => {
+      const t = $(sel), linea = t.closest('.sec').querySelector('.sec-line');
+      gsap.set(t, { '--fill': '100%' });
+      gsap.timeline({ scrollTrigger: { trigger: t, start: 'top 85%', toggleActions: 'play none none none' } })
+        .to(t, { '--fill': '0%', duration: 0.7, ease: 'steps(8)' })
+        .from(linea, { autoAlpha: 0, y: 12, duration: 0.4, ease: 'power2.out' }, '-=0.15');
+    });
+
+    // Niveles: cada uno se desbloquea y su conector se llena hacia el siguiente
+    const niveles = $$('#niveles .nivel');
+    niveles.forEach(n => n.classList.add('is-locked'));
+    gsap.set('#niveles .niv-con i', { '--p': 0 });
+    const tlNiv = gsap.timeline({ scrollTrigger: { trigger: '#niveles', start: 'top 70%', toggleActions: 'play none none none' } });
+    niveles.forEach((n, i) => {
+      tlNiv.call(() => n.classList.remove('is-locked'))
+        .fromTo($('.niv-nodo', n), { scale: 0.7 }, { scale: 1, duration: 0.25, ease: 'steps(4)' })
+        .from($$('.niv-k, h3, .niv-p, .niv-tag', n), { autoAlpha: 0, y: 10, duration: 0.25, stagger: 0.05, ease: 'steps(3)' }, '<');
+      if (i < niveles.length - 1) tlNiv.to($('.niv-con i', n), { '--p': 1, duration: 0.35, ease: 'steps(6)' }, '-=0.05');
+    });
+
+    gsap.from('#pjGrid .pj', {
+      autoAlpha: 0, y: 24, duration: 0.35, stagger: 0.08, ease: 'steps(4)', clearProps: 'transform',
+      scrollTrigger: { trigger: '#pjGrid', start: 'top 85%', toggleActions: 'play none none none' }
+    });
+    // Cierre: la llama salta y el título aparece
+    gsap.timeline({ scrollTrigger: { trigger: '#contacto', start: 'top 75%', toggleActions: 'play none none none' } })
+      .from('.cierre-llama', { y: 30, autoAlpha: 0, duration: 0.3, ease: 'steps(4)' })
+      .from('.cierre-txt > *', { autoAlpha: 0, y: 14, duration: 0.3, stagger: 0.08, ease: 'steps(3)' }, '-=0.1');
+  }
+
+  /* =================== Panel del prototipo =================== */
+
+  /* =================== Arranque =================== */
+  let visto = false;
+  try { visto = sessionStorage.getItem(CONFIG.clave) === '1'; } catch (e) {}
+  if (CONFIG.soloPrimeraVisita && visto) {
+    preloader.hidden = true;
+    main.inert = false;
+    document.documentElement.classList.remove('is-loading');
+    heroFx.iniciar();
+  } else {
+    iniciarCarga();
+  }
+  alHacerScroll();
+})();
+</script>
+</body>
+</html>
