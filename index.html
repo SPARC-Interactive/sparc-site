@@ -219,7 +219,7 @@
   .svc:hover h3::before{opacity:1}
   .svc-lead{font-size:17px;line-height:1.45}
   .svc-thumb{border:2px solid var(--fg);aspect-ratio:16/7;overflow:hidden;background:#000}
-  .svc-thumb img{width:100%;height:100%;object-fit:cover;object-position:left top}
+  .svc-thumb img{width:100%;height:100%;object-fit:cover;object-position:center top}
   .svc-list{list-style:none;display:grid;gap:10px}
   .svc-list li{display:flex;gap:10px;align-items:flex-start;color:var(--fg)}
   .chk{flex:none;width:20px;height:20px;margin-top:2px;display:grid;place-items:center;background:var(--c)}
@@ -303,9 +303,19 @@
   .deck .svc:hover{box-shadow:none}
   .deck .svc.is-front{box-shadow:8px 8px 0 color-mix(in srgb,var(--c) 40%,#0b0b0b)}
   .deck .svc:not(.is-front) h3::before{display:none}
-  .svc-body{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.9fr);column-gap:32px;row-gap:14px;align-content:start}
-  .svc-body > *{grid-column:1}
-  .svc-body > .svc-thumb{grid-column:2;grid-row:1 / span 12;align-self:stretch;aspect-ratio:auto;min-height:240px}
+  /* Carta en dos columnas: textos a la izquierda; captura (en su proporción real, sin estirarse) y lista a la derecha.
+     La fila vacía de 1fr absorbe la diferencia de alto para que la imagen nunca se deforme ni se recorte de más. */
+  .svc-body{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:32px;row-gap:14px;align-content:start;
+    grid-template-rows:auto auto auto auto auto 1fr auto;
+    grid-template-areas:'head media' 'h3 media' 'lead media' 'glos media' 'chip media' '. media' 'foot lista'}
+  .svc-body > .svc-head{grid-area:head}
+  .svc-body > h3{grid-area:h3}
+  .svc-body > .svc-lead{grid-area:lead}
+  .svc-body > .glosario{grid-area:glos}
+  .svc-body > .svc-chip{grid-area:chip;justify-self:start}
+  .svc-body > .svc-foot{grid-area:foot;align-self:end}
+  .svc-body > .svc-list{grid-area:lista;align-self:end}
+  .svc-body > .svc-thumb{grid-area:media;align-self:start;aspect-ratio:16 / 9;box-shadow:6px 6px 0 color-mix(in srgb,var(--c) 55%,#0b0b0b)}
   /* Pestaña (lomo) de cada carta: número y nombre */
   .svc-spine{position:absolute;top:0;right:0;bottom:0;width:var(--o);display:flex;flex-direction:column;align-items:center;gap:14px;padding:18px 0;
     background:var(--bg);color:var(--c);border:0;border-left:2px solid var(--c);cursor:pointer;font-family:var(--font-display);font-weight:700}
@@ -324,8 +334,9 @@
   .deck-tabs{display:none}
 
   @media (max-width:860px){
-    .svc-body{grid-template-columns:1fr}
-    .svc-body > .svc-thumb{grid-column:1;grid-row:auto;aspect-ratio:16 / 9;min-height:0}
+    .svc-body{grid-template-columns:1fr;grid-template-rows:none;grid-template-areas:none}
+    .svc-body > :is(.svc-head,h3,.svc-lead,.svc-thumb,.glosario,.svc-list,.svc-chip,.svc-foot){grid-area:auto;align-self:auto}
+    .svc-body > .svc-thumb{margin-right:6px}
   }
   /* Celular: sin lomos al costado; pestañas arriba como carpetas */
   @media (max-width:760px){
